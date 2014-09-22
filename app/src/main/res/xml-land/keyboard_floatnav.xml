@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
+          android:keyWidth="@dimen/keySize"
+          android:keyHeight="@dimen/keySize"
+    >
+    <Row>
+        <Key android:codes="55"    android:keyLabel="7" android:isRepeatable="true" />
+        <Key android:codes="56"    android:keyLabel="8" android:isRepeatable="true" />
+        <Key android:codes="57"    android:keyLabel="9" android:isRepeatable="true" />
+    </Row>
+    <Row>
+        <Key android:codes="52"    android:keyLabel="4" android:isRepeatable="true" />
+        <Key android:codes="53"    android:keyLabel="5" android:isRepeatable="true" />
+        <Key android:codes="54"    android:keyLabel="6" android:isRepeatable="true" />
+    </Row>
+    <Row>
+        <Key android:codes="49"    android:keyLabel="1" android:isRepeatable="true" />
+        <Key android:codes="50"    android:keyLabel="2" android:isRepeatable="true" />
+        <Key android:codes="51"    android:keyLabel="3" android:isRepeatable="true" />
+
+    </Row>
+    <Row>
+        <Key android:codes="48"    android:keyLabel="0" android:isRepeatable="true" />
+        <Key android:codes="9110"  android:keyLabel=", ." /><!-- decimal separator -->
+        <Key android:codes="177"   android:keyLabel="&#x00B1;" /><!-- negate -->
+    </Row>
+
+    <Row>
+        <Key android:codes="8"     android:keyIcon="@android:drawable/ic_input_delete" android:isRepeatable="true" /><!-- backspace -->
+        <Key android:codes="24"    android:keyIcon="@android:drawable/ic_menu_delete" /><!-- clear -->
+        <Key android:codes="23"    android:keyIcon="@android:drawable/ic_media_play" />
+    </Row>
+</Keyboard>

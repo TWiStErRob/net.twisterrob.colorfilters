@@ -1,0 +1,97 @@
+apply plugin: 'com.android.application'
+
+android {
+    buildToolsVersion "20"
+    compileSdkVersion "android-19"
+
+    defaultConfig {
+        applicationId "net.twisterrob.colorfilters"
+        versionCode 1
+        // doesn't read from manifest, must define here: https://code.google.com/p/android/issues/detail?id=67277
+        versionName "1.0"
+        //noinspection OldTargetApi
+        targetSdkVersion 19
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    lintOptions {
+        xmlReport false
+        checkAllWarnings true
+        disable 'GradleDependency', 'UnusedAttribute', 'RtlHardcoded'
+    }
+
+    signingConfigs {
+        release {
+            storeFile file(RELEASE_STORE_FILE)
+            storePassword RELEASE_STORE_PASSWORD
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+        }
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-DEBUG"
+            buildConfigField "String", "EMAIL", "\"papp.robert.s@gmail.com\""
+        }
+        release {
+            signingConfig = signingConfigs.release
+            buildConfigField "String", "EMAIL", "\"feedback@twisterrob.net\""
+            
+            runProguard true
+            proguardFile getDefaultProguardFile('proguard-android.txt')
+            proguardFile 'proguard-rules.pro'
+        }
+    }
+
+    applicationVariants.all { variant ->
+        //println "${variant.class}, name=${variant.name}, desc=${variant.description}, base=${variant.baseName}, dir=${variant.dirName}, pkg=${variant.packageName}, flav=${variant.flavorName}, ver=${variant.versionName}, code=${variant.versionCode}"
+        if (variant.install) {
+             tasks.create(name: "run${variant.name.capitalize()}", type: Exec, dependsOn: variant.install) {
+                description "Installs the APK for ${variant.description}, and then runs the main launcher activity."
+                def getMainActivity = { file ->
+                    new XmlSlurper().parse(file).application.activity.find{ it.'intent-filter'.find{ filter ->
+                        return filter.action  .find{it.@name.text() == 'android.intent.action.MAIN'      } \
+                            && filter.category.find{it.@name.text() == 'android.intent.category.LAUNCHER'}
+                    }}.@name
+                }
+                doFirst {
+                    def activityClass = getMainActivity(variant.processManifest.manifestOutputFile)
+                    // doesn't work: commandLine "${android.adbExe}", 'shell', 'am', 'start', '-a', 'android.intent.action.MAIN', '-c', 'android.intent.category.LAUNCHER', "${variant.packageName}"
+                    commandLine "${android.adbExe}", 'shell', 'am', 'start', '-n', "${variant.packageName}/${activityClass}"
+                    // or commandLine "${android.adbExe}", 'shell', 'monkey', '-p', "${variant.packageName}", '1'
+                }
+            }
+        }
+
+        //variant.variantData.generateResValuesTask.outputs.upToDateWhen { false }
+        //variant.buildType.resValue "bool", "generate_res_values", "true"
+        // The below should be variant.resValue, but there's not such API,
+        // overwriting before every use is a workaround, and it seems to work if there are flavors as well
+        variant.variantData.generateResValuesTask.doFirst {
+            // Add package for use e.g. in preferences to launch intent from the right package
+            variant.buildType.resValue "string", "app_package", "${variant.packageName}"
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.github.bumptech.glide:glide:3.3.1'
+    compile 'com.android.support:appcompat-v7:19.1.0'
+}
+
+tasks.withType(JavaCompile) {
+    if (!name.contains('Test')) {
+        options.compilerArgs << '-Xlint:unchecked' << '-Xlint:deprecation'
+    }
+}

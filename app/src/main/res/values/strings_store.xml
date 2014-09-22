@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cf_store_description">
+Demonstration and design application for Color Filters in the Android Framework.
+\n\n
+Android Color Filters are the classes that extend <a href="http://developer.android.com/reference/android/graphics/ColorFilter.html">android.graphics.ColorFilter</a>:
+\n&#8195;&#8226; <a href="http://developer.android.com/reference/android/graphics/ColorMatrixColorFilter.html">android.graphics.ColorMatrixColorFilter</a>
+\n&#8195;&#8226; <a href="http://developer.android.com/reference/android/graphics/LightingColorFilter.html">android.graphics.LightingColorFilter</a>
+\n&#8195;&#8226; <a href="http://developer.android.com/reference/android/graphics/PorterDuffColorFilter.html">android.graphics.PorterDuffColorFilter</a>
+\n\n
+The documentation of these classes is pretty thin, and parametrization may not be trivial. There are only a few parameters to each, but the effect of them may vary highly.
+This application lets you try all the possibilities with a live preview of your chosen image.
+\n\n
+If you\'re satisfied with the results and want to use it in your application it\'s easy to copy the code and use it with
+<a href="http://developer.android.com/reference/android/widget/ImageView.html#setColorFilter(android.graphics.ColorFilter)"><tt>ImageView.setColorFilter</tt></a>.
+It\'s also possible to share the code with the original and preview image attached.
+\n\n
+Any feedback is warmly welcome and will be taken into consideration.
+\n\n
+This is not an official Google product. Android is a trademark of Google Inc.
+    </string>
+</resources>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/margin"
+    tools:context=".lighting.LightingFragment"
+    >
+
+    <View
+        android:id="@+id/middle"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_centerHorizontal="true"
+        tools:layout_width="1dp"
+        tools:background="@android:color/black"
+        />
+
+    <TextView
+        android:id="@+id/mulLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="mul:"
+        tools:ignore="HardcodedText"
+        />
+
+    <EditText
+        android:id="@+id/mulEditor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/mulLabel"
+        android:layout_toLeftOf="@id/middle"
+        android:gravity="center"
+        tools:text="FFFFFF"
+        android:inputType="textNoSuggestions"
+        android:maxLength="6"
+        android:singleLine="true"
+        />
+
+    <TextView
+        android:id="@+id/mulRGBLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mulEditor"
+        android:layout_alignLeft="@id/mulEditor"
+        android:layout_alignRight="@id/mulEditor"
+        android:gravity="center"
+        android:textIsSelectable="true"
+        tools:text="255, 255, 255, 255"
+        />
+
+    <View
+        android:id="@+id/mulPreview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mulLabel"
+        android:layout_alignBottom="@id/mulRGBLabel"
+        android:layout_alignLeft="@id/mulLabel"
+        android:layout_alignRight="@id/mulLabel"
+        android:layout_margin="@dimen/margin"
+        android:clickable="true"
+        android:contentDescription="@string/cf_reset_cd"
+        tools:background="@android:color/black"
+        />
+
+    <net.twisterrob.android.view.color.ColorPickerView
+        android:id="@+id/mulColor"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_toLeftOf="@id/middle"
+        android:layout_below="@id/mulRGBLabel"
+        android:layout_margin="@dimen/margin"
+        />
+
+    <TextView
+        android:id="@+id/addLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/middle"
+        android:text="add:"
+        tools:ignore="HardcodedText"
+        />
+
+
+    <EditText
+        android:id="@+id/addEditor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/addLabel"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        tools:text="FFFFFF"
+        android:inputType="textNoSuggestions"
+        android:maxLength="6"
+        android:singleLine="true"
+        />
+
+    <TextView
+        android:id="@+id/addRGBLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addEditor"
+        android:layout_alignLeft="@id/addEditor"
+        android:layout_alignRight="@id/addEditor"
+        android:gravity="center"
+        android:textIsSelectable="true"
+        tools:text="255, 255, 255, 255"
+        />
+
+    <View
+        android:id="@+id/addPreview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addLabel"
+        android:layout_alignBottom="@id/addRGBLabel"
+        android:layout_alignLeft="@id/addLabel"
+        android:layout_alignRight="@id/addLabel"
+        android:layout_margin="@dimen/margin"
+        android:clickable="true"
+        android:contentDescription="@string/cf_reset_cd"
+        tools:background="@android:color/black"
+        />
+
+    <net.twisterrob.android.view.color.ColorPickerView
+        android:id="@+id/addColor"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_toRightOf="@id/middle"
+        android:layout_below="@id/addRGBLabel"
+        android:layout_margin="@dimen/margin"
+        />
+
+</RelativeLayout>

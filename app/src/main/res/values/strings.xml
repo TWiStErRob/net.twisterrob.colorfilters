@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources><!-- Supported HTML: StringBlock.get -->
+    <string name="app_name">Color Filters</string>
+
+    <string name="cf_reset_cd">reset color</string>
+
+    <string name="cf_image_action">Change Image</string>
+    <string name="cf_image_original_cd">Original image</string>
+    <string name="cf_image_preview_cd">Preview image using the specified ColorFilter</string>
+
+    <string name="cf_lighting_title">Lighting</string>
+    <string name="cf_lighting_info_title">LightingColorFilter(mul, add)</string>
+    <string name="cf_lighting_info">This is a color filter that multiplies the
+        <font fgcolor="#FFFF0000" color="-#010000">R</font><font fgcolor="#FF00FF00" color="-#FF0100">G</font><font fgcolor="#FF0000FF" color="-#FFFF01">B</font> channels
+        by one color (<tt>mul</tt>), and then adds a second color (<tt>add</tt>), pinning the result for each component to <tt>[0..255]</tt>.
+        \n\nThe alpha components of the <tt>mul</tt> and <tt>add</tt> arguments are ignored.
+    </string>
+
+    <string name="cf_porterduff_title">Porter/Duff</string>
+    <string name="cf_porterduff_info_title">PorterDuffColorFilter(color, mode)</string>
+    <string name="cf_porterduff_info">This is a color filter uses the specified <tt>color</tt> and porter-duff <tt>mode</tt>.</string>
+
+    <string name="cf_matrix_title">Color Matrix</string>
+    <string name="cf_matrix_info_title">ColorMatrixColorFilter(matrix)</string>
+    <string name="cf_matrix_info">This is a color filter that transforms colors through a 4x5 color <tt>matrix</tt>.
+        \n\nThe <tt>matrix</tt> is copied into the filter, so changes made to it after the filter is constructed will not be reflected in the filter.
+    </string>
+    <string name="cf_matrix_R"><font fgcolor="#FFFF0000" color="-#010000">R</font>:</string>
+    <string name="cf_matrix_G"><font fgcolor="#FF00FF00" color="-#FF0100">G</font>:</string>
+    <string name="cf_matrix_B"><font fgcolor="#FF0000FF" color="-#FFFF01">B</font>:</string>
+    <string name="cf_matrix_A"><font fgcolor="#FF000000" color="-#FFFFFF">A</font>:</string>
+    <string name="cf_matrix_cR">c<font fgcolor="#FFFF0000" color="-#010000">R</font></string>
+    <string name="cf_matrix_cG">c<font fgcolor="#FF00FF00" color="-#FF0100">G</font></string>
+    <string name="cf_matrix_cB">c<font fgcolor="#FF0000FF" color="-#FFFF01">B</font></string>
+    <string name="cf_matrix_cA">c<font fgcolor="#FF000000" color="-#FFFFFF">A</font></string>
+    <string name="cf_matrix_add">+</string>
+    <string name="cf_matrix_sR">S<sub><small><font fgcolor="#FFFF0000" color="-#010000">R</font></small></sub></string>
+    <string name="cf_matrix_sG">S<sub><small><font fgcolor="#FF00FF00" color="-#FF0100">G</font></small></sub></string>
+    <string name="cf_matrix_sB">S<sub><small><font fgcolor="#FF0000FF" color="-#FFFF01">B</font></small></sub></string>
+    <string name="cf_matrix_sA">S<sub><small><font fgcolor="#FF000000" color="-#FFFFFF">A</font></small></sub></string>
+    <string name="cf_matrix_rR">R<sub><small><font fgcolor="#FFFF0000" color="-#010000">R</font></small></sub></string>
+    <string name="cf_matrix_rG">R<sub><small><font fgcolor="#FF00FF00" color="-#FF0100">G</font></small></sub></string>
+    <string name="cf_matrix_rB">R<sub><small><font fgcolor="#FF0000FF" color="-#FFFF01">B</font></small></sub></string>
+    <string name="cf_matrix_sat">S<sub><small><small><font fgcolor="#FF000000" color="-#FFFFFF">sat</font></small></small></sub></string>
+    <string name="cf_matrix_S">S<sub><small><small><small><small><font fgcolor="#FFFF0000" color="-#010000">R</font><font fgcolor="#FF00FF00" color="-#FF0100">G</font><font fgcolor="#FF0000FF" color="-#FFFF01">B</font><font fgcolor="#FF000000" color="-#FFFFFF">A</font></small></small></small></small></sub></string>
+
+    <string name="cf_info_title">Color Filter Info</string>
+    <string name="cf_info_copy">Copy Code</string>
+    <string name="cf_info_ok">Thanks</string>
+    <string name="cf_info_copy_toast">Code copied to clipboard</string>
+    <string name="cf_info_code">Here\'s the current code:</string>
+
+    <string name="cf_pref_title">Settings</string>
+    <string name="cf_pref_keyboard" translatable="false">pref_keyboard</string>
+    <string name="cf_pref_keyboard_title">Experimental Keyboards</string>
+    <string name="cf_pref_keyboard_info">Use special built-in keyboards for color and floating point number inputs.</string>
+    <string name="cf_pref_keyboard_default">true</string>
+
+    <string name="cf_share_title">Share</string>
+    <string name="cf_share_picker_title">Share Color Filter</string>
+    <string name="cf_share_text">Look, what an awesome Color Filter I found!</string>
+    <string name="cf_share_subject">Effect created by Color Filters</string>
+</resources>

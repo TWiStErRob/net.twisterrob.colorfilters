@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="cf_about_title">About</string>
+
+    <string name="cf_about_application_title">Application</string>
+    <string name="cf_about_version">Version %1$s (r%2$d)</string>
+    <string name="cf_about_feedback">Feedback? <a href="#">Tap here</a>!</string>
+    <string name="cf_about_feedback_subject">%1$s feedback</string>
+    <!-- %1: app_name, %2: app_package, %3: app_version -->
+    <string name="cf_about_feedback_body">Package: %2$s\nVersion: %3$s/%4$d\n\nHey,\nI have some comments regarding your app:\n</string>
+    <string name="cf_about_icon_cd">Application icon</string>
+
+    <string name="cf_about_tips_title">Tips and Tricks</string>
+    <string name="cf_about_tips">
+        <big><b>General</b></big>
+        \n&#xA0;&#xA0;&#xA0;&#xA0;&#x2022; You can copy generated code from the &#8220;Info&#8221; or share it (with pictures) from the action bar.
+        \n&#xA0;&#xA0;&#xA0;&#xA0;&#x2022; Long pressing the color picker will give you more picker types.
+        \n&#xA0;&#xA0;&#xA0;&#xA0;&#x2022; Tapping on the original image (left/bottom) will give you the opportunity to swap the image.
+        \n&#xA0;&#xA0;&#xA0;&#xA0;&#x2022; Long pressing the original image (right/top) will reset the default image.
+        \n&#xA0;&#xA0;&#xA0;&#xA0;&#x2022; Tapping on the preview image (right/top) will reset the settings.
+
+        \n\n<big><b>Lighting Color Filter</b></big>
+        \n&#xA0;&#xA0;&#xA0;&#xA0;&#x2022; Tapping on the color preview will reset the color.
+
+        \n\n<big><b>Porter/Duff Color Filter</b></big>
+        \n&#xA0;&#xA0;&#xA0;&#xA0;&#x2022; Use (semi-)transparent images (png/gif) for best effects.
+        \n&#xA0;&#xA0;&#xA0;&#xA0;&#x2022; Tapping on the color preview will reset the color.
+
+        \n\n<big><b>Color Matrix Color Filter</b></big>
+        \n&#xA0;&#xA0;&#xA0;&#xA0;&#x2022; The little &#x00D7; on the Color Matrix will reset just the matrix.
+        \n&#xA0;&#xA0;&#xA0;&#xA0;&#x2022; You can change the order the matrices are multiplied by drag &amp; dropping the <tt>R</tt> and <tt>S</tt> boxes.
+    </string>
+
+    <string name="cf_about_faq_title">FAQ (Frequently Asked Questions)</string>
+    <string name="cf_about_faq">
+        <b>What is this application?</b>
+        \nThis application was made so that Android developers can test out what a Color Filter applied to an image will look like without the need for coding.
+        Once they are satisfied with the results it is easy to copy the code and just use it in their apps.
+
+        \n\n<b>How can I leave feedback? What is feedback?</b>
+        \nTap on the link below the application name/version in the About.
+        \nFeel free to send any kind of comment, request, suggestion, error report;
+        just about any thought regarding this application.
+
+        \n\n<b>I don\'t like the built-in keyboards!</b>
+        \nYou can turn them off in the Settings, and feel free to leave some feedback about it!
+    </string>
+
+    <string name="cf_about_licences_title">Acknowledgements and Licences</string>
+    <string-array name="cf_about_licences">
+        <item>Glide 3.3.1, library</item>
+        <item>Order from Chaos, image</item>
+        <item>Custom keyboard, tutorial</item>
+        <item>Android SDK Color Picker, sample</item>
+        <item>OpenFrameworks HSB Gradients, sample</item>
+    </string-array>
+
+    <string-array name="cf_about_licences_content">
+<item tools:ignore="TypographyQuotes,TypographyOther">Big thanks to <a href="https://github.com/sjudd">Sam</a> for maintaining <a href="https://github.com/bumptech/glide">Glide</a>,
+the most flexible Android image loader API on the market.
+\n
+\n<i>Licence obtained <a href="https://github.com/bumptech/glide/blob/v3.3.1/LICENSE">from GitHub</a> follows:</i>
+\n
+\nLicense for everything not in third_party and not otherwise marked:
+\n
+\nCopyright 2014 Google, Inc. All rights reserved.
+\n
+\nRedistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+\n
+\n   1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+\n
+\n   2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+\n
+\nTHIS SOFTWARE IS PROVIDED BY GOOGLE, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL GOOGLE, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+\n
+\nThe views and conclusions contained in the software and documentation are those of the authors and should not be interpreted as representing official policies, either expressed or implied, of Google, Inc.
+\n\n<b>-------------------------------------</b>\n
+\nLicense for third_party/disklrucache:
+\n
+\nCopyright 2012 Jake Wharton
+\nCopyright 2011 The Android Open Source Project
+\n
+\nLicensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+\n
+\n   http://www.apache.org/licenses/LICENSE-2.0
+\n
+\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+\n\n<b>-------------------------------------</b>\n
+\nLicense for third_party/gif_decoder:
+\n
+\nCopyright (c) 2013 Xcellent Creations, Inc.
+\n
+\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+\n
+\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+\n
+\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+</item>
+<item>Thanks to <a href="http://d.hatena.ne.jp/ita/20100210">板倉充洋 (Mitsuhiro Itakura)</a> for creating the default image used in this application.
+\nImage downloaded from <a href="http://allrgb.com/order-from-chaos">allRGB.com</a> and then re-compressed to make it fit the application.
+\n
+\n<i>Image is licenced under <a href="http://creativecommons.org/licenses/by/4.0/">CC-BY</a>.</i>
+</item>
+        <item>Thanks to <a href="http://www.fampennings.nl/maarten/index.htm">Maarten Pennings</a> for writing <a href="http://www.fampennings.nl/maarten/android/09keyboard/index.htm">this detailed tutorial</a> about how to create a custom keyboard in an Android application.</item>
+<item tools:ignore="TypographyQuotes,TypographyOther">Thanks to <a href="https://source.android.com/">AOSP</a> for writing <a href="https://github.com/android/platform_development/blob/android-sdk-adt_r20/samples/ApiDemos/src/com/example/android/apis/graphics/ColorPickerDialog.java">a color picker dialog sample</a>.
+\n
+\n<i>Licence obtained from .java source code follows:</i>
+\n
+\nCopyright (C) 2010 The Android Open Source Project
+\n
+\nLicensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+\n
+\n     http://www.apache.org/licenses/LICENSE-2.0
+\n
+\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+</item>
+<item tools:ignore="TypographyQuotes,TypographyOther">Thanks to <a href="http://openframeworks.cc/">openFrameworks</a> for writing <a href="https://sites.google.com/site/ofauckland/examples/hsb-gradients-all-in-one-example">this small sample</a> about different ways of displaying the HSB color-space. Some code from <a href="https://github.com/openframeworks/openFrameworks/tree/master/libs/openFrameworks">GitHub</a> has been also ported to Java.
+\n
+\n<i>Licence obtained from <a href="http://openframeworks.cc/about/license.html">ofLicence</a> follows:</i>
+\n
+\nCopyright (c) 2004- openFrameworks Community
+\n
+\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+\n
+\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+\n
+\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+</item>
+    </string-array>
+</resources>

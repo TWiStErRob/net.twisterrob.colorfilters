@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/margin"
+    android:paddingRight="@dimen/margin"
+    android:paddingTop="@dimen/margin"
+    android:paddingBottom="@dimen/margin"
+    tools:context=".porterduff.PorterDuffFragment"
+    >
+
+    <RelativeLayout
+        android:id="@+id/colorContainer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <View
+            android:id="@+id/middle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true"
+            />
+
+        <EditText
+            android:id="@+id/colorEditor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/middle"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            tools:text="FFFFFFFF"
+            android:maxLength="8"
+            android:inputType="textNoSuggestions"
+            android:singleLine="true"
+            />
+
+        <TextView
+            android:id="@+id/colorRGBLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/colorEditor"
+            android:layout_alignLeft="@+id/colorEditor"
+            android:layout_alignRight="@+id/colorEditor"
+            android:gravity="center"
+            android:textIsSelectable="true"
+            tools:text="255, 255, 255, 255"
+            />
+
+        <View
+            android:id="@+id/colorPreview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/colorRGBLabel"
+            android:layout_above="@+id/colorAlpha"
+            android:layout_alignLeft="@id/colorEditor"
+            android:layout_alignRight="@id/colorEditor"
+            android:layout_margin="@dimen/activity_margin"
+            android:clickable="true"
+            android:contentDescription="@string/cf_reset_cd"
+            tools:background="@android:color/black"
+            />
+
+        <SeekBar
+            android:id="@+id/colorAlpha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/colorEditor"
+            android:layout_alignRight="@+id/colorEditor"
+            android:layout_alignBottom="@+id/color"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:max="255"
+            />
+
+        <net.twisterrob.android.view.color.ColorPickerView
+            android:id="@+id/color"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_toLeftOf="@+id/middle"
+            android:layout_margin="@dimen/margin"
+            tools:visibility="visible"
+            />
+
+    </RelativeLayout>
+
+    <!-- TODO spinner with prev/next buttons on left/right -->
+    <TableLayout
+        android:id="@+id/modes"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin"
+        android:layout_marginBottom="@dimen/margin"
+        android:layout_below="@id/colorContainer"
+        android:stretchColumns="0,1,2,3,4"
+        tools:ignore="HardcodedText"
+        >
+        <TableRow>
+            <RadioButton android:id="@+id/mode_src" style="@style/mode" android:text="SRC" />
+            <RadioButton android:id="@+id/mode_src_in" style="@style/mode" android:text="SRC_IN" />
+            <RadioButton android:id="@+id/mode_src_over" style="@style/mode" android:text="SRC_OVER" />
+            <RadioButton android:id="@+id/mode_lighten" style="@style/mode" android:text="LIGHTEN" />
+        </TableRow>
+        <TableRow>
+            <RadioButton android:id="@+id/mode_dst" style="@style/mode" android:text="DST" />
+            <RadioButton android:id="@+id/mode_dst_in" style="@style/mode" android:text="DST_IN" />
+            <RadioButton android:id="@+id/mode_dst_over" style="@style/mode" android:text="DST_OVER" />
+            <RadioButton android:id="@+id/mode_darken" style="@style/mode" android:text="DARKEN" />
+        </TableRow>
+        <TableRow>
+            <RadioButton android:id="@+id/mode_add" style="@style/mode" android:text="ADD" />
+            <RadioButton android:id="@+id/mode_src_out" style="@style/mode" android:text="SRC_OUT" />
+            <RadioButton android:id="@+id/mode_dst_atop" style="@style/mode" android:text="DST_ATOP" />
+            <RadioButton android:id="@+id/mode_screen" style="@style/mode" android:text="SCREEN" />
+        </TableRow>
+        <TableRow>
+            <RadioButton android:id="@+id/mode_xor" style="@style/mode" android:text="XOR" />
+            <RadioButton android:id="@+id/mode_dst_out" style="@style/mode" android:text="DST_OUT" />
+            <RadioButton android:id="@+id/mode_src_atop" style="@style/mode" android:text="SRC_ATOP" />
+            <RadioButton android:id="@+id/mode_overlay" style="@style/mode" android:text="OVERLAY"
+                         android:checked="true" />
+        </TableRow>
+        <TableRow>
+            <View android:layout_width="0dp" android:layout_height="0dp" />
+            <RadioButton android:id="@+id/mode_clear" style="@style/mode" android:text="CLEAR" />
+            <RadioButton android:id="@+id/mode_multiply" style="@style/mode" android:text="MULTIPLY" />
+        </TableRow>
+    </TableLayout>
+</RelativeLayout>

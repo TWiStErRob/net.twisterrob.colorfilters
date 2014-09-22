@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:shrinkColumns="0"
+    android:stretchColumns="1,2,3,4,5"
+    tools:showIn="@layout/fragment_matrix"
+    >
+    <TableRow tools:id="@id/header">
+        <TextView
+            android:id="@+id/matrix_reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:clickable="true"
+            android:text="x"
+            tools:ignore="HardcodedText"
+            />
+        <TextView style="@style/matrix_label" tools:id="@id/label_cR" android:text="@string/cf_matrix_cR" />
+        <TextView style="@style/matrix_label" tools:id="@id/label_cG" android:text="@string/cf_matrix_cG" />
+        <TextView style="@style/matrix_label" tools:id="@id/label_cB" android:text="@string/cf_matrix_cB" />
+        <TextView style="@style/matrix_label" tools:id="@id/label_cA" android:text="@string/cf_matrix_cA" />
+        <TextView style="@style/matrix_label" tools:id="@id/label_Plus" android:text="@string/cf_matrix_add" />
+    </TableRow>
+    <TableRow>
+        <TextView style="@style/matrix_label" tools:id="@id/label_R" android:text="@string/cf_matrix_R" />
+        <EditText style="@style/matrix" android:id="@+id/matrix_a" tools:text="a" />
+        <EditText style="@style/matrix" android:id="@+id/matrix_b" tools:text="b" />
+        <EditText style="@style/matrix" android:id="@+id/matrix_c" tools:text="c" />
+        <EditText style="@style/matrix" android:id="@+id/matrix_d" tools:text="d" />
+        <EditText style="@style/matrix" android:id="@+id/matrix_e" tools:text="e" />
+    </TableRow>
+    <TableRow>
+        <TextView style="@style/matrix_label" tools:id="@id/label_G" android:text="@string/cf_matrix_G" />
+        <EditText style="@style/matrix" android:id="@+id/matrix_f" tools:text="f" />
+        <EditText style="@style/matrix" android:id="@+id/matrix_g" tools:text="g" />
+        <EditText style="@style/matrix" android:id="@+id/matrix_h" tools:text="h" />
+        <EditText style="@style/matrix" android:id="@+id/matrix_i" tools:text="i" />
+        <EditText style="@style/matrix" android:id="@+id/matrix_j" tools:text="j" />
+    </TableRow>
+    <TableRow>
+        <TextView style="@style/matrix_label" tools:id="@id/label_B" android:text="@string/cf_matrix_B" />
+        <EditText style="@style/matrix" android:id="@+id/matrix_k" tools:text="k" />
+        <EditText style="@style/matrix" android:id="@+id/matrix_l" tools:text="l" />
+        <EditText style="@style/matrix" android:id="@+id/matrix_m" tools:text="m" />
+        <EditText style="@style/matrix" android:id="@+id/matrix_n" tools:text="n" />
+        <EditText style="@style/matrix" android:id="@+id/matrix_o" tools:text="o" />
+    </TableRow>
+    <TableRow>
+        <TextView style="@style/matrix_label" tools:id="@id/label_A" android:text="@string/cf_matrix_A" />
+        <EditText style="@style/matrix" android:id="@+id/matrix_p" tools:text="p" />
+        <EditText style="@style/matrix" android:id="@+id/matrix_q" tools:text="q" />
+        <EditText style="@style/matrix" android:id="@+id/matrix_r" tools:text="r" />
+        <EditText style="@style/matrix" android:id="@+id/matrix_s" tools:text="s" />
+        <EditText style="@style/matrix" android:id="@+id/matrix_t" tools:text="t" />
+    </TableRow>
+</TableLayout>

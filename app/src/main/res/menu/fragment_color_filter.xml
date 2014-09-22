@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context=".LightingColorFragment"
+    >
+    <item
+        android:id="@+id/action_share"
+        android:icon="@android:drawable/ic_menu_share"
+        android:title="@string/cf_share_title"
+        app:showAsAction="ifRoom"
+        tools:showAsAction="ifRoom"
+        android:orderInCategory="2"
+        />
+    <item
+        android:id="@+id/action_info"
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:title="@string/cf_info_title"
+        app:showAsAction="never"
+        tools:showAsAction="never"
+        android:orderInCategory="3"
+        />
+</menu>
