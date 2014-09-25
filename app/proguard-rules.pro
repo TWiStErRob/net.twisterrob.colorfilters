@@ -40,7 +40,7 @@
 }
 
 
--libraryjars libs
+#-libraryjars libs
 
 # The official support library.
 -keep class android.support.v4.app.** { *; }
