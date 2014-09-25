@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
+<ImageView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin"
+    android:layout_width="16dp"
+    android:layout_height="16dp"
     android:layout_gravity="center"
-    android:textAppearance="@android:style/TextAppearance.Large"
-    android:text="&#x00D7;"
-    tools:ignore="HardcodedText"
+    android:gravity="center"
+    android:src="@drawable/cross"
+    android:scaleType="fitCenter"
+    tools:background="@android:color/darker_gray"
     />

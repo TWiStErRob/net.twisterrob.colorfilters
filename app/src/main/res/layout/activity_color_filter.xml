@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="-12dp"
+        android:layout_marginTop="-4dp"
         android:keyBackground="@drawable/keyboard_key"
         android:background="@android:color/transparent"
         />

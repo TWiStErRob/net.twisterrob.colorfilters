@@ -16,21 +16,32 @@
         android:layout_marginLeft="@dimen/margin"
         />
 
-    <include
-        layout="@layout/inc_matrix_editor"
-        android:id="@+id/editor"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_toLeftOf="@id/order"
-        />
+        >
 
-    <include
-        layout="@layout/inc_matrix_controls"
-        android:id="@+id/controls"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/editor"
-        android:layout_toLeftOf="@id/order"
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
 
+            <include
+                layout="@layout/inc_matrix_editor"
+                android:id="@+id/editor"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                />
+
+            <include
+                layout="@layout/inc_matrix_controls"
+                android:id="@+id/controls"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                />
+
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

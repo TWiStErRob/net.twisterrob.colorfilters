@@ -87,45 +87,50 @@
     </RelativeLayout>
 
     <!-- TODO spinner with prev/next buttons on left/right -->
-    <TableLayout
-        android:id="@+id/modes"
-        android:layout_width="fill_parent"
+    <ScrollView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/colorContainer"
         android:layout_marginTop="@dimen/margin"
         android:layout_marginBottom="@dimen/margin"
-        android:layout_below="@id/colorContainer"
-        android:stretchColumns="0,1,2,3,4"
-        tools:ignore="HardcodedText"
         >
-        <TableRow>
-            <RadioButton android:id="@+id/mode_src" style="@style/mode" android:text="SRC" />
-            <RadioButton android:id="@+id/mode_src_in" style="@style/mode" android:text="SRC_IN" />
-            <RadioButton android:id="@+id/mode_src_over" style="@style/mode" android:text="SRC_OVER" />
-            <RadioButton android:id="@+id/mode_lighten" style="@style/mode" android:text="LIGHTEN" />
-        </TableRow>
-        <TableRow>
-            <RadioButton android:id="@+id/mode_dst" style="@style/mode" android:text="DST" />
-            <RadioButton android:id="@+id/mode_dst_in" style="@style/mode" android:text="DST_IN" />
-            <RadioButton android:id="@+id/mode_dst_over" style="@style/mode" android:text="DST_OVER" />
-            <RadioButton android:id="@+id/mode_darken" style="@style/mode" android:text="DARKEN" />
-        </TableRow>
-        <TableRow>
-            <RadioButton android:id="@+id/mode_add" style="@style/mode" android:text="ADD" />
-            <RadioButton android:id="@+id/mode_src_out" style="@style/mode" android:text="SRC_OUT" />
-            <RadioButton android:id="@+id/mode_dst_atop" style="@style/mode" android:text="DST_ATOP" />
-            <RadioButton android:id="@+id/mode_screen" style="@style/mode" android:text="SCREEN" />
-        </TableRow>
-        <TableRow>
-            <RadioButton android:id="@+id/mode_xor" style="@style/mode" android:text="XOR" />
-            <RadioButton android:id="@+id/mode_dst_out" style="@style/mode" android:text="DST_OUT" />
-            <RadioButton android:id="@+id/mode_src_atop" style="@style/mode" android:text="SRC_ATOP" />
-            <RadioButton android:id="@+id/mode_overlay" style="@style/mode" android:text="OVERLAY"
-                         android:checked="true" />
-        </TableRow>
-        <TableRow>
-            <View android:layout_width="0dp" android:layout_height="0dp" />
-            <RadioButton android:id="@+id/mode_clear" style="@style/mode" android:text="CLEAR" />
-            <RadioButton android:id="@+id/mode_multiply" style="@style/mode" android:text="MULTIPLY" />
-        </TableRow>
-    </TableLayout>
+        <TableLayout
+            android:id="@+id/modes"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="0,1,2,3,4"
+            tools:ignore="HardcodedText"
+            >
+            <TableRow>
+                <RadioButton android:id="@+id/mode_src" style="@style/mode" android:text="SRC" />
+                <RadioButton android:id="@+id/mode_src_in" style="@style/mode" android:text="SRC_IN" />
+                <RadioButton android:id="@+id/mode_src_over" style="@style/mode" android:text="SRC_OVER" />
+                <RadioButton android:id="@+id/mode_lighten" style="@style/mode" android:text="LIGHTEN" />
+            </TableRow>
+            <TableRow>
+                <RadioButton android:id="@+id/mode_dst" style="@style/mode" android:text="DST" />
+                <RadioButton android:id="@+id/mode_dst_in" style="@style/mode" android:text="DST_IN" />
+                <RadioButton android:id="@+id/mode_dst_over" style="@style/mode" android:text="DST_OVER" />
+                <RadioButton android:id="@+id/mode_darken" style="@style/mode" android:text="DARKEN" />
+            </TableRow>
+            <TableRow>
+                <RadioButton android:id="@+id/mode_xor" style="@style/mode" android:text="XOR" />
+                <RadioButton android:id="@+id/mode_src_out" style="@style/mode" android:text="SRC_OUT" />
+                <RadioButton android:id="@+id/mode_dst_atop" style="@style/mode" android:text="DST_ATOP" />
+                <RadioButton android:id="@+id/mode_screen" style="@style/mode" android:text="SCREEN" />
+            </TableRow>
+            <TableRow>
+                <RadioButton android:id="@+id/mode_add" style="@style/mode" android:text="ADD" />
+                <RadioButton android:id="@+id/mode_dst_out" style="@style/mode" android:text="DST_OUT" />
+                <RadioButton android:id="@+id/mode_src_atop" style="@style/mode" android:text="SRC_ATOP" />
+                <RadioButton android:id="@+id/mode_overlay" style="@style/mode" android:text="OVERLAY"
+                             tools:checked="true" />
+            </TableRow>
+            <TableRow>
+                <View android:layout_width="0dp" android:layout_height="0dp" />
+                <RadioButton android:id="@+id/mode_clear" style="@style/mode" android:text="CLEAR" />
+                <RadioButton android:id="@+id/mode_multiply" style="@style/mode" android:text="MULTIPLY" />
+            </TableRow>
+        </TableLayout>
+    </ScrollView>
 </RelativeLayout>

@@ -1,6 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="margin">4dp</dimen>
-    <dimen name="activity_margin">16dp</dimen>
+    <dimen name="activity_margin">8dp</dimen>
     <dimen name="keySize">48dp</dimen>
     <dimen name="keySize_double">96dp</dimen>
 </resources>
