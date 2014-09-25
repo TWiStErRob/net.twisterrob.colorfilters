@@ -19,6 +19,7 @@ class OrderComponent extends Component {
     private static final int[] IDENT = new int[]{0, 1, 2, 3, 4};
     private final ViewGroup[] places;
     private final View[] comps;
+    private final View[] swaps;
     private final int[] map = new int[IDENT.length];
 
     public OrderComponent(View view, RefreshListener listener) {
@@ -38,27 +39,35 @@ class OrderComponent extends Component {
                 v(R.id.controls_comp_S),
                 v(R.id.controls_comp_sat)
         };
+        swaps = new View[]{
+                v(R.id.controls_swap_12),
+                v(R.id.controls_swap_23),
+                v(R.id.controls_swap_34),
+                v(R.id.controls_swap_45)
+        };
     }
 
     @Override
     public void setupUI() {
-        for (ViewGroup place : places) {
-            place.setOnDragListener(new ItemDragListener(new ItemDragListener.ChangeListener() {
+        for (int i = 0; i < swaps.length; i++) {
+            final ViewGroup left = places[i];
+            final ViewGroup right = places[i + 1];
+            if(swaps[i]!=null)
+            swaps[i].setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void dropped(ViewGroup source, ViewGroup target) {
-                    View from = source.getChildAt(0);
-                    View to = target.getChildAt(0);
-                    source.removeView(from);
-                    target.removeView(to);
-                    source.addView(to);
-                    target.addView(from);
-                    refreshModel();
-                    dispatchRefresh(true);
+                public void onClick(View v) {
+                    SWAPPER.dropped(left, right);
                 }
-            }));
+            });
         }
-        for (View comp : comps) {
-            comp.setOnTouchListener(new DragStartListener());
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            for (ViewGroup place : places) {
+                place.setOnDragListener(new ItemDragListener(SWAPPER));
+            }
+            for (View comp : comps) {
+                comp.setOnTouchListener(new DragStartListener());
+            }
         }
     }
 
@@ -206,4 +215,18 @@ class OrderComponent extends Component {
             dropTarget.setBackgroundDrawable(drawable);
         }
     }
+
+    private final ItemDragListener.ChangeListener SWAPPER = new ItemDragListener.ChangeListener() {
+        @Override
+        public void dropped(ViewGroup source, ViewGroup target) {
+            View from = source.getChildAt(0);
+            View to = target.getChildAt(0);
+            source.removeView(from);
+            target.removeView(to);
+            source.addView(to);
+            target.addView(from);
+            refreshModel();
+            dispatchRefresh(true);
+        }
+    };
 }

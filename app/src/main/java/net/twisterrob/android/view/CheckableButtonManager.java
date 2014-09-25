@@ -49,7 +49,9 @@ public class CheckableButtonManager implements CompoundButton.OnCheckedChangeLis
                 }
             }
         } else {
-            checkedButton.setChecked(false);
+            if (checkedButton != null) {
+                checkedButton.setChecked(false);
+            }
         }
     }
 

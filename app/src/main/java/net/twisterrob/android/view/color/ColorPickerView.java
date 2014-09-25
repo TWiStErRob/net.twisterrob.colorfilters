@@ -315,6 +315,6 @@ public class ColorPickerView extends ImageView implements SwatchChooser.OnSwatch
 
     @Override
     public void swatchSelected(Swatch swatch) {
-
+        this.swatch = swatch;
     }
 }

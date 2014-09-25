@@ -27,7 +27,6 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import net.twisterrob.android.view.KeyboardHandler;
-import net.twisterrob.colorfilters.android.R;
 import net.twisterrob.colorfilters.android.keyboard.KeyboardMode;
 
 import java.util.Locale;
@@ -139,12 +138,6 @@ public abstract class ColorFilterFragment extends Fragment {
                     (android.content.ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
             clipboard.setPrimaryClip(android.content.ClipData.newPlainText(title, content));
         }
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        updateFilter();
     }
 
     @Override

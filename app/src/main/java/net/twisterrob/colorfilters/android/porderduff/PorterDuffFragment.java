@@ -49,10 +49,10 @@ public class PorterDuffFragment extends ColorFilterFragment {
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private static PorterDuff.Mode getDefaultMode() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            return PorterDuff.Mode.OVERLAY;
-        } else {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
             return PorterDuff.Mode.SCREEN;
+        } else {
+            return PorterDuff.Mode.OVERLAY;
         }
     }
 
@@ -142,12 +142,13 @@ public class PorterDuffFragment extends ColorFilterFragment {
             }
         });
 
+        ((CompoundButton) view.findViewById(findView(DEFAULT_MODE))).setChecked(true);
         for (int id : MODES.keySet()) {
             modes.addButton((RadioButton) view.findViewById(id));
         }
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-            view.findViewById(R.id.mode_add).setVisibility(View.INVISIBLE);
-            view.findViewById(R.id.mode_overlay).setVisibility(View.INVISIBLE);
+            view.findViewById(R.id.mode_add).setEnabled(false);
+            view.findViewById(R.id.mode_overlay).setEnabled(false);
         }
         modes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -216,9 +217,9 @@ public class PorterDuffFragment extends ColorFilterFragment {
     }
 
     public void setValues(int color, PorterDuff.Mode mode) {
-        updateColor(color, null);
         int modeId = findView(mode);
         ((CompoundButton) getView().findViewById(modeId)).setChecked(true);
+        updateColor(color, null);
     }
 
     private int findView(PorterDuff.Mode mode) {
@@ -257,7 +258,7 @@ public class PorterDuffFragment extends ColorFilterFragment {
         modes.put(R.id.mode_lighten, PorterDuff.Mode.LIGHTEN);
         modes.put(R.id.mode_multiply, PorterDuff.Mode.MULTIPLY);
         modes.put(R.id.mode_screen, PorterDuff.Mode.SCREEN);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+        if (Build.VERSION_CODES.HONEYCOMB <= Build.VERSION.SDK_INT) {
             modes.put(R.id.mode_add, PorterDuff.Mode.ADD);
             modes.put(R.id.mode_overlay, PorterDuff.Mode.OVERLAY);
         }
