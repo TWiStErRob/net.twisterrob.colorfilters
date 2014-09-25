@@ -1,6 +1,5 @@
 package net.twisterrob.colorfilters.android;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -18,7 +17,6 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 
 import net.twisterrob.android.view.KeyboardHandler;
-import net.twisterrob.colorfilters.android.R;
 import net.twisterrob.colorfilters.android.image.ImageFragment;
 import net.twisterrob.colorfilters.android.image.LogoWriter;
 import net.twisterrob.colorfilters.android.keyboard.KeyboardMode;
@@ -99,14 +97,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.OnNavig
                 File logo = LogoWriter.write(36, 48, 72, 96, 144, 192, 512);
                 images.load(Uri.fromFile(logo));
                 Log.i("LOGO", "Written to: " + logo);
-                return true;
-            case R.id.action_store:
-                new AlertDialog.Builder(this)
-                        .setTitle(R.string.cf_about_application_title)
-                        .setMessage(R.string.cf_store_description)
-                        .create()
-                        .show()
-                ;
                 return true;
         }
         return super.onOptionsItemSelected(item);

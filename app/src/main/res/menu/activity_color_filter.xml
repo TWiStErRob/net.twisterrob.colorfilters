@@ -12,15 +12,6 @@
         android:orderInCategory="4"
         />
     <item
-        android:id="@+id/action_store"
-        android:title="Google Play Description"
-        android:icon="@drawable/ic_launcher"
-        app:showAsAction="never"
-        tools:showAsAction="never"
-        android:visible="false"
-        tools:ignore="HardcodedText"
-        />
-    <item
         android:id="@+id/action_logo"
         android:title="Generate Logo"
         android:icon="@drawable/ic_launcher"

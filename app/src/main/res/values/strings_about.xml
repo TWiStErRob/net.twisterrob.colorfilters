@@ -13,22 +13,23 @@
     <string name="cf_about_tips_title">Tips and Tricks</string>
     <string name="cf_about_tips">
         <big><b>General</b></big>
-        \n&#xA0;&#xA0;&#xA0;&#xA0;&#x2022; You can copy generated code from the &#8220;Info&#8221; or share it (with pictures) from the action bar.
-        \n&#xA0;&#xA0;&#xA0;&#xA0;&#x2022; Long pressing the color picker will give you more picker types.
-        \n&#xA0;&#xA0;&#xA0;&#xA0;&#x2022; Tapping on the original image (left/bottom) will give you the opportunity to swap the image.
-        \n&#xA0;&#xA0;&#xA0;&#xA0;&#x2022; Long pressing the original image (right/top) will reset the default image.
-        \n&#xA0;&#xA0;&#xA0;&#xA0;&#x2022; Tapping on the preview image (right/top) will reset the settings.
+        \n&#8195;&#8226;&#8194;You can copy generated code from the &#8220;Info&#8221; or share it (with pictures) from the action bar.
+        \n&#8195;&#8226;&#8194;Long pressing the color picker will give you more picker types.
+        \n&#8195;&#8226;&#8194;Tapping on the original image (left/bottom) will give you the opportunity to swap the image.
+        \n&#8195;&#8226;&#8194;Long pressing the original image (right/top) will reset the default image.
+        \n&#8195;&#8226;&#8194;Tapping on the preview image (right/top) will reset the settings.
 
         \n\n<big><b>Lighting Color Filter</b></big>
-        \n&#xA0;&#xA0;&#xA0;&#xA0;&#x2022; Tapping on the color preview will reset the color.
+        \n&#8195;&#8226;&#8194;Tapping on the color preview will reset the color.
 
         \n\n<big><b>Porter/Duff Color Filter</b></big>
-        \n&#xA0;&#xA0;&#xA0;&#xA0;&#x2022; Use (semi-)transparent images (png/gif) for best effects.
-        \n&#xA0;&#xA0;&#xA0;&#xA0;&#x2022; Tapping on the color preview will reset the color.
+        \n&#8195;&#8226;&#8194;Use (semi-)transparent images (png/gif) for best effects.
+        \n&#8195;&#8226;&#8194;Tapping on the color preview will reset the color.
+        \n&#8195;&#8226;&#8194;ADD/OVERLAY is supported only above Android 3.0
 
         \n\n<big><b>Color Matrix Color Filter</b></big>
-        \n&#xA0;&#xA0;&#xA0;&#xA0;&#x2022; The little &#x00D7; on the Color Matrix will reset just the matrix.
-        \n&#xA0;&#xA0;&#xA0;&#xA0;&#x2022; You can change the order the matrices are multiplied by drag &amp; dropping the <tt>R</tt> and <tt>S</tt> boxes.
+        \n&#8195;&#8226;&#8194;The little &#x00D7; on the Color Matrix will reset just the matrix.
+        \n&#8195;&#8226;&#8194;You can change the multiplication order of the matrices by clicking on the multiplication signs or by drag &amp; dropping the <tt>R</tt> and <tt>S</tt> boxes.
     </string>
 
     <string name="cf_about_faq_title">FAQ (Frequently Asked Questions)</string>
