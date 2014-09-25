@@ -38,7 +38,7 @@ public class AboutActivity extends ListActivity {
                 intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.cf_about_feedback_subject,
                         getString(R.string.app_name)));
                 intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.cf_about_feedback_body,
-                        getString(R.string.app_name), BuildConfig.PACKAGE_NAME, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE));
+                        BuildConfig.PACKAGE_NAME, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE));
                 startActivity(intent);
             }
         });

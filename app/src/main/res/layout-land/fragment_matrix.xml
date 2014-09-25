@@ -30,7 +30,6 @@
 
             <include
                 layout="@layout/inc_matrix_editor"
-                android:id="@+id/editor"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 />

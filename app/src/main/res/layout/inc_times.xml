@@ -8,5 +8,6 @@
     android:gravity="center"
     android:src="@drawable/cross"
     android:scaleType="fitCenter"
-    tools:background="@android:color/darker_gray"
+    android:contentDescription="multiplied by"
+    tools:ignore="HardcodedText"
     />

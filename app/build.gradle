@@ -21,7 +21,7 @@ android {
     lintOptions {
         xmlReport false
         checkAllWarnings true
-        disable 'GradleDependency', 'UnusedAttribute', 'RtlHardcoded'
+        disable 'GradleDependency', 'UnusedAttribute', 'RtlHardcoded', 'IconDensities'
     }
 
     signingConfigs {

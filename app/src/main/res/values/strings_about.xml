@@ -7,7 +7,7 @@
     <string name="cf_about_feedback">Feedback? <a href="#">Tap here</a>!</string>
     <string name="cf_about_feedback_subject">%1$s feedback</string>
     <!-- %1: app_name, %2: app_package, %3: app_version -->
-    <string name="cf_about_feedback_body">Package: %2$s\nVersion: %3$s/%4$d\n\nHey,\nI have some comments regarding your app:\n</string>
+    <string name="cf_about_feedback_body">Package: %1$s\nVersion: %2$s/%3$d\n\nHey,\nI have some comments regarding your app:\n</string>
     <string name="cf_about_icon_cd">Application icon</string>
 
     <string name="cf_about_tips_title">Tips and Tricks</string>
