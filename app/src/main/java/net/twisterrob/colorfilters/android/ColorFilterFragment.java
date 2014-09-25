@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.net.Uri;
@@ -149,6 +150,10 @@ public abstract class ColorFilterFragment extends Fragment {
     protected void updateFilter() {
         ColorFilter filter = createFilter();
         listener.colorFilterChanged(filter);
+    }
+
+    protected boolean isPortrait() {
+        return getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
     }
 
     protected abstract CharSequence generateCode();

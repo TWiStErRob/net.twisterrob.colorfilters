@@ -1,7 +1,6 @@
 package net.twisterrob.colorfilters.android.matrix;
 
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.graphics.ColorFilter;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
@@ -87,7 +86,7 @@ public class MatrixFragment extends ColorFilterFragment {
         getKeyboard().setCustomKeyboardListner(new KeyboardHandler.CustomKeyboardListener() {
             @Override
             public void customKeyboardShown() {
-                if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                if (isPortrait()) {
                     controlsGroup.setVisibility(View.GONE);
                 }
                 orderGroup.setVisibility(View.GONE);
@@ -95,7 +94,7 @@ public class MatrixFragment extends ColorFilterFragment {
 
             @Override
             public void customKeyboardHidden() {
-                if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                if (isPortrait()) {
                     controlsGroup.setVisibility(View.VISIBLE);
                 }
                 orderGroup.setVisibility(View.VISIBLE);

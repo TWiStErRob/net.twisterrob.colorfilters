@@ -78,14 +78,18 @@ public class LightingFragment extends ColorFilterFragment {
         getKeyboard().setCustomKeyboardListner(new KeyboardHandler.CustomKeyboardListener() {
             @Override
             public void customKeyboardShown() {
-                mulColor.setVisibility(View.GONE);
-                addColor.setVisibility(View.GONE);
+                if (isPortrait()) {
+                    mulColor.setVisibility(View.GONE);
+                    addColor.setVisibility(View.GONE);
+                }
             }
 
             @Override
             public void customKeyboardHidden() {
-                mulColor.setVisibility(View.VISIBLE);
-                addColor.setVisibility(View.VISIBLE);
+                if (isPortrait()) {
+                    mulColor.setVisibility(View.VISIBLE);
+                    addColor.setVisibility(View.VISIBLE);
+                }
             }
         });
     }
@@ -196,7 +200,7 @@ public class LightingFragment extends ColorFilterFragment {
                     colorView.setColor(color);
                 }
 
-                rgbLabel.setText(colorToARGBString(color));
+                rgbLabel.setText(colorToRGBString(color));
                 preview.setBackgroundColor(color);
             } finally {
                 pendingUpdate = false;
