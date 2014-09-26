@@ -6,10 +6,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -193,8 +193,8 @@ public class ImageFragment extends Fragment {
 
     public void load(Uri uri) {
         BitmapKeeper.save(getFragmentManager(), uri);
-        Glide.with(this).load(uri).into(original);
-        Glide.with(this).load(uri).into(preview);
+        Glide.with(this).load(uri).dontTransform().into(original);
+        Glide.with(this).load(uri).dontTransform().into(preview);
     }
 
     private void load(Bitmap bitmap) {
@@ -213,28 +213,25 @@ public class ImageFragment extends Fragment {
     }
 
     public Bitmap renderToBitmap() {
-        int ow = original.getWidth();
-        int pw = preview.getWidth();
-        int oh = original.getHeight();
-        int ph = preview.getHeight();
+        Drawable od = original.getDrawable(), pd = preview.getDrawable();
+        int ow = od.getIntrinsicWidth(), pw = pd.getIntrinsicWidth();
+        int oh = od.getIntrinsicHeight(), ph = pd.getIntrinsicHeight();
+        boolean portrait = Math.max(ow, pw) <= Math.max(oh, ph);
+
         int w, h;
-        boolean portrait = getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
         if (portrait) {
             w = ow + pw;
-            h = Math.max(oh, ph);
+            h = Math.max(ph, oh);
         } else {
             w = Math.max(ow, pw);
             h = oh + ph;
         }
+
         Bitmap image = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(image);
-        original.draw(canvas);
-        if (portrait) {
-            canvas.translate(ow, 0);
-        } else {
-            canvas.translate(0, oh);
-        }
-        preview.draw(canvas);
+        od.draw(canvas);
+        canvas.translate(portrait ? ow : 0, portrait ? 0 : oh);
+        pd.draw(canvas);
         return image;
     }
 }
