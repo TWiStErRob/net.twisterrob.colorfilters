@@ -4,12 +4,8 @@ buildscript {
         maven { url 'http://localhost/maven' }
     }
 
-    //configurations.classpath.resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+    //configurations.classpath.resolutionStrategy.cacheChangingModulesFor 0, 'seconds' // -SNAPSHOT
     dependencies {
-        classpath 'net.twisterrob.gradle:plugin:0.3'
+        classpath 'net.twisterrob.gradle:plugin:0.3.1'
     }
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.1'
 }

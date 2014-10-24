@@ -20,6 +20,7 @@
         android:layout_centerVertical="true"
         android:adjustViewBounds="true"
         android:src="@drawable/ic_launcher_web"
+        tools:ignore="ContentDescription"
         />
 
     <LinearLayout
@@ -36,6 +37,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
             android:text="@string/app_name"
             />
 
@@ -45,6 +49,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
             android:text="@string/cf_about_version"
             />
 

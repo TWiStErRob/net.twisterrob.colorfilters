@@ -38,17 +38,18 @@ public class AboutActivity extends ListActivity {
                 intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.cf_about_feedback_subject,
                         getString(R.string.app_name)));
                 intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.cf_about_feedback_body,
-                        BuildConfig.PACKAGE_NAME, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE));
+                        BuildConfig.APPLICATION_ID, BuildConfig.VERSION_NAME));
                 startActivity(intent);
             }
         });
         TextView name = (TextView) findViewById(R.id.about_name);
+        name.setSelected(true);
         TextView version = (TextView) findViewById(R.id.about_version);
-        version.setText(getString(R.string.cf_about_version,
-                BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE));
+        version.setText(getString(R.string.cf_about_version, BuildConfig.VERSION_NAME));
         TextView pkg = (TextView) findViewById(R.id.about_package);
+        version.setSelected(true);
         pkg.setSelected(true);
-        pkg.setVisibility(BuildConfig.DEBUG ? View.VISIBLE : View.GONE);
+        pkg.setVisibility(getResources().getBoolean(R.bool.in_test) ? View.VISIBLE : View.GONE);
     }
 
     @Override

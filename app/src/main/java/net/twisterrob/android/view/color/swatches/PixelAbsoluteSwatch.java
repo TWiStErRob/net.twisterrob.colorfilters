@@ -38,6 +38,7 @@ public class PixelAbsoluteSwatch extends Swatch {
     };
 
     @Override
+    @SuppressWarnings("deprecation")
     public void draw(Canvas canvas) {
         if (bitmap == null) return;
         Rect bounds = getBounds();

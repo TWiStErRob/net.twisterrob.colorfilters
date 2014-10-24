@@ -29,7 +29,7 @@ import java.io.File;
 import static android.provider.MediaStore.Images;
 
 
-public class MainActivity extends ActionBarActivity implements ActionBar.OnNavigationListener, ColorFilterFragment.Listener, ImageFragment.Listener {
+public class MainActivity extends ActionBarActivity implements ColorFilterFragment.Listener, ImageFragment.Listener {
     private static final String PREF_COLORFILTER_SELECTED = "ColorFilter.selected";
     private static final int COLORFILTER_DEFAULT = 0;
 
@@ -38,6 +38,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.OnNavig
 
 
     @Override
+    @SuppressWarnings("deprecation")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_color_filter);
@@ -47,20 +48,39 @@ public class MainActivity extends ActionBarActivity implements ActionBar.OnNavig
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_launcher);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-        actionBar.setListNavigationCallbacks(new ArrayAdapter<CharSequence>(
-                        actionBar.getThemedContext(),
-                        android.R.layout.simple_list_item_1,
-                        android.R.id.text1,
-                        new CharSequence[]{
-                                getText(R.string.cf_lighting_title),
-                                getText(R.string.cf_porterduff_title),
-                                getText(R.string.cf_matrix_title)
-                        }),
-                this);
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(
+                actionBar.getThemedContext(),
+                android.R.layout.simple_list_item_1,
+                android.R.id.text1,
+                new CharSequence[] {
+                        getText(R.string.cf_lighting_title),
+                        getText(R.string.cf_porterduff_title),
+                        getText(R.string.cf_matrix_title)
+                });
+        actionBar.setListNavigationCallbacks(adapter, new ActionBar.OnNavigationListener() {
+            @Override
+            public boolean onNavigationItemSelected(int position, long id) {
+                try {
+                    // keep the existing instance on rotation
+                    if (getPosition(getCurrentFragment()) != position) {
+                        ColorFilterFragment fragment = createFragment(position);
+                        getSupportFragmentManager().beginTransaction()
+                                                   .replace(R.id.container, fragment)
+                                                   .commit();
+                    }
+                    return true;
+                } catch (RuntimeException ex) {
+                    return false;
+                }
+            }
+        });
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     protected void onResume() {
         super.onResume();
         int position = getPrefs().getInt(PREF_COLORFILTER_SELECTED, COLORFILTER_DEFAULT);
@@ -132,23 +152,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.OnNavig
         if (kbd != null && kbd.handleBack()) return;
         super.onBackPressed();
     }
-
-    @Override
-    public boolean onNavigationItemSelected(int position, long id) {
-        try {
-            // keep the existing instance on rotation
-            if (getPosition(getCurrentFragment()) != position) {
-                ColorFilterFragment fragment = createFragment(position);
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, fragment)
-                        .commit();
-            }
-            return true;
-        } catch (RuntimeException ex) {
-            return false;
-        }
-    }
-
 
     public Fragment getCurrentFragment() {
         return getSupportFragmentManager().findFragmentById(R.id.container);

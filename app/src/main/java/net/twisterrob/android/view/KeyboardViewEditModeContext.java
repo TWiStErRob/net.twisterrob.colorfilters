@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.UserHandle;
+import android.support.annotation.NonNull;
 import android.view.Display;
 
 import java.io.File;
@@ -43,8 +44,8 @@ import java.io.InputStream;
  *   at android.inputmethodservice.KeyboardView.<init>(KeyboardView.java:283)
  *   at android.inputmethodservice.KeyboardView.<init>(KeyboardView.java:279)
  */
-@TargetApi(Build.VERSION_CODES.KITKAT)
-@SuppressWarnings({"deprecation", "NullableProblems"})
+@TargetApi(Build.VERSION_CODES.LOLLIPOP)
+@SuppressWarnings("deprecation")
 public class KeyboardViewEditModeContext extends Context {
     private final Context wrapped;
 
@@ -157,6 +158,10 @@ public class KeyboardViewEditModeContext extends Context {
         return wrapped.getFilesDir();
     }
 
+    @Override public File getNoBackupFilesDir() {
+        return wrapped.getNoBackupFilesDir();
+    }
+
     @Override
     public File getExternalFilesDir(String type) {
         return wrapped.getExternalFilesDir(type);
@@ -182,6 +187,10 @@ public class KeyboardViewEditModeContext extends Context {
         return wrapped.getCacheDir();
     }
 
+    @Override public File getCodeCacheDir() {
+        return wrapped.getCodeCacheDir();
+    }
+
     @Override
     public File getExternalCacheDir() {
         return wrapped.getExternalCacheDir();
@@ -190,6 +199,10 @@ public class KeyboardViewEditModeContext extends Context {
     @Override
     public File[] getExternalCacheDirs() {
         return wrapped.getExternalCacheDirs();
+    }
+
+    @Override public File[] getExternalMediaDirs() {
+        return wrapped.getExternalMediaDirs();
     }
 
     @Override
@@ -315,7 +328,7 @@ public class KeyboardViewEditModeContext extends Context {
     }
 
     @Override
-    public void sendOrderedBroadcast(Intent intent, String receiverPermission, BroadcastReceiver resultReceiver, Handler scheduler, int initialCode, String initialData, Bundle initialExtras) {
+    public void sendOrderedBroadcast(@NonNull Intent intent, String receiverPermission, BroadcastReceiver resultReceiver, Handler scheduler, int initialCode, String initialData, Bundle initialExtras) {
         wrapped.sendOrderedBroadcast(intent, receiverPermission, resultReceiver, scheduler, initialCode, initialData, initialExtras);
     }
 
@@ -390,22 +403,22 @@ public class KeyboardViewEditModeContext extends Context {
     }
 
     @Override
-    public boolean bindService(Intent service, ServiceConnection conn, int flags) {
+    public boolean bindService(Intent service, @NonNull ServiceConnection conn, int flags) {
         return wrapped.bindService(service, conn, flags);
     }
 
     @Override
-    public void unbindService(ServiceConnection conn) {
+    public void unbindService(@NonNull ServiceConnection conn) {
         wrapped.unbindService(conn);
     }
 
     @Override
-    public boolean startInstrumentation(ComponentName className, String profileFile, Bundle arguments) {
+    public boolean startInstrumentation(@NonNull ComponentName className, String profileFile, Bundle arguments) {
         return wrapped.startInstrumentation(className, profileFile, arguments);
     }
 
     @Override
-    public Object getSystemService(String name) {
+    public Object getSystemService(@NonNull String name) {
         try {
             return wrapped.getSystemService(name);
         } catch (RuntimeException ex) {
@@ -414,32 +427,32 @@ public class KeyboardViewEditModeContext extends Context {
     }
 
     @Override
-    public int checkPermission(String permission, int pid, int uid) {
+    public int checkPermission(@NonNull String permission, int pid, int uid) {
         return wrapped.checkPermission(permission, pid, uid);
     }
 
     @Override
-    public int checkCallingPermission(String permission) {
+    public int checkCallingPermission(@NonNull String permission) {
         return wrapped.checkCallingPermission(permission);
     }
 
     @Override
-    public int checkCallingOrSelfPermission(String permission) {
+    public int checkCallingOrSelfPermission(@NonNull String permission) {
         return wrapped.checkCallingOrSelfPermission(permission);
     }
 
     @Override
-    public void enforcePermission(String permission, int pid, int uid, String message) {
+    public void enforcePermission(@NonNull String permission, int pid, int uid, String message) {
         wrapped.enforcePermission(permission, pid, uid, message);
     }
 
     @Override
-    public void enforceCallingPermission(String permission, String message) {
+    public void enforceCallingPermission(@NonNull String permission, String message) {
         wrapped.enforceCallingPermission(permission, message);
     }
 
     @Override
-    public void enforceCallingOrSelfPermission(String permission, String message) {
+    public void enforceCallingOrSelfPermission(@NonNull String permission, String message) {
         wrapped.enforceCallingOrSelfPermission(permission, message);
     }
 
@@ -499,12 +512,12 @@ public class KeyboardViewEditModeContext extends Context {
     }
 
     @Override
-    public Context createConfigurationContext(Configuration overrideConfiguration) {
+    public Context createConfigurationContext(@NonNull Configuration overrideConfiguration) {
         return wrapped.createConfigurationContext(overrideConfiguration);
     }
 
     @Override
-    public Context createDisplayContext(Display display) {
+    public Context createDisplayContext(@NonNull Display display) {
         return wrapped.createDisplayContext(display);
     }
 
