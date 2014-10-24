@@ -20,7 +20,6 @@
         android:layout_centerVertical="true"
         android:adjustViewBounds="true"
         android:src="@drawable/ic_launcher_web"
-        android:contentDescription="@string/cf_about_icon_cd"
         />
 
     <LinearLayout

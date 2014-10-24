@@ -3,4 +3,6 @@
 /local.properties
 /temp
 /build
+/*.ipr
+/*.iws
 *.iml

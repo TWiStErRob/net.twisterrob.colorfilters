@@ -1,98 +1,21 @@
 apply plugin: 'com.android.application'
+apply plugin: 'net.twisterrob.android-app'
 
 android {
-    buildToolsVersion "20"
-    compileSdkVersion "android-19"
-
     defaultConfig {
-        applicationId "net.twisterrob.colorfilters"
-        versionCode 5
-        // doesn't read from manifest, must define here: https://code.google.com/p/android/issues/detail?id=67277
-        versionName "1.0"
-        //noinspection OldTargetApi
-        targetSdkVersion 19
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
+        applicationId 'net.twisterrob.colorfilters'
     }
 
     lintOptions {
-        xmlReport false
-        checkAllWarnings true
-        disable 'GradleDependency', 'UnusedAttribute', 'RtlHardcoded', 'IconDensities'
-    }
-
-    signingConfigs {
-        release {
-            storeFile file(RELEASE_STORE_FILE)
-            storePassword RELEASE_STORE_PASSWORD
-            keyAlias RELEASE_KEY_ALIAS
-            keyPassword RELEASE_KEY_PASSWORD
-        }
-    }
-
-    buildTypes {
-        debug {
-            applicationIdSuffix ".debug"
-            versionNameSuffix "-DEBUG"
-            buildConfigField "String", "EMAIL", "\"papp.robert.s@gmail.com\""
-        }
-        release {
-            signingConfig = signingConfigs.release
-            buildConfigField "String", "EMAIL", "\"feedback@twisterrob.net\""
-
-            runProguard true
-            proguardFile getDefaultProguardFile('proguard-android.txt')
-            proguardFile 'proguard-rules.pro'
-        }
-    }
-
-    applicationVariants.all { variant ->
-        //println "${variant.class}, name=${variant.name}, desc=${variant.description}, base=${variant.baseName}, dir=${variant.dirName}, pkg=${variant.applicationId}, flav=${variant.flavorName}, ver=${variant.versionName}, code=${variant.versionCode}"
-        if (variant.install) {
-            tasks.create(name: "run${variant.name.capitalize()}", type: Exec, dependsOn: variant.install) {
-                description "Installs the APK for ${variant.description}, and then runs the main launcher activity."
-                def getMainActivity = { file ->
-                    new XmlSlurper().parse(file).application.activity.find{ it.'intent-filter'.find{ filter ->
-                        return filter.action  .find{it.'@android:name'.text() == 'android.intent.action.MAIN'      } \
-                            && filter.category.find{it.'@android:name'.text() == 'android.intent.category.LAUNCHER'}
-                    }}.'@android:name'
-                }
-                doFirst {
-                    def activityClass = getMainActivity(variant.outputs.processManifest.manifestOutputFile)
-                    // doesn't work: commandLine "${android.adbExe}", 'shell', 'am', 'start', '-a', 'android.intent.action.MAIN', '-c', 'android.intent.category.LAUNCHER', "${variant.applicationId}"
-                    commandLine android.adbExe, 'shell', 'am', 'start', '-n', "${variant.applicationId}/${activityClass}"
-                    // or commandLine android.adbExe, 'shell', 'monkey', '-p', "${variant.applicationId}", '1'
-                }
-            }
-        }
-
-        //variant.variantData.generateResValuesTask.outputs.upToDateWhen { false }
-        //variant.buildType.resValue "bool", "generate_res_values", "true"
-        // The below should be variant.resValue, but there's not such API,
-        // overwriting before every use is a workaround, and it seems to work if there are flavors as well
-        variant.variantData.generateResValuesTask.doFirst {
-            // Add package for use e.g. in preferences to launch intent from the right package
-            variant.buildType.resValue "string", "app_package", "${variant.applicationId}"
-        }
+        disable 'UnusedAttribute', 'RtlHardcoded', 'IconDensities'
     }
 }
 
 repositories {
     mavenCentral()
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' } // glide SNAPSHOTS
 }
-
 dependencies {
-    // compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.github.bumptech.glide:glide:3.4.+' // TODO fix once 3.4 comes
-    compile 'com.android.support:appcompat-v7:20.0.0'
-}
-
-tasks.withType(JavaCompile) {
-    if (!name.contains('Test')) {
-        options.compilerArgs << '-Xlint:unchecked' << '-Xlint:deprecation'
-    }
+    compile 'com.android.support:appcompat-v7:21.0.0'
 }
