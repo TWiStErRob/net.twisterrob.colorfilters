@@ -1,31 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE drawable>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- top-left to bottom-right line -->
-    <item>
-        <rotate android:fromDegrees="45">
-            <shape android:shape="line">
-                <size
-                    android:width="16dp"
-                    android:height="16dp"/>
-                <stroke
-                    android:color="#000"
-                    android:width="1dp"/>
-            </shape>
-        </rotate>
-    </item>
+	<!-- top-left to bottom-right line -->
+	<item>
+		<rotate android:fromDegrees="45">
+			<shape android:shape="line">
+				<size android:width="16dp" android:height="16dp" />
+				<stroke android:width="1dp" android:color="#000" />
+			</shape>
+		</rotate>
+	</item>
 
-    <!-- top-right to bottom-left line -->
-    <item>
-        <rotate android:fromDegrees="-45">
-            <shape android:shape="line">
-                <size
-                    android:width="16dp"
-                    android:height="16dp"/>
-                <stroke
-                    android:color="#000"
-                    android:width="1dp"/>
-            </shape>
-        </rotate>
-    </item>
+	<!-- top-right to bottom-left line -->
+	<item>
+		<rotate android:fromDegrees="-45">
+			<shape android:shape="line">
+				<size android:width="16dp" android:height="16dp" />
+				<stroke android:width="1dp" android:color="#000" />
+			</shape>
+		</rotate>
+	</item>
 </layer-list>

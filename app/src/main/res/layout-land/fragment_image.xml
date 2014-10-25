@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical"
-    tools:showIn="@layout/activity_color_filter"
-    tools:context=".android.image.ImageFragment"
-    >
-
-    <ImageView
-        android:id="@+id/preview"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:layout_marginBottom="@dimen/margin"
-        android:scaleType="centerCrop"
-        android:src="@drawable/default_image"
-        android:contentDescription="@string/cf_image_preview_cd"
-        />
-
-    <ImageView
-        android:id="@+id/original"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:layout_marginTop="@dimen/margin"
-        android:scaleType="centerCrop"
-        android:src="@drawable/default_image"
-        android:contentDescription="@string/cf_image_original_cd"
-        />
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical"
+	tools:showIn="@layout/activity_color_filter"
+	tools:context=".android.image.ImageFragment"
+	>
+	<ImageView
+		android:id="@+id/preview"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_marginBottom="@dimen/margin"
+		android:layout_weight="0.5"
+		android:src="@drawable/default_image"
+		android:contentDescription="@string/cf_image_preview_cd"
+		android:scaleType="centerCrop"
+		/>
+	<ImageView
+		android:id="@+id/original"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_marginTop="@dimen/margin"
+		android:layout_weight="0.5"
+		android:src="@drawable/default_image"
+		android:contentDescription="@string/cf_image_original_cd"
+		android:scaleType="centerCrop"
+		/>
 </LinearLayout>

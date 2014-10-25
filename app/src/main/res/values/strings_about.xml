@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="cf_about_title">About</string>
+	<string name="cf_about_title">About</string>
 
-    <string name="cf_about_application_title">Application</string>
-    <string name="cf_about_version">Version %1$s</string>
-    <string name="cf_about_feedback">Feedback? <a href="#">Tap here</a>!</string>
-    <string name="cf_about_feedback_subject">%1$s feedback</string>
-    <!-- %1: app_name, %2: app_package, %3: app_version -->
-    <string name="cf_about_feedback_body">Package: %1$s\nVersion: %2$s\n\nHey,\nI have some comments regarding your app:\n</string>
+	<string name="cf_about_application_title">Application</string>
+	<string name="cf_about_version">Version %1$s</string>
+	<string name="cf_about_feedback">Feedback? <a href="#">Tap here</a>!</string>
+	<string name="cf_about_feedback_subject">%1$s feedback</string>
+	<!-- %1: app_name, %2: app_package, %3: app_version -->
+	<string name="cf_about_feedback_body">Package: %1$s\nVersion: %2$s\n\nHey,\nI have some comments regarding your app:\n</string>
 
-    <string name="cf_about_tips_title">Tips and Tricks</string>
+	<string name="cf_about_tips_title">Tips and Tricks</string>
     <string name="cf_about_tips">
         <big><b>General</b></big>
         \n&#8195;&#8226;&#8194;You can copy generated code from the &#8220;Info&#8221; or share it (with pictures) from the action bar.
@@ -31,7 +31,7 @@
         \n&#8195;&#8226;&#8194;You can change the multiplication order of the matrices by clicking on the multiplication signs or by drag &amp; dropping the <tt>R</tt> and <tt>S</tt> boxes.
     </string>
 
-    <string name="cf_about_faq_title">FAQ (Frequently Asked Questions)</string>
+	<string name="cf_about_faq_title">FAQ (Frequently Asked Questions)</string>
     <string name="cf_about_faq">
         <b>What is this application?</b>
         \nThis application was made so that Android developers can test out what a Color Filter applied to an image will look like without the need for coding.
@@ -46,16 +46,16 @@
         \nYou can turn them off in the Settings, and feel free to leave some feedback about it!
     </string>
 
-    <string name="cf_about_licences_title">Acknowledgements and Licences</string>
-    <string-array name="cf_about_licences">
-        <item>Glide 3.3.1, library</item>
-        <item>Order from Chaos, image</item>
-        <item>Custom keyboard, tutorial</item>
-        <item>Android SDK Color Picker, sample</item>
-        <item>OpenFrameworks HSB Gradients, sample</item>
-    </string-array>
+	<string name="cf_about_licences_title">Acknowledgements and Licences</string>
+	<string-array name="cf_about_licences">
+		<item>Glide 3.3.1, library</item>
+		<item>Order from Chaos, image</item>
+		<item>Custom keyboard, tutorial</item>
+		<item>Android SDK Color Picker, sample</item>
+		<item>OpenFrameworks HSB Gradients, sample</item>
+	</string-array>
 
-    <string-array name="cf_about_licences_content">
+	<string-array name="cf_about_licences_content">
 <item tools:ignore="TypographyQuotes,TypographyOther">Big thanks to <a href="https://github.com/sjudd">Sam</a> for maintaining <a href="https://github.com/bumptech/glide">Glide</a>,
 the most flexible Android image loader API on the market.
 \n
@@ -101,7 +101,7 @@ the most flexible Android image loader API on the market.
 \n
 \n<i>Image is licenced under <a href="http://creativecommons.org/licenses/by/4.0/">CC-BY</a>.</i>
 </item>
-        <item>Thanks to <a href="http://www.fampennings.nl/maarten/index.htm">Maarten Pennings</a> for writing <a href="http://www.fampennings.nl/maarten/android/09keyboard/index.htm">this detailed tutorial</a> about how to create a custom keyboard in an Android application.</item>
+		<item>Thanks to <a href="http://www.fampennings.nl/maarten/index.htm">Maarten Pennings</a> for writing <a href="http://www.fampennings.nl/maarten/android/09keyboard/index.htm">this detailed tutorial</a> about how to create a custom keyboard in an Android application.</item>
 <item tools:ignore="TypographyQuotes,TypographyOther">Thanks to <a href="https://source.android.com/">AOSP</a> for writing <a href="https://github.com/android/platform_development/blob/android-sdk-adt_r20/samples/ApiDemos/src/com/example/android/apis/graphics/ColorPickerDialog.java">a color picker dialog sample</a>.
 \n
 \n<i>Licence obtained from .java source code follows:</i>
@@ -126,5 +126,5 @@ the most flexible Android image loader API on the market.
 \n
 \nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 </item>
-    </string-array>
+	</string-array>
 </resources>

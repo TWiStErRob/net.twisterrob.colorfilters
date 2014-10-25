@@ -1,47 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    style="@style/perpendicularOrientation"
-    tools:showIn="@layout/fragment_matrix"
-    >
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	style="@style/perpendicularOrientation"
+	tools:showIn="@layout/fragment_matrix"
+	>
 
-    <FrameLayout style="@style/matrix_component" android:id="@+id/controls_comp_1">
-        <TextView style="@style/matrix_component_label"
-                  android:id="@+id/controls_comp_rR"
-                  android:text="@string/cf_matrix_rR" />
-    </FrameLayout>
+	<!-- @formatter:off -->
+	<FrameLayout android:id="@+id/controls_comp_1" style="@style/matrix_component">
+		<TextView android:id="@+id/controls_comp_rR"
+		          style="@style/matrix_component_label"
+		          android:text="@string/cf_matrix_rR" />
+	</FrameLayout>
 
-    <include layout="@layout/inc_times" android:id="@+id/controls_swap_12" />
+	<include android:id="@+id/controls_swap_12" layout="@layout/inc_times" />
 
-    <FrameLayout style="@style/matrix_component" android:id="@+id/controls_comp_2">
-        <TextView style="@style/matrix_component_label"
-                  android:id="@+id/controls_comp_rG"
-                  android:text="@string/cf_matrix_rG" />
-    </FrameLayout>
+	<FrameLayout android:id="@+id/controls_comp_2" style="@style/matrix_component">
+		<TextView android:id="@+id/controls_comp_rG"
+		          style="@style/matrix_component_label"
+		          android:text="@string/cf_matrix_rG" />
+	</FrameLayout>
 
-    <include layout="@layout/inc_times" android:id="@+id/controls_swap_23" />
+	<include android:id="@+id/controls_swap_23" layout="@layout/inc_times" />
 
-    <FrameLayout style="@style/matrix_component" android:id="@+id/controls_comp_3">
-        <TextView style="@style/matrix_component_label"
-                  android:id="@+id/controls_comp_rB"
-                  android:text="@string/cf_matrix_rB" />
-    </FrameLayout>
+	<FrameLayout android:id="@+id/controls_comp_3" style="@style/matrix_component">
+		<TextView android:id="@+id/controls_comp_rB"
+		          style="@style/matrix_component_label"
+		          android:text="@string/cf_matrix_rB" />
+	</FrameLayout>
 
-    <include layout="@layout/inc_times" android:id="@+id/controls_swap_34" />
+	<include android:id="@+id/controls_swap_34" layout="@layout/inc_times" />
 
-    <FrameLayout style="@style/matrix_component" android:id="@+id/controls_comp_4">
-        <TextView style="@style/matrix_component_label"
-                  android:id="@+id/controls_comp_S"
-                  android:text="@string/cf_matrix_S" />
-    </FrameLayout>
+	<FrameLayout android:id="@+id/controls_comp_4" style="@style/matrix_component">
+		<TextView android:id="@+id/controls_comp_S"
+		          style="@style/matrix_component_label"
+		          android:text="@string/cf_matrix_S" />
+	</FrameLayout>
 
-    <include layout="@layout/inc_times" android:id="@+id/controls_swap_45" />
+	<include android:id="@+id/controls_swap_45" layout="@layout/inc_times" />
 
-    <FrameLayout style="@style/matrix_component" android:id="@+id/controls_comp_5">
-        <TextView style="@style/matrix_component_label"
-                  android:id="@+id/controls_comp_sat"
-                  android:text="@string/cf_matrix_sat" />
-    </FrameLayout>
+	<FrameLayout android:id="@+id/controls_comp_5" style="@style/matrix_component">
+		<TextView android:id="@+id/controls_comp_sat"
+		          style="@style/matrix_component_label"
+		          android:text="@string/cf_matrix_sat" />
+	</FrameLayout>
+	<!-- @formatter:on -->
 
 </LinearLayout>

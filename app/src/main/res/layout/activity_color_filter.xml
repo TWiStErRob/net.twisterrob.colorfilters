@@ -1,51 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:actionBarNavMode="list"
-    tools:menu="fragment_image,fragment_color_filter,activity_color_filter"
-    tools:context=".MainActivity"
-    >
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:actionBarNavMode="list"
+	tools:menu="fragment_image,fragment_color_filter,activity_color_filter"
+	tools:context=".MainActivity"
+	>
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_margin="@dimen/activity_margin"
+		android:layout_above="@+id/keyboard"
+		android:orientation="vertical"
+		>
+		<fragment
+			android:id="@+id/images"
+			android:name="net.twisterrob.colorfilters.android.image.ImageFragment"
+			android:layout_width="fill_parent"
+			android:layout_height="0dp"
+			android:layout_weight="0.4"
+			tools:layout="@layout/fragment_image"
+			/>
+		<FrameLayout
+			android:id="@+id/container"
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_marginTop="@dimen/margin"
+			android:layout_weight="0.6"
+			android:focusableInTouchMode="true"
+			tools:background="@android:color/darker_gray"
+			/>
+	</LinearLayout>
 
-    <LinearLayout
-        android:layout_above="@+id/keyboard"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/activity_margin"
-        android:orientation="vertical"
-        >
-
-        <fragment
-            android:id="@+id/images"
-            android:name="net.twisterrob.colorfilters.android.image.ImageFragment"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.4"
-            tools:layout="@layout/fragment_image"
-            />
-
-        <FrameLayout
-            android:id="@+id/container"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.6"
-            android:layout_marginTop="@dimen/margin"
-            android:focusableInTouchMode="true"
-            tools:background="@android:color/darker_gray"
-            />
-    </LinearLayout>
-
-    <!-- To make the layout editor work append EditMode at the end of the class name -->
-    <net.twisterrob.android.view.KeyboardViewEditMode
-        android:id="@+id/keyboard"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="-4dp"
-        android:keyBackground="@drawable/keyboard_key"
-        android:background="@android:color/transparent"
-        />
+	<!-- To make the layout editor work append EditMode at the end of the class name -->
+	<net.twisterrob.android.view.KeyboardViewEditMode
+		android:id="@+id/keyboard"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="-4dp"
+		android:layout_alignParentBottom="true"
+		android:layout_centerHorizontal="true"
+		android:background="@android:color/transparent"
+		android:keyBackground="@drawable/keyboard_key"
+		/>
 </RelativeLayout>

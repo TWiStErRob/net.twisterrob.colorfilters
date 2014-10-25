@@ -9,11 +9,11 @@ import android.util.AttributeSet;
  * so resorting to manually changing the class name in the editor
  */
 public class KeyboardViewEditMode extends KeyboardView {
-    public KeyboardViewEditMode(Context context, AttributeSet attrs) {
-        super(new KeyboardViewEditModeContext(context), attrs);
-    }
+	public KeyboardViewEditMode(Context context, AttributeSet attrs) {
+		super(new KeyboardViewEditModeContext(context), attrs);
+	}
 
-    public KeyboardViewEditMode(Context context, AttributeSet attrs, int defStyle) {
-        super(new KeyboardViewEditModeContext(context), attrs, defStyle);
-    }
+	public KeyboardViewEditMode(Context context, AttributeSet attrs, int defStyle) {
+		super(new KeyboardViewEditModeContext(context), attrs, defStyle);
+	}
 }

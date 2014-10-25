@@ -1,118 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    tools:showIn="@layout/fragment_matrix"
-    tools:ignore="SelectableText"
-    >
-    <View
-        android:id="@+id/verticalHalf"
-        android:layout_centerHorizontal="true"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="@dimen/margin"
-        tools:layout_alignTop="@id/controls_scale"
-        tools:layout_alignBottom="@id/controls_scale"
-        tools:background="@android:color/black"
-        tools:layout_width="1dp"
-        />
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	tools:showIn="@layout/fragment_matrix"
+	tools:ignore="SelectableText"
+	>
+	<View
+		android:id="@+id/verticalHalf"
+		android:layout_width="0dp"
+		android:layout_height="0dp"
+		android:layout_margin="@dimen/margin"
+		android:layout_centerHorizontal="true"
+		tools:layout_alignTop="@id/controls_scale"
+		tools:layout_alignBottom="@id/controls_scale"
+		tools:background="@android:color/black"
+		tools:layout_width="1dp"
+		/>
 
-    <LinearLayout
-        tools:id="@id/controls_scale"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/verticalHalf"
-        android:orientation="vertical"
-        >
-        <RelativeLayout tools:id="@id/controls_scale_R" style="@style/wide">
-            <TextView android:id="@+id/label_sR" android:text="@string/cf_matrix_sR" style="@style/slider_label"
-                      android:layout_alignParentLeft="true" />
-            <TextView android:id="@+id/edit_sR" tools:text="1.00" style="@style/slider_value"
-                      android:layout_alignParentRight="true"/>
-            <SeekBar android:id="@+id/seek_sR" style="@style/matrix_slider"
-                     android:layout_toRightOf="@id/label_sR" android:layout_toLeftOf="@id/edit_sR"
-                     android:max="300" tools:progress="200" /><!-- -1 .. 2 by 0.01 -->
-        </RelativeLayout>
-        <RelativeLayout tools:id="@id/controls_scale_G" style="@style/wide">
-            <TextView android:id="@+id/label_sG" android:text="@string/cf_matrix_sG" style="@style/slider_label"
-                      android:layout_alignParentLeft="true"/>
-            <TextView android:id="@+id/edit_sG" tools:text="1.00" style="@style/slider_value"
-                      android:layout_alignParentRight="true"/>
-            <SeekBar android:id="@+id/seek_sG" style="@style/matrix_slider"
-                     android:layout_toRightOf="@id/label_sG" android:layout_toLeftOf="@id/edit_sG"
-                     android:max="300" tools:progress="200" /><!-- -1 .. 2 by 0.01 -->
-        </RelativeLayout>
-        <RelativeLayout tools:id="@id/controls_scale_B" style="@style/wide">
-            <TextView android:id="@+id/label_sB" android:text="@string/cf_matrix_sB" style="@style/slider_label"
-                      android:layout_alignParentLeft="true"/>
-            <TextView android:id="@+id/edit_sB" tools:text="1.00" style="@style/slider_value"
-                      android:layout_alignParentRight="true"/>
-            <SeekBar android:id="@+id/seek_sB" style="@style/matrix_slider"
-                     android:layout_toRightOf="@id/label_sB" android:layout_toLeftOf="@id/edit_sB"
-                     android:max="300" tools:progress="200" /><!-- -1 .. 2 by 0.01 -->
-        </RelativeLayout>
-        <RelativeLayout tools:id="@id/controls_scale_A" style="@style/wide">
-            <TextView android:id="@+id/label_sA" android:text="@string/cf_matrix_sA" style="@style/slider_label"
-                      android:layout_alignParentLeft="true"/>
-            <TextView android:id="@+id/edit_sA" tools:text="1.00" style="@style/slider_value"
-                      android:layout_alignParentRight="true"/>
-            <SeekBar android:id="@+id/seek_sA" style="@style/matrix_slider"
-                     android:layout_toRightOf="@id/label_sA" android:layout_toLeftOf="@id/edit_sA"
-                     android:max="300" tools:progress="200" /><!-- -1 .. 2 by 0.01 -->
-        </RelativeLayout>
-    </LinearLayout>
+	<LinearLayout
+		tools:id="@id/controls_scale"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_toLeftOf="@id/verticalHalf"
+		android:orientation="vertical"
+		>
+		<!-- -1 .. 2 by 0.01 -->
+		<!-- @formatter:off -->
+		<LinearLayout tools:id="@id/controls_scale_R" style="@style/wide">
+			<TextView android:id="@+id/label_sR" style="@style/slider_label" android:text="@string/cf_matrix_sR" />
+			<SeekBar android:id="@+id/seek_sR" style="@style/matrix_slider" android:max="300" tools:progress="100" />
+			<TextView android:id="@+id/edit_sR" style="@style/slider_value" tools:text="1.00" />
+		</LinearLayout>
+		<LinearLayout tools:id="@id/controls_scale_G" style="@style/wide">
+			<TextView android:id="@+id/label_sG" style="@style/slider_label" android:text="@string/cf_matrix_sG"/>
+			<SeekBar android:id="@+id/seek_sG" style="@style/matrix_slider" android:max="300" tools:progress="0" />
+			<TextView android:id="@+id/edit_sG" style="@style/slider_value" tools:text="0.00" />
+		</LinearLayout>
+		<LinearLayout tools:id="@id/controls_scale_B" style="@style/wide">
+			<TextView android:id="@+id/label_sB" style="@style/slider_label" android:text="@string/cf_matrix_sB"/>
+			<SeekBar android:id="@+id/seek_sB" style="@style/matrix_slider" android:max="300" tools:progress="300" />
+			<TextView android:id="@+id/edit_sB" style="@style/slider_value" tools:text="3.00" />
+		</LinearLayout>
+		<LinearLayout tools:id="@id/controls_scale_A" style="@style/wide">
+			<TextView android:id="@+id/label_sA" style="@style/slider_label" android:text="@string/cf_matrix_sA"/>
+			<SeekBar android:id="@+id/seek_sA" style="@style/matrix_slider" android:max="300" tools:progress="200" />
+			<TextView android:id="@+id/edit_sA" style="@style/slider_value" tools:text="2.00" />
+		</LinearLayout>
+		<!-- @formatter:on -->
+	</LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/controls_rotate"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/verticalHalf"
-        android:orientation="vertical"
-        >
-        <RelativeLayout tools:id="@id/controls_rotate_R" style="@style/wide">
-            <TextView android:id="@+id/label_rR" android:text="@string/cf_matrix_rR" style="@style/slider_label"
-                      android:layout_alignParentLeft="true"/>
-            <TextView android:id="@+id/edit_rR" tools:text="0" style="@style/slider_value"
-                      android:layout_alignParentRight="true"/>
-            <SeekBar android:id="@+id/seek_rR" style="@style/matrix_slider_circular"
-                     android:layout_toRightOf="@id/label_rR" android:layout_toLeftOf="@id/edit_rR"
-                     android:max="360" tools:progress="0" /><!-- 0 .. 360 by 1 -->
-        </RelativeLayout>
-        <RelativeLayout tools:id="@id/controls_rotate_G" style="@style/wide">
-            <TextView android:id="@+id/label_rG" android:text="@string/cf_matrix_rG" style="@style/slider_label"
-                      android:layout_alignParentLeft="true"/>
-            <TextView android:id="@+id/edit_rG" tools:text="0" style="@style/slider_value"
-                      android:layout_alignParentRight="true"/>
-            <SeekBar android:id="@+id/seek_rG" style="@style/matrix_slider_circular"
-                     android:layout_toRightOf="@id/label_rG" android:layout_toLeftOf="@id/edit_rG"
-                     android:max="360" tools:progress="0" /><!-- 0 .. 360 by 1 -->
-        </RelativeLayout>
-        <RelativeLayout tools:id="@id/controls_rotate_B" style="@style/wide">
-            <TextView android:id="@+id/label_rB" android:text="@string/cf_matrix_rB" style="@style/slider_label"
-                      android:layout_alignParentLeft="true"/>
-            <TextView android:id="@+id/edit_rB" tools:text="0" style="@style/slider_value"
-                      android:layout_alignParentRight="true"/>
-            <SeekBar android:id="@+id/seek_rB" style="@style/matrix_slider_circular"
-                     android:layout_toRightOf="@id/label_rB" android:layout_toLeftOf="@id/edit_rB"
-                     android:max="360" tools:progress="0" /><!-- 0 .. 360 by 1 -->
-        </RelativeLayout>
-    </LinearLayout>
+	<LinearLayout
+		android:id="@+id/controls_rotate"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_toRightOf="@id/verticalHalf"
+		android:orientation="vertical"
+		>
+		<!-- 0 .. 360 by 1 -->
+		<!-- @formatter:off -->
+		<LinearLayout tools:id="@id/controls_rotate_R" style="@style/wide">
+			<TextView android:id="@+id/label_rR" style="@style/slider_label" android:text="@string/cf_matrix_rR" />
+			<SeekBar android:id="@+id/seek_rR" style="@style/matrix_slider_R" />
+			<TextView android:id="@+id/edit_rR" style="@style/slider_value" tools:text="0" />
+		</LinearLayout>
+		<LinearLayout tools:id="@id/controls_rotate_G" style="@style/wide">
+			<TextView android:id="@+id/label_rG" style="@style/slider_label" android:text="@string/cf_matrix_rG" />
+			<SeekBar android:id="@+id/seek_rG" style="@style/matrix_slider_R" />
+			<TextView android:id="@+id/edit_rG" style="@style/slider_value" tools:text="0" />
+		</LinearLayout>
+		<LinearLayout tools:id="@id/controls_rotate_B" style="@style/wide">
+			<TextView android:id="@+id/label_rB" style="@style/slider_label" android:text="@string/cf_matrix_rB" />
+			<SeekBar android:id="@+id/seek_rB" style="@style/matrix_slider_R" />
+			<TextView android:id="@+id/edit_rB" style="@style/slider_value" tools:text="0" />
+		</LinearLayout>
+		<!-- @formatter:on -->
+	</LinearLayout>
 
-    <RelativeLayout
-        tools:id="@id/controls_saturation"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/verticalHalf"
-        android:layout_below="@id/controls_rotate"
-        >
-        <TextView android:id="@+id/label_sat" android:text="@string/cf_matrix_sat" style="@style/slider_label"
-                  android:layout_alignParentLeft="true"/>
-        <TextView android:id="@+id/edit_sat" tools:text="1.00" style="@style/slider_value"
-                  android:layout_alignParentRight="true"/>
-        <SeekBar android:id="@+id/seek_sat" style="@style/matrix_slider_circular"
-                 android:layout_toRightOf="@id/label_sat" android:layout_toLeftOf="@id/edit_sat"
-                 android:max="100" tools:progress="100" /><!-- 0 .. 1 by 0.01 -->
-    </RelativeLayout>
+	<LinearLayout
+		tools:id="@id/controls_saturation"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/controls_rotate"
+		android:layout_toRightOf="@id/verticalHalf"
+		>
+		<!-- 0 .. 1 by 0.01 -->
+		<!-- @formatter:off -->
+		<TextView android:id="@+id/label_sat" style="@style/slider_label" android:text="@string/cf_matrix_sat" />
+		<SeekBar android:id="@+id/seek_sat" style="@style/matrix_slider_R" android:max="100" tools:progress="100" />
+		<TextView android:id="@+id/edit_sat" style="@style/slider_value" tools:text="1.00" />
+		<!-- @formatter:on -->
+	</LinearLayout>
 </RelativeLayout>

@@ -1,45 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
+<Keyboard
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:keyHeight="@dimen/keySize"
+	android:keyWidth="@dimen/keySize"
+	>
+	<Row>
+		<!-- home -->
+		<Key android:codes="8676" android:isRepeatable="false" android:keyLabel="&#x21E4;" />
+		<!-- left -->
+		<Key android:codes="8592" android:isRepeatable="true" android:keyLabel="&#x2190;" />
+		<!-- right -->
+		<Key android:codes="8594" android:isRepeatable="true" android:keyLabel="&#x2192;" />
+		<!-- end -->
+		<Key android:codes="8677" android:isRepeatable="false" android:keyLabel="&#x21E5;" />
+	</Row>
 
-<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
-          android:keyWidth="@dimen/keySize"
-          android:keyHeight="@dimen/keySize"
-    >
-    <Row>
-        <Key android:codes="8676"  android:keyLabel="&#x21E4;" /><!-- home -->
-        <Key android:codes="8592"  android:keyLabel="&#x2190;" android:isRepeatable="true" /><!-- left -->
-        <Key android:codes="8594"  android:keyLabel="&#x2192;" android:isRepeatable="true" /><!-- right -->
-        <Key android:codes="8677"  android:keyLabel="&#x21E5;" /><!-- end -->
-    </Row>
+	<Row>
+		<Key android:codes="55" android:isRepeatable="true" android:keyLabel="7" />
+		<Key android:codes="56" android:isRepeatable="true" android:keyLabel="8" />
+		<Key android:codes="57" android:isRepeatable="true" android:keyLabel="9" />
+		<Key android:codes="70" android:isRepeatable="true" android:keyLabel="F" />
+	</Row>
+	<Row>
+		<Key android:codes="52" android:isRepeatable="true" android:keyLabel="4" />
+		<Key android:codes="53" android:isRepeatable="true" android:keyLabel="5" />
+		<Key android:codes="54" android:isRepeatable="true" android:keyLabel="6" />
+		<Key android:codes="69" android:isRepeatable="true" android:keyLabel="E" />
+	</Row>
+	<Row>
+		<Key android:codes="49" android:isRepeatable="true" android:keyLabel="1" />
+		<Key android:codes="50" android:isRepeatable="true" android:keyLabel="2" />
+		<Key android:codes="51" android:isRepeatable="true" android:keyLabel="3" />
+		<Key android:codes="68" android:isRepeatable="true" android:keyLabel="D" />
+	</Row>
+	<Row>
+		<Key android:codes="48" android:isRepeatable="true" android:keyLabel="0" />
+		<Key android:codes="65" android:isRepeatable="true" android:keyLabel="A" />
+		<Key android:codes="66" android:isRepeatable="true" android:keyLabel="B" />
+		<Key android:codes="67" android:isRepeatable="true" android:keyLabel="C" />
+	</Row>
 
-    <Row>
-        <Key android:codes="55"    android:keyLabel="7" android:isRepeatable="true" />
-        <Key android:codes="56"    android:keyLabel="8" android:isRepeatable="true" />
-        <Key android:codes="57"    android:keyLabel="9" android:isRepeatable="true" />
-        <Key android:codes="70"    android:keyLabel="F" android:isRepeatable="true" />
-    </Row>
-    <Row>
-        <Key android:codes="52"    android:keyLabel="4" android:isRepeatable="true" />
-        <Key android:codes="53"    android:keyLabel="5" android:isRepeatable="true" />
-        <Key android:codes="54"    android:keyLabel="6" android:isRepeatable="true" />
-        <Key android:codes="69"    android:keyLabel="E" android:isRepeatable="true" />
-    </Row>
-    <Row>
-        <Key android:codes="49"    android:keyLabel="1" android:isRepeatable="true" />
-        <Key android:codes="50"    android:keyLabel="2" android:isRepeatable="true" />
-        <Key android:codes="51"    android:keyLabel="3" android:isRepeatable="true" />
-        <Key android:codes="68"    android:keyLabel="D" android:isRepeatable="true" />
-    </Row>
-    <Row>
-        <Key android:codes="48"    android:keyLabel="0" android:isRepeatable="true" />
-        <Key android:codes="65"    android:keyLabel="A" android:isRepeatable="true" />
-        <Key android:codes="66"    android:keyLabel="B" android:isRepeatable="true" />
-        <Key android:codes="67"    android:keyLabel="C" android:isRepeatable="true" />
-    </Row>
-
-    <Row>
-        <Key android:codes="172"   android:keyLabel="&#x00AC;" /><!-- negate -->
-        <Key android:codes="8"     android:keyIcon="@android:drawable/ic_input_delete" android:isRepeatable="true" /><!-- backspace -->
-        <Key android:codes="24"    android:keyIcon="@android:drawable/ic_menu_delete" /><!-- clear -->
-        <Key android:codes="23"    android:keyIcon="@android:drawable/ic_media_play" />
-    </Row>
+	<Row>
+		<!-- negate -->
+		<Key android:codes="172" android:isRepeatable="false" android:keyLabel="&#x00AC;" />
+		<!-- backspace -->
+		<Key android:codes="8" android:isRepeatable="true" android:keyIcon="@android:drawable/ic_input_delete" />
+		<!-- clear -->
+		<Key android:codes="24" android:isRepeatable="false" android:keyIcon="@android:drawable/ic_menu_delete" />
+		<Key android:codes="23" android:isRepeatable="false" android:keyIcon="@android:drawable/ic_media_play" />
+	</Row>
 </Keyboard>

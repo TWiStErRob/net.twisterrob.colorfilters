@@ -1,23 +1,25 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto"
-      xmlns:tools="http://schemas.android.com/tools"
-      tools:context=".ImageFragment"
-    >
-    <item
-        android:id="@+id/action_settings"
-        android:title="@string/cf_pref_title"
-        android:icon="@android:drawable/ic_menu_preferences"
-        app:showAsAction="never"
-        tools:showAsAction="never"
-        android:orderInCategory="4"
-        />
-    <item
-        android:id="@+id/action_logo"
-        android:title="Generate Logo"
-        android:icon="@drawable/ic_launcher"
-        app:showAsAction="never"
-        tools:showAsAction="never"
-        android:visible="@bool/in_test"
-        tools:ignore="HardcodedText"
-        />
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	tools:context=".ImageFragment"
+	>
+	<item
+		android:id="@+id/action_settings"
+		android:title="@string/cf_pref_title"
+		android:icon="@android:drawable/ic_menu_preferences"
+		android:orderInCategory="4"
+		app:showAsAction="never"
+		tools:showAsAction="never"
+		/>
+	<item
+		android:id="@+id/action_logo"
+		android:title="Generate Logo"
+		android:icon="@drawable/ic_launcher"
+		android:visible="@bool/in_test"
+		app:showAsAction="never"
+		tools:showAsAction="never"
+		tools:ignore="HardcodedText"
+		/>
 </menu>
