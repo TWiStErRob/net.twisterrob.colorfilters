@@ -34,6 +34,7 @@ public abstract class KeyboardHandler {
 		hideCustomKeyboard();
 		window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		keyboardView.setPreviewEnabled(false);
+		setHapticFeedback(true);
 	}
 
 	public void hideCustomKeyboard() {

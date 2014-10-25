@@ -44,7 +44,7 @@ public class MainActivity extends ActionBarActivity implements ColorFilterFragme
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setHomeAsUpIndicator(R.drawable.ic_launcher);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-		ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(
+		ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(
 				actionBar.getThemedContext(),
 				android.R.layout.simple_list_item_1,
 				android.R.id.text1,

@@ -252,17 +252,16 @@ public class ColorPickerView extends ImageView implements SwatchChooser.OnSwatch
 
 	@Override
 	public boolean performClick() {
-		boolean result = false;
 		if (swatch != null) {
 			if (swatch instanceof PixelAbsoluteSwatch) {
 				((PixelAbsoluteSwatch)swatch).forceAsync();
 			}
 			setSwatch(swatch);
 		}
-		return super.performClick() || result;
+		return super.performClick();
 	}
 
-	private final List<Swatch> swatches = new ArrayList<Swatch>(Arrays.asList(
+	private final List<Swatch> swatches = new ArrayList<>(Arrays.asList(
 			new PixelAbsoluteSwatch(ColorReplacer.wrap(CenterBitmapDrawer.factory(), Color.BLACK, Color.TRANSPARENT),
 					new RadialHSBGradient()),
 			new PixelAbsoluteSwatch(ColumnByColumnBitmapDrawer.factory(), new LinearHSBGradient()),

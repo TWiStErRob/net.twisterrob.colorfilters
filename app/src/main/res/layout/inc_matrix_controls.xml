@@ -29,22 +29,22 @@
 		<!-- -1 .. 2 by 0.01 -->
 		<!-- @formatter:off -->
 		<LinearLayout tools:id="@id/controls_scale_R" style="@style/wide">
-			<TextView android:id="@+id/label_sR" style="@style/slider_label" android:text="@string/cf_matrix_sR" />
+			<TextView style="@style/slider_label" android:text="@string/cf_matrix_sR" />
 			<SeekBar android:id="@+id/seek_sR" style="@style/matrix_slider" android:max="300" tools:progress="100" />
 			<TextView android:id="@+id/edit_sR" style="@style/slider_value" tools:text="1.00" />
 		</LinearLayout>
 		<LinearLayout tools:id="@id/controls_scale_G" style="@style/wide">
-			<TextView android:id="@+id/label_sG" style="@style/slider_label" android:text="@string/cf_matrix_sG"/>
+			<TextView style="@style/slider_label" android:text="@string/cf_matrix_sG"/>
 			<SeekBar android:id="@+id/seek_sG" style="@style/matrix_slider" android:max="300" tools:progress="0" />
 			<TextView android:id="@+id/edit_sG" style="@style/slider_value" tools:text="0.00" />
 		</LinearLayout>
 		<LinearLayout tools:id="@id/controls_scale_B" style="@style/wide">
-			<TextView android:id="@+id/label_sB" style="@style/slider_label" android:text="@string/cf_matrix_sB"/>
+			<TextView style="@style/slider_label" android:text="@string/cf_matrix_sB"/>
 			<SeekBar android:id="@+id/seek_sB" style="@style/matrix_slider" android:max="300" tools:progress="300" />
 			<TextView android:id="@+id/edit_sB" style="@style/slider_value" tools:text="3.00" />
 		</LinearLayout>
 		<LinearLayout tools:id="@id/controls_scale_A" style="@style/wide">
-			<TextView android:id="@+id/label_sA" style="@style/slider_label" android:text="@string/cf_matrix_sA"/>
+			<TextView style="@style/slider_label" android:text="@string/cf_matrix_sA"/>
 			<SeekBar android:id="@+id/seek_sA" style="@style/matrix_slider" android:max="300" tools:progress="200" />
 			<TextView android:id="@+id/edit_sA" style="@style/slider_value" tools:text="2.00" />
 		</LinearLayout>
@@ -61,17 +61,17 @@
 		<!-- 0 .. 360 by 1 -->
 		<!-- @formatter:off -->
 		<LinearLayout tools:id="@id/controls_rotate_R" style="@style/wide">
-			<TextView android:id="@+id/label_rR" style="@style/slider_label" android:text="@string/cf_matrix_rR" />
+			<TextView style="@style/slider_label" android:text="@string/cf_matrix_rR" />
 			<SeekBar android:id="@+id/seek_rR" style="@style/matrix_slider_R" />
 			<TextView android:id="@+id/edit_rR" style="@style/slider_value" tools:text="0" />
 		</LinearLayout>
 		<LinearLayout tools:id="@id/controls_rotate_G" style="@style/wide">
-			<TextView android:id="@+id/label_rG" style="@style/slider_label" android:text="@string/cf_matrix_rG" />
+			<TextView style="@style/slider_label" android:text="@string/cf_matrix_rG" />
 			<SeekBar android:id="@+id/seek_rG" style="@style/matrix_slider_R" />
 			<TextView android:id="@+id/edit_rG" style="@style/slider_value" tools:text="0" />
 		</LinearLayout>
 		<LinearLayout tools:id="@id/controls_rotate_B" style="@style/wide">
-			<TextView android:id="@+id/label_rB" style="@style/slider_label" android:text="@string/cf_matrix_rB" />
+			<TextView style="@style/slider_label" android:text="@string/cf_matrix_rB" />
 			<SeekBar android:id="@+id/seek_rB" style="@style/matrix_slider_R" />
 			<TextView android:id="@+id/edit_rB" style="@style/slider_value" tools:text="0" />
 		</LinearLayout>
@@ -87,7 +87,7 @@
 		>
 		<!-- 0 .. 1 by 0.01 -->
 		<!-- @formatter:off -->
-		<TextView android:id="@+id/label_sat" style="@style/slider_label" android:text="@string/cf_matrix_sat" />
+		<TextView style="@style/slider_label" android:text="@string/cf_matrix_sat" />
 		<SeekBar android:id="@+id/seek_sat" style="@style/matrix_slider_R" android:max="100" tools:progress="100" />
 		<TextView android:id="@+id/edit_sat" style="@style/slider_value" tools:text="1.00" />
 		<!-- @formatter:on -->

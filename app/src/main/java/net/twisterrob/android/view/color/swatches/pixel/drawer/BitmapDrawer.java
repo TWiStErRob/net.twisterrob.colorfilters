@@ -171,23 +171,4 @@ public abstract class BitmapDrawer {
 			}
 		}
 	}
-
-	/** Beware of proguard */
-	public static class ReflectiveFactory<T extends BitmapDrawer> implements Factory {
-		private final Class<? extends T> clazz;
-
-		public ReflectiveFactory(Class<? extends T> clazz) {
-			this.clazz = clazz;
-		}
-
-		@Override
-		public T create(int[] bitmap, int w, int h, PixelColor color) {
-			try {
-				return clazz.getDeclaredConstructor(int[].class, int.class, int.class, PixelColor.class)
-				            .newInstance(bitmap, w, h, color);
-			} catch (Exception e) {
-				throw new IllegalArgumentException("Cannot instantiate " + clazz, e);
-			}
-		}
-	}
 }

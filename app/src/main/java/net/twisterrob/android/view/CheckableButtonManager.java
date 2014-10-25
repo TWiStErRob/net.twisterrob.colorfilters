@@ -5,7 +5,7 @@ import java.util.*;
 import android.widget.CompoundButton;
 
 public class CheckableButtonManager implements CompoundButton.OnCheckedChangeListener {
-	private final List<CompoundButton> buttons = new LinkedList<CompoundButton>();
+	private final List<CompoundButton> buttons = new LinkedList<>();
 	private CompoundButton checkedButton = null;
 	private static final boolean safeMode = false;
 	private CompoundButton.OnCheckedChangeListener listener;

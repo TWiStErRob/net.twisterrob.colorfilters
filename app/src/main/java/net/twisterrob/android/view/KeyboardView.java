@@ -3,6 +3,7 @@ package net.twisterrob.android.view;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.inputmethodservice.Keyboard;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 
 public class KeyboardView extends android.inputmethodservice.KeyboardView {
@@ -59,7 +60,7 @@ public class KeyboardView extends android.inputmethodservice.KeyboardView {
 	}
 
 	@Override
-	public void onDraw(Canvas canvas) {
+	public void onDraw(@NonNull Canvas canvas) {
 		super.onDraw(canvas);
 	}
 }

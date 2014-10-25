@@ -227,7 +227,7 @@ public class PorterDuffFragment extends ColorFilterFragment {
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	private static Map<Integer, PorterDuff.Mode> createModes() {
-		Map<Integer, PorterDuff.Mode> modes = new TreeMap<Integer, PorterDuff.Mode>();
+		Map<Integer, PorterDuff.Mode> modes = new TreeMap<>();
 		modes.put(R.id.mode_clear, PorterDuff.Mode.CLEAR);
 		modes.put(R.id.mode_src, PorterDuff.Mode.SRC);
 		modes.put(R.id.mode_dst, PorterDuff.Mode.DST);

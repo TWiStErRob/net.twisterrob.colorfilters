@@ -128,7 +128,7 @@ public class ImageFragment extends Fragment {
 
 	private void startLoadImage() {
 		// Camera
-		List<Intent> cameraIntents = new ArrayList<Intent>();
+		List<Intent> camIntents = new ArrayList<>();
 		Intent captureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		PackageManager packageManager = getActivity().getPackageManager();
 		List<ResolveInfo> listCam = packageManager.queryIntentActivities(captureIntent, 0);
@@ -136,7 +136,7 @@ public class ImageFragment extends Fragment {
 			Intent intent = new Intent(captureIntent);
 			intent.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
 			intent.setPackage(res.activityInfo.packageName);
-			cameraIntents.add(intent);
+			camIntents.add(intent);
 		}
 
 		// Filesystem
@@ -146,7 +146,7 @@ public class ImageFragment extends Fragment {
 		// Chooser of filesystem options
 		Intent chooserIntent = Intent.createChooser(galleryIntent, getText(R.string.cf_image_action));
 		// Add the camera options
-		chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, cameraIntents.toArray(new Parcelable[0]));
+		chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, camIntents.toArray(new Parcelable[camIntents.size()]));
 
 		startActivityForResult(chooserIntent, REQUEST_CODE_GET_PICTURE);
 	}
