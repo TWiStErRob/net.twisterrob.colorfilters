@@ -18,11 +18,13 @@ import net.twisterrob.colorfilters.android.keyboard.KeyboardMode;
 public class PorterDuffFragment extends ColorFilterFragment {
 	private static final String PREF_PORTERDUFF_COLOR = "PorterDuffColorFilter.color";
 	private static final String PREF_PORTERDUFF_MODE = "PorterDuffColorFilter.mode";
+	private static final String PREF_PORTERDUFF_SWATCH = "PorterDuffColorFilter.colorSwatch";
 
 	private static final Map<Integer, PorterDuff.Mode> MODES = createModes();
 
 	private static final int DEFAULT_COLOR = Color.argb(0xff, 0x00, 0x00, 0x00);
 	private static final PorterDuff.Mode DEFAULT_MODE = getDefaultMode();
+	private static final int KEEP_SWATCH = 0;
 
 	private ColorPickerView colorView;
 	private EditText editor;
@@ -177,7 +179,8 @@ public class PorterDuffFragment extends ColorFilterFragment {
 			SharedPreferences prefs = getPrefs();
 			int color = prefs.getInt(PREF_PORTERDUFF_COLOR, DEFAULT_COLOR);
 			String mode = prefs.getString(PREF_PORTERDUFF_MODE, DEFAULT_MODE.name());
-			setValues(color, PorterDuff.Mode.valueOf(mode));
+			int swatchIndex = prefs.getInt(PREF_PORTERDUFF_SWATCH, KEEP_SWATCH);
+			setValues(color, PorterDuff.Mode.valueOf(mode), swatchIndex);
 		}
 	}
 
@@ -187,6 +190,7 @@ public class PorterDuffFragment extends ColorFilterFragment {
 		getPrefs().edit()
 		          .putInt(PREF_PORTERDUFF_COLOR, currentColor)
 		          .putString(PREF_PORTERDUFF_MODE, MODES.get(modes.getChecked().getId()).name())
+		          .putInt(PREF_PORTERDUFF_SWATCH, colorView.getSwatches().indexOf(colorView.getSwatch()))
 		          .apply()
 		;
 	}
@@ -199,12 +203,13 @@ public class PorterDuffFragment extends ColorFilterFragment {
 
 	@Override
 	public void reset() {
-		setValues(DEFAULT_COLOR, DEFAULT_MODE);
+		setValues(DEFAULT_COLOR, DEFAULT_MODE, KEEP_SWATCH);
 	}
 
-	public void setValues(int color, PorterDuff.Mode mode) {
+	private void setValues(int color, PorterDuff.Mode mode, int swatchIndex) {
 		int modeId = findView(mode);
 		((CompoundButton)getView().findViewById(modeId)).setChecked(true);
+		colorView.setSwatch(swatchIndex);
 		updateColor(color, null);
 	}
 

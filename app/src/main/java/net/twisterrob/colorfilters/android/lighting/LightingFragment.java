@@ -14,9 +14,12 @@ import net.twisterrob.colorfilters.android.keyboard.KeyboardMode;
 
 public class LightingFragment extends ColorFilterFragment {
 	private static final String PREF_LIGHTING_MUL = "LightingColorFilter.mul";
+	private static final String PREF_LIGHTING_MUL_SWATCH = "LightingColorFilter.mulSwatch";
 	private static final String PREF_LIGHTING_ADD = "LightingColorFilter.add";
+	private static final String PREF_LIGHTING_ADD_SWATCH = "LightingColorFilter.addSwatch";
 	private static final int DEFAULT_MUL = Color.argb(0xff, 0xff, 0xff, 0xff);
 	private static final int DEFAULT_ADD = Color.argb(0xff, 0x00, 0x00, 0x00);
+	private static final int KEEP_SWATCH = -1;
 
 	private Wiring mulWiring;
 	private Wiring addWiring;
@@ -94,8 +97,10 @@ public class LightingFragment extends ColorFilterFragment {
 		if (savedInstanceState == null) {
 			SharedPreferences prefs = getPrefs();
 			int mul = prefs.getInt(PREF_LIGHTING_MUL, DEFAULT_MUL);
+			int mulSwatch = prefs.getInt(PREF_LIGHTING_MUL_SWATCH, KEEP_SWATCH);
 			int add = prefs.getInt(PREF_LIGHTING_ADD, DEFAULT_ADD);
-			setValues(mul, add);
+			int addSwatch = prefs.getInt(PREF_LIGHTING_ADD_SWATCH, KEEP_SWATCH);
+			setValues(mul, mulSwatch, add, addSwatch);
 		}
 	}
 
@@ -104,7 +109,9 @@ public class LightingFragment extends ColorFilterFragment {
 		super.onStop();
 		getPrefs().edit()
 		          .putInt(PREF_LIGHTING_MUL, mulColor.getColor())
+		          .putInt(PREF_LIGHTING_MUL_SWATCH, mulColor.getSwatches().indexOf(mulColor.getSwatch()))
 		          .putInt(PREF_LIGHTING_ADD, addColor.getColor())
+		          .putInt(PREF_LIGHTING_ADD_SWATCH, addColor.getSwatches().indexOf(addColor.getSwatch()))
 		          .apply()
 		;
 	}
@@ -118,11 +125,14 @@ public class LightingFragment extends ColorFilterFragment {
 
 	@Override
 	public void reset() {
-		setValues(DEFAULT_MUL, DEFAULT_ADD);
+		setValues(DEFAULT_MUL, KEEP_SWATCH, DEFAULT_ADD, KEEP_SWATCH);
 	}
 
-	private void setValues(int mul, int add) {
+	private void setValues(int mul, int mulSwatch, int add, int addSwatch) {
+		mulColor.setSwatch(mulSwatch);
 		mulWiring.updateColor(mul, null);
+
+		addColor.setSwatch(addSwatch);
 		addWiring.updateColor(add, null);
 	}
 

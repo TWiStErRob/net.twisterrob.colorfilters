@@ -80,6 +80,14 @@ public class ColorPickerView extends ImageView implements SwatchChooser.OnSwatch
 		return swatch;
 	}
 
+	public boolean setSwatch(int swatchIndex) {
+		if (0 <= swatchIndex && swatchIndex < swatches.size()) {
+			setSwatch(swatches.get(swatchIndex));
+			return true;
+		}
+		return false;
+	}
+
 	public void setSwatch(Swatch swatch) {
 		if (swatch == null) {
 			throw new NullPointerException("Swatch cannot be null");
