@@ -22,9 +22,10 @@
 	<style name="slider_value">
 		<item name="android:layout_width">wrap_content</item>
 		<item name="android:layout_height">wrap_content</item>
-		<item name="android:gravity">left|center_vertical</item>
+		<item name="android:gravity">right|center_vertical</item>
 		<item name="android:selectable">true</item>
 		<item name="android:textSize">12sp</item>
+		<item name="android:minEms">2</item>
 	</style>
 
 	<style name="matrix_label">

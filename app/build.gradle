@@ -3,12 +3,12 @@ apply plugin: 'net.twisterrob.android-app'
 
 repositories {
 	mavenCentral()
-	maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' } // glide SNAPSHOTS
 }
 
 dependencies {
-	compile 'com.github.bumptech.glide:glide:3.4.+' // TODO fix once 3.4 comes
+	compile 'com.github.bumptech.glide:glide:3.4.0'
 	compile 'com.android.support:appcompat-v7:21.0.0'
+	compile 'com.android.support:palette-v7:21.0.0'
 }
 
 android {

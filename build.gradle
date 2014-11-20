@@ -4,8 +4,10 @@ buildscript {
 		maven { url 'http://localhost/maven' }
 	}
 
-	//configurations.classpath.resolutionStrategy.cacheChangingModulesFor 0, 'seconds' // -SNAPSHOT
 	dependencies {
-		classpath 'net.twisterrob.gradle:plugin:0.3.2'
+		//configurations.classpath.resolutionStrategy.cacheChangingModulesFor 0, 'seconds' // -SNAPSHOT
+		classpath 'net.twisterrob.gradle:plugin:0.3.3'
 	}
 }
+
+apply plugin: 'net.twisterrob.root'

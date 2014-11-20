@@ -109,13 +109,13 @@
 			<TableRow>
 				<RadioButton android:id="@+id/mode_xor" style="@style/mode" android:text="XOR" />
 				<RadioButton android:id="@+id/mode_src_out" style="@style/mode" android:text="SRC_OUT" />
-				<RadioButton android:id="@+id/mode_dst_atop" style="@style/mode" android:text="DST_ATOP" />
+				<RadioButton android:id="@+id/mode_src_atop" style="@style/mode" android:text="SRC_ATOP" />
 				<RadioButton android:id="@+id/mode_screen" style="@style/mode" android:text="SCREEN" />
 			</TableRow>
 			<TableRow>
 				<RadioButton android:id="@+id/mode_add" style="@style/mode" android:text="ADD" />
 				<RadioButton android:id="@+id/mode_dst_out" style="@style/mode" android:text="DST_OUT" />
-				<RadioButton android:id="@+id/mode_src_atop" style="@style/mode" android:text="SRC_ATOP" />
+				<RadioButton android:id="@+id/mode_dst_atop" style="@style/mode" android:text="DST_ATOP" />
 				<RadioButton android:id="@+id/mode_overlay" style="@style/mode" android:text="OVERLAY"
 				             tools:checked="true" />
 			</TableRow>
