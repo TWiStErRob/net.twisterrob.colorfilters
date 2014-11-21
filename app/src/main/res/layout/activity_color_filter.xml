@@ -11,7 +11,6 @@
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:layout_margin="@dimen/activity_margin"
 		android:layout_above="@+id/keyboard"
 		android:orientation="vertical"
 		>
@@ -20,6 +19,10 @@
 			android:name="net.twisterrob.colorfilters.android.image.ImageFragment"
 			android:layout_width="fill_parent"
 			android:layout_height="0dp"
+			android:layout_marginLeft="@dimen/activity_margin"
+			android:layout_marginTop="@dimen/activity_margin"
+			android:layout_marginRight="@dimen/activity_margin"
+			android:layout_marginBottom="@dimen/margin"
 			android:layout_weight="0.4"
 			tools:layout="@layout/fragment_image"
 			/>
@@ -27,7 +30,6 @@
 			android:id="@+id/container"
 			android:layout_width="match_parent"
 			android:layout_height="0dp"
-			android:layout_marginTop="@dimen/margin"
 			android:layout_weight="0.6"
 			android:focusableInTouchMode="true"
 			tools:background="@android:color/darker_gray"
@@ -35,7 +37,7 @@
 	</LinearLayout>
 
 	<!-- To make the layout editor work append EditMode at the end of the class name -->
-	<net.twisterrob.android.view.KeyboardViewEditMode
+	<net.twisterrob.android.view.KeyboardView
 		android:id="@+id/keyboard"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"

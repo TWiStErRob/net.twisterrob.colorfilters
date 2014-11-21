@@ -11,7 +11,6 @@
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:layout_margin="@dimen/activity_margin"
 		android:layout_toLeftOf="@+id/keyboard"
 		android:orientation="horizontal"
 		android:baselineAligned="false"
@@ -20,7 +19,6 @@
 			android:id="@+id/container"
 			android:layout_width="0dp"
 			android:layout_height="match_parent"
-			android:layout_marginRight="@dimen/margin"
 			android:layout_weight="0.6"
 			android:focusableInTouchMode="true"
 			tools:background="@android:color/darker_gray"
@@ -30,12 +28,16 @@
 			android:name="net.twisterrob.colorfilters.android.image.ImageFragment"
 			android:layout_width="0dp"
 			android:layout_height="match_parent"
+			android:layout_marginLeft="@dimen/margin"
+			android:layout_marginTop="@dimen/activity_margin"
+			android:layout_marginRight="@dimen/activity_margin"
+			android:layout_marginBottom="@dimen/activity_margin"
 			android:layout_weight="0.4"
 			tools:layout="@layout/fragment_image"
 			/>
 	</LinearLayout>
 
-	<net.twisterrob.android.view.KeyboardViewEditMode
+	<net.twisterrob.android.view.KeyboardView
 		android:id="@+id/keyboard"
 		android:layout_width="wrap_content"
 		android:layout_height="fill_parent"

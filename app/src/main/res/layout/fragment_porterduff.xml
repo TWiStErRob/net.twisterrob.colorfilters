@@ -4,10 +4,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:paddingLeft="@dimen/margin"
-	android:paddingTop="@dimen/margin"
-	android:paddingRight="@dimen/margin"
-	android:paddingBottom="@dimen/margin"
+	android:layout_margin="@dimen/activity_margin"
 	tools:context=".porterduff.PorterDuffFragment"
 	>
 	<RelativeLayout
@@ -72,7 +69,6 @@
 			android:id="@+id/color"
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent"
-			android:layout_margin="@dimen/margin"
 			android:layout_toLeftOf="@+id/middle"
 			tools:visibility="visible"
 			/>
