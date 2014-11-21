@@ -91,6 +91,12 @@ public class LightingFragment extends ColorFilterFragment {
 		});
 	}
 
+	@Override public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putInt(PREF_LIGHTING_MUL_SWATCH, mulColor.getSwatches().indexOf(mulColor.getSwatch()));
+		outState.putInt(PREF_LIGHTING_ADD_SWATCH, addColor.getSwatches().indexOf(addColor.getSwatch()));
+	}
+
 	@Override
 	public void onViewStateRestored(Bundle savedInstanceState) {
 		super.onViewStateRestored(savedInstanceState);
@@ -101,6 +107,9 @@ public class LightingFragment extends ColorFilterFragment {
 			int add = prefs.getInt(PREF_LIGHTING_ADD, DEFAULT_ADD);
 			int addSwatch = prefs.getInt(PREF_LIGHTING_ADD_SWATCH, KEEP_SWATCH);
 			setValues(mul, mulSwatch, add, addSwatch);
+		} else {
+			mulColor.setSwatch(savedInstanceState.getInt(PREF_LIGHTING_MUL_SWATCH, KEEP_SWATCH));
+			addColor.setSwatch(savedInstanceState.getInt(PREF_LIGHTING_ADD_SWATCH, KEEP_SWATCH));
 		}
 	}
 

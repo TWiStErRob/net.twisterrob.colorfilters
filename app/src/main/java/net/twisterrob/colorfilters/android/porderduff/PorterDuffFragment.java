@@ -172,6 +172,11 @@ public class PorterDuffFragment extends ColorFilterFragment {
 		updateFilter();
 	}
 
+	@Override public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putInt(PREF_PORTERDUFF_SWATCH, colorView.getSwatches().indexOf(colorView.getSwatch()));
+	}
+
 	@Override
 	public void onViewStateRestored(Bundle savedInstanceState) {
 		super.onViewStateRestored(savedInstanceState);
@@ -181,6 +186,8 @@ public class PorterDuffFragment extends ColorFilterFragment {
 			String mode = prefs.getString(PREF_PORTERDUFF_MODE, DEFAULT_MODE.name());
 			int swatchIndex = prefs.getInt(PREF_PORTERDUFF_SWATCH, KEEP_SWATCH);
 			setValues(color, PorterDuff.Mode.valueOf(mode), swatchIndex);
+		} else {
+			colorView.setSwatch(savedInstanceState.getInt(PREF_PORTERDUFF_SWATCH, KEEP_SWATCH));
 		}
 	}
 
