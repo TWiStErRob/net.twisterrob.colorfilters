@@ -26,6 +26,10 @@ public abstract class ColorFilterFragment extends Fragment {
 		KeyboardHandler getKeyboard();
 
 		Uri renderCurrentView(CharSequence title, CharSequence description);
+
+		void fragmentOnResume();
+
+		Bitmap getCurrentBitmap();
 	}
 
 	private Listener listener;
@@ -40,13 +44,17 @@ public abstract class ColorFilterFragment extends Fragment {
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		listener = (Listener)activity;
-		listener.colorFilterChanged(null);
 	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
+	}
+
+	@Override public void onResume() {
+		super.onResume();
+		listener.fragmentOnResume();
 	}
 
 	@Override
@@ -134,9 +142,17 @@ public abstract class ColorFilterFragment extends Fragment {
 		getKeyboard().hideCustomKeyboard();
 	}
 
+	protected void imageChanged() {
+		// noop by default, use getCurrentBitmap to query Bitmap if needed
+	}
+
 	protected void updateFilter() {
 		ColorFilter filter = createFilter();
 		listener.colorFilterChanged(filter);
+	}
+
+	protected Bitmap getCurrentBitmap() {
+		return listener.getCurrentBitmap();
 	}
 
 	protected boolean isPortrait() {

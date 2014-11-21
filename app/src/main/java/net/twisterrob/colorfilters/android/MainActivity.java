@@ -21,6 +21,7 @@ import net.twisterrob.colorfilters.android.image.*;
 import net.twisterrob.colorfilters.android.keyboard.KeyboardMode;
 import net.twisterrob.colorfilters.android.lighting.LightingFragment;
 import net.twisterrob.colorfilters.android.matrix.MatrixFragment;
+import net.twisterrob.colorfilters.android.palette.PaletteFragment;
 import net.twisterrob.colorfilters.android.porderduff.PorterDuffFragment;
 
 public class MainActivity extends ActionBarActivity implements ColorFilterFragment.Listener, ImageFragment.Listener {
@@ -51,7 +52,8 @@ public class MainActivity extends ActionBarActivity implements ColorFilterFragme
 				new CharSequence[] {
 						getText(R.string.cf_lighting_title),
 						getText(R.string.cf_porterduff_title),
-						getText(R.string.cf_matrix_title)
+						getText(R.string.cf_matrix_title),
+						getText(R.string.cf_palette_title)
 				});
 		actionBar.setListNavigationCallbacks(adapter, new ActionBar.OnNavigationListener() {
 			@Override
@@ -121,13 +123,14 @@ public class MainActivity extends ActionBarActivity implements ColorFilterFragme
 		if (requestCode == RESULT_FIRST_USER) {
 			kbd = null;
 			Fragment fragment = getCurrentFragment();
-			if (fragment instanceof ColorFilterFragment) {
+			if (fragment != null) {
 				// force recreating the fragment to pick up the new keyboard (in case it changed in settings)
 				getSupportFragmentManager().beginTransaction()
 				                           .detach(fragment)
 				                           .attach(fragment)
-				                           .commitAllowingStateLoss() /* commit won't work because onResume is called after onActivityResult
-		                                              and at this state we're "after onSaveInstanceState" */
+				                           .commitAllowingStateLoss()
+				                        /* .commit won't work because onResume is called after onActivityResult
+				                            and at this state we're "after onSaveInstanceState" */
 				;
 			}
 			return;
@@ -137,7 +140,7 @@ public class MainActivity extends ActionBarActivity implements ColorFilterFragme
 
 	@Override
 	public void reset() {
-		ColorFilterFragment fragment = (ColorFilterFragment)getCurrentFragment();
+		ColorFilterFragment fragment = getCurrentFragment();
 		fragment.reset();
 	}
 
@@ -149,8 +152,8 @@ public class MainActivity extends ActionBarActivity implements ColorFilterFragme
 		super.onBackPressed();
 	}
 
-	public Fragment getCurrentFragment() {
-		return getSupportFragmentManager().findFragmentById(R.id.container);
+	public ColorFilterFragment getCurrentFragment() {
+		return (ColorFilterFragment)getSupportFragmentManager().findFragmentById(R.id.container);
 	}
 
 	private ColorFilterFragment createFragment(int position) {
@@ -161,6 +164,8 @@ public class MainActivity extends ActionBarActivity implements ColorFilterFragme
 				return PorterDuffFragment.newInstance();
 			case 2:
 				return MatrixFragment.newInstance();
+			case 3:
+				return PaletteFragment.newInstance();
 		}
 		throw new IllegalStateException("Unknown position " + position);
 	}
@@ -172,25 +177,35 @@ public class MainActivity extends ActionBarActivity implements ColorFilterFragme
 			return 1;
 		} else if (fragment instanceof MatrixFragment) {
 			return 2;
+		} else if (fragment instanceof PaletteFragment) {
+			return 3;
 		}
 		return -1;
 	}
 
 	@Override
 	public void colorFilterChanged(ColorFilter colorFilter) {
-		if (images != null) {
-			images.setColorFilter(colorFilter);
+		images.setColorFilter(colorFilter);
+	}
+
+	@Override
+	public void imageChanged() {
+		ColorFilterFragment fragment = getCurrentFragment();
+		if (fragment != null && fragment.isResumed()) {
+			fragment.imageChanged();
 		}
 	}
 
 	@Override
+	public Bitmap getCurrentBitmap() {
+		return images.getCurrent();
+	}
+
+	@Override
 	public Uri renderCurrentView(CharSequence title, CharSequence desc) {
-		if (images != null) {
-			Bitmap image = images.renderToBitmap();
-			String uri = Images.Media.insertImage(getContentResolver(), image, title.toString(), desc.toString());
-			return Uri.parse(uri);
-		}
-		return null;
+		Bitmap shareContent = images.renderPreview();
+		String uri = Images.Media.insertImage(getContentResolver(), shareContent, title.toString(), desc.toString());
+		return Uri.parse(uri);
 	}
 
 	@Override
@@ -199,12 +214,16 @@ public class MainActivity extends ActionBarActivity implements ColorFilterFragme
 		kbd = null;
 	}
 
+	@Override public void fragmentOnResume() {
+		imageChanged();
+	}
+
 	@Override
 	public KeyboardHandler getKeyboard() {
 		if (kbd == null) {
-			Fragment fragment = getCurrentFragment();
-			if (fragment instanceof ColorFilterFragment) {
-				KeyboardMode mode = ((ColorFilterFragment)fragment).getPreferredKeyboardMode();
+			ColorFilterFragment fragment = getCurrentFragment();
+			if (fragment != null) {
+				KeyboardMode mode = fragment.getPreferredKeyboardMode();
 				if (!getPrefs().getBoolean(getString(R.string.cf_pref_keyboard), false)) {
 					mode = KeyboardMode.NATIVE;
 				}

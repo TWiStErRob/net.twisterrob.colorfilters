@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:padding="@dimen/margin"
+	>
+	<TextView
+		android:id="@+id/color"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentStart="true"
+		android:layout_centerVertical="true"
+		android:gravity="center"
+		android:minEms="7"
+		tools:text="#000000\n360°, 100%, 100%"
+		tools:ignore="RelativeOverlap"
+		/>
+	<TextView
+		android:id="@+id/population"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentEnd="true"
+		android:layout_alignParentRight="true"
+		android:layout_centerVertical="true"
+		android:gravity="center"
+		android:minEms="3"
+		tools:text="999"
+		/>
+	<TextView
+		android:id="@+id/titleText"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:padding="@dimen/margin"
+		android:layout_alignParentTop="true"
+		android:layout_toEndOf="@id/color"
+		android:layout_toLeftOf="@id/population"
+		android:layout_toRightOf="@id/color"
+		android:layout_toStartOf="@id/population"
+		android:textAppearance="@style/TextAppearance.AppCompat.Title"
+		tools:text="Title Text"
+		tools:background="#ff0000"
+		tools:textColor="#00ff00"
+		/>
+	<TextView
+		android:id="@+id/bodyText"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:padding="@dimen/margin"
+		android:layout_below="@id/titleText"
+		android:layout_toEndOf="@id/color"
+		android:layout_toLeftOf="@id/population"
+		android:layout_toRightOf="@id/color"
+		android:layout_toStartOf="@id/population"
+		tools:text="Body Text"
+		tools:background="#ff0000"
+		tools:textColor="#ffff00"
+		/>
+</RelativeLayout>

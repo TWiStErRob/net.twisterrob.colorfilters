@@ -29,6 +29,9 @@
         \n\n<big><b>Color Matrix Color Filter</b></big>
         \n&#8195;&#8226;&#8194;The little &#x00D7; on the Color Matrix will reset just the matrix.
         \n&#8195;&#8226;&#8194;You can change the multiplication order of the matrices by clicking on the multiplication signs or by drag &amp; dropping the <tt>R</tt> and <tt>S</tt> boxes.
+
+        \n\n<big><b>Palette</b></big>
+        \n&#8195;&#8226;&#8194;The displayed Swatches and their order can be changed with the dropdown below the slider.
     </string>
 
 	<string name="cf_about_faq_title">FAQ (Frequently Asked Questions)</string>
@@ -48,7 +51,7 @@
 
 	<string name="cf_about_licences_title">Acknowledgements and Licences</string>
 	<string-array name="cf_about_licences">
-		<item>Glide 3.3.1, library</item>
+        <item>Glide 3.4, library</item>
 		<item>Order from Chaos, image</item>
 		<item>Custom keyboard, tutorial</item>
 		<item>Android SDK Color Picker, sample</item>

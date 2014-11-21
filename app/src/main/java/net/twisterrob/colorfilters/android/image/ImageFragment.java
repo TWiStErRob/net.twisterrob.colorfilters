@@ -15,8 +15,6 @@ import android.support.v4.app.Fragment;
 import android.view.*;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-
 import net.twisterrob.colorfilters.android.R;
 
 public class ImageFragment extends Fragment {
@@ -24,9 +22,17 @@ public class ImageFragment extends Fragment {
 
 	public interface Listener {
 		void reset();
+		void imageChanged();
 	}
 
 	private static final int REQUEST_CODE_GET_PICTURE = Activity.RESULT_FIRST_USER;
+
+	private final BitmapKeeper.Listener loadListener = new BitmapKeeper.Listener() {
+		@Override public void loadComplete() {
+			listener.imageChanged();
+		}
+	};
+
 	private ImageView original;
 	private ImageView preview;
 
@@ -88,8 +94,8 @@ public class ImageFragment extends Fragment {
 				return;
 			}
 		} else {
-			boolean originalLoaded = BitmapKeeper.into(getFragmentManager(), original);
-			boolean previewLoaded = BitmapKeeper.into(getFragmentManager(), preview);
+			boolean originalLoaded = BitmapKeeper.into(getFragmentManager(), original, loadListener);
+			boolean previewLoaded = BitmapKeeper.into(getFragmentManager(), preview, null);
 			if (originalLoaded && previewLoaded) {
 				return;
 			}
@@ -174,20 +180,22 @@ public class ImageFragment extends Fragment {
 	}
 
 	public void loadDefaults() {
+		BitmapKeeper.clear(getFragmentManager());
 		original.setImageResource(R.drawable.default_image);
 		preview.setImageResource(R.drawable.default_image);
+		loadListener.loadComplete();
 	}
 
 	public void load(Uri uri) {
 		BitmapKeeper.save(getFragmentManager(), uri);
-		Glide.with(this).load(uri).dontTransform().into(original);
-		Glide.with(this).load(uri).dontTransform().into(preview);
+		BitmapKeeper.into(getFragmentManager(), original, loadListener);
+		BitmapKeeper.into(getFragmentManager(), preview, null);
 	}
 
 	private void load(Bitmap bitmap) {
 		BitmapKeeper.save(getFragmentManager(), bitmap);
-		original.setImageBitmap(bitmap);
-		preview.setImageBitmap(bitmap);
+		BitmapKeeper.into(getFragmentManager(), original, loadListener);
+		BitmapKeeper.into(getFragmentManager(), preview, null);
 	}
 
 	private SharedPreferences getPrefs() {
@@ -196,9 +204,16 @@ public class ImageFragment extends Fragment {
 
 	public void setColorFilter(ColorFilter colorFilter) {
 		preview.setColorFilter(colorFilter);
+		// Glide sometimes share-leaks the Drawable state, to mutate correctly:
+		original.setColorFilter(colorFilter);
+		original.setColorFilter(null);
 	}
 
-	public Bitmap renderToBitmap() {
+	public Bitmap getCurrent() {
+		return BitmapKeeper.getBitmap(original.getDrawable());
+	}
+
+	public Bitmap renderPreview() {
 		Drawable od = original.getDrawable(), pd = preview.getDrawable();
 		int ow = od.getIntrinsicWidth(), pw = pd.getIntrinsicWidth();
 		int oh = od.getIntrinsicHeight(), ph = pd.getIntrinsicHeight();

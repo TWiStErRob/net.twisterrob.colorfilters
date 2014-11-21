@@ -44,10 +44,32 @@
 	<string name="cf_matrix_sat">S<sub><small><small><font fgcolor="#FF000000" color="-#FFFFFF">sat</font></small></small></sub></string>
 	<string name="cf_matrix_S">S<sub><small><small><small><small><font fgcolor="#FFFF0000" color="-#010000">R</font><font fgcolor="#FF00FF00" color="-#FF0100">G</font><font fgcolor="#FF0000FF" color="-#FFFF01">B</font><font fgcolor="#FF000000" color="-#FFFFFF">A</font></small></small></small></small></sub></string>
 
+	<string name="cf_palette_title">Palette</string>
+	<string name="cf_palette_info_title">Palette.generate(Bitmap, numColors)</string>
+	<string name="cf_palette_info">Extracts prominent colors from an image.
+		A number of colors with different profiles are extracted from the image:
+			\n&#8195;&#8226;&#8194;Vibrant
+			\n&#8195;&#8226;&#8194;Vibrant Dark
+			\n&#8195;&#8226;&#8194;Vibrant Light
+			\n&#8195;&#8226;&#8194;Muted
+			\n&#8195;&#8226;&#8194;Muted Dark
+			\n&#8195;&#8226;&#8194;Muted Light
+			\n&#8195;&#8226;&#8194;others via <tt>getSwatches()</tt>
+		\n\nYou can specify the maximum number of color swatches extracted from which the above six named ones are selected.
+		Good values for <tt>numColors</tt> depend on the source image type.
+		For landscapes, a good values are in the range 12&#8211;16.
+		For images which are largely made up of people\'s faces then this value should be increased to 24&#8211;32.
+		The default <tt>numColors</tt> is 16.
+		The number of returned swatches may be less than <tt>numColors</tt>, but at least one is always returned.
+		Not all of the above named ones are guaranteed to be found.
+		\n\nA swatch consists of a main background color and two text colors.
+		The text colors are guaranteed to have sufficient contrast when drawn over the background color.
+	</string>
+
 	<string name="cf_info_title">Color Filter Info</string>
 	<string name="cf_info_copy">Copy Code</string>
 	<string name="cf_info_ok">Thanks</string>
-	<string name="cf_info_copy_toast">Code copied to clipboard</string>
+	<string name="cf_info_copy_toast">Copied to clipboard</string>
 	<string name="cf_info_code">Here\'s the current code:</string>
 
 	<string name="cf_pref_title">Settings</string>
