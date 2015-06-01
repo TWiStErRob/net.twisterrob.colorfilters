@@ -3,12 +3,14 @@ package net.twisterrob.colorfilters.android.palette;
 import java.util.*;
 
 import android.content.*;
+import android.content.DialogInterface.OnClickListener;
 import android.graphics.*;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.graphics.Palette;
 import android.support.v7.graphics.Palette.Swatch;
+import android.text.TextUtils;
 import android.view.*;
-import android.view.View.*;
 import android.widget.*;
 import android.widget.AdapterView.*;
 
@@ -166,6 +168,78 @@ public class PaletteFragment extends ColorFilterFragment {
 				PaletteFragment.super.updateFilter();
 			}
 		});
+		swatchList.setOnItemLongClickListener(new OnItemLongClickListener() {
+			@Override public boolean onItemLongClick(final AdapterView<?> parent, View view, int position, long id) {
+				final Context context = parent.getContext();
+				Swatch swatch = (Swatch)parent.getAdapter().getItem(position);
+				if (swatch == null) {
+					Toast.makeText(context, "No swatch", Toast.LENGTH_SHORT).show();
+					return true;
+				}
+				final CharSequence[] titles = new CharSequence[] {
+						"Color",
+						"Title Text Color",
+						"Body Text Color",
+						"Summary",
+						"Android Color Resources"
+				};
+				final CharSequence[] values = new CharSequence[] {
+						colorToRGBHexString("", swatch.getRgb()),
+						colorToRGBHexString("", swatch.getTitleTextColor()),
+						colorToRGBHexString("", swatch.getBodyTextColor()),
+						null,
+						null
+				};
+				values[values.length - 2] = ""
+						+ "Color: #" + colorToRGBHexString("", swatch.getRgb()) + "\n"
+						+ "Title: #" + colorToRGBHexString("", swatch.getTitleTextColor()) + "\n"
+						+ "Body: #" + colorToRGBHexString("", swatch.getBodyTextColor()) + "\n"
+						+ "Population: " + swatch.getPopulation() + "\n"
+				;
+				values[values.length - 1] = res("myColor", swatch);
+
+				new AlertDialog.Builder(context)
+						.setTitle("Copy swatch to clipboard")
+						.setItems(titles, new OnClickListener() {
+							@Override public void onClick(DialogInterface dialog, int which) {
+								copyToClipboard(context, titles[which], values[which]);
+								String copiedAlert = context.getString(R.string.cf_info_copy_toast_arg, titles[which]);
+								Toast.makeText(context, copiedAlert, Toast.LENGTH_SHORT).show();
+							}
+						})
+						.setNeutralButton("Copy named swatches as resources", new OnClickListener() {
+							@Override public void onClick(DialogInterface dialog, int which) {
+								Palette palette = swatchAdapter.getPalette();
+								copyToClipboard(context, "Color Resources", TextUtils.concat(
+										res("vibrant", palette.getVibrantSwatch()),
+										res("vibrantLight", palette.getLightVibrantSwatch()),
+										res("vibrantDark", palette.getDarkVibrantSwatch()),
+										res("muted", palette.getMutedSwatch()),
+										res("mutedLight", palette.getLightMutedSwatch()),
+										res("mutedDark", palette.getDarkMutedSwatch())
+								));
+								String copiedAlert = context.getString(R.string.cf_info_copy_toast);
+								Toast.makeText(context, copiedAlert, Toast.LENGTH_SHORT).show();
+							}
+						})
+						.show()
+				;
+				return true;
+			}
+			private String res(String name, Swatch swatch) {
+				if (swatch == null) {
+					return "<!-- " + name + " not available -->\n";
+				}
+				return "<!-- " + name + " -->\n"
+						+ "<color name=\"" + name + "\">"
+						+ colorToRGBHexString("#", swatch.getRgb()) + "</color>\n"
+						+ "<color name=\"" + name + "_title\">"
+						+ colorToRGBHexString("#", swatch.getTitleTextColor()) + "</color>\n"
+						+ "<color name=\"" + name + "_body\">"
+						+ colorToRGBHexString("#", swatch.getBodyTextColor()) + "</color>\n"
+						;
+			}
+		});
 		swatchList.setAdapter(swatchAdapter);
 
 		swatchDisplay = (Spinner)view.findViewById(R.id.swatchSort);
@@ -310,71 +384,22 @@ public class PaletteFragment extends ColorFilterFragment {
 		private List<Swatch> swatches = Collections.emptyList();
 
 		private static class ViewHolder {
-			private final View view;
-			private final ListView list;
-
-			ViewHolder(View view, ListView list) {
-				this.view = view;
-				this.list = list;
+			ViewHolder(View view) {
 				colorText = (TextView)view.findViewById(R.id.color);
 				population = (TextView)view.findViewById(R.id.population);
 				titleText = (TextView)view.findViewById(R.id.titleText);
 				bodyText = (TextView)view.findViewById(R.id.bodyText);
-
-				colorText.setOnClickListener(new OnClickListener() {
-					@Override public void onClick(View v) {
-						clickMe();
-					}
-				});
-				colorText.setOnLongClickListener(new OnLongClickListener() {
-					@Override public boolean onLongClick(View v) {
-						copy(v.getContext(), "Palette color", color);
-						return true;
-					}
-				});
-				titleText.setOnClickListener(new OnClickListener() {
-					@Override public void onClick(View v) {
-						clickMe();
-					}
-				});
-				titleText.setOnLongClickListener(new OnLongClickListener() {
-					@Override public boolean onLongClick(View v) {
-						copy(v.getContext(), "Palette title color", title);
-						return true;
-					}
-				});
-				bodyText.setOnClickListener(new OnClickListener() {
-					@Override public void onClick(View v) {
-						clickMe();
-					}
-				});
-				bodyText.setOnLongClickListener(new OnLongClickListener() {
-					@Override public boolean onLongClick(View v) {
-						copy(v.getContext(), "Palette body color", body);
-						return true;
-					}
-				});
-			}
-			void clickMe() {
-				list.performItemClick(view, position, color);
 			}
 
-			void copy(Context context, String title, int color) {
-				copyToClipboard(context, title, colorToRGBHexString("", color));
-				String copiedAlert = context.getString(R.string.cf_info_copy_toast_arg, title);
-				Toast.makeText(context, copiedAlert, Toast.LENGTH_SHORT).show();
-			}
-
-			int position;
-			int color;
-			int title;
-			int body;
 			TextView colorText;
 			TextView titleText;
 			TextView bodyText;
 			TextView population;
 		}
 
+		public Palette getPalette() {
+			return palette;
+		}
 		@Override public int getCount() {
 			return swatches.size();
 		}
@@ -393,7 +418,7 @@ public class PaletteFragment extends ColorFilterFragment {
 			if (convertView == null) {
 				LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 				convertView = inflater.inflate(R.layout.inc_palette_swatch, parent, false);
-				holder = new ViewHolder(convertView, (ListView)parent);
+				holder = new ViewHolder(convertView);
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder)convertView.getTag();
@@ -403,28 +428,21 @@ public class PaletteFragment extends ColorFilterFragment {
 		}
 
 		private void bindView(int position, ViewHolder holder) {
-			holder.position = position;
 			Swatch swatch = getItem(position);
 			if (swatch != null) {
-				holder.color = swatch.getRgb();
-				holder.title = swatch.getTitleTextColor();
-				holder.body = swatch.getBodyTextColor();
 				float[] hsl = swatch.getHsl();
 				String type = getType(swatch);
-				holder.colorText.setText(colorToRGBHexString("#", holder.color)
+				holder.colorText.setText(colorToRGBHexString("#", swatch.getRgb())
 						+ "\n" + String.format(Locale.ROOT, "%.0f°, %.0f%%, %.0f%%", hsl[0], hsl[1] * 100, hsl[2] * 100)
 						+ (type != null? "\n" + type : ""));
-				holder.titleText.setBackgroundColor(holder.color);
-				holder.titleText.setTextColor(holder.title);
-				holder.titleText.setText("Title: " + colorToRGBHexString("#", holder.title));
-				holder.bodyText.setBackgroundColor(holder.color);
-				holder.bodyText.setTextColor(holder.body);
-				holder.bodyText.setText("Body: " + colorToRGBHexString("#", holder.body));
+				holder.titleText.setBackgroundColor(swatch.getRgb());
+				holder.titleText.setTextColor(swatch.getTitleTextColor());
+				holder.titleText.setText("Title: " + colorToRGBHexString("#", swatch.getTitleTextColor()));
+				holder.bodyText.setBackgroundColor(swatch.getRgb());
+				holder.bodyText.setTextColor(swatch.getBodyTextColor());
+				holder.bodyText.setText("Body: " + colorToRGBHexString("#", swatch.getBodyTextColor()));
 				holder.population.setText(Integer.toString(swatch.getPopulation()));
 			} else {
-				holder.color = 0;
-				holder.title = 0;
-				holder.body = 0;
 				holder.colorText.setText("missing");
 				holder.titleText.setBackgroundColor(Color.TRANSPARENT);
 				holder.titleText.setTextColor(Color.TRANSPARENT);

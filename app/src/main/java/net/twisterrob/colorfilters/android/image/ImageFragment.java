@@ -204,9 +204,6 @@ public class ImageFragment extends Fragment {
 
 	public void setColorFilter(ColorFilter colorFilter) {
 		preview.setColorFilter(colorFilter);
-		// Glide sometimes share-leaks the Drawable state, to mutate correctly:
-		original.setColorFilter(colorFilter);
-		original.setColorFilter(null);
 	}
 
 	public Bitmap getCurrent() {
