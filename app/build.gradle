@@ -6,9 +6,12 @@ repositories {
 }
 
 dependencies {
-	compile 'com.github.bumptech.glide:glide:3.4.0'
-	compile 'com.android.support:appcompat-v7:21.0.0'
-	compile 'com.android.support:palette-v7:21.0.0'
+	def supportVersion = '22.1.1'
+	compile "com.android.support:support-v4:${supportVersion}"
+	compile "com.android.support:appcompat-v7:${supportVersion}"
+	compile "com.android.support:palette-v7:${supportVersion}"
+
+	compile 'com.github.bumptech.glide:glide:3.6.0'
 }
 
 android {

@@ -51,7 +51,7 @@
 
 	<string name="cf_about_licences_title">Acknowledgements and Licences</string>
 	<string-array name="cf_about_licences">
-        <item>Glide 3.4, library</item>
+        <item>Glide 3.6, library</item>
 		<item>Order from Chaos, image</item>
 		<item>Custom keyboard, tutorial</item>
 		<item>Android SDK Color Picker, sample</item>

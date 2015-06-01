@@ -46,5 +46,6 @@
 		android:layout_centerVertical="true"
 		android:background="@android:color/transparent"
 		android:keyBackground="@drawable/keyboard_key"
+		tools:ignore="NegativeMargin"
 		/>
 </RelativeLayout>

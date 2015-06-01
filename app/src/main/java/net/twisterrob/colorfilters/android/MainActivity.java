@@ -2,13 +2,14 @@ package net.twisterrob.colorfilters.android;
 
 import java.io.File;
 
+import android.annotation.SuppressLint;
 import android.content.*;
 import android.graphics.*;
 import android.inputmethodservice.KeyboardView;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.*;
 import android.support.v7.app.*;
 import android.util.Log;
 import android.view.*;
@@ -24,16 +25,16 @@ import net.twisterrob.colorfilters.android.matrix.MatrixFragment;
 import net.twisterrob.colorfilters.android.palette.PaletteFragment;
 import net.twisterrob.colorfilters.android.porderduff.PorterDuffFragment;
 
-public class MainActivity extends ActionBarActivity implements ColorFilterFragment.Listener, ImageFragment.Listener {
+public class MainActivity extends AppCompatActivity implements ColorFilterFragment.Listener, ImageFragment.Listener {
 	private static final String PREF_COLORFILTER_SELECTED = "ColorFilter.selected";
+	private static final String PREF_COLORFILTER_PREVIEW = "ColorFilter.images";
 	private static final int COLORFILTER_DEFAULT = 0;
 
 	private ImageFragment images;
 	private KeyboardHandler kbd;
+	private MenuItem imageToggleItem;
 
-	@Override
-	@SuppressWarnings("deprecation")
-	protected void onCreate(Bundle savedInstanceState) {
+	@Override protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_color_filter);
 
@@ -44,6 +45,12 @@ public class MainActivity extends ActionBarActivity implements ColorFilterFragme
 		actionBar.setHomeButtonEnabled(true);
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setHomeAsUpIndicator(R.drawable.ic_launcher);
+		setupNavigation(actionBar);
+	}
+
+	@SuppressWarnings("deprecation")
+	private void setupNavigation(ActionBar actionBar) {
+		// the java compiler ignores deprecation supporession if there's a o.m(R.X.name); in here
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(
 				actionBar.getThemedContext(),
@@ -74,9 +81,8 @@ public class MainActivity extends ActionBarActivity implements ColorFilterFragme
 		});
 	}
 
-	@Override
 	@SuppressWarnings("deprecation")
-	protected void onResume() {
+	@Override protected void onResume() {
 		super.onResume();
 		int position = getPrefs().getInt(PREF_COLORFILTER_SELECTED, COLORFILTER_DEFAULT);
 		getSupportActionBar().setSelectedNavigationItem(position);
@@ -95,11 +101,14 @@ public class MainActivity extends ActionBarActivity implements ColorFilterFragme
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		getMenuInflater().inflate(R.menu.activity_color_filter, menu);
+		imageToggleItem = menu.findItem(R.id.action_image_toggle);
+		imageToggleItem.setChecked(getPrefs().getBoolean(PREF_COLORFILTER_PREVIEW, imageToggleItem.isChecked()));
+		updateImagesVisibility();
 		return true;
 	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	@SuppressLint("LogConditional")
+	@Override public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case android.R.id.home:
 				startActivity(new Intent(getApplicationContext(), AboutActivity.class));
@@ -114,8 +123,24 @@ public class MainActivity extends ActionBarActivity implements ColorFilterFragme
 				images.load(Uri.fromFile(logo));
 				Log.i("LOGO", "Written to: " + logo);
 				return true;
+			case R.id.action_image_toggle:
+				imageToggleItem.setChecked(!imageToggleItem.isChecked());
+				getPrefs().edit().putBoolean(PREF_COLORFILTER_PREVIEW, imageToggleItem.isChecked()).apply();
+				updateImagesVisibility();
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
 		}
-		return super.onOptionsItemSelected(item);
+	}
+
+	private void updateImagesVisibility() {
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		if (imageToggleItem.isChecked()) {
+			ft.show(images);
+		} else {
+			ft.hide(images);
+		}
+		ft.commitAllowingStateLoss();
 	}
 
 	@Override

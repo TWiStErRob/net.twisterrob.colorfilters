@@ -6,6 +6,15 @@
 	tools:context=".ImageFragment"
 	>
 	<item
+		android:id="@+id/action_image_toggle"
+		android:title="@string/cf_image_show"
+		android:icon="@android:drawable/ic_menu_view"
+		android:checkable="true"
+		android:checked="true"
+		app:showAsAction="never"
+		tools:showAsAction="never"
+		/>
+	<item
 		android:id="@+id/action_settings"
 		android:title="@string/cf_pref_title"
 		android:icon="@android:drawable/ic_menu_preferences"

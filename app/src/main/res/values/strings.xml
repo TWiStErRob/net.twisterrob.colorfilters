@@ -4,9 +4,10 @@
 
 	<string name="cf_reset_cd">reset color</string>
 
-	<string name="cf_image_action">Change Image</string>
+	<string name="cf_image_action">Change image</string>
+	<string name="cf_image_show">Show images</string>
 	<string name="cf_image_original_cd">Original image</string>
-	<string name="cf_image_preview_cd">Preview image using the specified ColorFilter</string>
+	<string name="cf_image_preview_cd">Preview image</string>
 
 	<string name="cf_lighting_title">Lighting</string>
 	<string name="cf_lighting_info_title">LightingColorFilter(mul, add)</string>

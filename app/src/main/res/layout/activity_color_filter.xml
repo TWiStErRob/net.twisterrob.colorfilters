@@ -23,14 +23,14 @@
 			android:layout_marginTop="@dimen/activity_margin"
 			android:layout_marginRight="@dimen/activity_margin"
 			android:layout_marginBottom="@dimen/margin"
-			android:layout_weight="0.4"
+			android:layout_weight="0.35"
 			tools:layout="@layout/fragment_image"
 			/>
 		<FrameLayout
 			android:id="@+id/container"
 			android:layout_width="match_parent"
 			android:layout_height="0dp"
-			android:layout_weight="0.6"
+			android:layout_weight="0.65"
 			android:focusableInTouchMode="true"
 			tools:background="@android:color/darker_gray"
 			/>
@@ -46,5 +46,6 @@
 		android:layout_centerHorizontal="true"
 		android:background="@android:color/transparent"
 		android:keyBackground="@drawable/keyboard_key"
+		tools:ignore="NegativeMargin"
 		/>
 </RelativeLayout>
