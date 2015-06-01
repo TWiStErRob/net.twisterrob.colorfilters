@@ -14,6 +14,7 @@ import android.view.*;
 import android.widget.*;
 import android.widget.AdapterView.*;
 
+import net.twisterrob.android.view.KeyboardHandler;
 import net.twisterrob.android.view.listeners.*;
 import net.twisterrob.colorfilters.android.*;
 import net.twisterrob.colorfilters.android.keyboard.KeyboardMode;
@@ -100,7 +101,7 @@ public class PaletteFragment extends ColorFilterFragment {
 
 	@Override
 	protected KeyboardMode getPreferredKeyboardMode() {
-		return KeyboardMode.NATIVE;
+		return KeyboardMode.Float;
 	}
 
 	@Override
@@ -125,6 +126,7 @@ public class PaletteFragment extends ColorFilterFragment {
 			}
 		});
 		numColorEditor = (EditText)view.findViewById(R.id.numEditor);
+		getKeyboard().registerEditText(numColorEditor);
 		numColorEditor.addTextChangedListener(new TextWatcherAdapter() {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -147,6 +149,7 @@ public class PaletteFragment extends ColorFilterFragment {
 			}
 		});
 		resizeDimenEditor = (EditText)view.findViewById(R.id.resizeDimenEditor);
+		getKeyboard().registerEditText(resizeDimenEditor);
 		resizeDimenEditor.addTextChangedListener(new TextWatcherAdapter() {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -207,7 +210,7 @@ public class PaletteFragment extends ColorFilterFragment {
 								Toast.makeText(context, copiedAlert, Toast.LENGTH_SHORT).show();
 							}
 						})
-						.setNeutralButton("Copy named swatches as resources", new OnClickListener() {
+						.setNeutralButton("Copy all named swatches", new OnClickListener() {
 							@Override public void onClick(DialogInterface dialog, int which) {
 								Palette palette = swatchAdapter.getPalette();
 								copyToClipboard(context, "Color Resources", TextUtils.concat(
@@ -256,6 +259,22 @@ public class PaletteFragment extends ColorFilterFragment {
 			}
 			@Override public void onNothingSelected(AdapterView<?> parent) {
 				throw new IllegalStateException("This should happen.");
+			}
+		});
+
+		getKeyboard().setCustomKeyboardListner(new KeyboardHandler.CustomKeyboardListener() {
+			@Override
+			public void customKeyboardShown() {
+				if (isPortrait()) {
+					swatchList.setVisibility(View.GONE);
+				}
+			}
+
+			@Override
+			public void customKeyboardHidden() {
+				if (isPortrait()) {
+					swatchList.setVisibility(View.VISIBLE);
+				}
 			}
 		});
 	}
@@ -312,6 +331,7 @@ public class PaletteFragment extends ColorFilterFragment {
 		super.onSaveInstanceState(outState);
 		outState.putInt(PREF_PALETTE_DISPLAY, swatchDisplay.getSelectedItemPosition());
 	}
+
 	@Override
 	public void onViewStateRestored(Bundle savedInstanceState) {
 		super.onViewStateRestored(savedInstanceState);
@@ -341,6 +361,7 @@ public class PaletteFragment extends ColorFilterFragment {
 	@Override
 	public void onDestroyView() {
 		getKeyboard().unregisterEditText(numColorEditor);
+		getKeyboard().unregisterEditText(resizeDimenEditor);
 		super.onDestroyView();
 	}
 

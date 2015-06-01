@@ -32,6 +32,8 @@
 
         \n\n<big><b>Palette</b></big>
         \n&#8195;&#8226;&#8194;The displayed Swatches and their order can be changed with the dropdown below the slider.
+        \n&#8195;&#8226;&#8194;Long tap a swatch in the list to copy colors.
+        \n&#8195;&#8226;&#8194;Don\'t set <tt>resizeBitmapSize</tt> too high, because it slows down.
     </string>
 
 	<string name="cf_about_faq_title">FAQ (Frequently Asked Questions)</string>

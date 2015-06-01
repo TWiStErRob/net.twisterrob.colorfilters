@@ -3,6 +3,7 @@ package net.twisterrob.colorfilters.android;
 import android.annotation.SuppressLint;
 import android.app.*;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
@@ -30,8 +31,8 @@ public class AboutActivity extends ListActivity {
 		feedback.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(Intent.ACTION_SEND);
-				intent.setType("message/rfc822");
+				Intent intent = new Intent(Intent.ACTION_VIEW);
+				intent.setData(Uri.parse("mailto:" + BuildConfig.EMAIL));
 				intent.putExtra(Intent.EXTRA_EMAIL, new String[] {BuildConfig.EMAIL});
 				intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.cf_about_feedback_subject,
 						getString(R.string.app_name)));

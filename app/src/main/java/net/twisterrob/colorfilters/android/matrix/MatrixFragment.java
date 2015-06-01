@@ -44,7 +44,7 @@ public class MatrixFragment extends ColorFilterFragment {
 
 	@Override
 	protected KeyboardMode getPreferredKeyboardMode() {
-		return KeyboardMode.Float;
+		return KeyboardMode.FloatNav;
 	}
 
 	@Override

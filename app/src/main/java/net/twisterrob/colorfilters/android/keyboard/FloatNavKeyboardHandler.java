@@ -1,25 +1,20 @@
 package net.twisterrob.colorfilters.android.keyboard;
 
 import android.inputmethodservice.*;
-import android.text.Editable;
 import android.view.*;
 import android.widget.EditText;
 
-import net.twisterrob.android.view.KeyboardHandler;
 import net.twisterrob.colorfilters.android.R;
 
-public class FloatNavKeyboardHandler extends KeyboardHandler {
+public class FloatNavKeyboardHandler extends FloatKeyboardHandler {
 	public FloatNavKeyboardHandler(Window window, KeyboardView keyboardView) {
 		super(window, keyboardView);
 
 		keyboardView.setKeyboard(new Keyboard(keyboardView.getContext(), R.xml.keyboard_floatnav));
-		keyboardView.setOnKeyboardActionListener(new MyOnKeyboardActionListener());
+		keyboardView.setOnKeyboardActionListener(new FloatNavKeyboardActionListener());
 	}
 
-	private class MyOnKeyboardActionListener extends BaseOnKeyboardActionListener {
-		private static final int KEY_DECIMAL = '\u2396';
-		private static final int KEY_CHANGE_SIGN = '\u00B1';
-
+	protected class FloatNavKeyboardActionListener extends FloatKeyboardActionListener {
 		private static final int KEY_NAV_W = '\u21D0';
 		private static final int KEY_NAV_N = '\u21D1';
 		private static final int KEY_NAV_E = '\u21D2';
@@ -48,12 +43,6 @@ public class FloatNavKeyboardHandler extends KeyboardHandler {
 		@Override
 		protected boolean onKey(EditText editor, int primaryCode, int[] keyCodes) {
 			switch (primaryCode) {
-				case KEY_DECIMAL:
-					super.onKey('.', keyCodes);
-					return true;
-				case KEY_CHANGE_SIGN:
-					negate(editor.getEditableText());
-					return true;
 				case KEY_NAV_W:
 				case KEY_NAV_N:
 				case KEY_NAV_E:
@@ -65,19 +54,7 @@ public class FloatNavKeyboardHandler extends KeyboardHandler {
 					navigate(primaryCode - FOCUS_FIRST, editor);
 					return true;
 				default:
-					return false;
-			}
-		}
-
-		private void negate(Editable text) {
-			if (text == null) {
-				return;
-			}
-			char firstChar = text.length() > 0? text.charAt(0) : '+';
-			if (firstChar == '-') { // -x -> x
-				text.delete(0, 1);
-			} else { // x -> -x
-				text.insert(0, "-");
+					return super.onKey(editor, primaryCode, keyCodes);
 			}
 		}
 

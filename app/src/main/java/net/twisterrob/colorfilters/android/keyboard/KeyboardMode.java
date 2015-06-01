@@ -12,10 +12,16 @@ public enum KeyboardMode {
 			return new HexKeyboardHandler(window, keyboardView);
 		}
 	},
-	Float {
+	FloatNav {
 		@Override
 		public KeyboardHandler create(Window window, KeyboardView keyboardView) {
 			return new FloatNavKeyboardHandler(window, keyboardView);
+		}
+	},
+	Float {
+		@Override
+		public KeyboardHandler create(Window window, KeyboardView keyboardView) {
+			return new FloatKeyboardHandler(window, keyboardView);
 		}
 	},
 	NATIVE {
