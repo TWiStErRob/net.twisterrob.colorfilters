@@ -2,13 +2,13 @@ package net.twisterrob.colorfilters.android.palette;
 
 import java.util.*;
 
-import android.content.SharedPreferences;
+import android.content.*;
 import android.graphics.*;
 import android.os.Bundle;
 import android.support.v7.graphics.Palette;
 import android.support.v7.graphics.Palette.Swatch;
-import android.util.Log;
 import android.view.*;
+import android.view.View.*;
 import android.widget.*;
 import android.widget.AdapterView.*;
 
@@ -18,16 +18,21 @@ import net.twisterrob.colorfilters.android.keyboard.KeyboardMode;
 
 public class PaletteFragment extends ColorFilterFragment {
 	private static final String PREF_PALETTE_NUMCOLORS = "Palette.numColors";
+	private static final String PREF_PALETTE_RESIZEDIMEN = "Palette.resizeDimen";
 	private static final String PREF_PALETTE_DISPLAY = "Palette.display";
 	private static final int DEFAULT_NUMCOLORS = 16;
+	private static final int DEFAULT_RESIZEDIMEN = 192;
 	private static final PaletteAdapter.Display DEFAULT_DISPLAY = PaletteAdapter.Display.get___Swatch;
 
 	private int currentNumColors;
+	private int currentResizeDimen;
 	private Bitmap lastImage;
 
 	private SeekBar numColorSlider;
 	private EditText numColorEditor;
 	private TextView numSwatches;
+	private SeekBar resizeDimenSlider;
+	private EditText resizeDimenEditor;
 
 	private Spinner swatchDisplay;
 	private ListView swatchList;
@@ -47,7 +52,7 @@ public class PaletteFragment extends ColorFilterFragment {
 	@Override
 	protected ColorFilter createFilter() {
 		int pos = swatchList.getCheckedItemPosition();
-		Log.d("Palette", "createFilter, pos = " + pos);
+		//Log.d("Palette", "createFilter, pos = " + pos);
 		if (pos < 0) {
 			return null;
 		}
@@ -63,13 +68,26 @@ public class PaletteFragment extends ColorFilterFragment {
 
 	@Override protected void imageChanged() {
 		lastImage = getCurrentBitmap();
+		if (lastImage != null) {
+			boolean wasAtMax = resizeDimenSlider.getMax() == resizeDimenSlider.getProgress();
+			resizeDimenSlider.setMax(Math.max(lastImage.getWidth(), lastImage.getHeight()) - 1);
+			if (wasAtMax) {
+				updateResizeDimen(resizeDimenSlider.getMax() + 1, null);
+			}
+		}
+		resizeDimenSlider.setEnabled(lastImage != null);
+		resizeDimenEditor.setEnabled(lastImage != null);
 		generatePalette();
 		super.updateFilter();
 	}
 
 	private void generatePalette() {
 		if (lastImage != null) {
-			Palette palette = Palette.generate(lastImage, currentNumColors);
+			Palette palette = Palette
+					.from(lastImage)
+					.maximumColorCount(currentNumColors)
+					.resizeBitmapSize(currentResizeDimen)
+					.generate();
 			numSwatches.setText(Integer.toString(palette.getSwatches().size()));
 			swatchAdapter.update(palette, getCurrentSort());
 		} else {
@@ -119,18 +137,33 @@ public class PaletteFragment extends ColorFilterFragment {
 			}
 		});
 
+		resizeDimenSlider = (SeekBar)view.findViewById(R.id.resizeDimen);
+		resizeDimenSlider.setOnSeekBarChangeListener(new OnSeekBarChangeAdapter() {
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+				updateResizeDimen(progress + 1, UpdateOrigin.Slider);
+			}
+		});
+		resizeDimenEditor = (EditText)view.findViewById(R.id.resizeDimenEditor);
+		resizeDimenEditor.addTextChangedListener(new TextWatcherAdapter() {
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				try {
+					int resizeDimen = Integer.parseInt(s.toString());
+					updateResizeDimen(resizeDimen, UpdateOrigin.Editor);
+					resizeDimenEditor.setError(null);
+				} catch (RuntimeException ex) {
+					//Log.w(TAG, "Cannot parse color: " + s, ex);
+					resizeDimenEditor.setError(ex.getMessage() + " " + s);
+				}
+			}
+		});
+
 		swatchList = (ListView)view.findViewById(android.R.id.list);
 		swatchList.setOnItemClickListener(new OnItemClickListener() {
 			@Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				swatchList.setItemChecked(position, true);
 				PaletteFragment.super.updateFilter();
-			}
-		});
-		swatchList.setOnItemLongClickListener(new OnItemLongClickListener() {
-			@Override public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-				copyToClipboard(getActivity(), "Palette color", colorToRGBHexString("", (int)id));
-				Toast.makeText(getActivity(), R.string.cf_info_copy_toast, Toast.LENGTH_SHORT).show();
-				return true;
 			}
 		});
 		swatchList.setAdapter(swatchAdapter);
@@ -177,6 +210,30 @@ public class PaletteFragment extends ColorFilterFragment {
 		updateFilter();
 	}
 
+	public void updateResizeDimen(int resizeDimen, UpdateOrigin origin) {
+		if (pendingUpdate) {
+			return;
+		}
+		if (resizeDimen < 1) {
+			throw new IllegalArgumentException("resizeDimen must be 1 of greater");
+		}
+
+		try {
+			pendingUpdate = true;
+			currentResizeDimen = resizeDimen;
+
+			if (origin != UpdateOrigin.Editor) {
+				resizeDimenEditor.setText(Integer.toString(resizeDimen));
+			}
+			if (origin != UpdateOrigin.Slider) {
+				resizeDimenSlider.setProgress(resizeDimen - 1);
+			}
+		} finally {
+			pendingUpdate = false;
+		}
+		updateFilter();
+	}
+
 	@Override public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putInt(PREF_PALETTE_DISPLAY, swatchDisplay.getSelectedItemPosition());
@@ -187,9 +244,10 @@ public class PaletteFragment extends ColorFilterFragment {
 		if (savedInstanceState == null) {
 			SharedPreferences prefs = getPrefs();
 			int numColors = prefs.getInt(PREF_PALETTE_NUMCOLORS, DEFAULT_NUMCOLORS);
+			int resizeDimen = prefs.getInt(PREF_PALETTE_RESIZEDIMEN, DEFAULT_RESIZEDIMEN);
 			String displayString = prefs.getString(PREF_PALETTE_DISPLAY, DEFAULT_DISPLAY.name());
 			PaletteAdapter.Display display = PaletteAdapter.Display.valueOf(displayString);
-			setValues(numColors, display);
+			setValues(numColors, resizeDimen, display);
 		} else {
 			swatchDisplay.setSelection(savedInstanceState.getInt(PREF_PALETTE_DISPLAY, DEFAULT_DISPLAY.ordinal()));
 		}
@@ -200,6 +258,7 @@ public class PaletteFragment extends ColorFilterFragment {
 		super.onStop();
 		getPrefs().edit()
 		          .putInt(PREF_PALETTE_NUMCOLORS, currentNumColors)
+		          .putInt(PREF_PALETTE_RESIZEDIMEN, currentResizeDimen)
 		          .putString(PREF_PALETTE_DISPLAY, getCurrentSort().name())
 		          .apply()
 		;
@@ -213,17 +272,29 @@ public class PaletteFragment extends ColorFilterFragment {
 
 	@Override
 	public void reset() {
-		setValues(DEFAULT_NUMCOLORS, DEFAULT_DISPLAY);
+		setValues(DEFAULT_NUMCOLORS, DEFAULT_RESIZEDIMEN, DEFAULT_DISPLAY);
 	}
 
-	private void setValues(int numColors, PaletteAdapter.Display display) {
+	private void setValues(int numColors, int resizeDimen, PaletteAdapter.Display display) {
 		swatchDisplay.setSelection(display.ordinal());
 		updateNumColors(numColors, null);
+		updateResizeDimen(resizeDimen, null);
 	}
 
 	@Override
 	protected String generateCode() {
-		return "Palette.generate(bitmap, " + currentNumColors + ");"; //NON-NLS
+		StringBuilder sb = new StringBuilder();
+		sb.append("Palette palette = Palette\n"); //NON-NLS
+		sb.append("\t\t.from(bitmap)\n"); //NON-NLS
+		if (currentNumColors != DEFAULT_NUMCOLORS) {
+			sb.append("\t\t.maximumColorCount(").append(currentNumColors).append(")\n"); //NON-NLS
+		}
+		if (currentResizeDimen != DEFAULT_RESIZEDIMEN) {
+			sb.append("\t\t.resizeBitmapSize(").append(currentResizeDimen).append(")\n"); //NON-NLS
+		}
+		sb.append("\t\t.generate()\n");
+		sb.append(";"); //NON-NLS
+		return sb.toString();
 	}
 	public PaletteAdapter.Display getCurrentSort() {
 		return PaletteAdapter.Display.values()[(int)swatchDisplay.getSelectedItemId()];
@@ -239,14 +310,66 @@ public class PaletteFragment extends ColorFilterFragment {
 		private List<Swatch> swatches = Collections.emptyList();
 
 		private static class ViewHolder {
-			ViewHolder(View view) {
-				color = (TextView)view.findViewById(R.id.color);
+			private final View view;
+			private final ListView list;
+
+			ViewHolder(View view, ListView list) {
+				this.view = view;
+				this.list = list;
+				colorText = (TextView)view.findViewById(R.id.color);
 				population = (TextView)view.findViewById(R.id.population);
 				titleText = (TextView)view.findViewById(R.id.titleText);
 				bodyText = (TextView)view.findViewById(R.id.bodyText);
+
+				colorText.setOnClickListener(new OnClickListener() {
+					@Override public void onClick(View v) {
+						clickMe();
+					}
+				});
+				colorText.setOnLongClickListener(new OnLongClickListener() {
+					@Override public boolean onLongClick(View v) {
+						copy(v.getContext(), "Palette color", color);
+						return true;
+					}
+				});
+				titleText.setOnClickListener(new OnClickListener() {
+					@Override public void onClick(View v) {
+						clickMe();
+					}
+				});
+				titleText.setOnLongClickListener(new OnLongClickListener() {
+					@Override public boolean onLongClick(View v) {
+						copy(v.getContext(), "Palette title color", title);
+						return true;
+					}
+				});
+				bodyText.setOnClickListener(new OnClickListener() {
+					@Override public void onClick(View v) {
+						clickMe();
+					}
+				});
+				bodyText.setOnLongClickListener(new OnLongClickListener() {
+					@Override public boolean onLongClick(View v) {
+						copy(v.getContext(), "Palette body color", body);
+						return true;
+					}
+				});
+			}
+			void clickMe() {
+				list.performItemClick(view, position, color);
 			}
 
-			TextView color;
+			void copy(Context context, String title, int color) {
+				copyToClipboard(context, title, colorToRGBHexString("", color));
+				String copiedAlert = context.getString(R.string.cf_info_copy_toast_arg, title);
+				Toast.makeText(context, copiedAlert, Toast.LENGTH_SHORT).show();
+			}
+
+			int position;
+			int color;
+			int title;
+			int body;
+			TextView colorText;
 			TextView titleText;
 			TextView bodyText;
 			TextView population;
@@ -270,7 +393,7 @@ public class PaletteFragment extends ColorFilterFragment {
 			if (convertView == null) {
 				LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 				convertView = inflater.inflate(R.layout.inc_palette_swatch, parent, false);
-				holder = new ViewHolder(convertView);
+				holder = new ViewHolder(convertView, (ListView)parent);
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder)convertView.getTag();
@@ -280,23 +403,29 @@ public class PaletteFragment extends ColorFilterFragment {
 		}
 
 		private void bindView(int position, ViewHolder holder) {
+			holder.position = position;
 			Swatch swatch = getItem(position);
 			if (swatch != null) {
-				int rgb = swatch.getRgb();
+				holder.color = swatch.getRgb();
+				holder.title = swatch.getTitleTextColor();
+				holder.body = swatch.getBodyTextColor();
 				float[] hsl = swatch.getHsl();
 				String type = getType(swatch);
-				holder.color.setText(colorToRGBHexString("#", rgb)
+				holder.colorText.setText(colorToRGBHexString("#", holder.color)
 						+ "\n" + String.format(Locale.ROOT, "%.0f°, %.0f%%, %.0f%%", hsl[0], hsl[1] * 100, hsl[2] * 100)
 						+ (type != null? "\n" + type : ""));
-				holder.titleText.setBackgroundColor(rgb);
-				holder.titleText.setTextColor(swatch.getTitleTextColor());
-				holder.titleText.setText("Title: " + colorToRGBHexString("#", swatch.getTitleTextColor()));
-				holder.bodyText.setBackgroundColor(rgb);
-				holder.bodyText.setTextColor(swatch.getBodyTextColor());
-				holder.bodyText.setText("Body: " + colorToRGBHexString("#", swatch.getBodyTextColor()));
+				holder.titleText.setBackgroundColor(holder.color);
+				holder.titleText.setTextColor(holder.title);
+				holder.titleText.setText("Title: " + colorToRGBHexString("#", holder.title));
+				holder.bodyText.setBackgroundColor(holder.color);
+				holder.bodyText.setTextColor(holder.body);
+				holder.bodyText.setText("Body: " + colorToRGBHexString("#", holder.body));
 				holder.population.setText(Integer.toString(swatch.getPopulation()));
 			} else {
-				holder.color.setText("missing");
+				holder.color = 0;
+				holder.title = 0;
+				holder.body = 0;
+				holder.colorText.setText("missing");
 				holder.titleText.setBackgroundColor(Color.TRANSPARENT);
 				holder.titleText.setTextColor(Color.TRANSPARENT);
 				holder.titleText.setText(null);
@@ -326,7 +455,7 @@ public class PaletteFragment extends ColorFilterFragment {
 		}
 
 		public void update(Palette palette, Display display) {
-			Log.d("Adapter", display + ": " + palette);
+			//Log.d("Adapter", display + ": " + palette);
 			this.palette = palette;
 			this.swatches = display.getSwatches(palette);
 
@@ -394,7 +523,7 @@ public class PaletteFragment extends ColorFilterFragment {
 			};
 
 			private final String title;
-			private Display(String title) {
+			Display(String title) {
 				this.title = title;
 			}
 			public String getTitle() {
