@@ -152,17 +152,17 @@ class MatrixComponent extends Component {
 		}
 	}
 
-	private static String getDisplay(Locale locale, float value) {
-		if (value == 0.0 || value == -0.0) {
+	private static String getDisplay(float value) {
+		if (value == 0) { // 0.0, -0.0
 			return "0";
 		}
-		return String.format(locale, "%.3f", value); //NON-NLS
+		return String.format(Locale.ROOT, "%.3f", value); //NON-NLS
 	}
 
 	private static String getCode(EditText edit) {
 		String c;
 		try {
-			c = getDisplay(Locale.ROOT, getValue(edit)) + "f"; //NON-NLS
+			c = getDisplay(getValue(edit)) + "f"; //NON-NLS
 		} catch (RuntimeException ex) {
 			c = "0 /* " + edit.getText() + ": " + ex.getMessage() + " */"; //NON-NLS
 		}
@@ -174,7 +174,7 @@ class MatrixComponent extends Component {
 	}
 
 	private static void setValue(EditText ed, float value) {
-		ed.setText(getDisplay(Locale.getDefault(), value));
+		ed.setText(getDisplay(value));
 	}
 
 	private static float getValue(EditText ed) {

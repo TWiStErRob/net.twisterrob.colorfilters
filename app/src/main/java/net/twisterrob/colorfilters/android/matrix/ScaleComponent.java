@@ -98,7 +98,7 @@ class ScaleComponent extends Component {
 	}
 
 	private static String getDisplay(float value) {
-		return String.format(Locale.getDefault(), "%.2f", value); //NON-NLS
+		return String.format(Locale.ROOT, "%.2f", value); //NON-NLS
 	}
 
 	private float getValue(int component) {

@@ -82,7 +82,7 @@ class RotateComponent extends Component {
 	}
 
 	private static String getDisplay(int value) {
-		return String.format(Locale.getDefault(), "% 3d", value); //NON-NLS
+		return String.format(Locale.ROOT, "% 3d", value); //NON-NLS
 	}
 
 	private int getValue() {
