@@ -17,5 +17,9 @@ dependencies {
 android {
 	defaultConfig {
 		applicationId 'net.twisterrob.colorfilters'
+		version {
+			major = 1
+			minor = 1
+		}
 	}
 }
