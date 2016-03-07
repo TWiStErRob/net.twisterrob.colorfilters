@@ -172,7 +172,7 @@ public class LightingFragment extends ColorFilterFragment {
 			this.preview = preview;
 			this.defaultColor = defaultColor;
 
-			colorView.setContinousMode(true);
+			colorView.setContinuousMode(true);
 			preview.setOnClickListener(this);
 			editor.addTextChangedListener(this);
 			colorView.setColorChangedListener(this);

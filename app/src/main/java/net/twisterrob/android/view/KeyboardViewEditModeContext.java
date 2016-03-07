@@ -17,13 +17,16 @@ import android.view.Display;
 
 /**
  * This class is to make layout editor work:
+ * <pre>
  * java.lang.UnsupportedOperationException: Unsupported Service: audio
  *   at com.android.layoutlib.bridge.android.BridgeContext.getSystemService(BridgeContext.java:465)
  *   at android.inputmethodservice.KeyboardView.<init>(KeyboardView.java:379)
  *   at android.inputmethodservice.KeyboardView.<init>(KeyboardView.java:283)
  *   at android.inputmethodservice.KeyboardView.<init>(KeyboardView.java:279)
+ * </pre>
+ * @see #getSystemService(String)
  */
-@TargetApi(Build.VERSION_CODES.LOLLIPOP)
+@TargetApi(Build.VERSION_CODES.M)
 @SuppressWarnings("deprecation")
 public class KeyboardViewEditModeContext extends Context {
 	private final Context wrapped;
@@ -417,6 +420,10 @@ public class KeyboardViewEditModeContext extends Context {
 			return null;
 		}
 	}
+	
+	@Override public String getSystemServiceName(Class<?> serviceClass) {
+		return wrapped.getSystemServiceName(serviceClass);
+	}
 
 	@Override
 	public int checkPermission(@NonNull String permission, int pid, int uid) {
@@ -431,6 +438,11 @@ public class KeyboardViewEditModeContext extends Context {
 	@Override
 	public int checkCallingOrSelfPermission(@NonNull String permission) {
 		return wrapped.checkCallingOrSelfPermission(permission);
+	}
+	
+	@Override
+	public int checkSelfPermission(@NonNull String permission) {
+		return wrapped.checkSelfPermission(permission);
 	}
 
 	@Override

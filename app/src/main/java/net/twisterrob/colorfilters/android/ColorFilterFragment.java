@@ -41,9 +41,9 @@ public abstract class ColorFilterFragment extends Fragment {
 	protected abstract KeyboardMode getPreferredKeyboardMode();
 
 	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-		listener = (Listener)activity;
+	public void onAttach(Context context) {
+		super.onAttach(context);
+		listener = (Listener)context;
 	}
 
 	@Override

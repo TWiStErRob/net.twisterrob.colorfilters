@@ -125,7 +125,7 @@ public abstract class BitmapDrawer {
 	public interface Factory {
 		BitmapDrawer create(int[] bitmap, int w, int h, PixelColor color);
 
-		public static final class Async implements Factory {
+		final class Async implements Factory {
 			private final Factory factory;
 
 			private Async(Factory factory) {
@@ -148,7 +148,7 @@ public abstract class BitmapDrawer {
 			}
 		}
 
-		public static final class Sync implements Factory {
+		final class Sync implements Factory {
 			private final Factory factory;
 
 			private Sync(Factory factory) {

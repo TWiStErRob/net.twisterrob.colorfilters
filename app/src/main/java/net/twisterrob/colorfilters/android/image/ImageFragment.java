@@ -39,9 +39,9 @@ public class ImageFragment extends Fragment {
 	private Listener listener;
 
 	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-		listener = (Listener)activity;
+	public void onAttach(Context context) {
+		super.onAttach(context);
+		listener = (Listener)context;
 	}
 
 	@Override

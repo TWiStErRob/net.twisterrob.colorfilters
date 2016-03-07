@@ -68,12 +68,12 @@ public class ColorPickerView extends ImageView implements SwatchChooser.OnSwatch
 		this.mListener = listener;
 	}
 
-	public boolean isContinousMode() {
+	public boolean isContinuousMode() {
 		return touch.isContinuousMode();
 	}
 
-	public void setContinousMode(boolean continousMode) {
-		touch.setContinuousMode(continousMode);
+	public void setContinuousMode(boolean continuousMode) {
+		touch.setContinuousMode(continuousMode);
 	}
 
 	public Swatch getSwatch() {

@@ -86,6 +86,7 @@ public class PaletteFragment extends ColorFilterFragment {
 
 	private void generatePalette() {
 		if (lastImage != null) {
+			@SuppressWarnings("deprecation")
 			Palette palette = Palette
 					.from(lastImage)
 					.maximumColorCount(currentNumColors)
