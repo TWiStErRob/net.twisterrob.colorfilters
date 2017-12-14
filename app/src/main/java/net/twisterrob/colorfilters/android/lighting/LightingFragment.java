@@ -3,6 +3,7 @@ package net.twisterrob.colorfilters.android.lighting;
 import android.content.SharedPreferences;
 import android.graphics.*;
 import android.os.Bundle;
+import android.support.annotation.*;
 import android.view.*;
 import android.widget.*;
 
@@ -34,7 +35,7 @@ public class LightingFragment extends ColorFilterFragment {
 	}
 
 	@Override
-	protected ColorFilter createFilter() {
+	protected @Nullable ColorFilter createFilter() {
 		if (mulColor != null && addColor != null) {
 			return new LightingColorFilter(mulColor.getColor(), addColor.getColor());
 		} else {
@@ -146,13 +147,13 @@ public class LightingFragment extends ColorFilterFragment {
 	}
 
 	@Override
-	protected String generateCode() {
+	protected @NonNull String generateCode() {
 		if (mulColor != null && addColor != null) {
 			String mul = colorToRGBHexString("0x", mulColor.getColor()); //NON-NLS
 			String add = colorToRGBHexString("0x", addColor.getColor()); //NON-NLS
 			return "new LightingColorFilter(" + mul + ", " + add + ");"; //NON-NLS
 		} else {
-			return null;
+			throw new IllegalStateException("No colors available for code generation");
 		}
 	}
 

@@ -6,6 +6,7 @@ import android.content.*;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.*;
 import android.os.Bundle;
+import android.support.annotation.*;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.graphics.Palette;
 import android.support.v7.graphics.Palette.Swatch;
@@ -53,7 +54,7 @@ public class PaletteFragment extends ColorFilterFragment {
 	}
 
 	@Override
-	protected ColorFilter createFilter() {
+	protected @Nullable ColorFilter createFilter() {
 		int pos = swatchList.getCheckedItemPosition();
 		//Log.d("Palette", "createFilter, pos = " + pos);
 		if (pos < 0) {
@@ -378,7 +379,7 @@ public class PaletteFragment extends ColorFilterFragment {
 	}
 
 	@Override
-	protected String generateCode() {
+	protected @NonNull String generateCode() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Palette palette = Palette\n"); //NON-NLS
 		sb.append("\t\t.from(bitmap)\n"); //NON-NLS

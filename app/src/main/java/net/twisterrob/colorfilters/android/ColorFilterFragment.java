@@ -10,6 +10,7 @@ import android.graphics.*;
 import android.net.Uri;
 import android.os.*;
 import android.preference.PreferenceManager;
+import android.support.annotation.*;
 import android.support.v4.app.Fragment;
 import android.text.*;
 import android.text.style.*;
@@ -90,6 +91,7 @@ public abstract class ColorFilterFragment extends Fragment {
 		return builder;
 	}
 
+	/** @see #displayHelp(int, int) */
 	protected abstract void displayHelp();
 
 	protected void displayHelp(final int titleResourceId, int descriptionResourceId) {
@@ -159,7 +161,7 @@ public abstract class ColorFilterFragment extends Fragment {
 		return getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
 	}
 
-	protected abstract CharSequence generateCode();
+	protected abstract @NonNull CharSequence generateCode();
 
 	protected CharSequence generateFormattedCode() {
 		Spannable code = new SpannableString(generateCode());
@@ -169,25 +171,29 @@ public abstract class ColorFilterFragment extends Fragment {
 		return code;
 	}
 
-	protected abstract ColorFilter createFilter();
+	protected abstract @Nullable ColorFilter createFilter();
 
 	public abstract void reset();
+	
+	public boolean needsImages() {
+		return true;
+	}
 
-	protected static String colorToRGBString(int color) {
+	protected static String colorToRGBString(@ColorInt int color) {
 		return String.format(Locale.ROOT, "%d, %d, %d", //NON-NLS
 				Color.red(color), Color.green(color), Color.blue(color));
 	}
 
-	protected static String colorToARGBString(int color) {
+	protected static String colorToARGBString(@ColorInt int color) {
 		return String.format(Locale.ROOT, "%d, %d, %d, %d", //NON-NLS
 				Color.alpha(color), Color.red(color), Color.green(color), Color.blue(color));
 	}
 
-	protected static String colorToRGBHexString(String prefix, int color) {
+	protected static String colorToRGBHexString(@NonNull String prefix, @ColorInt int color) {
 		return String.format(Locale.ROOT, "%s%06X", prefix, 0xFFFFFF & color); //NON-NLS
 	}
 
-	protected static String colorToARGBHexString(String prefix, int color) {
+	protected static String colorToARGBHexString(@NonNull String prefix, @ColorInt int color) {
 		return String.format(Locale.ROOT, "%s%08X", prefix, color); //NON-NLS
 	}
 

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/tableRow1"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:paddingLeft="@dimen/margin"
+	android:paddingRight="@dimen/margin"
+	tools:showIn="@layout/fragment_resfont"
+	>
+
+	<TextView
+		android:id="@+id/source"
+		android:layout_gravity="center_vertical"
+		tools:text="fgColor=&quot;-FF0088AA"
+		/>
+	<View style="@style/table_horizontal_divider" />
+	<TextView
+		android:id="@+id/resolved"
+		android:layout_gravity="center_vertical"
+		tools:text="FF0088AA"
+		/>
+	<View style="@style/table_horizontal_divider" />
+	<TextView
+		android:id="@+id/resultWhite"
+		android:layout_gravity="center_vertical"
+		android:background="@android:color/white"
+		tools:textColor="#ff0000"
+		tools:text="text"
+		/>
+	<View style="@style/table_horizontal_divider" />
+	<TextView
+		android:id="@+id/resultBlack"
+		android:layout_gravity="center_vertical"
+		android:background="@android:color/black"
+		tools:textColor="#ff0000"
+		tools:text="text"
+		/>
+</TableRow>

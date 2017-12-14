@@ -24,6 +24,7 @@ import net.twisterrob.colorfilters.android.lighting.LightingFragment;
 import net.twisterrob.colorfilters.android.matrix.MatrixFragment;
 import net.twisterrob.colorfilters.android.palette.PaletteFragment;
 import net.twisterrob.colorfilters.android.porderduff.PorterDuffFragment;
+import net.twisterrob.colorfilters.android.resources.ResourceFontFragment;
 
 public class MainActivity extends AppCompatActivity implements ColorFilterFragment.Listener, ImageFragment.Listener {
 	private static final String PREF_COLORFILTER_SELECTED = "ColorFilter.selected";
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements ColorFilterFragme
 
 	@SuppressWarnings("deprecation")
 	private void setupNavigation(ActionBar actionBar) {
-		// the java compiler ignores deprecation supporession if there's a o.m(R.X.name); in here
+		// TODO the java compiler ignores deprecation suppression if there's a o.m(R.X.name); in here
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(
 				actionBar.getThemedContext(),
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements ColorFilterFragme
 						getText(R.string.cf_porterduff_title),
 						getText(R.string.cf_matrix_title),
 						getText(R.string.cf_palette_title)
+						//,getText(R.string.cf_resfont_title)
 				});
 		actionBar.setListNavigationCallbacks(adapter, new ActionBar.OnNavigationListener() {
 			@Override
@@ -135,7 +137,8 @@ public class MainActivity extends AppCompatActivity implements ColorFilterFragme
 
 	private void updateImagesVisibility() {
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		if (imageToggleItem.isChecked()) {
+		ColorFilterFragment fragment = getCurrentFragment();
+		if (imageToggleItem.isChecked() && fragment != null && fragment.needsImages()) {
 			ft.show(images);
 		} else {
 			ft.hide(images);
@@ -191,6 +194,8 @@ public class MainActivity extends AppCompatActivity implements ColorFilterFragme
 				return MatrixFragment.newInstance();
 			case 3:
 				return PaletteFragment.newInstance();
+			case 4:
+				return ResourceFontFragment.newInstance();
 		}
 		throw new IllegalStateException("Unknown position " + position);
 	}
@@ -204,6 +209,8 @@ public class MainActivity extends AppCompatActivity implements ColorFilterFragme
 			return 2;
 		} else if (fragment instanceof PaletteFragment) {
 			return 3;
+		} else if (fragment instanceof ResourceFontFragment) {
+			return 4;
 		}
 		return -1;
 	}

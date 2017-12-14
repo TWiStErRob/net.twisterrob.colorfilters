@@ -3,6 +3,7 @@ package net.twisterrob.colorfilters.android.matrix;
 import android.content.SharedPreferences;
 import android.graphics.*;
 import android.os.Bundle;
+import android.support.annotation.*;
 import android.view.*;
 
 import net.twisterrob.android.view.KeyboardHandler;
@@ -38,7 +39,7 @@ public class MatrixFragment extends ColorFilterFragment {
 	}
 
 	@Override
-	protected ColorFilter createFilter() {
+	protected @NonNull ColorFilter createFilter() {
 		return new ColorMatrixColorFilter(colorMatrix);
 	}
 
@@ -175,7 +176,7 @@ public class MatrixFragment extends ColorFilterFragment {
 	}
 
 	@Override
-	protected String generateCode() {
+	protected @NonNull String generateCode() {
 		StringBuilder colorCode = new StringBuilder();
 		if (dirty) {
 			editor.appendTo(colorCode);

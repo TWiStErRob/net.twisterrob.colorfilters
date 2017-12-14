@@ -11,7 +11,7 @@
 
 	<string name="cf_lighting_title">Lighting</string>
 	<string name="cf_lighting_info_title">LightingColorFilter(mul, add)</string>
-    <string name="cf_lighting_info">This is a color filter that multiplies the
+	<string name="cf_lighting_info">This is a color filter that multiplies the
         <font fgcolor="#FFFF0000" color="-#010000">R</font><font fgcolor="#FF00FF00" color="-#FF0100">G</font><font fgcolor="#FF0000FF" color="-#FFFF01">B</font> channels
         by one color (<tt>mul</tt>), and then adds a second color (<tt>add</tt>), pinning the result for each component to <tt>[0..255]</tt>.
         \n\nThe alpha components of the <tt>mul</tt> and <tt>add</tt> arguments are ignored.
@@ -23,7 +23,7 @@
 
 	<string name="cf_matrix_title">Color Matrix</string>
 	<string name="cf_matrix_info_title">ColorMatrixColorFilter(matrix)</string>
-    <string name="cf_matrix_info">This is a color filter that transforms colors through a 4x5 color <tt>matrix</tt>.
+	<string name="cf_matrix_info">This is a color filter that transforms colors through a 4x5 color <tt>matrix</tt>.
         \n\nThe <tt>matrix</tt> is copied into the filter, so changes made to it after the filter is constructed will not be reflected in the filter.
     </string>
 	<string name="cf_matrix_R"><font fgcolor="#FFFF0000" color="-#010000">R</font>:</string>
@@ -71,6 +71,40 @@
 		\n<tt>resizeBitmapSize</tt> has a large effect on the processing time. The larger the resized image is, the greater time it will take to generate the palette.
 		The smaller the image is, the more detail is lost in the resulting image and thus less precision for color selection.
 	</string>
+
+	<string name="cf_resfont_title">String Resources</string>
+	<string name="cf_resfont_info_title"><![CDATA[<font color="…">]]></string>
+	<string name="cf_resfont_info">See my blog post:
+		<a href="http://www.twisterrob.net/blog/2016/09/android-xml-colors.html"
+			>Color support for XML string resources in Android</a></string>
+	<string name="cf_resfont_fg_argb_code"><![CDATA[fgcolor="#FFFF0000"]]></string>
+	<string name="cf_resfont_fg_argb"><font fgcolor="#FFFF0000">text</font></string>
+	<string name="cf_resfont_fg_rgb_code"><![CDATA[fgcolor="#FF0000"]]></string>
+	<string name="cf_resfont_fg_rgb"><font fgcolor="#FF0000">text</font></string>
+	<string name="cf_resfont_fg_named_code"><![CDATA[fgcolor="red"]]></string>
+	<string name="cf_resfont_fg_named"><font fgcolor="red">text</font></string>
+	<string name="cf_resfont_fg_neg_code"><![CDATA[fgcolor="-#00010000"]]></string>
+	<string name="cf_resfont_fg_neg"><font fgcolor="-#00010000">text</font></string>
+	<string name="cf_resfont_fg_color_code"><![CDATA[fgcolor="@darker_gray"]]></string>
+	<string name="cf_resfont_fg_color"><font fgcolor="@darker_gray">text</font></string>
+	<string name="cf_resfont_col_argb_code"><![CDATA[color="#FFFF0000"]]></string>
+	<string name="cf_resfont_col_argb"><font color="#FFFF0000">text</font></string>
+	<string name="cf_resfont_col_rgb_code"><![CDATA[color="#FF0000"]]></string>
+	<string name="cf_resfont_col_rgb"><font color="#FF0000">text</font></string>
+	<string name="cf_resfont_col_neg_code"><![CDATA[color="-#00010000"]]></string>
+	<string name="cf_resfont_col_neg"><font color="-#00010000">text</font></string>
+	<string name="cf_resfont_col_named_code"><![CDATA[color="red"]]></string>
+	<string name="cf_resfont_col_named"><font color="red">text</font></string>
+	<string name="cf_resfont_col_color_code"><![CDATA[color="@darker_gray"]]></string>
+	<string name="cf_resfont_col_color"><font color="@darker_gray">text</font></string>
+	<string name="cf_resfont_col_all_named_code"><![CDATA[fgcolor="#FFFF0000"\ncolor="red"]]></string>
+	<string name="cf_resfont_col_all_named"><font fgcolor="#FFFF0000" color="red">text</font></string>
+	<string name="cf_resfont_col_all_semi_code"><![CDATA[fgcolor="#7FFF0000"]]></string>
+	<string name="cf_resfont_col_all_semi"><font fgcolor="#7FFF0000">text</font></string>
+	<string name="cf_resfont_col_old_code"><![CDATA[fgcolor="#FFFF0000"\ncolor="-#00010000"]]></string>
+	<string name="cf_resfont_col_old"><font fgcolor="#FFFF0000" color="-#00010000">text</font></string>
+	<string name="cf_resfont_html_code"><![CDATA[HTML\ncolor="#FF0000"]]></string>
+	<string name="cf_resfont_html"><![CDATA[<font color="#FF0000">text</font>]]></string>
 
 	<string name="cf_info_title">Color Filter Info</string>
 	<string name="cf_info_copy">Copy Code</string>

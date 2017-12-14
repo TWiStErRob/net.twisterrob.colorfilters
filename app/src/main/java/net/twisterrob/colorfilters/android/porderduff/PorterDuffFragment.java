@@ -6,6 +6,7 @@ import android.annotation.TargetApi;
 import android.content.SharedPreferences;
 import android.graphics.*;
 import android.os.*;
+import android.support.annotation.NonNull;
 import android.view.*;
 import android.widget.*;
 
@@ -54,7 +55,7 @@ public class PorterDuffFragment extends ColorFilterFragment {
 	}
 
 	@Override
-	protected ColorFilter createFilter() {
+	protected @NonNull ColorFilter createFilter() {
 		PorterDuff.Mode mode = MODES.get(modes.getChecked().getId());
 		return new PorterDuffColorFilter(currentColor, mode);
 	}
@@ -230,7 +231,7 @@ public class PorterDuffFragment extends ColorFilterFragment {
 	}
 
 	@Override
-	protected String generateCode() {
+	protected @NonNull String generateCode() {
 		int color = currentColor;
 		PorterDuff.Mode mode = MODES.get(modes.getChecked().getId());
 		String zeroX = colorToARGBHexString("0x", color) + ", PorterDuff.Mode." + mode.name(); //NON-NLS
