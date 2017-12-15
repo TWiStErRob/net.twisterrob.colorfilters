@@ -1,6 +1,7 @@
 package net.twisterrob.colorfilters.android.resources;
 
 import android.graphics.ColorFilter;
+import android.os.Build.*;
 import android.os.Bundle;
 import android.support.annotation.*;
 import android.text.*;
@@ -80,7 +81,7 @@ public class ResourceFontFragment extends ColorFilterFragment {
 
 		source.setText(getString(R.string.cf_resfont_html_code));
 		try {
-			CharSequence resultText = Html.fromHtml(getString(R.string.cf_resfont_html));
+			CharSequence resultText = fromHtml(R.string.cf_resfont_html);
 			resultBlack.setText(resultText);
 			resultWhite.setText(resultText);
 			resolved.setText(getColor(resultText));
@@ -88,6 +89,15 @@ public class ResourceFontFragment extends ColorFilterFragment {
 			setError(row, ex);
 		}
 		return row;
+	}
+
+	@SuppressWarnings("deprecation")
+	private CharSequence fromHtml(@StringRes int htmlRes) {
+		if (VERSION.SDK_INT < VERSION_CODES.N) {
+			return Html.fromHtml(getString(htmlRes));
+		} else {
+			return Html.fromHtml(getString(htmlRes), Html.FROM_HTML_MODE_LEGACY);
+		}
 	}
 
 	private TableRow createRow(TableLayout table, @StringRes int test) {

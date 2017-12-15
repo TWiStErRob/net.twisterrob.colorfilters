@@ -36,7 +36,6 @@
 			/>
 	</LinearLayout>
 
-	<!-- To make the layout editor work append EditMode at the end of the class name -->
 	<net.twisterrob.android.view.KeyboardView
 		android:id="@+id/keyboard"
 		android:layout_width="fill_parent"

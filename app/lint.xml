@@ -3,4 +3,5 @@
 	<issue id="UnusedAttribute" severity="ignore" />
 	<issue id="RtlHardcoded" severity="ignore" />
 	<issue id="IconDensities" severity="ignore" />
+	<issue id="TypographyQuotes" severity="ignore" />
 </lint>

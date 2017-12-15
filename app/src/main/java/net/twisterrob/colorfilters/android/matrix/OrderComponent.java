@@ -5,7 +5,9 @@ import android.content.SharedPreferences;
 import android.graphics.ColorMatrix;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Build.*;
 import android.view.*;
+import android.view.View.DragShadowBuilder;
 
 import net.twisterrob.colorfilters.android.R;
 
@@ -146,10 +148,16 @@ import net.twisterrob.colorfilters.android.R;
 	@SuppressLint("ClickableViewAccessibility")
 	private static class DragStartListener implements View.OnTouchListener {
 		public boolean onTouch(View view, MotionEvent motionEvent) {
-			if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-				return view.startDrag(null, new View.DragShadowBuilder(view), view, 0);
+			return motionEvent.getAction() == MotionEvent.ACTION_DOWN && startDragAndDrop(view);
+		}
+
+		@SuppressWarnings("deprecation")
+		private boolean startDragAndDrop(View view) {
+			if (VERSION.SDK_INT < VERSION_CODES.N) {
+				return view.startDrag(null, new DragShadowBuilder(view), view, 0);
+			} else {
+				return view.startDragAndDrop(null, new DragShadowBuilder(view), view, 0);
 			}
-			return false;
 		}
 	}
 
