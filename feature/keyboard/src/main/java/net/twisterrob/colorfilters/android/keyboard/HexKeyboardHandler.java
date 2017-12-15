@@ -6,10 +6,8 @@ import android.inputmethodservice.*;
 import android.view.Window;
 import android.widget.EditText;
 
-import net.twisterrob.android.view.KeyboardHandler;
-
-public class HexKeyboardHandler extends KeyboardHandler {
-	public HexKeyboardHandler(Window window, KeyboardView keyboardView) {
+public class HexKeyboardHandler extends BaseKeyboardHandler {
+	public HexKeyboardHandler(Window window, android.inputmethodservice.KeyboardView keyboardView) {
 		super(window, keyboardView);
 
 		keyboardView.setKeyboard(new Keyboard(keyboardView.getContext(), R.xml.keyboard_hex));

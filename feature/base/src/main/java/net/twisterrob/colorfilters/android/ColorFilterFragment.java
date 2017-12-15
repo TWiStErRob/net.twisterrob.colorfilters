@@ -17,8 +17,7 @@ import android.text.style.*;
 import android.view.*;
 import android.widget.Toast;
 
-import net.twisterrob.android.view.KeyboardHandler;
-import net.twisterrob.colorfilters.android.keyboard.KeyboardMode;
+import net.twisterrob.colorfilters.android.keyboard.*;
 import net.twisterrob.colorfilters.base.R;
 
 public abstract class ColorFilterFragment extends Fragment {
@@ -40,7 +39,7 @@ public abstract class ColorFilterFragment extends Fragment {
 		return listener.getKeyboard();
 	}
 
-	protected abstract KeyboardMode getPreferredKeyboardMode();
+	protected abstract KeyboardHandlerFactory getPreferredKeyboardMode();
 
 	@Override
 	public void onAttach(Context context) {

@@ -3,9 +3,7 @@ package net.twisterrob.colorfilters.android.keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.view.Window;
 
-import net.twisterrob.android.view.KeyboardHandler;
-
-public enum KeyboardMode {
+public enum KeyboardMode implements KeyboardHandlerFactory {
 	Hex {
 		@Override
 		public KeyboardHandler create(Window window, KeyboardView keyboardView) {
@@ -29,7 +27,5 @@ public enum KeyboardMode {
 		public KeyboardHandler create(Window window, KeyboardView keyboardView) {
 			return new NullKeyboardHandler(window, keyboardView);
 		}
-	};
-
-	public abstract KeyboardHandler create(Window window, KeyboardView keyboardView);
+	}
 }

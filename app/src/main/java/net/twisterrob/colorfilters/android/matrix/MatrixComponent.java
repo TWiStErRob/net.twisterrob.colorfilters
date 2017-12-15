@@ -10,9 +10,9 @@ import android.text.Editable;
 import android.view.View;
 import android.widget.EditText;
 
-import net.twisterrob.android.view.KeyboardHandler;
 import net.twisterrob.android.view.listeners.TextWatcherAdapter;
 import net.twisterrob.colorfilters.android.R;
+import net.twisterrob.colorfilters.android.keyboard.KeyboardHandler;
 
 class MatrixComponent extends Component {
 	private static final String PREF_MATRIX_ITEM = "Matrix/";

@@ -5,7 +5,7 @@ import android.view.*;
 import android.widget.EditText;
 
 public class FloatNavKeyboardHandler extends FloatKeyboardHandler {
-	public FloatNavKeyboardHandler(Window window, KeyboardView keyboardView) {
+	public FloatNavKeyboardHandler(Window window, android.inputmethodservice.KeyboardView keyboardView) {
 		super(window, keyboardView);
 
 		keyboardView.setKeyboard(new Keyboard(keyboardView.getContext(), R.xml.keyboard_floatnav));

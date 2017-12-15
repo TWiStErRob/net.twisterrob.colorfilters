@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.support.annotation.*;
 import android.view.*;
 
-import net.twisterrob.android.view.KeyboardHandler;
 import net.twisterrob.colorfilters.android.*;
-import net.twisterrob.colorfilters.android.keyboard.KeyboardMode;
+import net.twisterrob.colorfilters.android.R;
+import net.twisterrob.colorfilters.android.keyboard.*;
 
 import static net.twisterrob.colorfilters.android.matrix.Component.*;
 

@@ -1,4 +1,4 @@
-package net.twisterrob.android.view;
+package net.twisterrob.colorfilters.android.keyboard;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -13,12 +13,7 @@ import android.widget.EditText;
 
 // http://www.fampennings.nl/maarten/android/09keyboard/index.htm
 // http://forum.xda-developers.com/showthread.php?t=2497237
-public abstract class KeyboardHandler {
-	public interface CustomKeyboardListener {
-		void customKeyboardShown();
-
-		void customKeyboardHidden();
-	}
+public abstract class BaseKeyboardHandler implements KeyboardHandler {
 
 	private boolean haptic;
 	protected final Context context;
@@ -26,7 +21,7 @@ public abstract class KeyboardHandler {
 	protected final KeyboardView keyboardView;
 	private CustomKeyboardListener listener;
 
-	public KeyboardHandler(Window window, KeyboardView keyboardView) {
+	public BaseKeyboardHandler(Window window, KeyboardView keyboardView) {
 		this.window = window;
 		this.context = keyboardView.getContext().getApplicationContext();
 		this.keyboardView = keyboardView;

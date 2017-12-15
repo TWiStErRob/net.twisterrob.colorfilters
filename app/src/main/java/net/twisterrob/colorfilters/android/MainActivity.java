@@ -17,9 +17,8 @@ import android.widget.ArrayAdapter;
 
 import static android.provider.MediaStore.*;
 
-import net.twisterrob.android.view.KeyboardHandler;
 import net.twisterrob.colorfilters.android.image.*;
-import net.twisterrob.colorfilters.android.keyboard.KeyboardMode;
+import net.twisterrob.colorfilters.android.keyboard.*;
 import net.twisterrob.colorfilters.android.lighting.LightingFragment;
 import net.twisterrob.colorfilters.android.matrix.MatrixFragment;
 import net.twisterrob.colorfilters.android.palette.PaletteFragment;
@@ -255,7 +254,7 @@ public class MainActivity extends AppCompatActivity implements ColorFilterFragme
 		if (kbd == null) {
 			ColorFilterFragment fragment = getCurrentFragment();
 			if (fragment != null) {
-				KeyboardMode mode = fragment.getPreferredKeyboardMode();
+				KeyboardHandlerFactory mode = fragment.getPreferredKeyboardMode();
 				if (!getPrefs().getBoolean(getString(R.string.cf_pref_keyboard), false)) {
 					mode = KeyboardMode.NATIVE;
 				}

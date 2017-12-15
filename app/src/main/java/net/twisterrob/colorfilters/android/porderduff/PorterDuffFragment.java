@@ -14,7 +14,8 @@ import net.twisterrob.android.view.*;
 import net.twisterrob.android.view.color.ColorPickerView;
 import net.twisterrob.android.view.listeners.*;
 import net.twisterrob.colorfilters.android.*;
-import net.twisterrob.colorfilters.android.keyboard.KeyboardMode;
+import net.twisterrob.colorfilters.android.R;
+import net.twisterrob.colorfilters.android.keyboard.*;
 
 public class PorterDuffFragment extends ColorFilterFragment {
 	private static final String PREF_PORTERDUFF_COLOR = "PorterDuffColorFilter.color";

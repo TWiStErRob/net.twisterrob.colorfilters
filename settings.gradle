@@ -2,5 +2,5 @@ rootProject.name = 'ColorFilters'
 
 include ':app'
 include ':feature:base'
-include ':feature:keyboard'
+include ':feature:keyboard', ':feature:keyboard-contract'
 include ':feature:lighting'

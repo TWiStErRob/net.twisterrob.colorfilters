@@ -7,11 +7,10 @@ import android.support.annotation.*;
 import android.view.*;
 import android.widget.*;
 
-import net.twisterrob.android.view.KeyboardHandler;
 import net.twisterrob.android.view.color.ColorPickerView;
 import net.twisterrob.android.view.listeners.TextWatcherAdapter;
-import net.twisterrob.colorfilters.android.*;
-import net.twisterrob.colorfilters.android.keyboard.KeyboardMode;
+import net.twisterrob.colorfilters.android.ColorFilterFragment;
+import net.twisterrob.colorfilters.android.keyboard.*;
 
 public class LightingFragment extends ColorFilterFragment {
 	private static final String PREF_LIGHTING_MUL = "LightingColorFilter.mul";

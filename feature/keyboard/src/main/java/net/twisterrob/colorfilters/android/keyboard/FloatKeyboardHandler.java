@@ -5,10 +5,8 @@ import android.text.Editable;
 import android.view.Window;
 import android.widget.EditText;
 
-import net.twisterrob.android.view.KeyboardHandler;
-
-public class FloatKeyboardHandler extends KeyboardHandler {
-	public FloatKeyboardHandler(Window window, KeyboardView keyboardView) {
+public class FloatKeyboardHandler extends BaseKeyboardHandler {
+	public FloatKeyboardHandler(Window window, android.inputmethodservice.KeyboardView keyboardView) {
 		super(window, keyboardView);
 
 		keyboardView.setKeyboard(new Keyboard(keyboardView.getContext(), R.xml.keyboard_float));

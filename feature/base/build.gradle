@@ -2,7 +2,7 @@ apply plugin: 'net.twisterrob.android-library'
 
 dependencies {
 
-	compile project(':feature:keyboard')
+	compile project(':feature:keyboard-contract')
 
 	compile "com.android.support:appcompat-v7:${VERSION_SUPPORT}"
 }

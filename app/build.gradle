@@ -8,6 +8,7 @@ repositories {
 
 dependencies {
 	compile project(':feature:lighting')
+	compile project(':feature:keyboard')
 }
 
 dependencies {

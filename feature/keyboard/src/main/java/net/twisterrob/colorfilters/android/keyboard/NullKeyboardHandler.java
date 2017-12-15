@@ -4,12 +4,10 @@ import android.inputmethodservice.*;
 import android.view.*;
 import android.widget.EditText;
 
-import net.twisterrob.android.view.KeyboardHandler;
-
-public class NullKeyboardHandler extends KeyboardHandler {
+public class NullKeyboardHandler extends BaseKeyboardHandler {
 	private static int originalInputMode;
 
-	public NullKeyboardHandler(Window window, KeyboardView keyboardView) {
+	public NullKeyboardHandler(Window window, android.inputmethodservice.KeyboardView keyboardView) {
 		super(saveInputMode(window), keyboardView);
 		window.setSoftInputMode(originalInputMode);
 

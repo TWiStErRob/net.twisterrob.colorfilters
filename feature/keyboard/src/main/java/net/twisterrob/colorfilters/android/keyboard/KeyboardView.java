@@ -1,4 +1,4 @@
-package net.twisterrob.android.view;
+package net.twisterrob.colorfilters.android.keyboard;
 
 import android.content.Context;
 import android.graphics.Canvas;

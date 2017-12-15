@@ -15,10 +15,10 @@ import android.view.*;
 import android.widget.*;
 import android.widget.AdapterView.*;
 
-import net.twisterrob.android.view.KeyboardHandler;
 import net.twisterrob.android.view.listeners.*;
 import net.twisterrob.colorfilters.android.*;
-import net.twisterrob.colorfilters.android.keyboard.KeyboardMode;
+import net.twisterrob.colorfilters.android.R;
+import net.twisterrob.colorfilters.android.keyboard.*;
 
 public class PaletteFragment extends ColorFilterFragment {
 	private static final String PREF_PALETTE_NUMCOLORS = "Palette.numColors";
