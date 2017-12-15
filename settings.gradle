@@ -1,3 +1,5 @@
 rootProject.name = 'ColorFilters'
 
 include ':app'
+include ':feature:base'
+include ':feature:lighting'

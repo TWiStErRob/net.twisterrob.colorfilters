@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import net.twisterrob.android.view.KeyboardHandler;
 import net.twisterrob.colorfilters.android.keyboard.KeyboardMode;
+import net.twisterrob.colorfilters.base.R;
 
 public abstract class ColorFilterFragment extends Fragment {
 	public interface Listener {
@@ -65,20 +66,20 @@ public abstract class ColorFilterFragment extends Fragment {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case R.id.action_info:
-				displayHelp();
-				return true;
-			case R.id.action_share:
-				Uri image = listener.renderCurrentView(getString(R.string.cf_share_subject), generateCode());
+		int itemId = item.getItemId();
+		if (itemId == R.id.action_info) {
+			displayHelp();
+			return true;
+		} else if (itemId == R.id.action_share) {
+			Uri image = listener.renderCurrentView(getString(R.string.cf_share_subject), generateCode());
 
-				Intent intent = new Intent(Intent.ACTION_SEND);
-				intent.setType("image/jpeg"); //NON-NLS
-				intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.cf_share_subject));
-				intent.putExtra(Intent.EXTRA_TEXT, getSharedText());
-				intent.putExtra(Intent.EXTRA_STREAM, image);
-				startActivity(Intent.createChooser(intent, getText(R.string.cf_share_picker_title)));
-				return true;
+			Intent intent = new Intent(Intent.ACTION_SEND);
+			intent.setType("image/jpeg"); //NON-NLS
+			intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.cf_share_subject));
+			intent.putExtra(Intent.EXTRA_TEXT, getSharedText());
+			intent.putExtra(Intent.EXTRA_STREAM, image);
+			startActivity(Intent.createChooser(intent, getText(R.string.cf_share_picker_title)));
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}

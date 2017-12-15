@@ -6,7 +6,7 @@ import android.view.Window;
 import android.widget.EditText;
 
 import net.twisterrob.android.view.KeyboardHandler;
-import net.twisterrob.colorfilters.android.R;
+import net.twisterrob.colorfilters.base.R;
 
 public class FloatKeyboardHandler extends KeyboardHandler {
 	public FloatKeyboardHandler(Window window, KeyboardView keyboardView) {

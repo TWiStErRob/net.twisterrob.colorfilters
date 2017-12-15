@@ -1,0 +1,6 @@
+apply plugin: 'net.twisterrob.android-library'
+
+dependencies {
+
+	compile "com.android.support:appcompat-v7:${VERSION_SUPPORT}"
+}

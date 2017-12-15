@@ -5,7 +5,7 @@ import android.view.*;
 import android.widget.EditText;
 
 import net.twisterrob.android.view.KeyboardHandler;
-import net.twisterrob.colorfilters.android.R;
+import net.twisterrob.colorfilters.base.R;
 
 public class NullKeyboardHandler extends KeyboardHandler {
 	private static int originalInputMode;

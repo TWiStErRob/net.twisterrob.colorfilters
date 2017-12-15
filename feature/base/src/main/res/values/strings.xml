@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<string name="cf_reset_cd">reset color</string>
+
+	<string name="cf_info_title">Color Filter Info</string>
+	<string name="cf_info_copy">Copy Code</string>
+	<string name="cf_info_ok">Thanks</string>
+	<string name="cf_info_copy_toast">Copied to clipboard</string>
+	<string name="cf_info_copy_toast_arg">%s copied to clipboard</string>
+	<string name="cf_info_code">Here\'s the current code:</string>
+
+	<string name="cf_share_title">Share</string>
+	<string name="cf_share_picker_title">Share Color Filter</string>
+	<string name="cf_share_text">Look, what an awesome Color Filter I found!</string>
+	<string name="cf_share_subject">Effect created by Color Filters</string>
+</resources>

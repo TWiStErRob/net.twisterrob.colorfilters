@@ -7,12 +7,18 @@ repositories {
 }
 
 dependencies {
+	compile project(':feature:lighting')
+}
+
+dependencies {
 	compile "com.android.support:support-v4:${VERSION_SUPPORT}"
 	compile "com.android.support:appcompat-v7:${VERSION_SUPPORT}"
 	compile "com.android.support:palette-v7:${VERSION_SUPPORT}"
 
 	compile "com.github.bumptech.glide:glide:${VERSION_GLIDE}"
+}
 
+dependencies {
 	androidTestCompile("com.android.support.test:runner:${VERSION_ESPRESSO_RUNNER}") {
 		exclude group: 'com.android.support'
 	}

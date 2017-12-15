@@ -7,7 +7,7 @@ import android.view.Window;
 import android.widget.EditText;
 
 import net.twisterrob.android.view.KeyboardHandler;
-import net.twisterrob.colorfilters.android.R;
+import net.twisterrob.colorfilters.base.R;
 
 public class HexKeyboardHandler extends KeyboardHandler {
 	public HexKeyboardHandler(Window window, KeyboardView keyboardView) {

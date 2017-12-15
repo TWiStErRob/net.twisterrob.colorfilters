@@ -4,7 +4,7 @@ import android.inputmethodservice.*;
 import android.view.*;
 import android.widget.EditText;
 
-import net.twisterrob.colorfilters.android.R;
+import net.twisterrob.colorfilters.base.R;
 
 public class FloatNavKeyboardHandler extends FloatKeyboardHandler {
 	public FloatNavKeyboardHandler(Window window, KeyboardView keyboardView) {
