@@ -7,7 +7,6 @@ import android.view.Window;
 import android.widget.EditText;
 
 import net.twisterrob.android.view.KeyboardHandler;
-import net.twisterrob.colorfilters.base.R;
 
 public class HexKeyboardHandler extends KeyboardHandler {
 	public HexKeyboardHandler(Window window, KeyboardView keyboardView) {
@@ -55,7 +54,7 @@ public class HexKeyboardHandler extends KeyboardHandler {
 		private /*static*/ final char[] NEGATE = {
 		            /*0x0?*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 		            /*0x1?*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-	                /*0x2?*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		            /*0x2?*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                     /*0x3?*/ 'F', 'E', 'D', 'C', 'B', 'A', '9', '8', '7', '6', 0, 0, 0, 0, 0, 0,
                     /*0x4?*/ 0, '5', '4', '3', '2', '1', '0', 0, 0, 0, 0, 0, 0, 0, 0, 0,
                     /*0x5?*/ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,

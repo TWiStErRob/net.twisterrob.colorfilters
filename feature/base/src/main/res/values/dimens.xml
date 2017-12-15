@@ -2,6 +2,4 @@
 <resources>
 	<dimen name="margin">4dp</dimen>
 	<dimen name="activity_margin">8dp</dimen>
-	<dimen name="keySize">48dp</dimen>
-	<dimen name="keySize2">96dp</dimen>
 </resources>
