@@ -1,4 +1,4 @@
-package net.twisterrob.colorfilters.android;
+package net.twisterrob.colorfilters.android.about;
 
 import android.annotation.SuppressLint;
 import android.app.*;
@@ -35,20 +35,24 @@ public class AboutActivity extends ListActivity {
 				intent.setData(Uri.parse("mailto:" + BuildConfig.EMAIL));
 				intent.putExtra(Intent.EXTRA_EMAIL, new String[] {BuildConfig.EMAIL});
 				intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.cf_about_feedback_subject,
-						getString(R.string.app_name)));
+						getString(getApplicationInfo().labelRes)));
 				intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.cf_about_feedback_body,
 						BuildConfig.APPLICATION_ID, BuildConfig.VERSION_NAME));
 				startActivity(intent);
 			}
 		});
 		TextView name = (TextView)findViewById(R.id.about_name);
+		name.setText(getApplicationInfo().labelRes);
 		name.setSelected(true);
 		TextView version = (TextView)findViewById(R.id.about_version);
 		version.setText(getString(R.string.cf_about_version, BuildConfig.VERSION_NAME));
 		TextView pkg = (TextView)findViewById(R.id.about_package);
+		pkg.setText(getApplicationContext().getPackageName());
 		version.setSelected(true);
 		pkg.setSelected(true);
 		pkg.setVisibility(getResources().getBoolean(R.bool.in_test)? View.VISIBLE : View.GONE);
+		ImageView icon = (ImageView)findViewById(R.id.about_icon);
+		icon.setImageResource(getApplicationInfo().icon);
 	}
 
 	@Override

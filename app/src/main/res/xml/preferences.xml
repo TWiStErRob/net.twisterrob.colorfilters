@@ -11,7 +11,7 @@
 		android:summary="@string/app_name"
 		>
 		<intent
-			android:targetClass="net.twisterrob.colorfilters.android.AboutActivity"
+			android:targetClass="net.twisterrob.colorfilters.android.about.AboutActivity"
 			android:targetPackage="@string/app_package"
 			/>
 	</Preference>

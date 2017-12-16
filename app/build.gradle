@@ -13,6 +13,7 @@ dependencies {
 	compile project(':feature:palette')
 	compile project(':feature:resfont')
 	compile project(':feature:keyboard')
+	compile project(':feature:about')
 }
 
 dependencies {

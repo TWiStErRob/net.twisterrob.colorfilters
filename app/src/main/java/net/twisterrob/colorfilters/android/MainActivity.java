@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 
 import static android.provider.MediaStore.*;
 
+import net.twisterrob.colorfilters.android.about.AboutActivity;
 import net.twisterrob.colorfilters.android.image.*;
 import net.twisterrob.colorfilters.android.keyboard.*;
 import net.twisterrob.colorfilters.android.lighting.LightingFragment;

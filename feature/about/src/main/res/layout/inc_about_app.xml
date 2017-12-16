@@ -20,9 +20,9 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_horizontal"
-			android:text="@string/app_name"
 			android:gravity="center"
 			android:singleLine="true"
+			tools:text="\@string/app_name"
 			/>
 		<TextView
 			android:id="@+id/about_version"
@@ -37,9 +37,9 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_horizontal"
-			android:text="@string/app_package"
 			android:gravity="center"
 			android:visibility="gone"
+			tools:text="\@string/app_package"
 			tools:visibility="visible"
 			/>
 		<TextView
@@ -53,12 +53,13 @@
 			/>
 	</LinearLayout>
 	<ImageView
+		android:id="@+id/about_icon"
 		android:layout_width="144dp"
 		android:layout_height="144dp"
 		android:layout_margin="@dimen/margin"
 		android:layout_centerVertical="true"
 		android:layout_toLeftOf="@id/about_app"
-		android:src="@drawable/ic_launcher"
-		tools:ignore="ContentDescription"
+		android:contentDescription="@null"
+		tools:src="@android:drawable/sym_def_app_icon"
 		/>
 </RelativeLayout>

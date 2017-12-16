@@ -31,7 +31,7 @@
 			/>
 
 		<activity
-			android:name=".AboutActivity"
+			android:name=".about.AboutActivity"
 			android:label="@string/cf_about_title"
 			android:exported="false"
 			/>
