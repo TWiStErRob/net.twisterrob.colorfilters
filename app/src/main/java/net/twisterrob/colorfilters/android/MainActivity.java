@@ -23,7 +23,7 @@ import net.twisterrob.colorfilters.android.keyboard.*;
 import net.twisterrob.colorfilters.android.lighting.LightingFragment;
 import net.twisterrob.colorfilters.android.matrix.MatrixFragment;
 import net.twisterrob.colorfilters.android.palette.PaletteFragment;
-import net.twisterrob.colorfilters.android.porderduff.PorterDuffFragment;
+import net.twisterrob.colorfilters.android.porterduff.PorterDuffFragment;
 import net.twisterrob.colorfilters.android.resources.ResourceFontFragment;
 
 public class MainActivity extends AppCompatActivity implements ColorFilterFragment.Listener, ImageFragment.Listener {
