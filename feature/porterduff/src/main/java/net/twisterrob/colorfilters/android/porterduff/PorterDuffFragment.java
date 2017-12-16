@@ -1,4 +1,4 @@
-package net.twisterrob.colorfilters.android.porderduff;
+package net.twisterrob.colorfilters.android.porterduff;
 
 import java.util.*;
 
@@ -10,10 +10,10 @@ import android.support.annotation.NonNull;
 import android.view.*;
 import android.widget.*;
 
-import net.twisterrob.android.view.*;
+import net.twisterrob.android.view.CheckableButtonManager;
 import net.twisterrob.android.view.color.ColorPickerView;
 import net.twisterrob.android.view.listeners.*;
-import net.twisterrob.colorfilters.android.*;
+import net.twisterrob.colorfilters.android.ColorFilterFragment;
 import net.twisterrob.colorfilters.android.keyboard.*;
 
 public class PorterDuffFragment extends ColorFilterFragment {
