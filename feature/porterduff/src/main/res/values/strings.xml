@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources><!-- Supported HTML: StringBlock.get -->
+
+	<string name="cf_porterduff_title">Porter/Duff</string>
+	<string name="cf_porterduff_info_title">PorterDuffColorFilter(color, mode)</string>
+	<string name="cf_porterduff_info">This is a color filter uses the specified <tt>color</tt> and porter-duff <tt>mode</tt>.</string>
+
+</resources>

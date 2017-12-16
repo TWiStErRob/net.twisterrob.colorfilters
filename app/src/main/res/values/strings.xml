@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><!-- Supported HTML: StringBlock.get -->
+<resources>
 	<string name="app_name">Color Filters</string>
 
 	<string name="cf_image_action">Change image</string>
@@ -7,110 +7,10 @@
 	<string name="cf_image_original_cd">Original image</string>
 	<string name="cf_image_preview_cd">Preview image</string>
 
-	<string name="cf_porterduff_title">Porter/Duff</string>
-	<string name="cf_porterduff_info_title">PorterDuffColorFilter(color, mode)</string>
-	<string name="cf_porterduff_info">This is a color filter uses the specified <tt>color</tt> and porter-duff <tt>mode</tt>.</string>
-
-	<string name="cf_matrix_title">Color Matrix</string>
-	<string name="cf_matrix_info_title">ColorMatrixColorFilter(matrix)</string>
-	<string name="cf_matrix_info">This is a color filter that transforms colors through a 4x5 color <tt>matrix</tt>.
-        \n\nThe <tt>matrix</tt> is copied into the filter, so changes made to it after the filter is constructed will not be reflected in the filter.
-    </string>
-	<string name="cf_matrix_R"><font fgcolor="#FFFF0000" color="-#010000">R</font>:</string>
-	<string name="cf_matrix_G"><font fgcolor="#FF00FF00" color="-#FF0100">G</font>:</string>
-	<string name="cf_matrix_B"><font fgcolor="#FF0000FF" color="-#FFFF01">B</font>:</string>
-	<string name="cf_matrix_A"><font fgcolor="#FF000000" color="-#FFFFFF">A</font>:</string>
-	<string name="cf_matrix_cR">c<font fgcolor="#FFFF0000" color="-#010000">R</font></string>
-	<string name="cf_matrix_cG">c<font fgcolor="#FF00FF00" color="-#FF0100">G</font></string>
-	<string name="cf_matrix_cB">c<font fgcolor="#FF0000FF" color="-#FFFF01">B</font></string>
-	<string name="cf_matrix_cA">c<font fgcolor="#FF000000" color="-#FFFFFF">A</font></string>
-	<string name="cf_matrix_add">+</string>
-	<string name="cf_matrix_sR">S<sub><small><font fgcolor="#FFFF0000" color="-#010000">R</font></small></sub></string>
-	<string name="cf_matrix_sG">S<sub><small><font fgcolor="#FF00FF00" color="-#FF0100">G</font></small></sub></string>
-	<string name="cf_matrix_sB">S<sub><small><font fgcolor="#FF0000FF" color="-#FFFF01">B</font></small></sub></string>
-	<string name="cf_matrix_sA">S<sub><small><font fgcolor="#FF000000" color="-#FFFFFF">A</font></small></sub></string>
-	<string name="cf_matrix_rR">R<sub><small><font fgcolor="#FFFF0000" color="-#010000">R</font></small></sub></string>
-	<string name="cf_matrix_rG">R<sub><small><font fgcolor="#FF00FF00" color="-#FF0100">G</font></small></sub></string>
-	<string name="cf_matrix_rB">R<sub><small><font fgcolor="#FF0000FF" color="-#FFFF01">B</font></small></sub></string>
-	<string name="cf_matrix_sat">S<sub><small><small><font fgcolor="#FF000000" color="-#FFFFFF">sat</font></small></small></sub></string>
-	<string name="cf_matrix_S">S<sub><small><small><small><small><font fgcolor="#FFFF0000" color="-#010000">R</font><font fgcolor="#FF00FF00" color="-#FF0100">G</font><font fgcolor="#FF0000FF" color="-#FFFF01">B</font><font fgcolor="#FF000000" color="-#FFFFFF">A</font></small></small></small></small></sub></string>
-
-	<string name="cf_palette_title">Palette</string>
-	<string name="cf_palette_info_title">Palette.from(Bitmap)….generate()</string>
-	<string name="cf_palette_info">Extracts prominent colors from an image.
-		A number of colors with different profiles are extracted from the image:
-			\n&#8195;&#8226;&#8194;Vibrant
-			\n&#8195;&#8226;&#8194;Vibrant Dark
-			\n&#8195;&#8226;&#8194;Vibrant Light
-			\n&#8195;&#8226;&#8194;Muted
-			\n&#8195;&#8226;&#8194;Muted Dark
-			\n&#8195;&#8226;&#8194;Muted Light
-			\n&#8195;&#8226;&#8194;others via <tt>getSwatches()</tt>
-		\n\nYou can specify the maximum number of color swatches extracted from which the above six named ones are selected.
-		Good values for <tt>maximumColorCount</tt> depend on the source image type.
-		For landscapes, a good values are in the range 12&#8211;16.
-		For images which are largely made up of people\'s faces then this value should be increased to 24&#8211;32.
-		The default <tt>maximumColorCount</tt> is 16.
-		The number of returned swatches may be less than <tt>maximumColorCount</tt>, but at least one is always returned.
-		Not all of the above named ones are guaranteed to be found.
-		\n\nA swatch consists of a main background color and two text colors.
-		The text colors are guaranteed to have sufficient contrast when drawn over the background color.
-		\n\nYou can also specify the size of the image from which the palette is generated. The default is 192px.
-		If the bitmap\'s largest dimension is greater than <tt>resizeBitmapSize</tt>, then the bitmap will be resized so that it\'s largest dimension matches the value.
-		If the bitmap is smaller or equal, the original is used as-is.
-		\n<tt>resizeBitmapSize</tt> has a large effect on the processing time. The larger the resized image is, the greater time it will take to generate the palette.
-		The smaller the image is, the more detail is lost in the resulting image and thus less precision for color selection.
-	</string>
-
-	<string name="cf_resfont_title">String Resources</string>
-	<string name="cf_resfont_info_title"><![CDATA[<font color="…">]]></string>
-	<string name="cf_resfont_info">See my blog post:
-		<a href="http://www.twisterrob.net/blog/2016/09/android-xml-colors.html"
-			>Color support for XML string resources in Android</a></string>
-	<string name="cf_resfont_fg_argb_code"><![CDATA[fgcolor="#FFFF0000"]]></string>
-	<string name="cf_resfont_fg_argb"><font fgcolor="#FFFF0000">text</font></string>
-	<string name="cf_resfont_fg_rgb_code"><![CDATA[fgcolor="#FF0000"]]></string>
-	<string name="cf_resfont_fg_rgb"><font fgcolor="#FF0000">text</font></string>
-	<string name="cf_resfont_fg_named_code"><![CDATA[fgcolor="red"]]></string>
-	<string name="cf_resfont_fg_named"><font fgcolor="red">text</font></string>
-	<string name="cf_resfont_fg_neg_code"><![CDATA[fgcolor="-#00010000"]]></string>
-	<string name="cf_resfont_fg_neg"><font fgcolor="-#00010000">text</font></string>
-	<string name="cf_resfont_fg_color_code"><![CDATA[fgcolor="@darker_gray"]]></string>
-	<string name="cf_resfont_fg_color"><font fgcolor="@darker_gray">text</font></string>
-	<string name="cf_resfont_col_argb_code"><![CDATA[color="#FFFF0000"]]></string>
-	<string name="cf_resfont_col_argb"><font color="#FFFF0000">text</font></string>
-	<string name="cf_resfont_col_rgb_code"><![CDATA[color="#FF0000"]]></string>
-	<string name="cf_resfont_col_rgb"><font color="#FF0000">text</font></string>
-	<string name="cf_resfont_col_neg_code"><![CDATA[color="-#00010000"]]></string>
-	<string name="cf_resfont_col_neg"><font color="-#00010000">text</font></string>
-	<string name="cf_resfont_col_named_code"><![CDATA[color="red"]]></string>
-	<string name="cf_resfont_col_named"><font color="red">text</font></string>
-	<string name="cf_resfont_col_color_code"><![CDATA[color="@darker_gray"]]></string>
-	<string name="cf_resfont_col_color"><font color="@darker_gray">text</font></string>
-	<string name="cf_resfont_col_all_named_code"><![CDATA[fgcolor="#FFFF0000"\ncolor="red"]]></string>
-	<string name="cf_resfont_col_all_named"><font fgcolor="#FFFF0000" color="red">text</font></string>
-	<string name="cf_resfont_col_all_semi_code"><![CDATA[fgcolor="#7FFF0000"]]></string>
-	<string name="cf_resfont_col_all_semi"><font fgcolor="#7FFF0000">text</font></string>
-	<string name="cf_resfont_col_old_code"><![CDATA[fgcolor="#FFFF0000"\ncolor="-#00010000"]]></string>
-	<string name="cf_resfont_col_old"><font fgcolor="#FFFF0000" color="-#00010000">text</font></string>
-	<string name="cf_resfont_html_code"><![CDATA[HTML\ncolor="#FF0000"]]></string>
-	<string name="cf_resfont_html"><![CDATA[<font color="#FF0000">text</font>]]></string>
-
-	<string name="cf_info_title">Color Filter Info</string>
-	<string name="cf_info_copy">Copy Code</string>
-	<string name="cf_info_ok">Thanks</string>
-	<string name="cf_info_copy_toast">Copied to clipboard</string>
-	<string name="cf_info_copy_toast_arg">%s copied to clipboard</string>
-	<string name="cf_info_code">Here\'s the current code:</string>
-
 	<string name="cf_pref_title">Settings</string>
 	<string name="cf_pref_keyboard" translatable="false">pref_keyboard</string>
 	<string name="cf_pref_keyboard_title">Experimental Keyboards</string>
 	<string name="cf_pref_keyboard_info">Use special built-in keyboards for color and floating point number inputs.</string>
 	<string name="cf_pref_keyboard_default">true</string>
 
-	<string name="cf_share_title">Share</string>
-	<string name="cf_share_picker_title">Share Color Filter</string>
-	<string name="cf_share_text">Look, what an awesome Color Filter I found!</string>
-	<string name="cf_share_subject">Effect created by Color Filters</string>
 </resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources><!-- Supported HTML: StringBlock.get -->
+
+	<string name="cf_matrix_title">Color Matrix</string>
+	<string name="cf_matrix_info_title">ColorMatrixColorFilter(matrix)</string>
+	<string name="cf_matrix_info">This is a color filter that transforms colors through a 4x5 color <tt>matrix</tt>.
+        \n\nThe <tt>matrix</tt> is copied into the filter, so changes made to it after the filter is constructed will not be reflected in the filter.
+    </string>
+	<string name="cf_matrix_R"><font fgcolor="#FFFF0000" color="-#010000">R</font>:</string>
+	<string name="cf_matrix_G"><font fgcolor="#FF00FF00" color="-#FF0100">G</font>:</string>
+	<string name="cf_matrix_B"><font fgcolor="#FF0000FF" color="-#FFFF01">B</font>:</string>
+	<string name="cf_matrix_A"><font fgcolor="#FF000000" color="-#FFFFFF">A</font>:</string>
+	<string name="cf_matrix_cR">c<font fgcolor="#FFFF0000" color="-#010000">R</font></string>
+	<string name="cf_matrix_cG">c<font fgcolor="#FF00FF00" color="-#FF0100">G</font></string>
+	<string name="cf_matrix_cB">c<font fgcolor="#FF0000FF" color="-#FFFF01">B</font></string>
+	<string name="cf_matrix_cA">c<font fgcolor="#FF000000" color="-#FFFFFF">A</font></string>
+	<string name="cf_matrix_add">+</string>
+	<string name="cf_matrix_sR">S<sub><small><font fgcolor="#FFFF0000" color="-#010000">R</font></small></sub></string>
+	<string name="cf_matrix_sG">S<sub><small><font fgcolor="#FF00FF00" color="-#FF0100">G</font></small></sub></string>
+	<string name="cf_matrix_sB">S<sub><small><font fgcolor="#FF0000FF" color="-#FFFF01">B</font></small></sub></string>
+	<string name="cf_matrix_sA">S<sub><small><font fgcolor="#FF000000" color="-#FFFFFF">A</font></small></sub></string>
+	<string name="cf_matrix_rR">R<sub><small><font fgcolor="#FFFF0000" color="-#010000">R</font></small></sub></string>
+	<string name="cf_matrix_rG">R<sub><small><font fgcolor="#FF00FF00" color="-#FF0100">G</font></small></sub></string>
+	<string name="cf_matrix_rB">R<sub><small><font fgcolor="#FF0000FF" color="-#FFFF01">B</font></small></sub></string>
+	<string name="cf_matrix_sat">S<sub><small><small><font fgcolor="#FF000000" color="-#FFFFFF">sat</font></small></small></sub></string>
+	<string name="cf_matrix_S">S<sub><small><small><small><small><font fgcolor="#FFFF0000" color="-#010000">R</font><font fgcolor="#FF00FF00" color="-#FF0100">G</font><font fgcolor="#FF0000FF" color="-#FFFF01">B</font><font fgcolor="#FF000000" color="-#FFFFFF">A</font></small></small></small></small></sub></string>
+
+</resources>

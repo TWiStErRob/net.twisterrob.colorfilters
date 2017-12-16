@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<style name="matrix">
+		<item name="android:layout_width">0dp</item>
+		<item name="android:layout_height">30sp</item>
+		<item name="android:padding">0dp</item>
+		<item name="android:gravity">center</item>
+		<item name="android:inputType">number|numberSigned|numberDecimal</item>
+		<item name="android:maxLength">6</item>
+		<item name="android:textSize">12sp</item>
+	</style>
+
+	<style name="slider_label">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:gravity">right|center_vertical</item>
+		<!-- TODO make it smaller by lifting it? so it doesn't push sliders around-->
+		<item name="android:lineSpacingExtra">4dp</item>
+		<item name="android:textSize">14sp</item>
+	</style>
+
+	<style name="slider_value">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:gravity">right|center_vertical</item>
+		<item name="android:selectable">true</item>
+		<item name="android:textSize">12sp</item>
+		<item name="android:minEms">2</item>
+	</style>
+
+	<style name="matrix_label">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_gravity">center</item>
+	</style>
+
+	<style name="matrix_component">
+		<item name="android:layout_width">0sp</item>
+		<item name="android:layout_height">48sp</item>
+		<item name="android:layout_weight">1</item>
+		<item name="android:layout_gravity">center</item>
+		<item name="android:background">@drawable/matrix_order_component</item>
+	</style>
+
+	<style name="matrix_component_label">
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">fill_parent</item>
+		<item name="android:layout_gravity">center</item>
+		<item name="android:gravity">center</item>
+		<item name="android:textColor">#ffff</item>
+		<item name="android:textSize">24sp</item>
+	</style>
+
+	<style name="matrix_slider">
+		<item name="android:layout_width">0dp</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_weight">1</item>
+		<item name="android:focusable">true</item>
+		<item name="android:focusableInTouchMode">true</item>
+		<item name="android:thumb">@drawable/thumb</item>
+		<item name="android:thumbOffset">10dp</item>
+		<item name="android:paddingLeft">10dp</item>
+		<item name="android:paddingRight">10dp</item>
+	</style>
+
+	<style name="matrix_slider_R" parent="matrix_slider">
+		<item name="android:max">360</item>
+	</style>
+
+	<style name="wide">
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+	</style>
+
+	<style name="perpendicularOrientation">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:orientation">horizontal</item>
+	</style>
+
+</resources>

@@ -8,13 +8,16 @@ repositories {
 
 dependencies {
 	compile project(':feature:lighting')
+	compile project(':feature:porterduff')
+	compile project(':feature:matrix')
+	compile project(':feature:palette')
+	compile project(':feature:resfont')
 	compile project(':feature:keyboard')
 }
 
 dependencies {
 	compile "com.android.support:support-v4:${VERSION_SUPPORT}"
 	compile "com.android.support:appcompat-v7:${VERSION_SUPPORT}"
-	compile "com.android.support:palette-v7:${VERSION_SUPPORT}"
 
 	compile "com.github.bumptech.glide:glide:${VERSION_GLIDE}"
 }

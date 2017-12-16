@@ -1,0 +1,7 @@
+apply plugin: 'net.twisterrob.android-library'
+
+dependencies {
+
+	compile project(':feature:base')
+	compile project(':feature:keyboard')
+}

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">Color Filters</string>
 
 	<string name="cf_lighting_title">Lighting</string>
 	<string name="cf_lighting_info_title">LightingColorFilter(mul, add)</string>
@@ -9,4 +8,5 @@
         by one color (<tt>mul</tt>), and then adds a second color (<tt>add</tt>), pinning the result for each component to <tt>[0..255]</tt>.
         \n\nThe alpha components of the <tt>mul</tt> and <tt>add</tt> arguments are ignored.
     </string>
+
 </resources>
