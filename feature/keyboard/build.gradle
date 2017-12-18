@@ -2,7 +2,6 @@ apply plugin: 'net.twisterrob.android-library'
 
 dependencies {
 
-	// TODO move KeyboardMode into contract and replace hard dependency on :feature:keyboard in features
 	api project(':feature:keyboard-contract')
 
 	implementation "com.android.support:support-annotations:${VERSION_SUPPORT}"

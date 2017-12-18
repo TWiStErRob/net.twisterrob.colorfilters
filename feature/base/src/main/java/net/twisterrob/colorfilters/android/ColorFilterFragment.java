@@ -39,7 +39,7 @@ public abstract class ColorFilterFragment extends Fragment {
 		return listener.getKeyboard();
 	}
 
-	protected abstract KeyboardHandlerFactory getPreferredKeyboardMode();
+	protected abstract @NonNull KeyboardMode getPreferredKeyboardMode();
 
 	@Override
 	public void onAttach(Context context) {

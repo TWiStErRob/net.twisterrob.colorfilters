@@ -3,7 +3,7 @@ apply plugin: 'net.twisterrob.android-library'
 dependencies {
 
 	implementation project(':feature:base')
-	implementation project(':feature:keyboard')
+	implementation project(':feature:keyboard-contract')
 
 	implementation "com.android.support:palette-v7:${VERSION_SUPPORT}"
 }

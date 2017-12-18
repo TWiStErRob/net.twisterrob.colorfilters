@@ -255,11 +255,11 @@ public class MainActivity extends AppCompatActivity implements ColorFilterFragme
 		if (kbd == null) {
 			ColorFilterFragment fragment = getCurrentFragment();
 			if (fragment != null) {
-				KeyboardHandlerFactory mode = fragment.getPreferredKeyboardMode();
+				KeyboardMode mode = fragment.getPreferredKeyboardMode();
 				if (!getPrefs().getBoolean(getString(R.string.cf_pref_keyboard), false)) {
 					mode = KeyboardMode.NATIVE;
 				}
-				kbd = mode.create(getWindow(), (KeyboardView)findViewById(R.id.keyboard));
+				kbd = new KeyboardHandlerFactory().create(mode, getWindow(), (KeyboardView)findViewById(R.id.keyboard));
 			}
 		}
 		return kbd;

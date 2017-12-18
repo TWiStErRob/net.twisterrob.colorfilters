@@ -3,5 +3,5 @@ apply plugin: 'net.twisterrob.android-library'
 dependencies {
 
 	implementation project(':feature:base')
-	implementation project(':feature:keyboard')
+	implementation project(':feature:keyboard-contract')
 }
