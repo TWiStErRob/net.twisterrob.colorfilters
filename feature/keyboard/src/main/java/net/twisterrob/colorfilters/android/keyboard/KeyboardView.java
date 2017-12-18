@@ -6,6 +6,17 @@ import android.inputmethodservice.Keyboard;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 
+/**
+ * 	<pre><code>
+ * 	&lt;net.twisterrob.colorfilters.android.keyboard.KeyboardView
+ * 	    android:layout_width="*"
+ * 	    android:layout_height="*"
+ * 	    android:background="@android:color/transparent"
+ * 	    android:keyBackground="@drawable/keyboard_key"
+ * 	    /&gt;
+ * 	</code></pre>
+ * 	Defaults for backgrounds can't be set in code, because the fields have no accessors.
+ */
 public class KeyboardView extends android.inputmethodservice.KeyboardView {
 	public KeyboardView(Context context, AttributeSet attrs) {
 		super(context, attrs);
