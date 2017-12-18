@@ -1,0 +1,7 @@
+<resources>
+	<public type="string" name="cf_reset_cd" />
+	<public type="string" name="cf_info_copy_toast" />
+	<public type="string" name="cf_info_copy_toast_arg" />
+	<public type="dimen" name="margin" />
+	<public type="dimen" name="activity_margin" />
+</resources>

@@ -1,6 +1,7 @@
 package net.twisterrob.android.view.color.swatches;
 
 import android.graphics.Canvas;
+import android.support.annotation.NonNull;
 
 public class EmptySwatch extends Swatch {
 	private int color;
@@ -25,7 +26,7 @@ public class EmptySwatch extends Swatch {
 	}
 
 	@Override
-	public void draw(Canvas canvas) {
+	public void draw(@NonNull Canvas canvas) {
 		canvas.drawColor(color);
 	}
 }

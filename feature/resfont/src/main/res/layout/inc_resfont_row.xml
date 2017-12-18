@@ -2,7 +2,6 @@
 <TableRow
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
-	android:id="@+id/tableRow1"
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content"
 	android:paddingLeft="@dimen/margin"
@@ -13,12 +12,14 @@
 	<TextView
 		android:id="@+id/source"
 		android:layout_gravity="center_vertical"
+		android:textIsSelectable="true"
 		tools:text="fgColor=&quot;-FF0088AA"
 		/>
 	<View style="@style/table_horizontal_divider" />
 	<TextView
 		android:id="@+id/resolved"
 		android:layout_gravity="center_vertical"
+		android:textIsSelectable="true"
 		tools:text="FF0088AA"
 		/>
 	<View style="@style/table_horizontal_divider" />
@@ -26,6 +27,7 @@
 		android:id="@+id/resultWhite"
 		android:layout_gravity="center_vertical"
 		android:background="@android:color/white"
+		android:textIsSelectable="true"
 		tools:textColor="#ff0000"
 		tools:text="text"
 		/>
@@ -34,6 +36,7 @@
 		android:id="@+id/resultBlack"
 		android:layout_gravity="center_vertical"
 		android:background="@android:color/black"
+		android:textIsSelectable="true"
 		tools:textColor="#ff0000"
 		tools:text="text"
 		/>

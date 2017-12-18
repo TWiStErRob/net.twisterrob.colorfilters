@@ -2,6 +2,7 @@ package net.twisterrob.android.view.color.swatches;
 
 import android.graphics.*;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 
 public abstract class Swatch extends Drawable {
 	public static final int AREA_INVALID = -1;
@@ -17,7 +18,7 @@ public abstract class Swatch extends Drawable {
 		return new IllegalStateException("Cannot find color for area " + area + " at " + x + ", " + y);
 	}
 
-	public abstract void draw(Canvas canvas);
+	public abstract void draw(@NonNull Canvas canvas);
 
 	public int getAreaCode(float x, float y) {
 		return AREA_DEFAULT;
@@ -36,7 +37,7 @@ public abstract class Swatch extends Drawable {
 
 	@Override
 	public int getOpacity() {
-		return 0;
+		return PixelFormat.UNKNOWN;
 	}
 
 	public boolean triggersColorChange(int trackedArea) {

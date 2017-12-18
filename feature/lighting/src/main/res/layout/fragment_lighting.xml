@@ -61,6 +61,7 @@
 		android:layout_below="@id/mulLabel"
 		android:clickable="true"
 		android:contentDescription="@string/cf_reset_cd"
+		android:focusable="true"
 		tools:background="@android:color/black"
 		/>
 	<net.twisterrob.android.view.color.ColorPickerView
@@ -113,6 +114,7 @@
 		android:layout_alignRight="@id/addLabel"
 		android:layout_below="@id/addLabel"
 		android:clickable="true"
+		android:focusable="true"
 		android:contentDescription="@string/cf_reset_cd"
 		tools:background="@android:color/black"
 		/>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources><!-- Supported HTML: StringBlock.get -->
 
-	<string name="cf_matrix_title">Color Matrix</string>
 	<string name="cf_matrix_info_title">ColorMatrixColorFilter(matrix)</string>
 	<string name="cf_matrix_info">This is a color filter that transforms colors through a 4x5 color <tt>matrix</tt>.
         \n\nThe <tt>matrix</tt> is copied into the filter, so changes made to it after the filter is constructed will not be reflected in the filter.

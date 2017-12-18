@@ -1,6 +1,7 @@
 package net.twisterrob.android.view.color.swatches;
 
 import android.graphics.*;
+import android.support.annotation.NonNull;
 
 import net.twisterrob.android.view.color.swatches.pixel.color.PixelColor;
 import net.twisterrob.android.view.color.swatches.pixel.drawer.BitmapDrawer;
@@ -37,7 +38,7 @@ public class PixelAbsoluteSwatch extends Swatch {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	public void draw(Canvas canvas) {
+	public void draw(@NonNull Canvas canvas) {
 		if (bitmap == null) {
 			return;
 		}

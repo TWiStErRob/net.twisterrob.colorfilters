@@ -1,6 +1,7 @@
 package net.twisterrob.android.view.color.swatches;
 
 import android.graphics.*;
+import android.support.annotation.NonNull;
 
 import net.twisterrob.android.view.color.ColorMath;
 
@@ -36,7 +37,7 @@ public class APIDemoSwatch extends Swatch {
 	}
 
 	@Override
-	public void draw(Canvas canvas) {
+	public void draw(@NonNull Canvas canvas) {
 		Rect bounds = getBounds();
 
 		mPaint.setStrokeWidth(bounds.width() * 0.2f);

@@ -52,6 +52,7 @@
 			android:layout_below="@id/colorRGBLabel"
 			android:clickable="true"
 			android:contentDescription="@string/cf_reset_cd"
+			android:focusable="true"
 			tools:background="@android:color/black"
 			/>
 		<SeekBar

@@ -4,5 +4,6 @@ dependencies {
 
 	implementation project(':feature:keyboard-contract')
 
-	implementation "com.android.support:appcompat-v7:${VERSION_SUPPORT}"
+	// TODO go back to implementation, or remove all appcompat references from other projects
+	api "com.android.support:appcompat-v7:${VERSION_SUPPORT}"
 }

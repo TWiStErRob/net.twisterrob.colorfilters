@@ -131,7 +131,7 @@ public class ResourceFontFragment extends ColorFilterFragment {
 		int removeCount = row.getChildCount() - resolvedAt;
 		row.removeViews(resolvedAt, removeCount);
 		params.span += removeCount; // two rendered + two divider
-		resolved.setText(ex.getClass().getSimpleName() + "\n" + ex.getMessage());
+		resolved.setText(String.format("%s\n%s", ex.getClass().getSimpleName(), ex.getMessage()));
 	}
 
 	private String getColor(CharSequence text) {

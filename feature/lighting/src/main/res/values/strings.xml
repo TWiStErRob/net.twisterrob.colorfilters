@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-	<string name="cf_lighting_title">Lighting</string>
 	<string name="cf_lighting_info_title">LightingColorFilter(mul, add)</string>
 	<string name="cf_lighting_info">This is a color filter that multiplies the
         <font fgcolor="#FFFF0000" color="-#010000">R</font><font fgcolor="#FF00FF00" color="-#FF0100">G</font><font fgcolor="#FF0000FF" color="-#FFFF01">B</font> channels

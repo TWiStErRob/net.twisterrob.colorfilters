@@ -13,3 +13,17 @@ buildscript {
 }
 
 apply plugin: 'net.twisterrob.root'
+
+allprojects { project ->
+	project.plugins.all {
+		if (it instanceof com.android.build.gradle.BasePlugin) {
+			project.android {
+				lintOptions {
+					warningsAsErrors = true
+					// TODO this is not working in AS
+					lintConfig = rootProject.file('lint.xml')
+				}
+			}
+		}
+	}
+}

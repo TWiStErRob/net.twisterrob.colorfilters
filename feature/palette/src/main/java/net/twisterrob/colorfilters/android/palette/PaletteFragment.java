@@ -92,7 +92,7 @@ public class PaletteFragment extends ColorFilterFragment {
 					.maximumColorCount(currentNumColors)
 					.resizeBitmapSize(currentResizeDimen)
 					.generate();
-			numSwatches.setText(Integer.toString(palette.getSwatches().size()));
+			numSwatches.setText(asString(palette.getSwatches().size()));
 			swatchAdapter.update(palette, getCurrentSort());
 		} else {
 			numSwatches.setText("?");
@@ -132,7 +132,7 @@ public class PaletteFragment extends ColorFilterFragment {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				try {
-					int numColors = Integer.parseInt(s.toString());
+					int numColors = fromString(s.toString());
 					updateNumColors(numColors, UpdateOrigin.Editor);
 					numColorEditor.setError(null);
 				} catch (RuntimeException ex) {
@@ -155,7 +155,7 @@ public class PaletteFragment extends ColorFilterFragment {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				try {
-					int resizeDimen = Integer.parseInt(s.toString());
+					int resizeDimen = fromString(s.toString());
 					updateResizeDimen(resizeDimen, UpdateOrigin.Editor);
 					resizeDimenEditor.setError(null);
 				} catch (RuntimeException ex) {
@@ -293,7 +293,7 @@ public class PaletteFragment extends ColorFilterFragment {
 			currentNumColors = numColors;
 
 			if (origin != UpdateOrigin.Editor) {
-				numColorEditor.setText(Integer.toString(numColors));
+				numColorEditor.setText(asString(numColors));
 			}
 			if (origin != UpdateOrigin.Slider) {
 				numColorSlider.setProgress(numColors - 1);
@@ -317,7 +317,7 @@ public class PaletteFragment extends ColorFilterFragment {
 			currentResizeDimen = resizeDimen;
 
 			if (origin != UpdateOrigin.Editor) {
-				resizeDimenEditor.setText(Integer.toString(resizeDimen));
+				resizeDimenEditor.setText(asString(resizeDimen));
 			}
 			if (origin != UpdateOrigin.Slider) {
 				resizeDimenSlider.setProgress(resizeDimen - 1);
@@ -396,6 +396,18 @@ public class PaletteFragment extends ColorFilterFragment {
 		return PaletteAdapter.Display.values()[(int)swatchDisplay.getSelectedItemId()];
 	}
 
+	// TODO report this not being flagged for i18n,
+	// it should be because all usages are setText()
+	private static CharSequence asString(int number) {
+		// TODO return String.format(Locale.getDefault(), "%d", number);
+		return Integer.toString(number);
+	}
+
+	private static int fromString(String value) {
+		// TODO return NumberFormat.getInstance().parse(s.toString()).intValue();
+		return Integer.parseInt(value);
+	}
+
 	private enum UpdateOrigin {
 		Editor,
 		Slider
@@ -454,24 +466,28 @@ public class PaletteFragment extends ColorFilterFragment {
 			if (swatch != null) {
 				float[] hsl = swatch.getHsl();
 				String type = getType(swatch);
-				holder.colorText.setText(colorToRGBHexString("#", swatch.getRgb())
-						+ "\n" + String.format(Locale.ROOT, "%.0f°, %.0f%%, %.0f%%", hsl[0], hsl[1] * 100, hsl[2] * 100)
-						+ (type != null? "\n" + type : ""));
+				holder.colorText.setText(String.format(Locale.ROOT, "%s\n%.0f°, %.0f%%, %.0f%%%s",
+						colorToRGBHexString("#", swatch.getRgb()),
+						hsl[0], hsl[1] * 100, hsl[2] * 100,
+						type != null? "\n" + type : ""
+				));
 				holder.titleText.setBackgroundColor(swatch.getRgb());
 				holder.titleText.setTextColor(swatch.getTitleTextColor());
-				holder.titleText.setText("Title: " + colorToRGBHexString("#", swatch.getTitleTextColor()));
+				holder.titleText.setText(
+						String.format("Title: %s", colorToRGBHexString("#", swatch.getTitleTextColor())));
 				holder.bodyText.setBackgroundColor(swatch.getRgb());
 				holder.bodyText.setTextColor(swatch.getBodyTextColor());
-				holder.bodyText.setText("Body: " + colorToRGBHexString("#", swatch.getBodyTextColor()));
-				holder.population.setText(Integer.toString(swatch.getPopulation()));
+				holder.bodyText.setText(String.format("Body: %s", colorToRGBHexString("#", swatch.getBodyTextColor())));
+				holder.population.setText(asString(swatch.getPopulation()));
 			} else {
-				holder.colorText.setText("missing");
+				holder.colorText.setText(R.string.cf_palette_missing);
 				holder.titleText.setBackgroundColor(Color.TRANSPARENT);
 				holder.titleText.setTextColor(Color.TRANSPARENT);
 				holder.titleText.setText(null);
 				holder.bodyText.setBackgroundColor(Color.TRANSPARENT);
 				holder.bodyText.setTextColor(Color.TRANSPARENT);
 				holder.bodyText.setText(null);
+				// TODO why is this not a lint?
 				holder.population.setText("N/A");
 			}
 		}
@@ -518,7 +534,7 @@ public class PaletteFragment extends ColorFilterFragment {
 			},
 			getSwatchesByHSL("getSwatches() by HSL") {
 				@Override public List<Swatch> getSwatches(Palette palette) {
-					ArrayList<Swatch> swatches = new ArrayList<>(palette.getSwatches());
+					List<Swatch> swatches = new ArrayList<>(palette.getSwatches());
 					Collections.sort(swatches, new Comparator<Swatch>() {
 						@Override public int compare(Swatch lhs, Swatch rhs) {
 							int compHue = Float.compare(lhs.getHsl()[0], rhs.getHsl()[0]);
@@ -541,7 +557,7 @@ public class PaletteFragment extends ColorFilterFragment {
 			},
 			getSwatchesByPopulationAsc("getSwatches() by population ASC") {
 				@Override public List<Swatch> getSwatches(Palette palette) {
-					ArrayList<Swatch> swatches = new ArrayList<>(palette.getSwatches());
+					List<Swatch> swatches = new ArrayList<>(palette.getSwatches());
 					Collections.sort(swatches, new Comparator<Swatch>() {
 						@Override public int compare(Swatch lhs, Swatch rhs) {
 							return (int)((long)lhs.getPopulation() - (long)rhs.getPopulation());
@@ -552,7 +568,7 @@ public class PaletteFragment extends ColorFilterFragment {
 			},
 			getSwatchesByPopulationDesc("getSwatches() by population DESC") {
 				@Override public List<Swatch> getSwatches(Palette palette) {
-					ArrayList<Swatch> swatches = new ArrayList<>(palette.getSwatches());
+					List<Swatch> swatches = new ArrayList<>(palette.getSwatches());
 					Collections.sort(swatches, new Comparator<Swatch>() {
 						@Override public int compare(Swatch lhs, Swatch rhs) {
 							return (int)((long)rhs.getPopulation() - (long)lhs.getPopulation());

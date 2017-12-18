@@ -6,9 +6,9 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.*;
 import android.os.Build;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.*;
 import android.view.*;
-import android.widget.ImageView;
 
 import static android.util.TypedValue.*;
 
@@ -16,7 +16,7 @@ import net.twisterrob.android.view.color.swatches.*;
 import net.twisterrob.android.view.color.swatches.pixel.color.*;
 import net.twisterrob.android.view.color.swatches.pixel.drawer.*;
 
-public class ColorPickerView extends ImageView implements SwatchChooser.OnSwatchChangeListener {
+public class ColorPickerView extends AppCompatImageView implements SwatchChooser.OnSwatchChangeListener {
 	public interface OnColorChangedListener {
 		void colorChanged(int color);
 	}
@@ -231,7 +231,7 @@ public class ColorPickerView extends ImageView implements SwatchChooser.OnSwatch
 			return unhandled(event);
 		}
 
-		private boolean unhandled(MotionEvent event) {
+		private boolean unhandled(@SuppressWarnings("unused") MotionEvent event) {
 			return false;
 		}
 

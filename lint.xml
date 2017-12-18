@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+	<issue id="UnusedAttribute" severity="ignore" />
+	<issue id="RtlHardcoded" severity="ignore" />
+	<issue id="IconDensities" severity="ignore" />
+	<issue id="TypographyQuotes" severity="ignore" />
+	<issue id="GradleDependency" severity="ignore" />
+	<issue id="UnusedResources">
+		<!-- Not used, but can't do anything about it :) -->
+		<ignore regexp="R\.bool\.in_prod" />
+		<ignore regexp="R\.bool\.in_test" />
+		<!-- TODO report this bug -->
+		<ignore regexp="R\.font\." />
+		<ignore regexp="R\.string\.cf_resfont_.*_code" />
+	</issue>
+</lint>

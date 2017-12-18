@@ -2,6 +2,12 @@
 <resources>
 	<string name="app_name">Color Filters</string>
 
+	<string name="cf_lighting_title">Lighting</string>
+	<string name="cf_porterduff_title">Porter/Duff</string>
+	<string name="cf_matrix_title">Color Matrix</string>
+	<string name="cf_palette_title">Palette</string>
+	<!--<string name="cf_resfont_title">String Resources</string>-->
+
 	<string name="cf_image_action">Change image</string>
 	<string name="cf_image_show">Show images</string>
 	<string name="cf_image_original_cd">Original image</string>

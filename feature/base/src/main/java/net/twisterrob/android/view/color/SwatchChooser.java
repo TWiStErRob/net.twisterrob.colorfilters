@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import android.graphics.*;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.view.*;
 
 import net.twisterrob.android.view.color.swatches.*;
@@ -34,7 +35,7 @@ public class SwatchChooser extends Drawable implements View.OnTouchListener {
 	}
 
 	@Override
-	public void draw(Canvas canvas) {
+	public void draw(@NonNull Canvas canvas) {
 		if (image == null) {
 			image = build(getBounds().width(), getBounds().height());
 		}
@@ -148,7 +149,7 @@ public class SwatchChooser extends Drawable implements View.OnTouchListener {
 
 	@Override
 	public int getOpacity() {
-		return 0;
+		return PixelFormat.UNKNOWN;
 	}
 
 	@Override

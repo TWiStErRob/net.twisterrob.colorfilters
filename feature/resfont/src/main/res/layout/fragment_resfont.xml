@@ -17,14 +17,14 @@
 			android:padding="@dimen/margin"
 			>
 			<TextView
-				android:text="XML" />
+				android:text="@string/cf_resfont_type_xml" />
 			<View style="@style/table_horizontal_divider" />
 			<TextView
-				android:text="Resolved color" />
+				android:text="@string/cf_resfont_type_resolved" />
 			<View style="@style/table_horizontal_divider" />
 			<TextView
 				android:layout_span="3"
-				android:text="Rendered"
+				android:text="@string/cf_resfont_type_rendered"
 				/>
 		</TableRow>
 		<include layout="@layout/inc_resfont_row" />
