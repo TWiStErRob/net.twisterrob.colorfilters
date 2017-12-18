@@ -4,6 +4,4 @@ dependencies {
 
 	implementation project(':feature:base')
 	implementation project(':feature:keyboard')
-
-	implementation "com.android.support:support-v4:${VERSION_SUPPORT}"
 }

@@ -6,5 +6,4 @@ dependencies {
 	implementation project(':feature:keyboard')
 
 	implementation "com.android.support:palette-v7:${VERSION_SUPPORT}"
-	implementation "com.android.support:appcompat-v7:${VERSION_SUPPORT}"
 }

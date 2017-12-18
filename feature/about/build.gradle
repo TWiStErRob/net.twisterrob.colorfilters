@@ -3,6 +3,4 @@ apply plugin: 'net.twisterrob.android-library'
 dependencies {
 
 	implementation project(":feature:base")
-
-	implementation "com.android.support:appcompat-v7:${VERSION_SUPPORT}"
 }
