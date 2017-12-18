@@ -10,5 +10,5 @@ include ':feature:matrix'
 include ':feature:palette'
 include ':feature:resfont'
 
-include ':feature:base'
+include ':feature:base', ':feature:image'
 include ':feature:keyboard', ':feature:keyboard-contract'

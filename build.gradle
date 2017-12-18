@@ -15,6 +15,11 @@ buildscript {
 apply plugin: 'net.twisterrob.root'
 
 allprojects { project ->
+
+	repositories {
+		jcenter()
+	}
+
 	project.plugins.all {
 		if (it instanceof com.android.build.gradle.BasePlugin) {
 			project.android {

@@ -2,12 +2,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'net.twisterrob.android-app'
 
-repositories {
-	jcenter()
-}
-
 dependencies {
 	implementation project(':feature:base')
+	implementation project(':feature:image')
 	implementation project(':feature:lighting')
 	implementation project(':feature:porterduff')
 	implementation project(':feature:matrix')
@@ -18,7 +15,6 @@ dependencies {
 }
 
 dependencies {
-	implementation "com.github.bumptech.glide:glide:${VERSION_GLIDE}"
 }
 
 dependencies {

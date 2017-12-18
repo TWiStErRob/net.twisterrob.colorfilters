@@ -8,10 +8,7 @@
 	<string name="cf_palette_title">Palette</string>
 	<!--<string name="cf_resfont_title">String Resources</string>-->
 
-	<string name="cf_image_action">Change image</string>
 	<string name="cf_image_show">Show images</string>
-	<string name="cf_image_original_cd">Original image</string>
-	<string name="cf_image_preview_cd">Preview image</string>
 
 	<string name="cf_pref_title">Settings</string>
 	<string name="cf_pref_keyboard" translatable="false">pref_keyboard</string>

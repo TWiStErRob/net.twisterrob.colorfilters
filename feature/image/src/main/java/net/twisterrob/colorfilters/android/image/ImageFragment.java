@@ -15,8 +15,6 @@ import android.support.v4.app.Fragment;
 import android.view.*;
 import android.widget.ImageView;
 
-import net.twisterrob.colorfilters.android.R;
-
 public class ImageFragment extends Fragment {
 	private static final String PREF_IMAGE_URL = "Image.url";
 
@@ -111,10 +109,10 @@ public class ImageFragment extends Fragment {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case R.id.action_image:
-				startLoadImage();
-				return true;
+		int itemId = item.getItemId();
+		if (itemId == R.id.action_image) {
+			startLoadImage();
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
