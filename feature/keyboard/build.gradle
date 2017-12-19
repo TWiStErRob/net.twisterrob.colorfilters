@@ -2,7 +2,7 @@ apply plugin: 'net.twisterrob.android-library'
 
 dependencies {
 
-	api project(':feature:keyboard-contract')
+	api project('contract')
 
 	implementation "com.android.support:support-annotations:${VERSION_SUPPORT}"
 }

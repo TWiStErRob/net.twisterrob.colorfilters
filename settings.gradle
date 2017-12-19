@@ -11,4 +11,4 @@ include ':feature:palette'
 include ':feature:resfont'
 
 include ':feature:base', ':feature:image'
-include ':feature:keyboard', ':feature:keyboard-contract'
+include ':feature:keyboard', ':feature:keyboard:contract'
