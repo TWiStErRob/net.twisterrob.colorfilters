@@ -7,5 +7,6 @@
 /*.iws
 /captures
 /projectFilesBackup
+/gradled.bat
 *.iml
 build

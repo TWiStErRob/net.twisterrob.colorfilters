@@ -10,5 +10,8 @@ include ':feature:matrix'
 include ':feature:palette'
 include ':feature:resfont'
 
-include ':feature:base', ':feature:image'
+include ':feature:base', 'test-base'
+project(":test-base").projectDir = file('feature/test-base')
+
+include ':feature:image'
 include ':feature:keyboard', ':feature:keyboard:contract'

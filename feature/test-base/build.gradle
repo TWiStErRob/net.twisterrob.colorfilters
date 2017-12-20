@@ -1,0 +1,10 @@
+apply plugin: 'net.twisterrob.android-kotlin-library'
+
+dependencies {
+	api("com.android.support.test:runner:${VERSION_ESPRESSO_RUNNER}") {
+		exclude group: 'com.android.support'
+	}
+	api("com.android.support.test.espresso:espresso-core:${VERSION_ESPRESSO}") {
+		exclude group: 'com.android.support'
+	}
+}
