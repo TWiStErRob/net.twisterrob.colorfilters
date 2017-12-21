@@ -1,1 +1,9 @@
-<manifest package="net.twisterrob.colorfilters.base" /> 
+<manifest
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	package="net.twisterrob.colorfilters.base">
+
+	<application
+		android:theme="@style/Theme.AppCompat.Light"
+		/>
+
+</manifest>

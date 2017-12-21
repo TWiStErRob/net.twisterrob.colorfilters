@@ -1,0 +1,16 @@
+<manifest
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	package="net.twisterrob.colorfilters.test"
+	android:sharedUserId="net.twisterrob.colorfilters"
+	>
+
+	<application>
+
+		<activity
+			android:name="net.twisterrob.colorfilters.android.ColorFilterFragmentHost"
+			android:process="net.twisterrob.colorfilters.debug"
+			/>
+
+	</application>
+
+</manifest>

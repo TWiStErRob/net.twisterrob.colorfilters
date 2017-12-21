@@ -1,7 +1,16 @@
 apply plugin: 'net.twisterrob.android-kotlin-library'
 
+android {
+	defaultConfig {
+		testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+		multiDexEnabled true
+	}
+}
+
 dependencies {
 
 	implementation project(':feature:base')
 	implementation project(':feature:keyboard:contract')
+
+	androidTestImplementation project(':test-base')
 }
