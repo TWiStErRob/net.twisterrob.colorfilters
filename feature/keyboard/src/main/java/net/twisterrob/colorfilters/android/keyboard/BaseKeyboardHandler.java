@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.inputmethodservice.KeyboardView;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.text.*;
 import android.util.Log;
 import android.view.*;
@@ -48,7 +49,7 @@ public abstract class BaseKeyboardHandler implements KeyboardHandler {
 		}
 	}
 
-	public void showCustomKeyboard(View v) {
+	public void showCustomKeyboard(@NonNull View v) {
 		if (v != null) {
 			InputMethodManager imm = (InputMethodManager)context.getSystemService(Activity.INPUT_METHOD_SERVICE);
 			imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
@@ -60,7 +61,7 @@ public abstract class BaseKeyboardHandler implements KeyboardHandler {
 		}
 	}
 
-	public void registerEditText(EditText editText) {
+	public void registerEditText(@NonNull EditText editText) {
 		// alternative to this is editText.setOnTouchListener(new OnTouchWrapper());
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
 			editText.setInputType(InputType.TYPE_NULL);
@@ -78,7 +79,7 @@ public abstract class BaseKeyboardHandler implements KeyboardHandler {
 		editText.setOnClickListener(new MyOnClickListener());
 	}
 
-	public void unregisterEditText(EditText editText) {
+	public void unregisterEditText(@NonNull EditText editText) {
 		editText.setOnFocusChangeListener(null);
 		editText.setOnClickListener(null);
 		editText.clearFocus();
@@ -100,7 +101,7 @@ public abstract class BaseKeyboardHandler implements KeyboardHandler {
 		return false;
 	}
 
-	public void setCustomKeyboardListner(CustomKeyboardListener listener) {
+	public void setCustomKeyboardListener(@NonNull CustomKeyboardListener listener) {
 		this.listener = listener;
 	}
 

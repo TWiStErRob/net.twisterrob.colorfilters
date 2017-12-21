@@ -43,7 +43,7 @@ public class MatrixFragment extends ColorFilterFragment {
 	}
 
 	@Override
-	protected KeyboardMode getPreferredKeyboardMode() {
+	protected @NonNull KeyboardMode getPreferredKeyboardMode() {
 		return KeyboardMode.FloatNav;
 	}
 
@@ -75,7 +75,7 @@ public class MatrixFragment extends ColorFilterFragment {
 
 		final View controlsGroup = view.findViewById(R.id.controls);
 		final View orderGroup = view.findViewById(R.id.order);
-		getKeyboard().setCustomKeyboardListner(new KeyboardHandler.CustomKeyboardListener() {
+		getKeyboard().setCustomKeyboardListener(new KeyboardHandler.CustomKeyboardListener() {
 			@Override
 			public void customKeyboardShown() {
 				if (isPortrait()) {

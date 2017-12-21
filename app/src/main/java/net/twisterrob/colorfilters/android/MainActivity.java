@@ -9,6 +9,7 @@ import android.inputmethodservice.KeyboardView;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.*;
 import android.support.v4.app.*;
 import android.support.v7.app.*;
 import android.util.Log;
@@ -216,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements ColorFilterFragme
 	}
 
 	@Override
-	public void colorFilterChanged(ColorFilter colorFilter) {
+	public void colorFilterChanged(@Nullable ColorFilter colorFilter) {
 		images.setColorFilter(colorFilter);
 	}
 
@@ -229,12 +230,12 @@ public class MainActivity extends AppCompatActivity implements ColorFilterFragme
 	}
 
 	@Override
-	public Bitmap getCurrentBitmap() {
+	public @Nullable Bitmap getCurrentBitmap() {
 		return images.getCurrent();
 	}
 
 	@Override
-	public Uri renderCurrentView(CharSequence title, CharSequence desc) {
+	public @NonNull Uri renderCurrentView(@NonNull CharSequence title, @NonNull CharSequence desc) {
 		Bitmap shareContent = images.renderPreview();
 		String uri = Images.Media.insertImage(getContentResolver(), shareContent, title.toString(), desc.toString());
 		return Uri.parse(uri);
@@ -251,7 +252,7 @@ public class MainActivity extends AppCompatActivity implements ColorFilterFragme
 	}
 
 	@Override
-	public KeyboardHandler getKeyboard() {
+	public @NonNull KeyboardHandler getKeyboard() {
 		if (kbd == null) {
 			ColorFilterFragment fragment = getCurrentFragment();
 			if (fragment != null) {

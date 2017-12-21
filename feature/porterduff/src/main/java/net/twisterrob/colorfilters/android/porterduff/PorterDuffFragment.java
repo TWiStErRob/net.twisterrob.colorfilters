@@ -61,7 +61,7 @@ public class PorterDuffFragment extends ColorFilterFragment {
 	}
 
 	@Override
-	protected KeyboardMode getPreferredKeyboardMode() {
+	protected @NonNull KeyboardMode getPreferredKeyboardMode() {
 		return KeyboardMode.Hex;
 	}
 
@@ -117,7 +117,7 @@ public class PorterDuffFragment extends ColorFilterFragment {
 		});
 		getKeyboard().registerEditText(editor);
 		final View modesContainer = view.findViewById(R.id.modes);
-		getKeyboard().setCustomKeyboardListner(new KeyboardHandler.CustomKeyboardListener() {
+		getKeyboard().setCustomKeyboardListener(new KeyboardHandler.CustomKeyboardListener() {
 			@Override
 			public void customKeyboardShown() {
 				modesContainer.setVisibility(View.GONE);

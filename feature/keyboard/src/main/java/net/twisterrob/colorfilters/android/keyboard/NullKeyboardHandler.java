@@ -1,6 +1,7 @@
 package net.twisterrob.colorfilters.android.keyboard;
 
 import android.inputmethodservice.*;
+import android.support.annotation.NonNull;
 import android.view.*;
 import android.widget.EditText;
 
@@ -16,11 +17,11 @@ public class NullKeyboardHandler extends BaseKeyboardHandler {
 	}
 
 	@Override
-	public void registerEditText(EditText editText) {
+	public void registerEditText(@NonNull EditText editText) {
 	}
 
 	@Override
-	public void unregisterEditText(EditText editText) {
+	public void unregisterEditText(@NonNull EditText editText) {
 	}
 
 	@Override
@@ -29,7 +30,7 @@ public class NullKeyboardHandler extends BaseKeyboardHandler {
 	}
 
 	@Override
-	public void showCustomKeyboard(View v) {
+	public void showCustomKeyboard(@NonNull View v) {
 	}
 
 	@Override

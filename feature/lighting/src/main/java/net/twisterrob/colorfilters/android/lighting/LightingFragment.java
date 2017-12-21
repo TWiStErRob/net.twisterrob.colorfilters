@@ -43,7 +43,7 @@ public class LightingFragment extends ColorFilterFragment {
 	}
 
 	@Override
-	protected KeyboardMode getPreferredKeyboardMode() {
+	protected @NonNull KeyboardMode getPreferredKeyboardMode() {
 		return KeyboardMode.Hex;
 	}
 
@@ -72,7 +72,7 @@ public class LightingFragment extends ColorFilterFragment {
 		View addPreview = view.findViewById(R.id.addPreview);
 		addWiring = new Wiring(addColor, addColorDesc, addColorRGB, addPreview, DEFAULT_ADD);
 
-		getKeyboard().setCustomKeyboardListner(new KeyboardHandler.CustomKeyboardListener() {
+		getKeyboard().setCustomKeyboardListener(new KeyboardHandler.CustomKeyboardListener() {
 			@Override
 			public void customKeyboardShown() {
 				if (isPortrait()) {

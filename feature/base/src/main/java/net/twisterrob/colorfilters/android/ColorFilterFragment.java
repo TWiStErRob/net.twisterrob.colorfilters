@@ -22,20 +22,20 @@ import net.twisterrob.colorfilters.base.R;
 
 public abstract class ColorFilterFragment extends Fragment {
 	public interface Listener {
-		void colorFilterChanged(ColorFilter colorFilter);
+		void colorFilterChanged(@Nullable ColorFilter colorFilter);
 
-		KeyboardHandler getKeyboard();
+		@NonNull KeyboardHandler getKeyboard();
 
-		Uri renderCurrentView(CharSequence title, CharSequence description);
+		@NonNull Uri renderCurrentView(@NonNull CharSequence title, @NonNull CharSequence description);
 
 		void fragmentOnResume();
 
-		Bitmap getCurrentBitmap();
+		@Nullable Bitmap getCurrentBitmap();
 	}
 
 	private Listener listener;
 
-	protected KeyboardHandler getKeyboard() {
+	protected @NonNull KeyboardHandler getKeyboard() {
 		return listener.getKeyboard();
 	}
 

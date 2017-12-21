@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.*;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
+import android.support.annotation.*;
 import android.support.v4.app.Fragment;
 import android.view.*;
 import android.widget.ImageView;
@@ -196,15 +197,15 @@ public class ImageFragment extends Fragment {
 		BitmapKeeper.into(getFragmentManager(), preview, null);
 	}
 
-	private SharedPreferences getPrefs() {
+	private @NonNull SharedPreferences getPrefs() {
 		return PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
 	}
 
-	public void setColorFilter(ColorFilter colorFilter) {
+	public void setColorFilter(@Nullable ColorFilter colorFilter) {
 		preview.setColorFilter(colorFilter);
 	}
 
-	public Bitmap getCurrent() {
+	public @Nullable Bitmap getCurrent() {
 		return BitmapKeeper.getBitmap(original.getDrawable());
 	}
 

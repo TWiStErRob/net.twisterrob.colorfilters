@@ -1,5 +1,6 @@
 package net.twisterrob.colorfilters.android.keyboard;
 
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.EditText;
 
@@ -13,16 +14,16 @@ public interface KeyboardHandler {
 
 	void hideCustomKeyboard();
 
-	void showCustomKeyboard(View v);
+	void showCustomKeyboard(@NonNull View v);
 
-	void registerEditText(EditText editText);
+	void registerEditText(@NonNull EditText editText);
 
-	void unregisterEditText(EditText editText);
+	void unregisterEditText(@NonNull EditText editText);
 
 	void setHapticFeedback(boolean haptic);
 
 	boolean handleBack();
 
-	void setCustomKeyboardListner(CustomKeyboardListener listener);
+	void setCustomKeyboardListener(@NonNull CustomKeyboardListener listener);
 }
 

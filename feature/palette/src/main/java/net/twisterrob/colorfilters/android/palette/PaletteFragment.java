@@ -101,7 +101,7 @@ public class PaletteFragment extends ColorFilterFragment {
 	}
 
 	@Override
-	protected KeyboardMode getPreferredKeyboardMode() {
+	protected @NonNull KeyboardMode getPreferredKeyboardMode() {
 		return KeyboardMode.Float;
 	}
 
@@ -263,7 +263,7 @@ public class PaletteFragment extends ColorFilterFragment {
 			}
 		});
 
-		getKeyboard().setCustomKeyboardListner(new KeyboardHandler.CustomKeyboardListener() {
+		getKeyboard().setCustomKeyboardListener(new KeyboardHandler.CustomKeyboardListener() {
 			@Override
 			public void customKeyboardShown() {
 				if (isPortrait()) {

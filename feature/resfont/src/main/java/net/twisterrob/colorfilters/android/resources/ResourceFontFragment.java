@@ -35,7 +35,7 @@ public class ResourceFontFragment extends ColorFilterFragment {
 		return new ResourceFontFragment();
 	}
 
-	@Override protected KeyboardMode getPreferredKeyboardMode() {
+	@Override protected @NonNull KeyboardMode getPreferredKeyboardMode() {
 		return KeyboardMode.NATIVE;
 	}
 	@Override protected void displayHelp() {

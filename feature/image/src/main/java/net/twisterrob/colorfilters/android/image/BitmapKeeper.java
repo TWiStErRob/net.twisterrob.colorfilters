@@ -95,7 +95,7 @@ public class BitmapKeeper extends Fragment {
 		return fragment != null? fragment.uri : null;
 	}
 
-	static Bitmap getBitmap(Drawable d) {
+	static @Nullable Bitmap getBitmap(@Nullable Drawable d) {
 		if (d == null) {
 			return null;
 		}
