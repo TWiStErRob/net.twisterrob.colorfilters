@@ -3,6 +3,7 @@ buildscript {
 		jcenter()
 		google()
 		maven { url 'http://localhost/maven' }
+		maven { name = "Gradle libs (for Kotlin-DSL)"; url = "https://repo.gradle.org/gradle/libs-releases-local/" }
 	}
 
 	dependencies {
@@ -15,13 +16,14 @@ apply plugin: 'net.twisterrob.root'
 
 allprojects { project ->
 
-	repositories {
-		jcenter()
-	}
-
 	project.plugins.all {
 		if (it instanceof com.android.build.gradle.BasePlugin) {
 			project.android {
+
+				defaultConfig {
+					minSdkVersion 10
+				}
+
 				lintOptions {
 					warningsAsErrors = true
 					// TODO this is not working in AS
@@ -30,4 +32,8 @@ allprojects { project ->
 			}
 		}
 	}
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
 }

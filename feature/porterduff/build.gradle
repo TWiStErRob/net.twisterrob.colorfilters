@@ -1,4 +1,11 @@
-apply plugin: 'net.twisterrob.android-kotlin-library'
+// TODEL this block shouldn't be needed, plugin does it
+repositories {
+	google() // multiDex requires this to be first... what?
+	jcenter()
+}
+
+apply plugin: 'net.twisterrob.android-library'
+apply plugin: 'net.twisterrob.kotlin'
 
 android {
 	defaultConfig {

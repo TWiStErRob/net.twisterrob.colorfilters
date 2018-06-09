@@ -1,6 +1,8 @@
-apply plugin: 'net.twisterrob.android-kotlin-library'
+apply plugin: 'net.twisterrob.android-library'
+apply plugin: 'net.twisterrob.kotlin'
 
 dependencies {
+
 	implementation project(':feature:base')
 	
 	api("com.android.support.test:runner:${VERSION_ESPRESSO_RUNNER}") {
