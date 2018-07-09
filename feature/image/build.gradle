@@ -5,6 +5,8 @@ dependencies {
 
 	implementation project(':feature:base')
 
-	implementation "com.github.bumptech.glide:glide:${VERSION_GLIDE}"
+	implementation ("com.github.bumptech.glide:glide:${VERSION_GLIDE}") {
+		exclude group: 'com.android.support'
+	}
 	implementation "com.android.support:support-annotations:${VERSION_SUPPORT}"
 }

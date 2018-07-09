@@ -9,10 +9,10 @@ import android.support.v4.app.*;
 import android.widget.ImageView;
 
 import com.bumptech.glide.*;
-import com.bumptech.glide.load.resource.bitmap.GlideBitmapDrawable;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.gif.GifDrawable;
-import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.*;
 import com.bumptech.glide.request.target.Target;
 
 /**
@@ -44,10 +44,12 @@ public class BitmapKeeper extends Fragment {
 				return true;
 			}
 			if (fragment.uri != null) {
-				DrawableRequestBuilder<Uri> builder = Glide
+				RequestBuilder<Drawable> builder = Glide
 						.with(imageView.getContext())
 						.load(fragment.uri)
-						.dontTransform();
+						.apply(new RequestOptions()
+								.dontTransform()
+						);
 				if (listener != null) {
 					builder = builder.listener(new GlideRequestListener(listener));
 				}
@@ -102,9 +104,6 @@ public class BitmapKeeper extends Fragment {
 		if (d instanceof BitmapDrawable) {
 			return ((BitmapDrawable)d).getBitmap();
 		}
-		if (d instanceof GlideBitmapDrawable) {
-			return ((GlideBitmapDrawable)d).getBitmap();
-		}
 		if (d instanceof GifDrawable) {
 			return ((GifDrawable)d).getFirstFrame();
 		}
@@ -114,7 +113,7 @@ public class BitmapKeeper extends Fragment {
 		return image;
 	}
 
-	private static class GlideRequestListener implements RequestListener<Uri, GlideDrawable> {
+	private static class GlideRequestListener implements RequestListener<Drawable> {
 		private final Listener listener;
 		private final Handler ui = new Handler(Looper.getMainLooper());
 		private final Runnable notifyLoadComplete = new Runnable() {
@@ -127,13 +126,12 @@ public class BitmapKeeper extends Fragment {
 			this.listener = listener;
 		}
 
-		@Override public boolean onException(Exception e, Uri model, Target<GlideDrawable> target,
+		@Override public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target,
 				boolean isFirstResource) {
 			return false;
 		}
-
-		@Override public boolean onResourceReady(GlideDrawable resource, Uri model, Target<GlideDrawable> target,
-				boolean isFromMemoryCache, boolean isFirstResource) {
+		@Override public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target,
+				DataSource dataSource, boolean isFirstResource) {
 			ui.post(notifyLoadComplete); // async to give Glide time to set a drawable just after returning
 			return false;
 		}
