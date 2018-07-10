@@ -50,10 +50,8 @@ public abstract class BaseKeyboardHandler implements KeyboardHandler {
 	}
 
 	public void showCustomKeyboard(@NonNull View v) {
-		if (v != null) {
-			InputMethodManager imm = (InputMethodManager)context.getSystemService(Activity.INPUT_METHOD_SERVICE);
-			imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-		}
+		InputMethodManager imm = (InputMethodManager)context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 		keyboardView.setEnabled(true);
 		keyboardView.setVisibility(View.VISIBLE);
 		if (listener != null) {

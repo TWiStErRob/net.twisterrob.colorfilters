@@ -50,15 +50,15 @@ public class ImageFragment extends Fragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.fragment_image, container, false);
 	}
 
 	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
+	public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		original = (ImageView)view.findViewById(R.id.original);
+		original = view.findViewById(R.id.original);
 		original.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -73,7 +73,7 @@ public class ImageFragment extends Fragment {
 			}
 		});
 
-		preview = (ImageView)view.findViewById(R.id.preview);
+		preview = view.findViewById(R.id.preview);
 		preview.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -135,7 +135,7 @@ public class ImageFragment extends Fragment {
 		// Camera
 		List<Intent> camIntents = new ArrayList<>();
 		Intent captureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-		PackageManager packageManager = getActivity().getPackageManager();
+		PackageManager packageManager = requireActivity().getPackageManager();
 		List<ResolveInfo> listCam = packageManager.queryIntentActivities(captureIntent, 0);
 		for (ResolveInfo res : listCam) {
 			Intent intent = new Intent(captureIntent);
@@ -198,7 +198,7 @@ public class ImageFragment extends Fragment {
 	}
 
 	private @NonNull SharedPreferences getPrefs() {
-		return PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+		return PreferenceManager.getDefaultSharedPreferences(requireActivity().getApplicationContext());
 	}
 
 	public void setColorFilter(@Nullable ColorFilter colorFilter) {

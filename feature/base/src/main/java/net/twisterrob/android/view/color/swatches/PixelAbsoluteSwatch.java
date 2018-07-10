@@ -37,7 +37,6 @@ public class PixelAbsoluteSwatch extends Swatch {
 	};
 
 	@Override
-	@SuppressWarnings("deprecation")
 	public void draw(@NonNull Canvas canvas) {
 		if (bitmap == null) {
 			return;

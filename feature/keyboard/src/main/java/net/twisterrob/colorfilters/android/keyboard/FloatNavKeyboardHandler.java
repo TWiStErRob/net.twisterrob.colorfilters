@@ -60,11 +60,9 @@ public class FloatNavKeyboardHandler extends FloatKeyboardHandler {
 			int[] focusKeys = FOCUS_SEARCH[direction];
 			View focus = view;
 			if (focus != null && focusKeys[0] != FOCUS_NO) {
-				//noinspection ResourceType
 				focus = focus.focusSearch(focusKeys[0]); // View.findUserSetNextFocus
 			}
 			if (focus != null && focusKeys[1] != FOCUS_NO) {
-				//noinspection ResourceType
 				focus = focus.focusSearch(focusKeys[1]); // View.findUserSetNextFocus
 			}
 			if (focus != null) {

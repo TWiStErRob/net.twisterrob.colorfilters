@@ -66,16 +66,16 @@ public class PorterDuffFragment extends ColorFilterFragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.fragment_porterduff, container, false);
 	}
 
 	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
+	public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		rgbLabel = (TextView)view.findViewById(R.id.colorRGBLabel);
-		colorView = (ColorPickerView)view.findViewById(R.id.color);
+		rgbLabel = view.findViewById(R.id.colorRGBLabel);
+		colorView = view.findViewById(R.id.color);
 		colorView.setColorChangedListener(new ColorPickerView.OnColorChangedListener() {
 			@Override
 			public void colorChanged(int color) {
@@ -91,7 +91,7 @@ public class PorterDuffFragment extends ColorFilterFragment {
 			}
 		});
 
-		editor = (EditText)view.findViewById(R.id.colorEditor);
+		editor = view.findViewById(R.id.colorEditor);
 		editor.addTextChangedListener(new TextWatcherAdapter() {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -106,7 +106,7 @@ public class PorterDuffFragment extends ColorFilterFragment {
 			}
 		});
 
-		alphaSlider = (SeekBar)view.findViewById(R.id.colorAlpha);
+		alphaSlider = view.findViewById(R.id.colorAlpha);
 		alphaSlider.setOnSeekBarChangeListener(new OnSeekBarChangeAdapter() {
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -173,7 +173,8 @@ public class PorterDuffFragment extends ColorFilterFragment {
 		updateFilter();
 	}
 
-	@Override public void onSaveInstanceState(Bundle outState) {
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putInt(PREF_PORTERDUFF_SWATCH, colorView.getSwatches().indexOf(colorView.getSwatch()));
 	}

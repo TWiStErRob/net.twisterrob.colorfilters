@@ -54,15 +54,17 @@ public class ResourceFontFragment extends ColorFilterFragment {
 		return false;
 	}
 
-	@Override public @Nullable View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+	@Override
+	public @Nullable View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 			@Nullable Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.fragment_resfont, container, false);
 	}
 
-	@Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		TableLayout table = (TableLayout)view.findViewById(R.id.table);
+		TableLayout table = view.findViewById(R.id.table);
 		table.removeViews(1, table.getChildCount() - 1); // keep header
 		for (@StringRes int test : TESTS) {
 			createRow(table, test);
@@ -75,10 +77,10 @@ public class ResourceFontFragment extends ColorFilterFragment {
 		TableRow row = (TableRow)inflater.inflate(R.layout.inc_resfont_row, table, false);
 		table.addView(row);
 
-		TextView source = (TextView)row.findViewById(R.id.source);
-		TextView resultBlack = (TextView)row.findViewById(R.id.resultBlack);
-		TextView resultWhite = (TextView)row.findViewById(R.id.resultWhite);
-		TextView resolved = (TextView)row.findViewById(R.id.resolved);
+		TextView source = row.findViewById(R.id.source);
+		TextView resultBlack = row.findViewById(R.id.resultBlack);
+		TextView resultWhite = row.findViewById(R.id.resultWhite);
+		TextView resolved = row.findViewById(R.id.resolved);
 
 		source.setText(getString(R.string.cf_resfont_html_code));
 		try {
@@ -106,13 +108,13 @@ public class ResourceFontFragment extends ColorFilterFragment {
 		TableRow row = (TableRow)inflater.inflate(R.layout.inc_resfont_row, table, false);
 		table.addView(row);
 
-		TextView source = (TextView)row.findViewById(R.id.source);
-		TextView resultBlack = (TextView)row.findViewById(R.id.resultBlack);
-		TextView resultWhite = (TextView)row.findViewById(R.id.resultWhite);
-		TextView resolved = (TextView)row.findViewById(R.id.resolved);
+		TextView source = row.findViewById(R.id.source);
+		TextView resultBlack = row.findViewById(R.id.resultBlack);
+		TextView resultWhite = row.findViewById(R.id.resultWhite);
+		TextView resolved = row.findViewById(R.id.resolved);
 
 		String codeRes = getResources().getResourceEntryName(test) + "_code";
-		source.setText(getResources().getIdentifier(codeRes, "string", getContext().getPackageName()));
+		source.setText(getResources().getIdentifier(codeRes, "string", requireContext().getPackageName()));
 		try {
 			CharSequence resultText = getText(test);
 			resultBlack.setText(resultText);
@@ -125,7 +127,7 @@ public class ResourceFontFragment extends ColorFilterFragment {
 	}
 
 	private void setError(TableRow row, Exception ex) {
-		TextView resolved = (TextView)row.findViewById(R.id.resolved);
+		TextView resolved = row.findViewById(R.id.resolved);
 		TableRow.LayoutParams params = (TableRow.LayoutParams)resolved.getLayoutParams();
 		int resolvedAt = row.indexOfChild(resolved) + 1;
 		int removeCount = row.getChildCount() - resolvedAt;

@@ -198,6 +198,6 @@ public abstract class ColorFilterFragment extends Fragment {
 	}
 
 	protected SharedPreferences getPrefs() {
-		return PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+		return PreferenceManager.getDefaultSharedPreferences(requireContext().getApplicationContext());
 	}
 }

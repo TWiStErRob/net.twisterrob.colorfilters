@@ -51,24 +51,24 @@ public class LightingFragment extends ColorFilterFragment {
 	private ColorPickerView addColor;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.fragment_lighting, container, false);
 	}
 
 	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
+	public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		mulColor = (ColorPickerView)view.findViewById(R.id.mulColor);
-		EditText mulColorDesc = (EditText)view.findViewById(R.id.mulEditor);
-		TextView mulColorRGB = (TextView)view.findViewById(R.id.mulRGBLabel);
+		mulColor = view.findViewById(R.id.mulColor);
+		EditText mulColorDesc = view.findViewById(R.id.mulEditor);
+		TextView mulColorRGB = view.findViewById(R.id.mulRGBLabel);
 		View mulPreview = view.findViewById(R.id.mulPreview);
 		mulWiring = new Wiring(mulColor, mulColorDesc, mulColorRGB, mulPreview, DEFAULT_MUL);
 
-		addColor = (ColorPickerView)view.findViewById(R.id.addColor);
-		EditText addColorDesc = (EditText)view.findViewById(R.id.addEditor);
-		TextView addColorRGB = (TextView)view.findViewById(R.id.addRGBLabel);
+		addColor = view.findViewById(R.id.addColor);
+		EditText addColorDesc = view.findViewById(R.id.addEditor);
+		TextView addColorRGB = view.findViewById(R.id.addRGBLabel);
 		View addPreview = view.findViewById(R.id.addPreview);
 		addWiring = new Wiring(addColor, addColorDesc, addColorRGB, addPreview, DEFAULT_ADD);
 
@@ -91,7 +91,8 @@ public class LightingFragment extends ColorFilterFragment {
 		});
 	}
 
-	@Override public void onSaveInstanceState(Bundle outState) {
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putInt(PREF_LIGHTING_MUL_SWATCH, mulColor.getSwatches().indexOf(mulColor.getSwatch()));
 		outState.putInt(PREF_LIGHTING_ADD_SWATCH, addColor.getSwatches().indexOf(addColor.getSwatch()));

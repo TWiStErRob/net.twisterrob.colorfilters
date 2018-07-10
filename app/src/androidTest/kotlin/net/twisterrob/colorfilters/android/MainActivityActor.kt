@@ -49,7 +49,7 @@ class MainActivityActor {
 	}
 
 	private fun spinner() = allOf(
-			withParent(withId(R.id.action_bar)),
-			withClassName(equalTo("android.support.v7.widget.AppCompatSpinner"))
+		withParent(withId(R.id.action_bar)),
+		withClassName(equalTo("android.support.v7.widget.AppCompatSpinner"))
 	)
 }

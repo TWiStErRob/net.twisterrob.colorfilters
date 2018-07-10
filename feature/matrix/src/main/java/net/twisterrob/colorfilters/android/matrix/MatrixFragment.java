@@ -48,14 +48,14 @@ public class MatrixFragment extends ColorFilterFragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.fragment_matrix, container, false);
 	}
 
 	private final CentralRefreshListener listener = new CentralRefreshListener();
 
 	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
+	public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
 		listener.disable();
@@ -117,7 +117,7 @@ public class MatrixFragment extends ColorFilterFragment {
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putBoolean(SAVE_EDITOR_DIRTY, dirty);
 		outState.putIntArray(SAVE_ORDER_MAP, order.getMap());

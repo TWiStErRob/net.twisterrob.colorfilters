@@ -71,7 +71,7 @@ public class KeyboardView extends android.inputmethodservice.KeyboardView {
 	}
 
 	@Override
-	public void onDraw(@NonNull Canvas canvas) {
+	public void onDraw(@SuppressWarnings("NullableProblems") @NonNull Canvas canvas) {
 		super.onDraw(canvas);
 	}
 }

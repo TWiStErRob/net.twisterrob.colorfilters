@@ -26,7 +26,7 @@ dependencies {
 android {
 	defaultConfig {
 		applicationId 'net.twisterrob.colorfilters'
-		targetSdkVersion 19
+		targetSdkVersion 27
 
 		testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 	}

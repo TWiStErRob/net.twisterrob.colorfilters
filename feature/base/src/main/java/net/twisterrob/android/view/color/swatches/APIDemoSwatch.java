@@ -72,15 +72,16 @@ public class APIDemoSwatch extends Swatch {
 
 	@Override
 	public int findColor(int area, float x, float y) {
-		if (area == AREA_DEFAULT) {
-			x -= getBounds().exactCenterX();
-			y -= getBounds().exactCenterY();
-			float unit = APIMath.angleAsUnit(x, y);
-			return APIMath.interpColor(COLORS, unit);
-		} else if (area == AREA_CENTER) {
-			return getCurrentColor();
-		} else {
-			throw invalidArea(area, x, y);
+		switch (area) {
+			case AREA_DEFAULT:
+				x -= getBounds().exactCenterX();
+				y -= getBounds().exactCenterY();
+				float unit = APIMath.angleAsUnit(x, y);
+				return APIMath.interpColor(COLORS, unit);
+			case AREA_CENTER:
+				return getCurrentColor();
+			default:
+				throw invalidArea(area, x, y);
 		}
 	}
 

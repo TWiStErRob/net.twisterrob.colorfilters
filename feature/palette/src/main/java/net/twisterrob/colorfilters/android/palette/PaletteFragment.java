@@ -106,27 +106,27 @@ public class PaletteFragment extends ColorFilterFragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_palette, container, false);
-		ListView list = (ListView)view.findViewById(android.R.id.list);
+		ListView list = view.findViewById(android.R.id.list);
 		list.addHeaderView(inflater.inflate(R.layout.inc_palette_header, list, false));
 		return view;
 	}
 
 	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
+	public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		numSwatches = (TextView)view.findViewById(R.id.numPalette);
+		numSwatches = view.findViewById(R.id.numPalette);
 
-		numColorSlider = (SeekBar)view.findViewById(R.id.numColors);
+		numColorSlider = view.findViewById(R.id.numColors);
 		numColorSlider.setOnSeekBarChangeListener(new OnSeekBarChangeAdapter() {
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 				updateNumColors(progress + 1, UpdateOrigin.Slider);
 			}
 		});
-		numColorEditor = (EditText)view.findViewById(R.id.numEditor);
+		numColorEditor = view.findViewById(R.id.numEditor);
 		getKeyboard().registerEditText(numColorEditor);
 		numColorEditor.addTextChangedListener(new TextWatcherAdapter() {
 			@Override
@@ -142,14 +142,14 @@ public class PaletteFragment extends ColorFilterFragment {
 			}
 		});
 
-		resizeDimenSlider = (SeekBar)view.findViewById(R.id.resizeDimen);
+		resizeDimenSlider = view.findViewById(R.id.resizeDimen);
 		resizeDimenSlider.setOnSeekBarChangeListener(new OnSeekBarChangeAdapter() {
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 				updateResizeDimen(progress + 1, UpdateOrigin.Slider);
 			}
 		});
-		resizeDimenEditor = (EditText)view.findViewById(R.id.resizeDimenEditor);
+		resizeDimenEditor = view.findViewById(R.id.resizeDimenEditor);
 		getKeyboard().registerEditText(resizeDimenEditor);
 		resizeDimenEditor.addTextChangedListener(new TextWatcherAdapter() {
 			@Override
@@ -165,7 +165,7 @@ public class PaletteFragment extends ColorFilterFragment {
 			}
 		});
 
-		swatchList = (ListView)view.findViewById(android.R.id.list);
+		swatchList = view.findViewById(android.R.id.list);
 		swatchList.setOnItemClickListener(new OnItemClickListener() {
 			@Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				swatchList.setItemChecked(position, true);
@@ -246,13 +246,13 @@ public class PaletteFragment extends ColorFilterFragment {
 		});
 		swatchList.setAdapter(swatchAdapter);
 
-		swatchDisplay = (Spinner)view.findViewById(R.id.swatchSort);
+		swatchDisplay = view.findViewById(R.id.swatchSort);
 		PaletteAdapter.Display[] values = PaletteAdapter.Display.values();
 		String[] displays = new String[values.length];
 		for (int i = 0; i < values.length; i++) {
 			displays[i] = values[i].getTitle();
 		}
-		swatchDisplay.setAdapter(new ArrayAdapter<>(getActivity(),
+		swatchDisplay.setAdapter(new ArrayAdapter<>(requireContext(),
 				android.R.layout.simple_spinner_dropdown_item, android.R.id.text1, displays));
 		swatchDisplay.setOnItemSelectedListener(new OnItemSelectedListener() {
 			@Override public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -328,7 +328,8 @@ public class PaletteFragment extends ColorFilterFragment {
 		updateFilter();
 	}
 
-	@Override public void onSaveInstanceState(Bundle outState) {
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putInt(PREF_PALETTE_DISPLAY, swatchDisplay.getSelectedItemPosition());
 	}
@@ -419,10 +420,10 @@ public class PaletteFragment extends ColorFilterFragment {
 
 		private static class ViewHolder {
 			ViewHolder(View view) {
-				colorText = (TextView)view.findViewById(R.id.color);
-				population = (TextView)view.findViewById(R.id.population);
-				titleText = (TextView)view.findViewById(R.id.titleText);
-				bodyText = (TextView)view.findViewById(R.id.bodyText);
+				colorText = view.findViewById(R.id.color);
+				population = view.findViewById(R.id.population);
+				titleText = view.findViewById(R.id.titleText);
+				bodyText = view.findViewById(R.id.bodyText);
 			}
 
 			TextView colorText;

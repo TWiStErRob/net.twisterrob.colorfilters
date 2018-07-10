@@ -82,8 +82,10 @@ public class BitmapKeeper extends Fragment {
 		BitmapKeeper fragment = getCurrent(fragmentManager);
 		if (fragment == null) {
 			fragment = new BitmapKeeper();
-			fragmentManager.beginTransaction().add(fragment, FRAGMENT_TAG).commitAllowingStateLoss();
-			fragmentManager.executePendingTransactions(); // to make .save then .into work immediately after
+			fragmentManager
+					.beginTransaction()
+					.add(fragment, FRAGMENT_TAG)
+					.commitAllowingStateLoss();
 		}
 		return fragment;
 	}

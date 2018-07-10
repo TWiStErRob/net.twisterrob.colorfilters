@@ -18,10 +18,10 @@ import kotlin.reflect.KClass
  * Includes some Magic ported from TestPackageIntentRule and TestActivityCompat in Inventory.
  */
 class ColorFilterFragmentHost(
-		val listener: ColorFilterFragment.Listener = mock(defaultAnswer = Answers.RETURNS_DEEP_STUBS)
+	val listener: ColorFilterFragment.Listener = mock(defaultAnswer = Answers.RETURNS_DEEP_STUBS)
 ) :
-		AppCompatActivity(),
-		ColorFilterFragment.Listener by listener {
+	AppCompatActivity(),
+	ColorFilterFragment.Listener by listener {
 
 	override fun attachBaseContext(ignored: Context) {
 		super.attachBaseContext(InstrumentationRegistry.getTargetContext())
@@ -42,9 +42,9 @@ class ColorFilterFragmentHost(
 		if (savedInstanceState == null) {
 			val fragment = Fragment.instantiate(this, intent.getStringExtra(EXTRA_FRAGMENT))
 			supportFragmentManager
-					.beginTransaction()
-					.add(R.id.fragment_container, fragment)
-					.commit()
+				.beginTransaction()
+				.add(R.id.fragment_container, fragment)
+				.commit()
 		}
 	}
 
@@ -64,7 +64,7 @@ class ColorFilterFragmentHost(
 				val intent = Intent()
 
 				override fun getActivityIntent() = intent
-						.putExtra(EXTRA_FRAGMENT, clazz.qualifiedName)
+					.putExtra(EXTRA_FRAGMENT, clazz.qualifiedName)
 
 				override fun beforeActivityLaunched() {
 					// set the package and class properly

@@ -5,7 +5,6 @@ import android.os.*;
 import android.preference.PreferenceActivity;
 
 public class PreferencesActivity extends PreferenceActivity {
-	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

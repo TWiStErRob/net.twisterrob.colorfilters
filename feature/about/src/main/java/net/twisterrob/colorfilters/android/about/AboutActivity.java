@@ -27,7 +27,7 @@ public class AboutActivity extends ListActivity {
 		licenceContents = getResources().getTextArray(R.array.cf_about_licences_content);
 
 		// views inside ListView.headerView
-		TextView feedback = (TextView)findViewById(R.id.about_feedback);
+		TextView feedback = findViewById(R.id.about_feedback);
 		feedback.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -41,17 +41,17 @@ public class AboutActivity extends ListActivity {
 				startActivity(intent);
 			}
 		});
-		TextView name = (TextView)findViewById(R.id.about_name);
+		TextView name = findViewById(R.id.about_name);
 		name.setText(getApplicationInfo().labelRes);
 		name.setSelected(true);
-		TextView version = (TextView)findViewById(R.id.about_version);
+		TextView version = findViewById(R.id.about_version);
 		version.setText(getString(R.string.cf_about_version, BuildConfig.VERSION_NAME));
-		TextView pkg = (TextView)findViewById(R.id.about_package);
+		TextView pkg = findViewById(R.id.about_package);
 		pkg.setText(getApplicationContext().getPackageName());
 		version.setSelected(true);
 		pkg.setSelected(true);
 		pkg.setVisibility(getResources().getBoolean(R.bool.in_test)? View.VISIBLE : View.GONE);
-		ImageView icon = (ImageView)findViewById(R.id.about_icon);
+		ImageView icon = findViewById(R.id.about_icon);
 		icon.setImageResource(getApplicationInfo().icon);
 	}
 
@@ -69,7 +69,7 @@ public class AboutActivity extends ListActivity {
 
 	private View createContents(CharSequence content) {
 		@SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.dialog_about_licence, null);
-		TextView message = (TextView)view.findViewById(android.R.id.message);
+		TextView message = view.findViewById(android.R.id.message);
 		message.setText(content);
 		message.setMovementMethod(LinkMovementMethod.getInstance());
 		return view;
