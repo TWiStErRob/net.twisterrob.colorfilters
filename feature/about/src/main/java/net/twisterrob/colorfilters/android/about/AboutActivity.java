@@ -3,6 +3,7 @@ package net.twisterrob.colorfilters.android.about;
 import android.annotation.SuppressLint;
 import android.app.*;
 import android.content.Intent;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
@@ -45,7 +46,7 @@ public class AboutActivity extends ListActivity {
 		name.setText(getApplicationInfo().labelRes);
 		name.setSelected(true);
 		TextView version = findViewById(R.id.about_version);
-		version.setText(getString(R.string.cf_about_version, BuildConfig.VERSION_NAME));
+		version.setText(getString(R.string.cf_about_version, getVersionName()));
 		TextView pkg = findViewById(R.id.about_package);
 		pkg.setText(getApplicationContext().getPackageName());
 		version.setSelected(true);
@@ -53,6 +54,14 @@ public class AboutActivity extends ListActivity {
 		pkg.setVisibility(getResources().getBoolean(R.bool.in_test)? View.VISIBLE : View.GONE);
 		ImageView icon = findViewById(R.id.about_icon);
 		icon.setImageResource(getApplicationInfo().icon);
+	}
+
+	private String getVersionName() {
+		try {
+			return getApplicationContext().getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+		} catch (NameNotFoundException e) {
+			return "error";
+		}
 	}
 
 	@Override
