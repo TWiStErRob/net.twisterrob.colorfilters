@@ -212,6 +212,7 @@ import android.view.View.DragShadowBuilder;
 			return true;
 		}
 
+		@SuppressWarnings("deprecation")
 		private void setBackground(View dropTarget, int drawableResourceID) {
 			Drawable drawable = dropTarget.getResources().getDrawable(drawableResourceID);
 			dropTarget.setBackgroundDrawable(drawable);
