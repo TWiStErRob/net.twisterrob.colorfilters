@@ -5,7 +5,6 @@ import android.app.AlertDialog
 import android.content.*
 import android.content.res.Configuration
 import android.graphics.Bitmap
-import android.graphics.Color
 import android.graphics.ColorFilter
 import android.net.Uri
 import android.os.Build
@@ -36,7 +35,7 @@ abstract class ColorFilterFragment : Fragment() {
 
 	protected val keyboard: KeyboardHandler get() = listener.keyboard
 
-	protected abstract val preferredKeyboardMode: KeyboardMode
+	abstract val preferredKeyboardMode: KeyboardMode
 
 	protected val currentBitmap: Bitmap? get() = listener.currentBitmap
 
@@ -119,7 +118,7 @@ abstract class ColorFilterFragment : Fragment() {
 		keyboard.hideCustomKeyboard()
 	}
 
-	protected open fun imageChanged() {
+	open fun imageChanged() {
 		// noop by default, use currentBitmap to query Bitmap if needed
 	}
 
@@ -185,10 +184,5 @@ abstract class ColorFilterFragment : Fragment() {
 		@JvmStatic
 		protected fun colorToARGBHexString(prefix: String, @ColorInt color: Int): String =
 			"%s%08X".format(Locale.ROOT, prefix, color)
-
-		@Suppress("NOTHING_TO_INLINE") protected inline fun Int.red() = Color.red(this)
-		@Suppress("NOTHING_TO_INLINE") protected inline fun Int.green() = Color.red(this)
-		@Suppress("NOTHING_TO_INLINE") protected inline fun Int.blue() = Color.red(this)
-		@Suppress("NOTHING_TO_INLINE") protected inline fun Int.alpha() = Color.red(this)
 	}
 }
