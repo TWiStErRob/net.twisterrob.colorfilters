@@ -37,7 +37,9 @@ class CenterBitmapDrawer(
 	companion object {
 
 		@JvmStatic
-		@Suppress("ConvertReferenceToLambda")
-		fun factory() = BitmapDrawer.Factory(::CenterBitmapDrawer)
+		fun factory() = object : BitmapDrawer.Factory {
+			override fun create(bitmap: IntArray, w: Int, h: Int, pixel: PixelColor) =
+				CenterBitmapDrawer(bitmap, w, h, pixel)
+		}
 	}
 }

@@ -43,9 +43,10 @@ class PixelAbsoluteSwatch(
 		super.onBoundsChange(bounds)
 		val w = bounds.width()
 		val h = bounds.height()
-		this.bitmap = IntArray(w * h)
+		val bitmap = IntArray(w * h).also { this.bitmap = it }
+		this.bitmap = bitmap
 		val drawer = drawerFactory.create(bitmap, w, h, pixels).apply {
-			setCallback(invalidate)
+			callback = this@PixelAbsoluteSwatch.invalidate
 		}
 		drawer.draw()
 	}

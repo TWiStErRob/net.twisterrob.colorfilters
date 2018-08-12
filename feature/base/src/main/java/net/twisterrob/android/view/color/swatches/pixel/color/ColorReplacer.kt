@@ -18,13 +18,9 @@ class ColorReplacer(
 
 		@JvmStatic
 		fun wrap(factory: Factory, findColor: Int, replaceColor: Int) =
-			BitmapDrawer.Factory { bitmap, w, h, color ->
-				factory.create(
-					bitmap,
-					w,
-					h,
-					ColorReplacer(color, findColor, replaceColor)
-				)
+			object : BitmapDrawer.Factory {
+				override fun create(bitmap: IntArray, w: Int, h: Int, pixel: PixelColor) =
+					factory.create(bitmap, w, h, ColorReplacer(pixel, findColor, replaceColor))
 			}
 	}
 }

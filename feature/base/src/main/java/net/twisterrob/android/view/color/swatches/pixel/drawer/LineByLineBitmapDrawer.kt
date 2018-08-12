@@ -20,7 +20,9 @@ class LineByLineBitmapDrawer(
 	companion object {
 
 		@JvmStatic
-		@Suppress("ConvertReferenceToLambda")
-		fun factory() = BitmapDrawer.Factory(::LineByLineBitmapDrawer)
+		fun factory() = object : BitmapDrawer.Factory {
+			override fun create(bitmap: IntArray, w: Int, h: Int, pixel: PixelColor) =
+				LineByLineBitmapDrawer(bitmap, w, h, pixel)
+		}
 	}
 }

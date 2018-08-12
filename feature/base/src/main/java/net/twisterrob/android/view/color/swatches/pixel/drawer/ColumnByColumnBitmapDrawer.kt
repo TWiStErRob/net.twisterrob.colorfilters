@@ -20,7 +20,9 @@ class ColumnByColumnBitmapDrawer(
 	companion object {
 
 		@JvmStatic
-		@Suppress("ConvertReferenceToLambda")
-		fun factory() = BitmapDrawer.Factory(::ColumnByColumnBitmapDrawer)
+		fun factory() = object : BitmapDrawer.Factory {
+			override fun create(bitmap: IntArray, w: Int, h: Int, pixel: PixelColor) =
+				ColumnByColumnBitmapDrawer(bitmap, w, h, pixel)
+		}
 	}
 }
