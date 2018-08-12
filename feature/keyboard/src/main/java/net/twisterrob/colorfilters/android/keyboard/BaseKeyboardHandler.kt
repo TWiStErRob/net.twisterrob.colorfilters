@@ -31,22 +31,28 @@ abstract class BaseKeyboardHandler(
 	protected val keyboardView: KeyboardView
 ) : KeyboardHandler {
 
-	private var haptic: Boolean = false
 	private val context: Context = keyboardView.context.applicationContext
-	private var listener: CustomKeyboardListener? = null
+
+	override var hapticFeedback: Boolean = false
+		set(value) {
+			keyboardView.isHapticFeedbackEnabled = value
+			field = value
+		}
+
+	override var customKeyboardListener: CustomKeyboardListener? = null
 
 	init {
 		hideCustomKeyboard()
 		window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 		keyboardView.isPreviewEnabled = false
-		setHapticFeedback(true)
+		hapticFeedback = true
 	}
 
 	override fun hideCustomKeyboard() {
 		keyboardView.visibility = View.GONE
 		keyboardView.isEnabled = false
 		clearFocus()
-		listener?.customKeyboardHidden()
+		customKeyboardListener?.customKeyboardHidden()
 	}
 
 	private fun clearFocus() {
@@ -58,7 +64,7 @@ abstract class BaseKeyboardHandler(
 		imm.hideSoftInputFromWindow(v.windowToken, 0)
 		keyboardView.isEnabled = true
 		keyboardView.visibility = View.VISIBLE
-		listener?.customKeyboardShown()
+		customKeyboardListener?.customKeyboardShown()
 	}
 
 	override fun registerEditText(editText: EditText) {
@@ -86,11 +92,6 @@ abstract class BaseKeyboardHandler(
 		editText.clearFocus()
 	}
 
-	override fun setHapticFeedback(haptic: Boolean) {
-		keyboardView.isHapticFeedbackEnabled = haptic
-		this.haptic = haptic
-	}
-
 	override fun handleBack(): Boolean {
 		if (keyboardView.handleBack()) {
 			return true
@@ -100,10 +101,6 @@ abstract class BaseKeyboardHandler(
 			return true
 		}
 		return false
-	}
-
-	override fun setCustomKeyboardListener(listener: CustomKeyboardListener) {
-		this.listener = listener
 	}
 
 	@Suppress("unused")
@@ -198,7 +195,7 @@ abstract class BaseKeyboardHandler(
 		protected abstract fun onKey(editor: EditText, primaryCode: Int, keyCodes: IntArray): Boolean
 
 		override fun onPress(primaryCode: Int) {
-			if (haptic && primaryCode != 0) {
+			if (hapticFeedback && primaryCode != 0) {
 				keyboardView.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
 			}
 			//findEdit().onKeyDown(primaryCode, KeyEvent(KeyEvent.ACTION_DOWN, primaryCode))

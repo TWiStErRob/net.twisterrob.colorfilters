@@ -20,9 +20,9 @@ interface KeyboardHandler {
 
 	fun unregisterEditText(editText: EditText)
 
-	fun setHapticFeedback(haptic: Boolean)
+	var hapticFeedback: Boolean
 
 	fun handleBack(): Boolean
 
-	fun setCustomKeyboardListener(listener: CustomKeyboardListener)
+	var customKeyboardListener: CustomKeyboardListener?
 }
