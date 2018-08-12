@@ -24,10 +24,6 @@ public class LightingFragment extends ColorFilterFragment {
 	private Wiring mulWiring;
 	private Wiring addWiring;
 
-	public static LightingFragment newInstance() {
-		return new LightingFragment();
-	}
-
 	@Override
 	protected void displayHelp() {
 		displayHelp(R.string.cf_lighting_info_title, R.string.cf_lighting_info);
@@ -43,7 +39,7 @@ public class LightingFragment extends ColorFilterFragment {
 	}
 
 	@Override
-	protected @NonNull KeyboardMode getPreferredKeyboardMode() {
+	public @NonNull KeyboardMode getPreferredKeyboardMode() {
 		return KeyboardMode.Hex;
 	}
 

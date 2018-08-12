@@ -35,7 +35,7 @@ abstract class ColorFilterFragment : Fragment() {
 
 	protected val keyboard: KeyboardHandler get() = listener.keyboard
 
-	protected abstract val preferredKeyboardMode: KeyboardMode
+	abstract val preferredKeyboardMode: KeyboardMode
 
 	protected val currentBitmap: Bitmap? get() = listener.currentBitmap
 
@@ -118,7 +118,7 @@ abstract class ColorFilterFragment : Fragment() {
 		keyboard.hideCustomKeyboard()
 	}
 
-	protected open fun imageChanged() {
+	open fun imageChanged() {
 		// noop by default, use currentBitmap to query Bitmap if needed
 	}
 

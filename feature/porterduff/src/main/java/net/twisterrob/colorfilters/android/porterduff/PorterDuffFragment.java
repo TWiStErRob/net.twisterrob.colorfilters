@@ -45,10 +45,6 @@ public class PorterDuffFragment extends ColorFilterFragment {
 		}
 	}
 
-	public static PorterDuffFragment newInstance() {
-		return new PorterDuffFragment();
-	}
-
 	@Override
 	protected void displayHelp() {
 		displayHelp(R.string.cf_porterduff_info_title, R.string.cf_porterduff_info);
@@ -61,7 +57,7 @@ public class PorterDuffFragment extends ColorFilterFragment {
 	}
 
 	@Override
-	protected @NonNull KeyboardMode getPreferredKeyboardMode() {
+	public @NonNull KeyboardMode getPreferredKeyboardMode() {
 		return KeyboardMode.Hex;
 	}
 

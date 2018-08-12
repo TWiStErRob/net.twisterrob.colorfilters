@@ -16,7 +16,7 @@ import android.widget.*;
 import android.widget.AdapterView.*;
 
 import net.twisterrob.android.view.listeners.*;
-import net.twisterrob.colorfilters.android.*;
+import net.twisterrob.colorfilters.android.ColorFilterFragment;
 import net.twisterrob.colorfilters.android.keyboard.*;
 
 public class PaletteFragment extends ColorFilterFragment {
@@ -43,10 +43,6 @@ public class PaletteFragment extends ColorFilterFragment {
 
 	private boolean pendingUpdate;
 
-	public static PaletteFragment newInstance() {
-		return new PaletteFragment();
-	}
-
 	@Override
 	protected void displayHelp() {
 		displayHelp(R.string.cf_palette_info_title, R.string.cf_palette_info);
@@ -69,7 +65,7 @@ public class PaletteFragment extends ColorFilterFragment {
 		super.updateFilter();
 	}
 
-	@Override protected void imageChanged() {
+	@Override public void imageChanged() {
 		lastImage = getCurrentBitmap();
 		if (lastImage != null) {
 			boolean wasAtMax = resizeDimenSlider.getMax() == resizeDimenSlider.getProgress();
@@ -101,7 +97,7 @@ public class PaletteFragment extends ColorFilterFragment {
 	}
 
 	@Override
-	protected @NonNull KeyboardMode getPreferredKeyboardMode() {
+	public @NonNull KeyboardMode getPreferredKeyboardMode() {
 		return KeyboardMode.Float;
 	}
 

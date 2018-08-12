@@ -3,10 +3,10 @@ package net.twisterrob.colorfilters.android.matrix;
 import android.content.SharedPreferences;
 import android.graphics.*;
 import android.os.Bundle;
-import android.support.annotation.*;
+import android.support.annotation.NonNull;
 import android.view.*;
 
-import net.twisterrob.colorfilters.android.*;
+import net.twisterrob.colorfilters.android.ColorFilterFragment;
 import net.twisterrob.colorfilters.android.keyboard.*;
 
 import static net.twisterrob.colorfilters.android.matrix.Component.*;
@@ -28,10 +28,6 @@ public class MatrixFragment extends ColorFilterFragment {
 	private boolean dirty;
 	private MatrixComponent editor;
 
-	public static MatrixFragment newInstance() {
-		return new MatrixFragment();
-	}
-
 	@Override
 	protected void displayHelp() {
 		displayHelp(R.string.cf_matrix_info_title, R.string.cf_matrix_info);
@@ -43,7 +39,7 @@ public class MatrixFragment extends ColorFilterFragment {
 	}
 
 	@Override
-	protected @NonNull KeyboardMode getPreferredKeyboardMode() {
+	public @NonNull KeyboardMode getPreferredKeyboardMode() {
 		return KeyboardMode.FloatNav;
 	}
 

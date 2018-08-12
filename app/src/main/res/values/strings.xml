@@ -6,7 +6,7 @@
 	<string name="cf_porterduff_title">Porter/Duff</string>
 	<string name="cf_matrix_title">Color Matrix</string>
 	<string name="cf_palette_title">Palette</string>
-	<!--<string name="cf_resfont_title">String Resources</string>-->
+	<string name="cf_resfont_title">String Resources</string>
 
 	<string name="cf_image_show">Show images</string>
 

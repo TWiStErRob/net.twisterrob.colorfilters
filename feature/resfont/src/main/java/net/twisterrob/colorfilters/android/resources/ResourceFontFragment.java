@@ -9,7 +9,7 @@ import android.text.style.ForegroundColorSpan;
 import android.view.*;
 import android.widget.*;
 
-import net.twisterrob.colorfilters.android.*;
+import net.twisterrob.colorfilters.android.ColorFilterFragment;
 import net.twisterrob.colorfilters.android.keyboard.KeyboardMode;
 import net.twisterrob.colorfilters.android.resfont.R;
 
@@ -31,11 +31,7 @@ public class ResourceFontFragment extends ColorFilterFragment {
 			R.string.cf_resfont_col_old,
 	};
 
-	public static ResourceFontFragment newInstance() {
-		return new ResourceFontFragment();
-	}
-
-	@Override protected @NonNull KeyboardMode getPreferredKeyboardMode() {
+	@Override public @NonNull KeyboardMode getPreferredKeyboardMode() {
 		return KeyboardMode.NATIVE;
 	}
 	@Override protected void displayHelp() {
