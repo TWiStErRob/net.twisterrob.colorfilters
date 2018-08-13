@@ -89,7 +89,8 @@ class MainActivity : AppCompatActivity(), ColorFilterFragment.Listener, ImageFra
 				getText(R.string.cf_porterduff_title),
 				getText(R.string.cf_matrix_title),
 				getText(R.string.cf_palette_title)
-//				,getText(R.string.cf_resfont_title)
+			) + if (!BuildConfig.DEBUG) emptyArray<CharSequence>() else arrayOf(
+				getText(R.string.cf_resfont_title)
 			)
 		)
 		actionBar.setListNavigationCallbacks(adapter, ActionBar.OnNavigationListener { position, _ ->
@@ -240,7 +241,7 @@ class MainActivity : AppCompatActivity(), ColorFilterFragment.Listener, ImageFra
 	}
 
 	override fun renderCurrentView(title: CharSequence, description: CharSequence): Uri {
-		val shareContent = images.renderPreview()!!
+		val shareContent = images.renderPreview()
 		val uri =
 			Images.Media.insertImage(contentResolver, shareContent, title.toString(), description.toString())!!
 		return Uri.parse(uri)
