@@ -27,7 +27,6 @@ import net.twisterrob.colorfilters.android.keyboard.KeyboardHandler
 import net.twisterrob.colorfilters.android.keyboard.KeyboardMode
 import net.twisterrob.colorfilters.base.R
 import net.twisterrob.colorfilters.base.R.string
-import java.util.*
 
 abstract class ColorFilterFragment : Fragment() {
 
@@ -155,7 +154,6 @@ abstract class ColorFilterFragment : Fragment() {
 
 	companion object {
 
-		@JvmStatic
 		@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 		fun copyToClipboard(context: Context, title: CharSequence, content: CharSequence) {
 			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
@@ -169,20 +167,18 @@ abstract class ColorFilterFragment : Fragment() {
 			}
 		}
 
-		@JvmStatic
-		protected fun colorToRGBString(@ColorInt color: Int): String =
-			"%d, %d, %d".format(Locale.ROOT, color.red(), color.green(), color.blue())
+		// TODO consider extensions in ColorUtils.kt?
 
-		@JvmStatic
-		protected fun colorToARGBString(@ColorInt color: Int): String =
-			"%d, %d, %d, %d".format(Locale.ROOT, color.alpha(), color.red(), color.green(), color.blue())
+		fun colorToRGBString(@ColorInt color: Int): String =
+			"%d, %d, %d".formatRoot(color.red(), color.green(), color.blue())
 
-		@JvmStatic
-		protected fun colorToRGBHexString(prefix: String, @ColorInt color: Int): String =
-			"%s%06X".format(Locale.ROOT, prefix, 0xFFFFFF and color)
+		fun colorToARGBString(@ColorInt color: Int): String =
+			"%d, %d, %d, %d".formatRoot(color.alpha(), color.red(), color.green(), color.blue())
 
-		@JvmStatic
-		protected fun colorToARGBHexString(prefix: String, @ColorInt color: Int): String =
-			"%s%08X".format(Locale.ROOT, prefix, color)
+		fun colorToRGBHexString(prefix: String, @ColorInt color: Int): String =
+			"%s%06X".formatRoot(prefix, 0xFFFFFF and color)
+
+		fun colorToARGBHexString(prefix: String, @ColorInt color: Int): String =
+			"%s%08X".formatRoot(prefix, color)
 	}
 }
