@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import net.twisterrob.android.view.color.ColorPickerView
-import net.twisterrob.android.view.color.swatchIndex
 import net.twisterrob.android.view.listeners.TextWatcherAdapter
 import net.twisterrob.colorfilters.android.ColorFilterFragment
 import net.twisterrob.colorfilters.android.keyboard.KeyboardHandler

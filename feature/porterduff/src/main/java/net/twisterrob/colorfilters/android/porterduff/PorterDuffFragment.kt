@@ -38,7 +38,6 @@ import android.widget.SeekBar
 import android.widget.TextView
 import net.twisterrob.android.view.CheckableButtonManager
 import net.twisterrob.android.view.color.ColorPickerView
-import net.twisterrob.android.view.color.swatchIndex
 import net.twisterrob.android.view.listeners.OnSeekBarChangeAdapter
 import net.twisterrob.android.view.listeners.TextWatcherAdapter
 import net.twisterrob.colorfilters.android.ColorFilterFragment
@@ -116,8 +115,10 @@ class PorterDuffFragment : ColorFilterFragment() {
 
 		rgbLabel = view.findViewById(R.id.colorRGBLabel)
 		colorView = view.findViewById(R.id.color)
-		colorView.colorChangedListener = ColorPickerView.OnColorChangedListener { color ->
-			updateColor(color.replaceAlphaFrom(currentColor), UpdateOrigin.Picker)
+		colorView.colorChangedListener = object : ColorPickerView.OnColorChangedListener {
+			override fun colorChanged(color: Int) {
+				updateColor(color.replaceAlphaFrom(currentColor), UpdateOrigin.Picker)
+			}
 		}
 		colorPreview = view.findViewById(R.id.colorPreview)
 		colorPreview.setOnClickListener { updateColor(DEFAULT_COLOR, null) }
