@@ -142,37 +142,32 @@ class LightingFragment : ColorFilterFragment() {
 		private val rgbLabel: TextView,
 		private val preview: View,
 		private val defaultColor: Int
-	) : // TODO change these to lambdas
-		TextWatcherAdapter(),
-		ColorPickerView.OnColorChangedListener,
-		View.OnClickListener {
+	) {
 
 		private var pendingUpdate: Boolean = false
 
 		init {
 			colorView.isContinuousMode = true
-			preview.setOnClickListener(this)
-			editor.addTextChangedListener(this)
-			colorView.colorChangedListener = this
-			keyboard.registerEditText(editor)
-		}
-
-		override fun /*colorView.*/colorChanged(color: Int) {
-			updateColor(color, UpdateOrigin.Picker)
-		}
-
-		override fun /*descView.*/onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-			try {
-				val color = Color.parseColor("#" + s.toString())
-				updateColor(color, UpdateOrigin.Editor)
-				editor.error = null
-			} catch (ex: RuntimeException) {
-				editor.error = ex.message
+			preview.setOnClickListener {
+				updateColor(defaultColor, null)
 			}
-		}
-
-		override fun /*preview.*/onClick(v: View) {
-			updateColor(defaultColor, null)
+			editor.addTextChangedListener(object : TextWatcherAdapter() {
+				override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+					try {
+						val color = Color.parseColor("#" + s.toString())
+						updateColor(color, UpdateOrigin.Editor)
+						editor.error = null
+					} catch (ex: RuntimeException) {
+						editor.error = ex.message
+					}
+				}
+			})
+			colorView.colorChangedListener = object : ColorPickerView.OnColorChangedListener {
+				override fun colorChanged(color: Int) {
+					updateColor(color, UpdateOrigin.Picker)
+				}
+			}
+			keyboard.registerEditText(editor)
 		}
 
 		fun updateColor(color: Int, origin: UpdateOrigin?) {
