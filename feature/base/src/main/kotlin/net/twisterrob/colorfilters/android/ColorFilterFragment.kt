@@ -137,7 +137,7 @@ abstract class ColorFilterFragment : Fragment() {
 
 	abstract fun reset()
 
-	open fun needsImages() = true // TODO property
+	open val needsImages = true
 
 	interface Listener {
 

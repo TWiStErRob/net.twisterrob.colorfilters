@@ -49,7 +49,7 @@ class ResourceFontFragment : ColorFilterFragment() {
 
 	override fun reset() {}
 
-	override fun needsImages() = false
+	override val needsImages = false
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
 		inflater.inflate(R.layout.fragment_resfont, container, false)

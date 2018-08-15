@@ -168,7 +168,7 @@ class MainActivity : AppCompatActivity(), ColorFilterFragment.Listener, ImageFra
 	private fun updateImagesVisibility() {
 		supportFragmentManager.beginTransaction().apply {
 			val fragment = currentFragment
-			if (imageToggleItem.isChecked && fragment != null && fragment.needsImages()) {
+			if (imageToggleItem.isChecked && fragment != null && fragment.needsImages) {
 				show(images)
 			} else {
 				hide(images)
