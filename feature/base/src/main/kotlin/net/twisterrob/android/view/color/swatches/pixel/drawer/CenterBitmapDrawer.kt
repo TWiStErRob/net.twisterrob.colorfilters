@@ -33,13 +33,4 @@ class CenterBitmapDrawer(
 		}
 		// drawBorder(this, randomColor(), 10)
 	}
-
-	companion object {
-
-		@JvmStatic
-		fun factory() = object : BitmapDrawer.Factory {
-			override fun create(bitmap: IntArray, w: Int, h: Int, pixel: PixelColor) =
-				CenterBitmapDrawer(bitmap, w, h, pixel)
-		}
-	}
 }

@@ -5,6 +5,8 @@ import android.os.HandlerThread
 import android.os.Looper
 import net.twisterrob.android.view.color.swatches.pixel.color.PixelColor
 
+typealias BitmapDrawerFactory = (bitmap: IntArray, w: Int, h: Int, pixel: PixelColor) -> BitmapDrawer
+
 abstract class BitmapDrawer(
 	val bitmap: IntArray,
 	val w: Int,
@@ -24,6 +26,12 @@ abstract class BitmapDrawer(
 
 		private val uiHandler = Looper.getMainLooper()?.let { Handler(it) }
 		private val asyncHandler = BitmapDrawerThread().mHandler
+
+		fun sync(factory: BitmapDrawerFactory): BitmapDrawerFactory =
+			factory as? Sync ?: Sync(factory)
+
+		fun async(factory: BitmapDrawerFactory): BitmapDrawerFactory =
+			factory as? Async ?: Async(factory)
 	}
 
 	var callback: Callback? = null
@@ -86,31 +94,13 @@ abstract class BitmapDrawer(
 		}
 	}
 
-	interface Factory { // TODO function type
-		fun create(bitmap: IntArray, w: Int, h: Int, pixel: PixelColor): BitmapDrawer
+	private class Async(private val factory: BitmapDrawerFactory) : BitmapDrawerFactory by factory {
+		override fun invoke(bitmap: IntArray, w: Int, h: Int, pixel: PixelColor) =
+			factory(bitmap, w, h, pixel).apply { enableAsync() }
+	}
 
-		class Async private constructor(private val factory: Factory) : Factory by factory {
-
-			override fun create(bitmap: IntArray, w: Int, h: Int, pixel: PixelColor) =
-				factory.create(bitmap, w, h, pixel).apply { enableAsync() }
-
-			companion object {
-
-				fun wrap(factory: Factory): Factory =
-					factory as? Async ?: Async(factory)
-			}
-		}
-
-		class Sync private constructor(private val factory: Factory) : Factory by factory {
-
-			override fun create(bitmap: IntArray, w: Int, h: Int, pixel: PixelColor) =
-				factory.create(bitmap, w, h, pixel).apply { disableAsync() }
-
-			companion object {
-
-				fun wrap(factory: Factory): Factory =
-					factory as? Sync ?: Sync(factory)
-			}
-		}
+	private class Sync(private val factory: BitmapDrawerFactory) : BitmapDrawerFactory by factory {
+		override fun invoke(bitmap: IntArray, w: Int, h: Int, pixel: PixelColor) =
+			factory(bitmap, w, h, pixel).apply { disableAsync() }
 	}
 }

@@ -251,13 +251,13 @@ open class ColorPickerView : AppCompatImageView, SwatchChooser.OnSwatchChangeLis
 	 */
 	val swatches: List<Swatch> = mutableListOf(
 		PixelAbsoluteSwatch(
-			ColorReplacer.wrap(CenterBitmapDrawer.factory(), Color.BLACK, Color.TRANSPARENT),
+			ColorReplacer.wrap(::CenterBitmapDrawer, Color.BLACK, Color.TRANSPARENT),
 			RadialHSBGradient()
 		),
-		PixelAbsoluteSwatch(ColumnByColumnBitmapDrawer.factory(), LinearHSBGradient()),
+		PixelAbsoluteSwatch(::ColumnByColumnBitmapDrawer, LinearHSBGradient()),
 		APIDemoSwatch(),
-		PixelAbsoluteSwatch(CenterBitmapDrawer.factory(), RadialHueGradient()),
-		PixelAbsoluteSwatch(LineByLineBitmapDrawer.factory(), LinearHueGradient())
+		PixelAbsoluteSwatch(::CenterBitmapDrawer, RadialHueGradient()),
+		PixelAbsoluteSwatch(::LineByLineBitmapDrawer, LinearHueGradient())
 	)
 
 	val swatchIndex get() = this.swatches.indexOf(this.swatch)

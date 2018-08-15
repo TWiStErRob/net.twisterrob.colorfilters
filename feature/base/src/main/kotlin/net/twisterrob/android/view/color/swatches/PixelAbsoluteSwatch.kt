@@ -5,9 +5,10 @@ import android.graphics.Color
 import android.graphics.Rect
 import net.twisterrob.android.view.color.swatches.pixel.color.PixelColor
 import net.twisterrob.android.view.color.swatches.pixel.drawer.BitmapDrawer
+import net.twisterrob.android.view.color.swatches.pixel.drawer.BitmapDrawerFactory
 
 class PixelAbsoluteSwatch(
-	private val originalFactory: BitmapDrawer.Factory,
+	private val originalFactory: BitmapDrawerFactory,
 	private val pixels: PixelColor
 ) : Swatch() {
 
@@ -45,7 +46,7 @@ class PixelAbsoluteSwatch(
 		val h = bounds.height()
 		val bitmap = IntArray(w * h).also { this.bitmap = it }
 		this.bitmap = bitmap
-		val drawer = drawerFactory.create(bitmap, w, h, pixels).apply {
+		val drawer = drawerFactory(bitmap, w, h, pixels).apply {
 			callback = this@PixelAbsoluteSwatch.invalidate
 		}
 		drawer.draw()
@@ -54,11 +55,11 @@ class PixelAbsoluteSwatch(
 	override fun findColor(area: Int, x: Float, y: Float) = pixels.getPixelColorAt(x.toInt(), y.toInt())
 
 	fun forceAsync() {
-		drawerFactory = BitmapDrawer.Factory.Async.wrap(originalFactory)
+		drawerFactory = BitmapDrawer.async(originalFactory)
 	}
 
 	fun forceSync() {
-		drawerFactory = BitmapDrawer.Factory.Sync.wrap(originalFactory)
+		drawerFactory = BitmapDrawer.sync(originalFactory)
 	}
 
 	fun resetAsync() {

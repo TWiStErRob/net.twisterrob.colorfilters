@@ -16,13 +16,4 @@ class LineByLineBitmapDrawer(
 			reportProgress()
 		}
 	}
-
-	companion object {
-
-		@JvmStatic
-		fun factory() = object : BitmapDrawer.Factory {
-			override fun create(bitmap: IntArray, w: Int, h: Int, pixel: PixelColor) =
-				LineByLineBitmapDrawer(bitmap, w, h, pixel)
-		}
-	}
 }

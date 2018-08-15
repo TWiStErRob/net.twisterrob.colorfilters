@@ -16,13 +16,4 @@ class ColumnByColumnBitmapDrawer(
 			reportProgress()
 		}
 	}
-
-	companion object {
-
-		@JvmStatic
-		fun factory() = object : BitmapDrawer.Factory {
-			override fun create(bitmap: IntArray, w: Int, h: Int, pixel: PixelColor) =
-				ColumnByColumnBitmapDrawer(bitmap, w, h, pixel)
-		}
-	}
 }

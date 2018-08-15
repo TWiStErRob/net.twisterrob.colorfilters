@@ -1,7 +1,6 @@
 package net.twisterrob.android.view.color.swatches.pixel.color
 
-import net.twisterrob.android.view.color.swatches.pixel.drawer.BitmapDrawer
-import net.twisterrob.android.view.color.swatches.pixel.drawer.BitmapDrawer.Factory
+import net.twisterrob.android.view.color.swatches.pixel.drawer.BitmapDrawerFactory
 
 class ColorReplacer(
 	private val pixelColor: PixelColor,
@@ -17,10 +16,9 @@ class ColorReplacer(
 	companion object {
 
 		@JvmStatic
-		fun wrap(factory: Factory, findColor: Int, replaceColor: Int) =
-			object : BitmapDrawer.Factory {
-				override fun create(bitmap: IntArray, w: Int, h: Int, pixel: PixelColor) =
-					factory.create(bitmap, w, h, ColorReplacer(pixel, findColor, replaceColor))
+		fun wrap(factory: BitmapDrawerFactory, findColor: Int, replaceColor: Int): BitmapDrawerFactory =
+			{ bitmap, w, h, pixel ->
+				factory(bitmap, w, h, ColorReplacer(pixel, findColor, replaceColor))
 			}
 	}
 }
