@@ -382,7 +382,7 @@ class PaletteFragment : ColorFilterFragment() {
 		get() = PaletteAdapter.Display.values()[swatchDisplay.selectedItemId.toInt()]
 
 	companion object {
-		// TODO report this not being flagged for i18n,
+		// REPORT report this not being flagged for i18n,
 		// it should be because all usages are setText()
 		// TODO return String.format(Locale.getDefault(), "%d", number);
 		private fun Int.asString(): CharSequence = Integer.toString(this)
@@ -460,7 +460,7 @@ class PaletteFragment : ColorFilterFragment() {
 				holder.bodyText.setBackgroundColor(Color.TRANSPARENT)
 				holder.bodyText.setTextColor(Color.TRANSPARENT)
 				holder.bodyText.text = null
-				// TODO why is this not a lint?
+				// REPORT why is this not a lint?
 				holder.population.text = "N/A"
 			}
 		}

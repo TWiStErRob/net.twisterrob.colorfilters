@@ -9,7 +9,7 @@
 		<!-- Not used, but can't do anything about it :) -->
 		<ignore regexp="R\.bool\.in_prod" />
 		<ignore regexp="R\.bool\.in_test" />
-		<!-- TODO report this bug -->
+		<!-- REPORT report this bug -->
 		<ignore regexp="R\.font\." />
 		<ignore regexp="R\.string\.cf_resfont_.*_code" />
 	</issue>
