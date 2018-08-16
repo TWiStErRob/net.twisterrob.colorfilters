@@ -21,7 +21,7 @@ internal class OrderComponent(
 
 	companion object {
 		private const val PREF_ORDER_MAP = "Order.map/"
-		private val IDENT = intArrayOf(0, 1, 2, 3, 4)
+		private val IDENTITY_MAPPING = intArrayOf(0, 1, 2, 3, 4)
 	}
 
 	private val places = arrayOf(
@@ -44,7 +44,7 @@ internal class OrderComponent(
 		v(R.id.controls_swap_34),
 		v(R.id.controls_swap_45)
 	)
-	var map = IntArray(IDENT.size)
+	var map = IntArray(IDENTITY_MAPPING.size)
 		set(map) {
 			System.arraycopy(map, 0, this.map, 0, this.map.size)
 			refreshUI()
@@ -82,7 +82,7 @@ internal class OrderComponent(
 	}
 
 	override fun reset() {
-		map = IDENT
+		map = IDENTITY_MAPPING
 	}
 
 	override fun refreshModel() {
@@ -90,7 +90,7 @@ internal class OrderComponent(
 			val id = comps[origPos].id
 			for (newPos in places.indices) {
 				val found: View? = places[newPos].findViewById(id)
-				if (found != null) { // TODO really nullable?
+				if (found != null) { // the original component was moved from origPos to newPos
 					this.map[newPos] = origPos
 				}
 			}
