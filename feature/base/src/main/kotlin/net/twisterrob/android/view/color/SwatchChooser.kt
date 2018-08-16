@@ -25,7 +25,11 @@ class SwatchChooser(swatches: Collection<Swatch>) : Drawable(), View.OnTouchList
 	private val locations: Array<Rect?> = arrayOfNulls(this.swatches.size)
 	var onSwatchChangeListener: OnSwatchChangeListener? = null
 	private var margin: Int = 0
-	private var image: Bitmap? = null
+	private var image: Bitmap? = null /* by lazy { build }, but with with setter */
+		get() {
+			field = field ?: build(bounds.width(), bounds.height())
+			return field
+		}
 
 	fun setTileMargin(margin: Int) {
 		this.margin = margin
@@ -33,9 +37,6 @@ class SwatchChooser(swatches: Collection<Swatch>) : Drawable(), View.OnTouchList
 	}
 
 	override fun draw(canvas: Canvas) {
-		if (image == null) { // TODO get() = field = field ?: build()
-			image = build(bounds.width(), bounds.height())
-		}
 		canvas.drawBitmap(image!!, 0f, 0f, null)
 	}
 
