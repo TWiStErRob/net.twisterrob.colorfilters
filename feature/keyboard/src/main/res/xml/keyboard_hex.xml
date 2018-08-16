@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <Keyboard
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:keyHeight="@dimen/keySize"
@@ -11,9 +10,9 @@
 		<Key android:codes="57" android:isRepeatable="true" android:keyLabel="9" />
 		<Key android:codes="70" android:isRepeatable="true" android:keyLabel="F" />
 
-		<!-- home -->
+		<!-- home: ⇤ -->
 		<Key android:codes="8676" android:isRepeatable="false" android:keyLabel="&#x21E4;" />
-		<!-- end -->
+		<!-- end: ⇥ -->
 		<Key android:codes="8677" android:isRepeatable="false" android:keyLabel="&#x21E5;" />
 	</Row>
 	<Row>
@@ -22,9 +21,9 @@
 		<Key android:codes="54" android:isRepeatable="true" android:keyLabel="6" />
 		<Key android:codes="69" android:isRepeatable="true" android:keyLabel="E" />
 
-		<!-- left -->
+		<!-- left: ← -->
 		<Key android:codes="8592" android:isRepeatable="true" android:keyLabel="&#x2190;" />
-		<!-- right -->
+		<!-- right: → -->
 		<Key android:codes="8594" android:isRepeatable="true" android:keyLabel="&#x2192;" />
 	</Row>
 	<Row>
@@ -33,9 +32,9 @@
 		<Key android:codes="51" android:isRepeatable="true" android:keyLabel="3" />
 		<Key android:codes="68" android:isRepeatable="true" android:keyLabel="D" />
 
-		<!-- clear -->
+		<!-- clear:  (CAN / Cancel) -->
 		<Key android:codes="24" android:isRepeatable="false" android:keyIcon="@android:drawable/ic_menu_delete" />
-		<!-- backspace -->
+		<!-- backspace:  (BS / Backspace) -->
 		<Key android:codes="8" android:isRepeatable="true" android:keyIcon="@android:drawable/ic_input_delete" />
 	</Row>
 	<Row>
@@ -44,8 +43,9 @@
 		<Key android:codes="66" android:isRepeatable="true" android:keyLabel="B" />
 		<Key android:codes="67" android:isRepeatable="true" android:keyLabel="C" />
 
-		<!-- negate -->
+		<!-- negate: ¬ -->
 		<Key android:codes="172" android:isRepeatable="false" android:keyLabel="&#x00AC;" />
+		<!-- done:  (ETB / End of Transmission Block) -->
 		<Key android:codes="23" android:isRepeatable="false" android:keyIcon="@android:drawable/ic_media_play" />
 	</Row>
 </Keyboard>

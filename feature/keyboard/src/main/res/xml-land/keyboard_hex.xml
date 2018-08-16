@@ -5,13 +5,13 @@
 	android:keyWidth="@dimen/keySize"
 	>
 	<Row>
-		<!-- home -->
+		<!-- home: ⇤ -->
 		<Key android:codes="8676" android:isRepeatable="false" android:keyLabel="&#x21E4;" />
-		<!-- left -->
+		<!-- left: ← -->
 		<Key android:codes="8592" android:isRepeatable="true" android:keyLabel="&#x2190;" />
-		<!-- right -->
+		<!-- right: → -->
 		<Key android:codes="8594" android:isRepeatable="true" android:keyLabel="&#x2192;" />
-		<!-- end -->
+		<!-- end: ⇥ -->
 		<Key android:codes="8677" android:isRepeatable="false" android:keyLabel="&#x21E5;" />
 	</Row>
 
@@ -41,12 +41,13 @@
 	</Row>
 
 	<Row>
-		<!-- negate -->
+		<!-- negate: ¬ -->
 		<Key android:codes="172" android:isRepeatable="false" android:keyLabel="&#x00AC;" />
-		<!-- backspace -->
+		<!-- backspace:  (BS / Backspace) -->
 		<Key android:codes="8" android:isRepeatable="true" android:keyIcon="@android:drawable/ic_input_delete" />
-		<!-- clear -->
+		<!-- clear:  (CAN / Cancel) -->
 		<Key android:codes="24" android:isRepeatable="false" android:keyIcon="@android:drawable/ic_menu_delete" />
+		<!-- done:  (ETB / End of Transmission Block) -->
 		<Key android:codes="23" android:isRepeatable="false" android:keyIcon="@android:drawable/ic_media_play" />
 	</Row>
 </Keyboard>
