@@ -25,7 +25,7 @@ import net.twisterrob.android.view.color.swatches.pixel.drawer.ColumnByColumnBit
 import net.twisterrob.android.view.color.swatches.pixel.drawer.LineByLineBitmapDrawer
 import kotlin.math.sqrt
 
-open class ColorPickerView : AppCompatImageView, SwatchChooser.OnSwatchChangeListener {
+open class ColorPickerView : AppCompatImageView {
 
 	interface OnColorChangedListener {
 		fun colorChanged(color: Int)
@@ -267,12 +267,13 @@ open class ColorPickerView : AppCompatImageView, SwatchChooser.OnSwatchChangeLis
 	 */
 	fun showChooser() {
 		val chooser = SwatchChooser(swatches)
-		chooser.setOnSwatchChangeListener(this)
+		// Note: this won't leak as it will be forgotten when the `chooser` is overwritten (no references to drawable)
+		chooser.onSwatchChangeListener = object : SwatchChooser.OnSwatchChangeListener {
+			override fun swatchSelected(swatch: Swatch) {
+				this@ColorPickerView.swatch = swatch
+			}
+		}
 		chooser.setTileMargin(TypedValue.applyDimension(COMPLEX_UNIT_DIP, 4f, resources.displayMetrics).toInt())
 		setImageDrawable(chooser)
-	}
-
-	override fun swatchSelected(swatch: Swatch) {
-		this.swatch = swatch
 	}
 }

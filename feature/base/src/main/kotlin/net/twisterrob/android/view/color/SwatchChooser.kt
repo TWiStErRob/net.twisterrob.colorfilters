@@ -23,14 +23,9 @@ class SwatchChooser(swatches: Collection<Swatch>) : Drawable(), View.OnTouchList
 
 	private val swatches: Array<Swatch> = swatches.toTypedArray()
 	private val locations: Array<Rect?> = arrayOfNulls(this.swatches.size)
-	private var listener: OnSwatchChangeListener? = null
+	var onSwatchChangeListener: OnSwatchChangeListener? = null
 	private var margin: Int = 0
 	private var image: Bitmap? = null
-
-	// TODO var
-	fun setOnSwatchChangeListener(onSwatchChangeListener: OnSwatchChangeListener) {
-		this.listener = onSwatchChangeListener
-	}
 
 	fun setTileMargin(margin: Int) {
 		this.margin = margin
@@ -151,8 +146,8 @@ class SwatchChooser(swatches: Collection<Swatch>) : Drawable(), View.OnTouchList
 			MotionEvent.ACTION_DOWN -> {
 				val x = (event.x - v.paddingLeft).toInt()
 				val y = (event.y - v.paddingTop).toInt()
-				if (listener != null) {
-					listener!!.swatchSelected(at(x, y)!!)
+				onSwatchChangeListener?.apply {
+					swatchSelected(at(x, y)!!)
 					v.performClick()
 				}
 				return true
