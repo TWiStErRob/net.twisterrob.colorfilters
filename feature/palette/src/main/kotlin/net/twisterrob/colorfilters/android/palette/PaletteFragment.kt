@@ -33,6 +33,7 @@ import net.twisterrob.colorfilters.android.formatRoot
 import net.twisterrob.colorfilters.android.keyboard.KeyboardHandler
 import net.twisterrob.colorfilters.android.keyboard.KeyboardMode
 import net.twisterrob.colorfilters.android.palette.PaletteFragment.PaletteAdapter.Display
+import net.twisterrob.colorfilters.android.toRGBHexString
 
 private const val PREF_PALETTE_NUM_COLORS = "Palette.numColors"
 private const val PREF_PALETTE_RESIZE_DIMEN = "Palette.resizeDimen"
@@ -188,13 +189,13 @@ class PaletteFragment : ColorFilterFragment() {
 					"Android Color Resources"
 				)
 				val values = arrayOf<CharSequence>(
-					colorToRGBHexString("", swatch.rgb),
-					colorToRGBHexString("", swatch.titleTextColor),
-					colorToRGBHexString("", swatch.bodyTextColor),
+					swatch.rgb.toRGBHexString(),
+					swatch.titleTextColor.toRGBHexString(),
+					swatch.bodyTextColor.toRGBHexString(),
 					"""
-						Color: #${colorToRGBHexString("", swatch.rgb)}
-						Title: #${colorToRGBHexString("", swatch.titleTextColor)}
-						Body: #${colorToRGBHexString("", swatch.bodyTextColor)}
+						Color: #${swatch.rgb.toRGBHexString()}
+						Title: #${swatch.titleTextColor.toRGBHexString()}
+						Body: #${swatch.bodyTextColor.toRGBHexString()}
 						Population: ${swatch.population}
 					""".trimIndent(),
 					res("myColor", swatch)
@@ -232,9 +233,9 @@ class PaletteFragment : ColorFilterFragment() {
 				else
 					"""
 					<!-- ${name} -->
-					<color name="${name}">${colorToRGBHexString("#", swatch.rgb)}</color>
-					<color name="${name}_title">${colorToRGBHexString("#", swatch.titleTextColor)}</color>
-					<color name="${name}_body">${colorToRGBHexString("#", swatch.bodyTextColor)}</color>
+					<color name="${name}">${swatch.rgb.toRGBHexString("#")}</color>
+					<color name="${name}_title">${swatch.titleTextColor.toRGBHexString("#")}</color>
+					<color name="${name}_body">${swatch.bodyTextColor.toRGBHexString("#")}</color>
 					""".trimIndent()
 		}
 		swatchList.adapter = swatchAdapter
@@ -441,16 +442,16 @@ class PaletteFragment : ColorFilterFragment() {
 				val hsl = swatch.hsl
 				val type = getType(swatch)
 				holder.colorText.text = "%s\n%.0f°, %.0f%%, %.0f%%%s".formatRoot(
-					colorToRGBHexString("#", swatch.rgb),
+					swatch.rgb.toRGBHexString("#"),
 					hsl[0], hsl[1] * 100, hsl[2] * 100,
 					if (type != null) "\n" + type else ""
 				)
 				holder.titleText.setBackgroundColor(swatch.rgb)
 				holder.titleText.setTextColor(swatch.titleTextColor)
-				holder.titleText.text = "Title: %s".format(colorToRGBHexString("#", swatch.titleTextColor))
+				holder.titleText.text = "Title: %s".format(swatch.titleTextColor.toRGBHexString("#"))
 				holder.bodyText.setBackgroundColor(swatch.rgb)
 				holder.bodyText.setTextColor(swatch.bodyTextColor)
-				holder.bodyText.text = "Body: %s".format(colorToRGBHexString("#", swatch.bodyTextColor))
+				holder.bodyText.text = "Body: %s".format(swatch.bodyTextColor.toRGBHexString("#"))
 				holder.population.text = swatch.population.asString()
 			} else {
 				holder.colorText.setText(R.string.cf_palette_missing)

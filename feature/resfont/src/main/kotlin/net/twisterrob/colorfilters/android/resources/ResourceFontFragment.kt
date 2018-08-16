@@ -18,6 +18,7 @@ import net.twisterrob.colorfilters.android.ColorFilterFragment
 import net.twisterrob.colorfilters.android.formatRoot
 import net.twisterrob.colorfilters.android.keyboard.KeyboardMode
 import net.twisterrob.colorfilters.android.resfont.R
+import net.twisterrob.colorfilters.android.toARGBHexString
 
 @StringRes private val TESTS = intArrayOf(
 	R.string.cf_resfont_fg_argb,
@@ -137,7 +138,7 @@ class ResourceFontFragment : ColorFilterFragment() {
 					if (color.isNotEmpty()) {
 						color.append(",\n")
 					}
-					color.append(ColorFilterFragment.colorToARGBHexString("", span.foregroundColor))
+					color.append(span.foregroundColor.toARGBHexString())
 				}
 			}
 		}

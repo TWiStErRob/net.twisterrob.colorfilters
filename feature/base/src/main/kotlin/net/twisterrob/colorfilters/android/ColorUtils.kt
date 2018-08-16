@@ -21,3 +21,15 @@ inline fun Int.replaceAlphaFrom(color: Int) =
 @Suppress("NOTHING_TO_INLINE")
 inline fun Int.replaceAlpha(alpha: Int) =
 	Color.argb(alpha, this.red(), this.green(), this.blue())
+
+fun Int.toRGBDecString(separator: String = ", "): String =
+	"%d%s%d%s%d".formatRoot(red(), separator, green(), separator, blue())
+
+fun Int.toARGBDecString(separator: String = ", "): String =
+	"%d%s%d%s%d%s%d".formatRoot(alpha(), separator, red(), separator, green(), separator, blue())
+
+fun Int.toRGBHexString(prefix: String = ""): String =
+	"%s%06X".formatRoot(prefix, 0xFFFFFF and this)
+
+fun Int.toARGBHexString(prefix: String = ""): String =
+	"%s%08X".formatRoot(prefix, this)

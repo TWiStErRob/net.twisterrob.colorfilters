@@ -13,6 +13,8 @@ import net.twisterrob.android.view.listeners.TextWatcherAdapter
 import net.twisterrob.colorfilters.android.ColorFilterFragment
 import net.twisterrob.colorfilters.android.keyboard.KeyboardHandler
 import net.twisterrob.colorfilters.android.keyboard.KeyboardMode
+import net.twisterrob.colorfilters.android.toRGBHexString
+import net.twisterrob.colorfilters.android.toRGBDecString
 
 private const val PREF_LIGHTING_MUL = "LightingColorFilter.mul"
 private const val PREF_LIGHTING_MUL_SWATCH = "LightingColorFilter.mulSwatch"
@@ -128,8 +130,8 @@ class LightingFragment : ColorFilterFragment() {
 
 	override fun generateCode(): String {
 		if (::mulColor.isInitialized && ::addColor.isInitialized) {
-			val mul = colorToRGBHexString("0x", mulColor.color)
-			val add = colorToRGBHexString("0x", addColor.color)
+			val mul = mulColor.color.toRGBHexString("0x")
+			val add = addColor.color.toRGBHexString("0x")
 			return "new LightingColorFilter(${mul}, ${add});"
 		} else {
 			throw IllegalStateException("No colors available for code generation")
@@ -178,13 +180,13 @@ class LightingFragment : ColorFilterFragment() {
 				pendingUpdate = true
 
 				if (origin != UpdateOrigin.Editor) {
-					editor.setText(colorToRGBHexString("", color))
+					editor.setText(color.toRGBHexString())
 				}
 				if (origin != UpdateOrigin.Picker) {
 					colorView.color = color
 				}
 
-				rgbLabel.text = colorToRGBString(color)
+				rgbLabel.text = color.toRGBDecString()
 				preview.setBackgroundColor(color)
 			} finally {
 				pendingUpdate = false

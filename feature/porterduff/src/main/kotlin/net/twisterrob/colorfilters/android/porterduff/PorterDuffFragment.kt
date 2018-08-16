@@ -47,6 +47,8 @@ import net.twisterrob.colorfilters.android.keyboard.KeyboardMode
 import net.twisterrob.colorfilters.android.porterduff.R.id
 import net.twisterrob.colorfilters.android.replaceAlpha
 import net.twisterrob.colorfilters.android.replaceAlphaFrom
+import net.twisterrob.colorfilters.android.toARGBHexString
+import net.twisterrob.colorfilters.android.toARGBDecString
 
 private const val PREF_PORTERDUFF_COLOR = "PorterDuffColorFilter.color"
 private const val PREF_PORTERDUFF_MODE = "PorterDuffColorFilter.mode"
@@ -179,7 +181,7 @@ class PorterDuffFragment : ColorFilterFragment() {
 			currentColor = color
 
 			if (origin != UpdateOrigin.Editor) {
-				editor.setText(colorToARGBHexString("", color))
+				editor.setText(color.toARGBHexString())
 			}
 			if (origin != UpdateOrigin.Alpha) {
 				alphaSlider.progress = color.alpha()
@@ -188,7 +190,7 @@ class PorterDuffFragment : ColorFilterFragment() {
 				colorView.color = color
 			}
 
-			rgbLabel.text = colorToARGBString(color)
+			rgbLabel.text = color.toARGBDecString()
 			colorPreview.setBackgroundColor(color)
 		} finally {
 			pendingUpdate = false
@@ -246,7 +248,7 @@ class PorterDuffFragment : ColorFilterFragment() {
 
 	override fun generateCode(): String {
 		return "new PorterDuffColorFilter(" +
-				"${colorToARGBHexString("0x", currentColor)}," +
+				"${currentColor.toARGBHexString("0x")}," +
 				" PorterDuff.Mode.${currentMode.name}" +
 				");"
 	}

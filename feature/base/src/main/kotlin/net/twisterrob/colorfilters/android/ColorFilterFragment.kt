@@ -10,7 +10,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.support.annotation.ColorInt
 import android.support.annotation.StringRes
 import android.support.v4.app.Fragment
 import android.text.SpannableString
@@ -166,19 +165,5 @@ abstract class ColorFilterFragment : Fragment() {
 				clipboard.primaryClip = android.content.ClipData.newPlainText(title, content)
 			}
 		}
-
-		// TODO consider extensions in ColorUtils.kt?
-
-		fun colorToRGBString(@ColorInt color: Int): String =
-			"%d, %d, %d".formatRoot(color.red(), color.green(), color.blue())
-
-		fun colorToARGBString(@ColorInt color: Int): String =
-			"%d, %d, %d, %d".formatRoot(color.alpha(), color.red(), color.green(), color.blue())
-
-		fun colorToRGBHexString(prefix: String, @ColorInt color: Int): String =
-			"%s%06X".formatRoot(prefix, 0xFFFFFF and color)
-
-		fun colorToARGBHexString(prefix: String, @ColorInt color: Int): String =
-			"%s%08X".formatRoot(prefix, color)
 	}
 }
