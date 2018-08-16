@@ -21,7 +21,7 @@
 		<Key android:codes="8657" android:isRepeatable="true" android:keyLabel="&#x21D1;" />
 		<!-- NE: ⇗ -->
 		<Key android:codes="8663" android:isRepeatable="true" android:keyLabel="&#x21D7;" />
-		<!-- clear:  (CAN / Cancel) -->
+		<!-- clear: CAN (Cancel) -->
 		<Key android:codes="24" android:isRepeatable="false" android:keyIcon="@android:drawable/ic_menu_delete" />
 	</Row>
 	<Row>
@@ -39,7 +39,7 @@
 		<Key android:codes="8659" android:isRepeatable="true" android:keyLabel="&#x21D3;" />
 		<!-- SE: ⇘ -->
 		<Key android:codes="8664" android:isRepeatable="true" android:keyLabel="&#x21D8;" />
-		<!-- backspace:  (BS / Backspace) -->
+		<!-- backspace: BS (Backspace) -->
 		<Key android:codes="8" android:isRepeatable="true" android:keyIcon="@android:drawable/ic_input_delete" />
 	</Row>
 	<Row>
@@ -61,7 +61,7 @@
 		<Key android:codes="50" android:isRepeatable="true" android:keyLabel="2" />
 		<Key android:codes="51" android:isRepeatable="true" android:keyLabel="3" />
 
-		<!-- done:  (ETB / End of Transmission Block) -->
+		<!-- done: ETB (End of Transmission Block) -->
 		<Key android:codes="23" android:isRepeatable="false" android:keyIcon="@android:drawable/ic_media_play" />
 	</Row>
 </Keyboard>
