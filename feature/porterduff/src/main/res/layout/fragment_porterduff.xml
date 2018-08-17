@@ -25,6 +25,7 @@
 			android:layout_alignParentRight="true"
 			android:layout_toRightOf="@+id/middle"
 			android:gravity="center"
+			android:hint="@string/cf_porterduff_color_hint"
 			android:inputType="textNoSuggestions"
 			android:maxLength="8"
 			android:singleLine="true"

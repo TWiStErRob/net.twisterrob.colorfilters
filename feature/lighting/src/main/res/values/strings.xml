@@ -7,5 +7,7 @@
         by one color (<tt>mul</tt>), and then adds a second color (<tt>add</tt>), pinning the result for each component to <tt>[0..255]</tt>.
         \n\nThe alpha components of the <tt>mul</tt> and <tt>add</tt> arguments are ignored.
     </string>
+	<string name="cf_lighting_mul_hint">RRGGBB hex color</string>
+	<string name="cf_lighting_add_hint">RRGGBB hex color</string>
 
 </resources>

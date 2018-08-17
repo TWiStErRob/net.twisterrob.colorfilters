@@ -19,6 +19,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="maximumColorCount:"
+			android:labelFor="@id/numEditor"
 			tools:ignore="HardcodedText"
 			/>
 		<SeekBar
@@ -59,6 +60,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:gravity="center"
+			android:hint="@string/cf_palette_count_hint"
 			android:inputType="number"
 			android:maxLength="2"
 			android:minEms="2"
@@ -78,6 +80,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="resizeBitmapSize:"
+			android:labelFor="@id/resizeDimenEditor"
 			tools:ignore="HardcodedText"
 			/>
 		<SeekBar
@@ -96,6 +99,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:gravity="center"
+			android:hint="@string/cf_palette_size_hint"
 			android:inputType="number"
 			android:minEms="4"
 			android:singleLine="true"

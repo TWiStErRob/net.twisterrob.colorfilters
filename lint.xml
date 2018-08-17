@@ -5,6 +5,9 @@
 	<issue id="IconDensities" severity="ignore" />
 	<issue id="TypographyQuotes" severity="ignore" />
 	<issue id="GradleDependency" severity="ignore" />
+	<issue id="SyntheticAccessor" severity="ignore">
+		<!-- Don't want to deal with it yet -->
+	</issue>
 	<issue id="UnusedResources">
 		<!-- Not used, but can't do anything about it :) -->
 		<ignore regexp="R\.bool\.in_prod" />

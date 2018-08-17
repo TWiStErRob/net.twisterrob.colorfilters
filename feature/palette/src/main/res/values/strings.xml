@@ -27,5 +27,7 @@
 		The smaller the image is, the more detail is lost in the resulting image and thus less precision for color selection.
 	</string>
 	<string name="cf_palette_missing">missing</string>
+	<string name="cf_palette_count_hint">16</string>
+	<string name="cf_palette_size_hint">192</string>
 
 </resources>

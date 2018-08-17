@@ -1,5 +1,6 @@
 package net.twisterrob.colorfilters.android
 
+import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.app.AlertDialog
 import android.content.*
@@ -153,6 +154,7 @@ abstract class ColorFilterFragment : Fragment() {
 
 	companion object {
 
+		@SuppressLint("ObsoleteSdkInt")
 		@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 		fun copyToClipboard(context: Context, title: CharSequence, content: CharSequence) {
 			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {

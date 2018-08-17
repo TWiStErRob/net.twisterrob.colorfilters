@@ -12,8 +12,8 @@ public class APIDemoSwatch extends Swatch {
 			new int[] {0xFFFF0000, 0xFFFF00FF, 0xFF0000FF, 0xFF00FFFF, 0xFF00FF00, 0xFFFFFF00, 0xFFFF0000};
 	private static final Shader SHADER = new SweepGradient(0, 0, COLORS, null);
 
-	protected final Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-	protected final Paint mCenterPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+	protected final @NonNull Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+	protected final @NonNull Paint mCenterPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 	private int currentArea;
 
 	public APIDemoSwatch() {
