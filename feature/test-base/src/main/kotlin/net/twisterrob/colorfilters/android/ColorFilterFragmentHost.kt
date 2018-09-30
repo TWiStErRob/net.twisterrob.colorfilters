@@ -69,7 +69,9 @@ class ColorFilterFragmentHost(
 				override fun beforeActivityLaunched() {
 					// set the package and class properly
 					// AFTER ActivityTestRule has done its forceful usage of getTargetContext()
-					intent.setClassName(InstrumentationRegistry.getContext(), intent.component.className)
+					intent.component?.let { component ->
+						intent.setClassName(InstrumentationRegistry.getContext(), component.className)
+					}
 				}
 			}
 		}

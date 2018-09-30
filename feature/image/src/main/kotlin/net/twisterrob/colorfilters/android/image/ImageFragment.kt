@@ -143,13 +143,13 @@ class ImageFragment : Fragment() {
 	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 		when (requestCode) {
 			REQUEST_CODE_GET_PICTURE -> {
-				if (resultCode == Activity.RESULT_OK) {
-					if (data!!.data != null) {
-						load(data.data)
+				if (resultCode == Activity.RESULT_OK && data != null) {
+					data.data?.let { dataUri ->
+						load(dataUri)
 						return
 					}
-					if (data.extras != null) {
-						val extraData = data.extras!!.get("data")
+					data.extras?.let { extras ->
+						val extraData = extras.get("data")
 						if (extraData is Bitmap) {
 							load(extraData)
 							return

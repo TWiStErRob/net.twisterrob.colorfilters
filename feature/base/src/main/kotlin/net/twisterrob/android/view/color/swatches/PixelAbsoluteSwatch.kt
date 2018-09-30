@@ -31,12 +31,9 @@ class PixelAbsoluteSwatch(
 	}
 
 	override fun draw(canvas: Canvas) {
-		if (bitmap == null) {
-			return
-		}
 		with(bounds) {
 			@Suppress("DEPRECATION")
-			canvas.drawBitmap(bitmap, 0, width(), 0, 0, width(), height(), true, null)
+			canvas.drawBitmap(bitmap ?: return, 0, width(), 0, 0, width(), height(), true, null)
 		}
 	}
 
