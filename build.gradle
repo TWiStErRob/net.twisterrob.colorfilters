@@ -27,7 +27,7 @@ allprojects { project ->
 				lintOptions {
 					warningsAsErrors = true
 					// REPORT this is not working in AS
-					lintConfig = rootProject.file('lint.xml')
+					lintConfig = rootProject.file('config/lint/lint.xml')
 				}
 			}
 		}
