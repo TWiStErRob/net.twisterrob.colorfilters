@@ -1,17 +1,3 @@
-buildscript {
-	repositories {
-		jcenter()
-		google()
-		maven { url 'http://localhost/maven' }
-		maven { name = "Gradle libs (for Kotlin-DSL)"; url = "https://repo.gradle.org/gradle/libs-releases-local/" }
-	}
-
-	dependencies {
-		//configurations.classpath.resolutionStrategy.cacheChangingModulesFor 0, 'seconds' // -SNAPSHOT
-		classpath "net.twisterrob.gradle:plugin:${VERSION_PLUGIN_ANDROID}"
-	}
-}
-
 apply plugin: 'net.twisterrob.root'
 
 allprojects { project ->

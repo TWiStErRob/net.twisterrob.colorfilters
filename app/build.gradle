@@ -1,9 +1,3 @@
-// TODEL this block shouldn't be needed, plugin does it
-repositories {
-	google() // multiDex requires this to be first... what?
-	jcenter()
-}
-
 apply plugin: 'net.twisterrob.android-app'
 apply plugin: 'net.twisterrob.kotlin'
 
@@ -26,6 +20,7 @@ dependencies {
 android {
 	defaultConfig {
 		applicationId 'net.twisterrob.colorfilters'
+		compileSdkVersion 27
 		targetSdkVersion 27
 
 		testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
