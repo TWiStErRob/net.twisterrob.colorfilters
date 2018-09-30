@@ -50,7 +50,7 @@ class ColorFilterFragmentHost(
 
 	override fun onStart() {
 		super.onStart()
-		title = supportFragmentManager.findFragmentById(R.id.fragment_container)::class.simpleName
+		title = supportFragmentManager.findFragmentById(R.id.fragment_container)!!::class.simpleName
 	}
 
 	companion object {
