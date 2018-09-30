@@ -53,7 +53,7 @@
 
 	<string name="cf_about_licences_title">Acknowledgements and Licences</string>
 	<string-array name="cf_about_licences">
-        <item>Glide 4.7.1, library</item>
+        <item>Glide 4.8.0, library</item>
 		<item>Order from Chaos, image</item>
 		<item>Custom keyboard, tutorial</item>
 		<item>Android SDK Color Picker, sample</item>
@@ -64,7 +64,7 @@
 <item tools:ignore="TypographyQuotes,TypographyOther">Big thanks to <a href="https://github.com/sjudd">Sam</a> for maintaining <a href="https://github.com/bumptech/glide">Glide</a>,
 the most flexible Android image loader API on the market.
 \n
-\n<i>Licence obtained <a href="https://github.com/bumptech/glide/blob/v4.7.1/LICENSE">from GitHub</a> follows:</i>
+\n<i>Licence obtained <a href="https://github.com/bumptech/glide/blob/v4.8.0/LICENSE">from GitHub</a> follows:</i>
 \n
 \nLicense for everything not in third_party and not otherwise marked:
 \n
