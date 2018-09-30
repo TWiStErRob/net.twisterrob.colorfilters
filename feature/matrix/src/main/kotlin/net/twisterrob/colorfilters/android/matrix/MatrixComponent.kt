@@ -85,7 +85,7 @@ internal class MatrixComponent(
 		val c = savedMatrix.array
 		for (y in 0 until HEIGHT) {
 			for (x in 0 until WIDTH) {
-				c[y * WIDTH + x] = prefs.getFloat("$PREF_MATRIX_ITEM$x,$y", defaultValue(x, y))
+				c[y * WIDTH + x] = prefs.getFloat("${PREF_MATRIX_ITEM}${x},${y}", defaultValue(x, y))
 			}
 		}
 		setMatrix(savedMatrix)

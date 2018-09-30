@@ -10,7 +10,7 @@
 	<string name="cf_about_feedback_body">Package: %1$s\nVersion: %2$s\n\nHey,\nI have some comments regarding your app:\n</string>
 
 	<string name="cf_about_tips_title">Tips and Tricks</string>
-    <string name="cf_about_tips">
+	<string name="cf_about_tips">
         <big><b>General</b></big>
         \n&#8195;&#8226;&#8194;You can copy generated code from the &#8220;Info&#8221; or share it (with pictures) from the action bar.
         \n&#8195;&#8226;&#8194;Long pressing the color picker will give you more picker types.
@@ -37,7 +37,7 @@
     </string>
 
 	<string name="cf_about_faq_title">FAQ (Frequently Asked Questions)</string>
-    <string name="cf_about_faq">
+	<string name="cf_about_faq">
         <b>What is this application?</b>
         \nThis application was made so that Android developers can test out what a Color Filter applied to an image will look like without the need for coding.
         Once they are satisfied with the results it is easy to copy the code and just use it in their apps.
@@ -53,7 +53,7 @@
 
 	<string name="cf_about_licences_title">Acknowledgements and Licences</string>
 	<string-array name="cf_about_licences">
-        <item>Glide 4.8.0, library</item>
+		<item>Glide 4.8.0, library</item>
 		<item>Order from Chaos, image</item>
 		<item>Custom keyboard, tutorial</item>
 		<item>Android SDK Color Picker, sample</item>

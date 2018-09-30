@@ -47,8 +47,8 @@ import net.twisterrob.colorfilters.android.keyboard.KeyboardMode
 import net.twisterrob.colorfilters.android.porterduff.R.id
 import net.twisterrob.colorfilters.android.replaceAlpha
 import net.twisterrob.colorfilters.android.replaceAlphaFrom
-import net.twisterrob.colorfilters.android.toARGBHexString
 import net.twisterrob.colorfilters.android.toARGBDecString
+import net.twisterrob.colorfilters.android.toARGBHexString
 
 private const val PREF_PORTERDUFF_COLOR = "PorterDuffColorFilter.color"
 private const val PREF_PORTERDUFF_MODE = "PorterDuffColorFilter.mode"

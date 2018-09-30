@@ -47,9 +47,9 @@ internal abstract class Component(
 	companion object {
 
 		@JvmStatic val COMP_R = 0
-		@JvmStatic  val COMP_G = 1
-		@JvmStatic  val COMP_B = 2
-		@JvmStatic  val COMP_A = 3
+		@JvmStatic val COMP_G = 1
+		@JvmStatic val COMP_B = 2
+		@JvmStatic val COMP_A = 3
 
 		@JvmStatic
 		protected fun get(seekBar: SeekBar, scale: Float, offset: Float): Float =

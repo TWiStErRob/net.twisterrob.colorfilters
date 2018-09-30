@@ -13,8 +13,8 @@ import net.twisterrob.android.view.listeners.TextWatcherAdapter
 import net.twisterrob.colorfilters.android.ColorFilterFragment
 import net.twisterrob.colorfilters.android.keyboard.KeyboardHandler
 import net.twisterrob.colorfilters.android.keyboard.KeyboardMode
-import net.twisterrob.colorfilters.android.toRGBHexString
 import net.twisterrob.colorfilters.android.toRGBDecString
+import net.twisterrob.colorfilters.android.toRGBHexString
 
 private const val PREF_LIGHTING_MUL = "LightingColorFilter.mul"
 private const val PREF_LIGHTING_MUL_SWATCH = "LightingColorFilter.mulSwatch"

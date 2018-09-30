@@ -8,6 +8,7 @@ const val PI: Float = kotlin.math.PI.toFloat()
 
 fun ofMap(value: Int, inputMin: Int, inputMax: Int, outputMin: Int, outputMax: Int): Float =
 	ofMap(value.toFloat(), inputMin.toFloat(), inputMax.toFloat(), outputMin.toFloat(), outputMax.toFloat())
+
 fun ofMap(value: Float, inputMin: Int, inputMax: Int, outputMin: Int, outputMax: Int): Float =
 	ofMap(value, inputMin.toFloat(), inputMax.toFloat(), outputMin.toFloat(), outputMax.toFloat())
 

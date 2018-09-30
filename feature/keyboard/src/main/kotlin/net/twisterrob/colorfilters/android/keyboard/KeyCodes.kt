@@ -4,6 +4,7 @@ package net.twisterrob.colorfilters.android.keyboard
  * @see `res/xml/keyboard_*.xml`
  */
 object KeyCodes {
+
 	const val KEY_MOVE_LEFT: Int = '\u2190'.toInt() // ←
 	const val KEY_MOVE_RIGHT: Int = '\u2192'.toInt() // →
 	const val KEY_MOVE_START: Int = '\u21E4'.toInt() // ⇤

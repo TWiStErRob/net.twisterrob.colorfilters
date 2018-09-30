@@ -15,6 +15,7 @@ public class FastMath {
 		private static final float DEG = 180.0f / (float)Math.PI;
 
 		private static final float[] atan2 = new float[ATAN2_COUNT];
+
 		static {
 			for (int i = 0; i < ATAN2_DIM; i++) {
 				for (int j = 0; j < ATAN2_DIM; j++) {
@@ -479,6 +480,7 @@ public class FastMath {
 		private static final float[] ATAN2_TABLE_NPX = new float[SIZE + 1];
 		private static final float[] ATAN2_TABLE_NNY = new float[SIZE + 1];
 		private static final float[] ATAN2_TABLE_NNX = new float[SIZE + 1];
+
 		static {
 			for (int i = 0; i <= SIZE; i++) {
 				float f = (float)i / SIZE;
@@ -541,6 +543,7 @@ public class FastMath {
 
 		private static final float[] sin = new float[SIN_COUNT];
 		private static final float[] cos = new float[SIN_COUNT];
+
 		static {
 			for (int i = 0; i < SIN_COUNT; i++) {
 				sin[i] = (float)Math.sin((i + 0.5f) / SIN_COUNT * radFull);
