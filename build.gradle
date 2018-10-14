@@ -1,4 +1,9 @@
 apply plugin: 'net.twisterrob.root'
+apply plugin: 'net.twisterrob.quality'
+
+allprojects {
+	apply plugin: 'net.twisterrob.quality'
+}
 
 allprojects { project ->
 
@@ -13,7 +18,7 @@ allprojects { project ->
 				lintOptions {
 					warningsAsErrors = true
 					// REPORT this is not working in AS
-					lintConfig = rootProject.file('config/lint/lint.xml')
+					//lintConfig = rootProject.file('config/lint/lint.xml')
 				}
 			}
 		}

@@ -10,6 +10,7 @@ repositories {
 	google()
 	maven { setUrl("http://localhost/maven") }
 	maven { name = "Gradle libs (for Kotlin-DSL)"; setUrl("https://repo.gradle.org/gradle/libs-releases-local/") }
+	maven { name = "TWiStErRob"; setUrl("https://dl.bintray.com/twisterrob/maven") }
 }
 
 configurations.all {
@@ -34,6 +35,7 @@ dependencies {
 	compileOnly(gradleApi())
 	implementation(kotlin("gradle-plugin"))
 	configurations.implementation.resolutionStrategy.cacheChangingModulesFor(0, TimeUnit.SECONDS) // -SNAPSHOT
+	implementation("net.twisterrob.gradle:twister-quality:${VERSION_PLUGIN_QUALITY}")
 	implementation("net.twisterrob.gradle:plugin:${VERSION_PLUGIN_ANDROID}")
 
 	testImplementation("junit:junit:4.12")
