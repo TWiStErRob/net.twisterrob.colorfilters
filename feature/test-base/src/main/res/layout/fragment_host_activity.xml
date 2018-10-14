@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/fragment_container"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	/>
+	tools:ignore="MergeRootFrame"
+	>
+	<!-- MergeRootFrame: A view is necessary here to have a container for the fragment:
+	     fragmentTransaction.add(R.id.fragment_container, fragment) -->
+</FrameLayout>

@@ -7,7 +7,10 @@
 	android:shrinkColumns="0"
 	android:stretchColumns="1,2,3,4,5"
 	tools:showIn="@layout/fragment_matrix"
+	tools:ignore="AutoFill,LabelFor"
 	>
+	<!-- LabelFor: each cell is labeled by row and column headings -->
+	<!-- AutoFill: these are numbers, cannot be auto-filled by Android -->
 	<TableRow tools:ID="@+id/header">
 		<TextView
 			android:id="@+id/matrix_reset"

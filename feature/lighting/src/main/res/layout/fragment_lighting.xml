@@ -34,6 +34,7 @@
 		android:layout_height="wrap_content"
 		android:layout_toLeftOf="@id/middle"
 		android:layout_toRightOf="@id/mulLabel"
+		android:autofillHints="color"
 		android:gravity="center"
 		android:hint="@string/cf_lighting_mul_hint"
 		android:inputType="textNoSuggestions"
@@ -73,6 +74,7 @@
 		android:layout_marginTop="@dimen/margin"
 		android:layout_below="@id/mulRGBLabel"
 		android:layout_toLeftOf="@id/middle"
+		tools:ignore="MissingRegistered"
 		/>
 
 	<TextView
@@ -89,8 +91,8 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_alignParentRight="true"
-		android:autofillHints="color"
 		android:layout_toRightOf="@id/addLabel"
+		android:autofillHints="color"
 		android:gravity="center"
 		android:hint="@string/cf_lighting_add_hint"
 		android:inputType="textNoSuggestions"
@@ -130,5 +132,6 @@
 		android:layout_marginTop="@dimen/margin"
 		android:layout_below="@id/addRGBLabel"
 		android:layout_toRightOf="@id/middle"
+		tools:ignore="MissingRegistered"
 		/>
 </RelativeLayout>

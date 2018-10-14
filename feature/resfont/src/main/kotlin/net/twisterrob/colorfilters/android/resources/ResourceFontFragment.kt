@@ -1,5 +1,6 @@
 package net.twisterrob.colorfilters.android.resources
 
+import android.annotation.SuppressLint
 import android.graphics.ColorFilter
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
@@ -15,7 +16,6 @@ import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
 import net.twisterrob.colorfilters.android.ColorFilterFragment
-import net.twisterrob.colorfilters.android.formatRoot
 import net.twisterrob.colorfilters.android.keyboard.KeyboardMode
 import net.twisterrob.colorfilters.android.resfont.R
 import net.twisterrob.colorfilters.android.toARGBHexString
@@ -126,7 +126,8 @@ class ResourceFontFragment : ColorFilterFragment() {
 		val removeCount = row.childCount - resolvedAt
 		row.removeViews(resolvedAt, removeCount)
 		params.span += removeCount // two rendered + two divider
-		resolved.text = "%s\n%s".formatRoot(ex.javaClass.simpleName, ex.message)
+		@SuppressLint("SetTextI18n")
+		resolved.text = "${ex.javaClass.simpleName}\n${ex.message}"
 	}
 
 	private fun getColor(text: CharSequence): String? {
@@ -134,7 +135,7 @@ class ResourceFontFragment : ColorFilterFragment() {
 		if (text is Spanned) {
 			val spans = text.getSpans(0, text.length, ForegroundColorSpan::class.java)
 			if (spans != null) {
-				for (span in spans) {
+				for (span in spans) { // TODO joinToString
 					if (color.isNotEmpty()) {
 						color.append(",\n")
 					}

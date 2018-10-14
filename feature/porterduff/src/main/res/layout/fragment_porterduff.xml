@@ -24,6 +24,7 @@
 			android:layout_height="wrap_content"
 			android:layout_alignParentRight="true"
 			android:layout_toRightOf="@+id/middle"
+			android:autofillHints="color"
 			android:gravity="center"
 			android:hint="@string/cf_porterduff_color_hint"
 			android:inputType="textNoSuggestions"
@@ -73,6 +74,7 @@
 			android:layout_height="fill_parent"
 			android:layout_toLeftOf="@+id/middle"
 			tools:visibility="visible"
+			tools:ignore="MissingRegistered"
 			/>
 	</RelativeLayout>
 

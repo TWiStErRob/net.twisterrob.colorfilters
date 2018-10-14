@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
-	<issue id="UnusedAttribute" severity="ignore" />
+	<issue id="UnusedAttribute">
+		<ignore regexp="\b(autofillHints)\b">
+			<!-- used attribute for higher APIs only -->
+		</ignore>
+	</issue>
+	<issue id="LintBaseline" severity="ignore">
+		<!-- "# errors were filtered out because it is listed in the baseline file"
+		     Hide these messages, baseline files only contain issues that are not suppressable otherwise. -->
+	</issue>
 	<issue id="RtlHardcoded" severity="ignore" />
-	<issue id="IconDensities" severity="ignore" />
-	<issue id="TypographyQuotes" severity="ignore" />
-	<issue id="GradleDependency" severity="ignore" />
+	<issue id="GradleDependency" severity="ignore">
+		<!-- Keep the build stable -->
+	</issue>
 	<issue id="SyntheticAccessor" severity="ignore">
 		<!-- Don't want to deal with it yet -->
 	</issue>
@@ -12,8 +20,21 @@
 		<!-- Not used, but can't do anything about it :) -->
 		<ignore regexp="R\.bool\.in_prod" />
 		<ignore regexp="R\.bool\.in_test" />
-		<!-- REPORT report this bug -->
+		<!-- REPORT "The resource `R.font.` appears to be unused"
+		     only comes up with checkDependencies = true -->
 		<ignore regexp="R\.font\." />
+		<!-- REPORT "The resource `R.string.cf_resfont_..._code` appears to be unused"
+		     only comes up with checkDependencies = true
+		     this is reported on :app, even though the resource is in :resfont; and it's not reported there. -->
+		<!-- Accessed dynamically by ResourceFontFragment.createRow -->
 		<ignore regexp="R\.string\.cf_resfont_.*_code" />
 	</issue>
+	<issue id="IconColors">
+		<!-- menu/activity_color_filter.xml/action_logo uses ic_launcher.png as an icon,
+		     so it'll be classified as an ActionBar icon.
+		     See IconDetector.MenuFinder writing to actionBarIcons and isActionBarIcon() reading that. -->
+		<ignore path="**/res/drawable-*/ic_launcher.png" />
+	</issue>
+	<!-- REPORT MissingRegistered lint only shows one result with checkDependencies = true
+	     to repro remove ignore from `<ColorPickerView />` and run :app:lint. -->
 </lint>
