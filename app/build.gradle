@@ -20,8 +20,6 @@ dependencies {
 android {
 	defaultConfig {
 		applicationId 'net.twisterrob.colorfilters'
-
-		testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 	}
 	sourceSets {
 		androidTest {
@@ -34,15 +32,5 @@ android {
 	}
 	lintOptions {
 		checkDependencies = true
-	}
-}
-
-tasks.withType(JavaCompile) {
-	it.options.compilerArgs << '-Xlint:all' << '-Werror'
-}
-
-tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile) {
-	kotlinOptions {
-		allWarningsAsErrors = true
 	}
 }

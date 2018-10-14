@@ -6,24 +6,29 @@ allprojects {
 }
 
 allprojects { project ->
-
-	project.plugins.all {
-		if (it instanceof com.android.build.gradle.BasePlugin) {
-			project.android {
-
-				defaultConfig {
-					minSdkVersion 14
-				}
-
-				lintOptions {
-					warningsAsErrors = true
-					// REPORT this is not working in AS
-					// workaround? java.nio.file.Files.createSymbolicLink in settings.gradle
-					lintConfig = rootProject.file('config/lint/lint.xml')
-					def cleanPath = project.path.substring(1).replace(':', '+')
-					baselineFile = rootProject.file("config/lint/baseline ${cleanPath}.xml")
-				}
+	project.plugins.withType(com.android.build.gradle.BasePlugin) {
+		project.android {
+			defaultConfig {
+				testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 			}
+			lintOptions {
+				warningsAsErrors = true
+				// REPORT this is not working in AS
+				// workaround? java.nio.file.Files.createSymbolicLink in settings.gradle
+				lintConfig = rootProject.file('config/lint/lint.xml')
+				def cleanPath = project.path.substring(1).replace(':', '+')
+				baselineFile = rootProject.file("config/lint/baseline ${cleanPath}.xml")
+			}
+		}
+	}
+
+	project.tasks.withType(JavaCompile) {
+		it.options.compilerArgs << '-Xlint:all' << '-Werror'
+	}
+
+	project.tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile) {
+		kotlinOptions {
+			allWarningsAsErrors = true
 		}
 	}
 }
