@@ -31,7 +31,12 @@ val props = Properties().apply {
 val VERSION_PLUGIN_QUALITY: String by props
 val VERSION_PLUGIN_ANDROID: String by props
 dependencies {
+	compileOnly(gradleApi())
 	implementation(kotlin("gradle-plugin"))
 	configurations.implementation.resolutionStrategy.cacheChangingModulesFor(0, TimeUnit.SECONDS) // -SNAPSHOT
 	implementation("net.twisterrob.gradle:plugin:${VERSION_PLUGIN_ANDROID}")
+
+	testImplementation("junit:junit:4.12")
+	testImplementation("org.mockito:mockito-core:2.23.0")
+	testImplementation(gradleApi())
 }
