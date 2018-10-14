@@ -44,7 +44,6 @@ import net.twisterrob.colorfilters.android.ColorFilterFragment
 import net.twisterrob.colorfilters.android.alpha
 import net.twisterrob.colorfilters.android.keyboard.KeyboardHandler
 import net.twisterrob.colorfilters.android.keyboard.KeyboardMode
-import net.twisterrob.colorfilters.android.porterduff.R.id
 import net.twisterrob.colorfilters.android.replaceAlpha
 import net.twisterrob.colorfilters.android.replaceAlphaFrom
 import net.twisterrob.colorfilters.android.toARGBDecString
@@ -56,25 +55,25 @@ private const val PREF_PORTERDUFF_SWATCH = "PorterDuffColorFilter.colorSwatch"
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 private val MODES = (mapOf(
-	id.mode_clear to CLEAR,
-	id.mode_src to SRC,
-	id.mode_dst to DST,
-	id.mode_src_over to SRC_OVER,
-	id.mode_dst_over to DST_OVER,
-	id.mode_src_in to SRC_IN,
-	id.mode_dst_in to DST_IN,
-	id.mode_src_out to SRC_OUT,
-	id.mode_dst_out to DST_OUT,
-	id.mode_src_atop to SRC_ATOP,
-	id.mode_dst_atop to DST_ATOP,
-	id.mode_xor to XOR,
-	id.mode_darken to DARKEN,
-	id.mode_lighten to LIGHTEN,
-	id.mode_multiply to MULTIPLY,
-	id.mode_screen to SCREEN
+	R.id.mode_clear to CLEAR,
+	R.id.mode_src to SRC,
+	R.id.mode_dst to DST,
+	R.id.mode_src_over to SRC_OVER,
+	R.id.mode_dst_over to DST_OVER,
+	R.id.mode_src_in to SRC_IN,
+	R.id.mode_dst_in to DST_IN,
+	R.id.mode_src_out to SRC_OUT,
+	R.id.mode_dst_out to DST_OUT,
+	R.id.mode_src_atop to SRC_ATOP,
+	R.id.mode_dst_atop to DST_ATOP,
+	R.id.mode_xor to XOR,
+	R.id.mode_darken to DARKEN,
+	R.id.mode_lighten to LIGHTEN,
+	R.id.mode_multiply to MULTIPLY,
+	R.id.mode_screen to SCREEN
 ) + if (VERSION_CODES.HONEYCOMB <= VERSION.SDK_INT) mapOf(
-	id.mode_add to ADD,
-	id.mode_overlay to OVERLAY
+	R.id.mode_add to ADD,
+	R.id.mode_overlay to OVERLAY
 ) else emptyMap()).toSortedMap()
 
 private val DEFAULT_COLOR = Color.argb(0xff, 0x00, 0x00, 0x00)

@@ -131,18 +131,15 @@ class ResourceFontFragment : ColorFilterFragment() {
 	}
 
 	private fun getColor(text: CharSequence): String? {
-		val color = StringBuilder()
 		if (text is Spanned) {
-			val spans = text.getSpans(0, text.length, ForegroundColorSpan::class.java)
-			if (spans != null) {
-				for (span in spans) { // TODO joinToString
-					if (color.isNotEmpty()) {
-						color.append(",\n")
-					}
-					color.append(span.foregroundColor.toARGBHexString())
+			val spans: Array<ForegroundColorSpan>? = text.getSpans(0, text.length, ForegroundColorSpan::class.java)
+			// empty spans is also null
+			if (spans != null && spans.isNotEmpty()) {
+				return spans.joinToString(",\n") { span ->
+					span.foregroundColor.toARGBHexString()
 				}
 			}
 		}
-		return if (color.isNotEmpty()) color.toString() else null
+		return null
 	}
 }
