@@ -34,7 +34,8 @@ val VERSION_PLUGIN_ANDROID: String by props
 dependencies {
 	compileOnly(gradleApi())
 	implementation(kotlin("gradle-plugin"))
-	configurations.implementation.resolutionStrategy.cacheChangingModulesFor(0, TimeUnit.SECONDS) // -SNAPSHOT
+
+	configurations.all { resolutionStrategy.cacheChangingModulesFor(0, TimeUnit.SECONDS) /* -SNAPSHOT */ }
 	implementation("net.twisterrob.gradle:twister-quality:${VERSION_PLUGIN_QUALITY}")
 	implementation("net.twisterrob.gradle:plugin:${VERSION_PLUGIN_ANDROID}")
 
