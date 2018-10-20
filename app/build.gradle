@@ -37,14 +37,12 @@ android {
 			// Depend on non-test files from other projects.
 			// This needs a bit of trickery, because srcDir don't support filters properly (on a per-directory basis).
 			// So include a root folder where each module can be separately added, and exclude tests as relative paths.
-			def appDirs = kotlin.srcDirs
 			// rootDir cannot be used because kaptAndroidTest would try to hash .gradle/fileContent/fileContent.lock
 			File root = new File(rootDir, 'feature')
-			kotlin.srcDirs = [ root, projectDir ]
-			appDirs.each { File appDir ->
-				def relative = projectDir.toPath().relativize(appDir.toPath()).toFile()
-				kotlin.include "$relative/"
-			}
+			kotlin.srcDir root
+			// Explicitly include sources of app/androidTest
+			kotlin.include "net/twisterrob/colorfilters/"
+			// Include Actors and helpers (non-test files) from other modules
 			configurations['implementation'].dependencies.withType(ProjectDependency) {
 				evaluationDependsOn it.dependencyProject.path // get .android ready
 				it.dependencyProject.android.sourceSets.androidTest.kotlin.srcDirs.each { File dir ->
