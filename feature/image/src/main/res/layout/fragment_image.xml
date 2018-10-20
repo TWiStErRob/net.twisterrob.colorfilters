@@ -6,7 +6,7 @@
 	android:layout_height="fill_parent"
 	android:orientation="horizontal"
 	tools:showIn="@layout/activity_color_filter"
-	tools:context=".image.ImageFragment"
+	tools:context=".ImageFragment"
 	>
 	<ImageView
 		android:id="@+id/original"
