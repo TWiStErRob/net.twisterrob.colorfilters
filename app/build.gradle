@@ -21,13 +21,39 @@ android {
 	defaultConfig {
 		applicationId 'net.twisterrob.colorfilters'
 	}
+
+	/* 
+	buildTypes {
+		// didn't work, the proguarding keeps failing on the test and the tests crash with NoClassDefFoundError
+		testBuildType "release"
+		release {
+			testProguardFile 'src/androidTest/proguard.pro'
+		}
+	}
+	*/
+
 	sourceSets {
 		androidTest {
+			// Depend on non-test files from other projects.
+			// This needs a bit of trickery, because srcDir don't support filters properly (on a per-directory basis).
+			// So include a root folder where each module can be separately added, and exclude tests as relative paths.
+			def appDirs = kotlin.srcDirs
+			// rootDir cannot be used because kaptAndroidTest would try to hash .gradle/fileContent/fileContent.lock
+			File root = new File(rootDir, 'feature')
+			kotlin.srcDirs = [ root, projectDir ]
+			appDirs.each { File appDir ->
+				def relative = projectDir.toPath().relativize(appDir.toPath()).toFile()
+				kotlin.include "$relative/"
+			}
 			configurations['implementation'].dependencies.withType(ProjectDependency) {
 				evaluationDependsOn it.dependencyProject.path // get .android ready
-				java.srcDirs it.dependencyProject.android.sourceSets.androidTest.java.srcDirs.toArray()
-				kotlin.srcDirs it.dependencyProject.android.sourceSets.androidTest.kotlin.srcDirs.toArray()
+				it.dependencyProject.android.sourceSets.androidTest.kotlin.srcDirs.each { File dir ->
+					def relative = root.toPath().relativize(dir.toPath()).toFile()
+					kotlin.include "$relative/"
+					kotlin.exclude "$relative/**/*Test.*"
+				}
 			}
+			//kotlin.files.each { println it }
 		}
 	}
 	lintOptions {
