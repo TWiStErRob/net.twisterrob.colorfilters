@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<style name="slider_label" parent="slider_label_Base">
+		<!-- TODO make it smaller by lifting it? so it doesn't push sliders around-->
+		<!-- Since Lollipop lineSpacingExtra doesn't apply to single-line TextViews, so override it -->
+		<item name="android:paddingBottom">4sp</item>
+	</style>
+
+</resources>

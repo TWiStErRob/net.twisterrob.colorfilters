@@ -11,13 +11,18 @@
 		<item name="android:textSize">12sp</item>
 	</style>
 
-	<style name="slider_label">
+	<!-- Common attributes independent of resource splits -->
+	<style name="slider_label_Base">
 		<item name="android:layout_width">wrap_content</item>
 		<item name="android:layout_height">wrap_content</item>
 		<item name="android:gravity">right|center_vertical</item>
-		<!-- TODO make it smaller by lifting it? so it doesn't push sliders around-->
-		<item name="android:lineSpacingExtra">4dp</item>
 		<item name="android:textSize">14sp</item>
+	</style>
+
+	<style name="slider_label" parent="slider_label_Base">
+		<!-- TODO make it smaller by lifting it? so it doesn't push sliders around-->
+		<!-- Since Lollipop lineSpacingExtra doesn't apply to single-line TextViews, so check v21 override -->
+		<item name="android:lineSpacingExtra">4sp</item>
 	</style>
 
 	<style name="slider_value">
