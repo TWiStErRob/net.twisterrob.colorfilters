@@ -5,6 +5,9 @@
 	<string name="cf_matrix_info">This is a color filter that transforms colors through a 4x5 color <tt>matrix</tt>.
         \n\nThe <tt>matrix</tt> is copied into the filter, so changes made to it after the filter is constructed will not be reflected in the filter.
     </string>
+
+	<!-- Before 23 there's a need to hack around: http://www.twisterrob.net/blog/2016/09/android-xml-colors.html
+	     see override in other resource folder. -->
 	<string name="cf_matrix_R"><font fgcolor="#FFFF0000" color="-#010000">R</font>:</string>
 	<string name="cf_matrix_G"><font fgcolor="#FF00FF00" color="-#FF0100">G</font>:</string>
 	<string name="cf_matrix_B"><font fgcolor="#FF0000FF" color="-#FFFF01">B</font>:</string>

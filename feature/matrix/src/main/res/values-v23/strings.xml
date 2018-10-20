@@ -1,0 +1,24 @@
+<resources>
+
+	<!-- Before 23 there's no need to hack around: http://www.twisterrob.net/blog/2016/09/android-xml-colors.html
+	     see base in default resource folder. -->
+	<string name="cf_matrix_R"><font fgcolor="#FFFF0000">R</font>:</string>
+	<string name="cf_matrix_G"><font fgcolor="#FF00FF00">G</font>:</string>
+	<string name="cf_matrix_B"><font fgcolor="#FF0000FF">B</font>:</string>
+	<string name="cf_matrix_A"><font fgcolor="#FF000000">A</font>:</string>
+	<string name="cf_matrix_cR">c<font fgcolor="#FFFF0000">R</font></string>
+	<string name="cf_matrix_cG">c<font fgcolor="#FF00FF00">G</font></string>
+	<string name="cf_matrix_cB">c<font fgcolor="#FF0000FF">B</font></string>
+	<string name="cf_matrix_cA">c<font fgcolor="#FF000000">A</font></string>
+	<string name="cf_matrix_add">+</string>
+	<string name="cf_matrix_sR">S<sub><small><font fgcolor="#FFFF0000">R</font></small></sub></string>
+	<string name="cf_matrix_sG">S<sub><small><font fgcolor="#FF00FF00">G</font></small></sub></string>
+	<string name="cf_matrix_sB">S<sub><small><font fgcolor="#FF0000FF">B</font></small></sub></string>
+	<string name="cf_matrix_sA">S<sub><small><font fgcolor="#FF000000">A</font></small></sub></string>
+	<string name="cf_matrix_rR">R<sub><small><font fgcolor="#FFFF0000">R</font></small></sub></string>
+	<string name="cf_matrix_rG">R<sub><small><font fgcolor="#FF00FF00">G</font></small></sub></string>
+	<string name="cf_matrix_rB">R<sub><small><font fgcolor="#FF0000FF">B</font></small></sub></string>
+	<string name="cf_matrix_sat">S<sub><small><small><font fgcolor="#FF000000">sat</font></small></small></sub></string>
+	<string name="cf_matrix_S">S<sub><small><small><small><small><font fgcolor="#FFFF0000">R</font><font fgcolor="#FF00FF00">G</font><font fgcolor="#FF0000FF">B</font><font fgcolor="#FF000000">A</font></small></small></small></small></sub></string>
+
+</resources>
