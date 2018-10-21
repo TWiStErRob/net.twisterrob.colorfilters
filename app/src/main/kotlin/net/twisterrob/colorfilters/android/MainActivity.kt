@@ -151,7 +151,7 @@ class MainActivity : AppCompatActivity(), ColorFilterFragment.Listener, ImageFra
 
 			R.id.action_logo -> {
 				val logoZip = App.getShareableCachePath(this, "logos.zip")
-				LogoGenerator.write(logoZip, 36, 48, 72, 96, 144, 192, 512)
+				LogoGenerator.write(logoZip)
 				Log.i("LOGO", "Written to: $logoZip")
 
 				val logoUri = App.getShareableCacheUri(this, logoZip)

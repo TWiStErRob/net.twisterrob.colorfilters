@@ -20,12 +20,23 @@ import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 import kotlin.math.sqrt
 
+private val sizes = mapOf(
+	"ldpi" to 36,
+	"mdpi" to 48,
+	"hdpi" to 72,
+	"xhdpi" to 96,
+	"xxhdpi" to 144,
+	"xxxhdpi" to 192,
+	null to 512
+)
+
 object LogoGenerator {
 
-	fun write(file: File, vararg sizes: Int) {
+	fun write(file: File) {
 		ZipOutputStream(file.outputStream()).use { zip ->
-			sizes.forEach { size ->
-				zip.putNextEntry(ZipEntry("logo_$size.png"))
+			sizes.forEach { (res, size) ->
+				val name = if (res != null) "drawable-${res}/ic_launcher.png" else "Hi-res Icon (512x512).png"
+				zip.putNextEntry(ZipEntry(name))
 				zip.write(draw(size).toByteArray(CompressFormat.PNG))
 				zip.closeEntry()
 			}
