@@ -74,20 +74,16 @@ object LogoGenerator {
 			val bri = ofMap(dist, 4 * w, 6 * w, 1, 0)
 			val alp = ofMap(dist, 5 * w, 6 * w, 1, 0)
 			val sat = ofMap(dist, 0, 4 * w, 0, 1)
-			var hue = angle / (PI * 2)
-			if (cx <= x) {
-				hue = 1 - hue // mirror on the right
-			}
-			hue = hue * 2 % 1 // draw 2 rounds in 1 circle
-			var color = fromHsb(hue, sat, bri, alp)
-			if (cx <= x) {
-				color = desaturate(color)
-			}
-			return color
+			val hue = angle / (PI * 2)
+			val doubleHue = hue * 2 % 1 // draw 2 rounds in 1 circle
+			val mirrorHue = if (cx <= x) 1 - doubleHue else doubleHue // mirror on the right
+			val color = fromHsb(mirrorHue, sat, bri, alp)
+			return if (cx <= x) desaturate(color) else color // desaturate on the right
 		}
 
 		/**
 		 * Twisted desaturation with off-ratios.
+		 * CONSIDER desaturating by setting sat before the color is calculated
 		 */
 		private fun desaturate(color: Int): Int {
 			val r = (0.4 * color.red() + 0.4 * color.green() + 0.2 * color.blue()).toInt()
