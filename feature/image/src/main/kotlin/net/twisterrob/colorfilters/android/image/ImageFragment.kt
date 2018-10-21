@@ -174,7 +174,7 @@ class ImageFragment : Fragment() {
 		BitmapKeeper.into(requireFragmentManager(), preview, noListener)
 	}
 
-	private fun load(bitmap: Bitmap) {
+	fun load(bitmap: Bitmap) {
 		BitmapKeeper.save(requireFragmentManager(), bitmap)
 		BitmapKeeper.into(requireFragmentManager(), original, loadListener)
 		BitmapKeeper.into(requireFragmentManager(), preview, noListener)

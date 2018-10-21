@@ -26,7 +26,6 @@ import android.widget.Toast
 import net.twisterrob.colorfilters.android.keyboard.KeyboardHandler
 import net.twisterrob.colorfilters.android.keyboard.KeyboardMode
 import net.twisterrob.colorfilters.base.R
-import net.twisterrob.colorfilters.base.R.string
 
 abstract class ColorFilterFragment : Fragment() {
 
@@ -60,33 +59,27 @@ abstract class ColorFilterFragment : Fragment() {
 		inflater.inflate(R.menu.fragment_color_filter, menu)
 	}
 
-	override fun onOptionsItemSelected(item: MenuItem): Boolean {
+	override fun onOptionsItemSelected(item: MenuItem) =
 		when (item.itemId) {
-			R.id.action_info -> {
-				displayHelp()
-				return true
-			}
-
-			R.id.action_share -> {
-				val image = listener.renderCurrentView(getString(R.string.cf_share_subject), generateCode())
-
-				val intent = Intent(Intent.ACTION_SEND).apply {
-					val sharedText: CharSequence = SpannableStringBuilder().apply {
-						append(getText(string.cf_share_text))
-						append("\n\n")
-						append(generateFormattedCode())
-					}
-					type = "image/jpeg" //NON-NLS
-					putExtra(Intent.EXTRA_SUBJECT, getString(R.string.cf_share_subject))
-					putExtra(Intent.EXTRA_TEXT, sharedText)
-					putExtra(Intent.EXTRA_STREAM, image)
-				}
-				startActivity(Intent.createChooser(intent, getText(R.string.cf_share_picker_title)))
-				return true
-			}
-
-			else -> return super.onOptionsItemSelected(item)
+			R.id.action_info -> displayHelp().let { true }
+			R.id.action_share -> share().let { true }
+			else -> super.onOptionsItemSelected(item)
 		}
+
+	private fun share() {
+		val image = listener.renderCurrentView(getString(R.string.cf_share_subject), generateCode())
+		val intent = Intent(Intent.ACTION_SEND).apply {
+			val sharedText: CharSequence = SpannableStringBuilder().apply {
+				append(getText(R.string.cf_share_text))
+				append("\n\n")
+				append(generateFormattedCode())
+			}
+			type = "image/jpeg" //NON-NLS
+			putExtra(Intent.EXTRA_SUBJECT, getString(R.string.cf_share_subject))
+			putExtra(Intent.EXTRA_TEXT, sharedText)
+			putExtra(Intent.EXTRA_STREAM, image)
+		}
+		startActivity(Intent.createChooser(intent, getText(R.string.cf_share_picker_title)))
 	}
 
 	/** @see displayHelp(Int, Int) */

@@ -1,9 +1,9 @@
 package net.twisterrob.colorfilters.android.image
 
 import android.graphics.Bitmap
+import android.graphics.Bitmap.CompressFormat
+import android.graphics.Bitmap.Config
 import android.graphics.Color
-import android.os.Environment
-import android.util.Log
 import net.twisterrob.android.view.color.FastMath
 import net.twisterrob.android.view.color.PI
 import net.twisterrob.android.view.color.fromHsb
@@ -14,29 +14,35 @@ import net.twisterrob.colorfilters.android.alpha
 import net.twisterrob.colorfilters.android.blue
 import net.twisterrob.colorfilters.android.green
 import net.twisterrob.colorfilters.android.red
+import java.io.ByteArrayOutputStream
 import java.io.File
-import java.io.IOException
+import java.util.zip.ZipEntry
+import java.util.zip.ZipOutputStream
 import kotlin.math.sqrt
 
-object LogoWriter {
+object LogoGenerator {
 
-	fun write(vararg sizes: Int): File? =
-		sizes.associate { size -> size to write(size) }.maxBy { it.key }?.value
-
-	private fun write(size: Int): File? = try {
-		val pixels = IntArray(size * size)
-		LineByLineBitmapDrawer(pixels, size, size, RadialHSBGradientLogo()).draw()
-		val bitmap = Bitmap.createBitmap(pixels, size, size, Bitmap.Config.ARGB_8888)!!
-		val picturesDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)!!
-		File(picturesDir, "colorfilters_logo_$size.png").also { output ->
-			output.outputStream().use { out ->
-				bitmap.compress(Bitmap.CompressFormat.PNG, 100, out)
-				out.flush()
+	fun write(file: File, vararg sizes: Int) {
+		ZipOutputStream(file.outputStream()).use { zip ->
+			sizes.forEach { size ->
+				zip.putNextEntry(ZipEntry("logo_$size.png"))
+				zip.write(draw(size).toByteArray(CompressFormat.PNG))
+				zip.closeEntry()
 			}
 		}
-	} catch (ex: IOException) {
-		Log.e("LOGO", ex.message, ex)
-		null
+	}
+
+	private fun Bitmap.toByteArray(format: CompressFormat): ByteArray {
+		val memory = ByteArrayOutputStream()
+		// no .use {} necessary because it's a memory stream
+		this.compress(format, 100, memory)
+		return memory.toByteArray()
+	}
+
+	private fun draw(size: Int): Bitmap {
+		val pixels = IntArray(size * size)
+		LineByLineBitmapDrawer(pixels, size, size, RadialHSBGradientLogo()).draw()
+		return Bitmap.createBitmap(pixels, size, size, Config.ARGB_8888)
 	}
 
 	private class RadialHSBGradientLogo : PixelColor {

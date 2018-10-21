@@ -5,12 +5,13 @@ import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Bitmap
+import android.graphics.Bitmap.CompressFormat
+import android.graphics.BitmapFactory
 import android.graphics.ColorFilter
 import android.inputmethodservice.KeyboardView
 import android.net.Uri
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.provider.MediaStore.Images
 import android.support.v4.app.Fragment
 import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
@@ -18,11 +19,11 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.webkit.MimeTypeMap
 import android.widget.ArrayAdapter
-import net.twisterrob.colorfilters.android.R.string
 import net.twisterrob.colorfilters.android.about.AboutActivity
 import net.twisterrob.colorfilters.android.image.ImageFragment
-import net.twisterrob.colorfilters.android.image.LogoWriter
+import net.twisterrob.colorfilters.android.image.LogoGenerator
 import net.twisterrob.colorfilters.android.keyboard.KeyboardHandler
 import net.twisterrob.colorfilters.android.keyboard.KeyboardHandlerFactory
 import net.twisterrob.colorfilters.android.keyboard.KeyboardMode
@@ -32,6 +33,7 @@ import net.twisterrob.colorfilters.android.matrix.MatrixFragment
 import net.twisterrob.colorfilters.android.palette.PaletteFragment
 import net.twisterrob.colorfilters.android.porterduff.PorterDuffFragment
 import net.twisterrob.colorfilters.android.resources.ResourceFontFragment
+import java.util.zip.ZipFile
 
 class MainActivity : AppCompatActivity(), ColorFilterFragment.Listener, ImageFragment.Listener {
 
@@ -53,7 +55,7 @@ class MainActivity : AppCompatActivity(), ColorFilterFragment.Listener, ImageFra
 		).also { kbd = it }
 
 	private fun SharedPreferences.findKeyboardMode(): KeyboardMode =
-		if (this.getBoolean(getString(string.cf_pref_keyboard), false)) {
+		if (this.getBoolean(getString(R.string.cf_pref_keyboard), false)) {
 			this@MainActivity.currentFragment!!.preferredKeyboardMode
 		} else {
 			NATIVE
@@ -148,9 +150,25 @@ class MainActivity : AppCompatActivity(), ColorFilterFragment.Listener, ImageFra
 			}
 
 			R.id.action_logo -> {
-				val logo = LogoWriter.write(36, 48, 72, 96, 144, 192, 512)!!
-				images.load(Uri.fromFile(logo))
-				Log.i("LOGO", "Written to: $logo")
+				val logoZip = App.getShareableCachePath(this, "logos.zip")
+				LogoGenerator.write(logoZip, 36, 48, 72, 96, 144, 192, 512)
+				Log.i("LOGO", "Written to: $logoZip")
+
+				val logoUri = App.getShareableCacheUri(this, logoZip)
+				val intent = Intent(Intent.ACTION_SEND).apply {
+					type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(logoZip.extension)
+					putExtra(Intent.EXTRA_STREAM, logoUri)
+				}
+				startActivity(Intent.createChooser(intent, getText(R.string.cf_share_picker_title)))
+
+				images.load(ZipFile(logoZip).let { zip ->
+					val biggest = zip
+						.entries()
+						.asSequence()
+						.maxBy { it.size }
+						?: error("No images in $logoZip")
+					zip.getInputStream(biggest).use { BitmapFactory.decodeStream(it) }
+				})
 				return true
 			}
 
@@ -241,10 +259,15 @@ class MainActivity : AppCompatActivity(), ColorFilterFragment.Listener, ImageFra
 	}
 
 	override fun renderCurrentView(title: CharSequence, description: CharSequence): Uri {
-		val shareContent = images.renderPreview()
-		val uri =
-			Images.Media.insertImage(contentResolver, shareContent, title.toString(), description.toString())!!
-		return Uri.parse(uri)
+		val file = App.getShareableCachePath(this, "temp.jpg")
+		file.outputStream().use {
+			val shareContent = images.renderPreview()
+			val saved = shareContent.compress(CompressFormat.JPEG, 100, it)
+			check(saved) {
+				error("Couldn't save generated shared content to ${file.absolutePath}")
+			}
+		}
+		return App.getShareableCacheUri(this, file)
 	}
 
 	override fun onAttachFragment(fragment: Fragment) {
