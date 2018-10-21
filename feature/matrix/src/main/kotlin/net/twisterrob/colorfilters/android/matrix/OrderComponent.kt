@@ -137,12 +137,14 @@ internal class OrderComponent(
 		private fun startDragAndDrop(view: View): Boolean {
 			return if (VERSION.SDK_INT < VERSION_CODES.N) {
 				@Suppress("DEPRECATION")
-				view.startDrag(null, DragShadowBuilder(view), view, 0)
+				view.startDrag(null, DragShadowBuilder(view), OrderDragLocalState(view), 0)
 			} else {
-				view.startDragAndDrop(null, DragShadowBuilder(view), view, 0)
+				view.startDragAndDrop(null, DragShadowBuilder(view), OrderDragLocalState(view), 0)
 			}
 		}
 	}
+
+	private class OrderDragLocalState(val view: View)
 
 	private class ItemDragListener(
 		private val listener: ChangeListener
@@ -156,7 +158,7 @@ internal class OrderComponent(
 			if (event.action != DragEvent.ACTION_DRAG_LOCATION) {
 				//Log.d("DRAG", describeDragEvent(dropTarget, event))
 			}
-			val dragged = event.localState as View
+			val dragged = (event.localState as? OrderDragLocalState ?: return false).view
 
 			when (event.action) {
 				DragEvent.ACTION_DRAG_STARTED -> {
