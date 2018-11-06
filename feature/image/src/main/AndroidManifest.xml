@@ -1,1 +1,7 @@
-<manifest package="net.twisterrob.colorfilters.android.image" /> 
+<manifest
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	package="net.twisterrob.colorfilters.android.image">
+
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+</manifest>

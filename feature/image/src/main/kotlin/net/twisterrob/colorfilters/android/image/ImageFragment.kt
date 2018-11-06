@@ -1,19 +1,25 @@
 package net.twisterrob.colorfilters.android.image
 
+import android.Manifest
 import android.app.Activity
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.ColorFilter
 import android.net.Uri
+import android.os.Build.VERSION
+import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.os.Parcelable
 import android.preference.PreferenceManager
 import android.provider.MediaStore
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
+import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -24,7 +30,8 @@ import android.widget.ImageView
 import kotlin.math.max
 
 private const val PREF_IMAGE_URL = "Image.url"
-private const val REQUEST_CODE_GET_PICTURE = Activity.RESULT_FIRST_USER
+private const val REQUEST_CODE_GET_PICTURE = 1235
+private const val REQUEST_CODE_PERMISSION_PICTURE = 1236
 
 class ImageFragment : Fragment() {
 
@@ -64,7 +71,7 @@ class ImageFragment : Fragment() {
 		super.onViewCreated(view, savedInstanceState)
 
 		original = view.findViewById(R.id.original)
-		original.setOnClickListener { startLoadImage() }
+		original.setOnClickListener { startLoadImage(false) }
 		original.setOnLongClickListener { loadDefaults();true }
 
 		preview = view.findViewById(R.id.preview)
@@ -96,7 +103,7 @@ class ImageFragment : Fragment() {
 
 	override fun onOptionsItemSelected(item: MenuItem): Boolean {
 		when (item.itemId) {
-			R.id.action_image -> startLoadImage()
+			R.id.action_image -> startLoadImage(false)
 			else -> return super.onOptionsItemSelected(item)
 		}
 		return true
@@ -112,6 +119,60 @@ class ImageFragment : Fragment() {
 				remove(PREF_IMAGE_URL)
 			}
 		}.apply()
+	}
+
+	private fun checkPermission(
+		permission: String,
+		requestCode: Int,
+		rationale: (() -> Unit)? = null
+	): Boolean {
+		@Suppress("LiftReturnOrAssignment")
+		if (VERSION_CODES.M <= VERSION.SDK_INT
+			&& ContextCompat.checkSelfPermission(requireContext(), permission) != PackageManager.PERMISSION_GRANTED
+		) {
+			if (rationale != null && shouldShowRequestPermissionRationale(permission)) {
+				rationale()
+			} else {
+				requestPermissions(arrayOf(permission), requestCode)
+			}
+			return false
+		} else {
+			return true
+		}
+	}
+
+	private fun startLoadImage(skipRationale: Boolean) {
+		if (!checkPermission(
+				Manifest.permission.READ_EXTERNAL_STORAGE,
+				REQUEST_CODE_PERMISSION_PICTURE,
+				if (skipRationale) null else fun() {
+					AlertDialog.Builder(requireContext())
+						.setMessage("External applications may return a reference to a file on the device's storage.")
+						.setPositiveButton(android.R.string.ok) { _, _ -> startLoadImage(true) }
+						.setNegativeButton(android.R.string.cancel) { _, _ -> }
+						.show()
+				}
+			)
+		) {
+			return
+		}
+		startLoadImage()
+	}
+
+	override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+		when (requestCode) {
+			REQUEST_CODE_PERMISSION_PICTURE ->
+				if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+					AlertDialog.Builder(requireContext())
+						.setMessage("You may continue, but it is possible the picked image will not load.")
+						.setPositiveButton(android.R.string.ok) { _, _ -> startLoadImage() }
+						.setNegativeButton(android.R.string.cancel) { _, _ -> }
+						.show()
+				} else {
+					startLoadImage(false)
+				}
+			else -> super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+		}
 	}
 
 	private fun startLoadImage() {
