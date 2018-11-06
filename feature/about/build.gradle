@@ -5,3 +5,5 @@ dependencies {
 
 	implementation project(":feature:base")
 }
+
+android.libraryVariants.all { it.generateBuildConfig.enabled = true }

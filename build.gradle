@@ -6,7 +6,7 @@ allprojects {
 }
 
 allprojects { project ->
-	project.plugins.withType(com.android.build.gradle.BasePlugin) {
+	project.plugins.withType(com.android.build.gradle.BasePlugin) { plugin ->
 		project.android {
 			defaultConfig {
 				testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -18,6 +18,12 @@ allprojects { project ->
 				lintConfig = rootProject.file('config/lint/lint.xml')
 				def cleanPath = project.path.substring(1).replace(':', '+')
 				baselineFile = rootProject.file("config/lint/baseline ${cleanPath}.xml")
+			}
+			if (plugin instanceof com.android.build.gradle.LibraryPlugin) {
+				libraryVariants.all {
+					// TODEL replace with https://issuetracker.google.com/issues/72050365 once released.
+					it.generateBuildConfig.enabled = false
+				}
 			}
 		}
 	}
