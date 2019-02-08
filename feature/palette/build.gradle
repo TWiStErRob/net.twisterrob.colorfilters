@@ -6,7 +6,12 @@ dependencies {
 	implementation project(':feature:base')
 	implementation project(':feature:keyboard:contract')
 
-	implementation "androidx.palette:palette:1.0.0"
+	implementation("androidx.palette:palette:1.0.0") {
+		exclude group: "androidx.legacy"
+	}
+	implementation("androidx.palette:palette-ktx:1.0.0") {
+		exclude group: "androidx.legacy"
+	}
 
 	androidTestImplementation project(':test-base')
 }

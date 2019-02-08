@@ -21,6 +21,7 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.transaction
 import net.twisterrob.colorfilters.android.about.AboutActivity
 import net.twisterrob.colorfilters.android.image.ImageFragment
 import net.twisterrob.colorfilters.android.image.LogoGenerator
@@ -100,9 +101,9 @@ class MainActivity : AppCompatActivity(), ColorFilterFragment.Listener, ImageFra
 				// keep the existing instance on rotation
 				if (getPosition(currentFragment) != position) {
 					val fragment = createFragment(position)
-					supportFragmentManager.beginTransaction()
-						.replace(R.id.container, fragment)
-						.commit()
+					supportFragmentManager.transaction {
+						replace(R.id.container, fragment)
+					}
 				}
 				return@OnNavigationListener true
 			} catch (ex: RuntimeException) {

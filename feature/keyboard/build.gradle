@@ -4,6 +4,4 @@ apply plugin: 'net.twisterrob.kotlin'
 dependencies {
 
 	api project('contract')
-
-	implementation "androidx.annotation:annotation:1.0.1"
 }
