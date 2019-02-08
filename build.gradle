@@ -9,7 +9,7 @@ allprojects { project ->
 	project.plugins.withType(com.android.build.gradle.BasePlugin) { plugin ->
 		project.android {
 			defaultConfig {
-				testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+				testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 			}
 			lintOptions {
 				warningsAsErrors = true

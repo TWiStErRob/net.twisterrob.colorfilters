@@ -5,5 +5,6 @@ dependencies {
 
 	implementation project(':feature:keyboard:contract')
 
-	api "com.android.support:appcompat-v7:${VERSION_SUPPORT}"
+	api "androidx.appcompat:appcompat:1.0.2"
+	api "androidx.annotation:annotation:1.0.1"
 }

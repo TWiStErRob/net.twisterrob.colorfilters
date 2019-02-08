@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.net.Uri
 import android.preference.PreferenceManager
-import android.support.v4.content.FileProvider
+import androidx.core.content.FileProvider
 import java.io.File
 
 class App : Application() {

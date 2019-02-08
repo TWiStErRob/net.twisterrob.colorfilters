@@ -1,7 +1,2 @@
 apply plugin: 'net.twisterrob.android-library'
 apply plugin: 'net.twisterrob.kotlin'
-
-dependencies {
-
-	implementation "com.android.support:support-annotations:${VERSION_SUPPORT}"
-}

@@ -5,7 +5,6 @@ import android.graphics.ColorFilter
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
-import android.support.annotation.StringRes
 import android.text.Html
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
@@ -15,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
+import androidx.annotation.StringRes
 import net.twisterrob.colorfilters.android.ColorFilterFragment
 import net.twisterrob.colorfilters.android.keyboard.KeyboardMode
 import net.twisterrob.colorfilters.android.resfont.R

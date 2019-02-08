@@ -1,7 +1,8 @@
 package net.twisterrob.android.view.color.swatches;
 
 import android.graphics.*;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import net.twisterrob.android.view.color.ColorMath;
 

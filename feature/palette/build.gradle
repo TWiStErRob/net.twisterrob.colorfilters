@@ -6,7 +6,7 @@ dependencies {
 	implementation project(':feature:base')
 	implementation project(':feature:keyboard:contract')
 
-	implementation "com.android.support:palette-v7:${VERSION_SUPPORT}"
+	implementation "androidx.palette:palette:1.0.0"
 
 	androidTestImplementation project(':test-base')
 }

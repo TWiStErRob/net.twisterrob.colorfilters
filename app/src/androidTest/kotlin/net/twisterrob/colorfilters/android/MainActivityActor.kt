@@ -1,13 +1,14 @@
 package net.twisterrob.colorfilters.android
 
-import android.support.annotation.StringRes
-import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.action.ViewActions.click
-import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.matcher.ViewMatchers.withClassName
-import android.support.test.espresso.matcher.ViewMatchers.withId
-import android.support.test.espresso.matcher.ViewMatchers.withParent
-import android.support.test.espresso.matcher.ViewMatchers.withText
+import androidx.annotation.StringRes
+import androidx.appcompat.widget.AppCompatSpinner
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.withClassName
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withParent
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import net.twisterrob.colorfilters.android.lighting.LightingScreenActor
 import net.twisterrob.colorfilters.android.matrix.MatrixScreenActor
 import net.twisterrob.colorfilters.android.palette.PaletteScreenActor
@@ -50,6 +51,6 @@ class MainActivityActor {
 
 	private fun spinner() = allOf(
 		withParent(withId(R.id.action_bar)),
-		withClassName(equalTo("android.support.v7.widget.AppCompatSpinner"))
+		withClassName(equalTo(AppCompatSpinner::class.qualifiedName))
 	)
 }

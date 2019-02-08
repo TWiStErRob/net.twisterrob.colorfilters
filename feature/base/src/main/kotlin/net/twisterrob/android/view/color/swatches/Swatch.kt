@@ -4,8 +4,8 @@ import android.graphics.Canvas
 import android.graphics.ColorFilter
 import android.graphics.PixelFormat
 import android.graphics.drawable.Drawable
-import android.support.annotation.ColorInt
-import android.support.annotation.IntRange
+import androidx.annotation.ColorInt
+import androidx.annotation.IntRange
 
 abstract class Swatch : Drawable() {
 

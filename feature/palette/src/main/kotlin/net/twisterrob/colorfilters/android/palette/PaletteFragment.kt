@@ -7,9 +7,6 @@ import android.graphics.ColorFilter
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
-import android.support.v7.graphics.Palette
-import android.support.v7.graphics.Palette.Swatch
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +23,9 @@ import android.widget.SeekBar
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.palette.graphics.Palette
+import androidx.palette.graphics.Palette.Swatch
 import net.twisterrob.android.view.listeners.OnSeekBarChangeAdapter
 import net.twisterrob.android.view.listeners.TextWatcherAdapter
 import net.twisterrob.colorfilters.android.ColorFilterFragment

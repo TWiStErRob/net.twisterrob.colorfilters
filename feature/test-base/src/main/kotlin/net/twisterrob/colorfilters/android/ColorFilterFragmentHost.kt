@@ -3,12 +3,12 @@ package net.twisterrob.colorfilters.android
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.annotation.LayoutRes
-import android.support.test.InstrumentationRegistry
-import android.support.test.rule.ActivityTestRule
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
+import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.rule.ActivityTestRule
 import com.nhaarman.mockito_kotlin.mock
 import net.twisterrob.colorfilters.android.testbase.R
 import org.mockito.Answers
@@ -24,11 +24,11 @@ class ColorFilterFragmentHost(
 	ColorFilterFragment.Listener by listener {
 
 	override fun attachBaseContext(ignored: Context) {
-		super.attachBaseContext(InstrumentationRegistry.getTargetContext())
+		super.attachBaseContext(InstrumentationRegistry.getInstrumentation().targetContext)
 	}
 
 	override fun setContentView(@LayoutRes layoutResID: Int) {
-		val inflater = LayoutInflater.from(InstrumentationRegistry.getContext())
+		val inflater = LayoutInflater.from(InstrumentationRegistry.getInstrumentation().context)
 		val view = inflater.inflate(layoutResID, null, false)
 		super.setContentView(view)
 	}
@@ -70,7 +70,7 @@ class ColorFilterFragmentHost(
 					// set the package and class properly
 					// AFTER ActivityTestRule has done its forceful usage of getTargetContext()
 					intent.component?.let { component ->
-						intent.setClassName(InstrumentationRegistry.getContext(), component.className)
+						intent.setClassName(InstrumentationRegistry.getInstrumentation().context, component.className)
 					}
 				}
 			}

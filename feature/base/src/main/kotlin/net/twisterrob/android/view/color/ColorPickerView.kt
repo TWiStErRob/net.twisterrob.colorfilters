@@ -5,13 +5,13 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.PointF
 import android.os.Build
-import android.support.v7.widget.AppCompatImageView
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.util.TypedValue.COMPLEX_UNIT_DIP
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
+import androidx.appcompat.widget.AppCompatImageView
 import net.twisterrob.android.view.color.swatches.APIDemoSwatch
 import net.twisterrob.android.view.color.swatches.PixelAbsoluteSwatch
 import net.twisterrob.android.view.color.swatches.Swatch

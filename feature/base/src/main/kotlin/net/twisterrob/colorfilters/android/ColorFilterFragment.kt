@@ -3,7 +3,9 @@ package net.twisterrob.colorfilters.android
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.app.AlertDialog
-import android.content.*
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.ColorFilter
@@ -11,8 +13,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.support.annotation.StringRes
-import android.support.v4.app.Fragment
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.Spanned
@@ -23,6 +23,8 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.annotation.StringRes
+import androidx.fragment.app.Fragment
 import net.twisterrob.colorfilters.android.keyboard.KeyboardHandler
 import net.twisterrob.colorfilters.android.keyboard.KeyboardMode
 import net.twisterrob.colorfilters.base.R
