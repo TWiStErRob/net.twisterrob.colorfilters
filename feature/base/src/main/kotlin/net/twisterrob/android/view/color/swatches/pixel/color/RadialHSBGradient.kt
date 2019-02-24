@@ -1,5 +1,7 @@
 package net.twisterrob.android.view.color.swatches.pixel.color
 
+import androidx.annotation.ColorInt
+import androidx.annotation.IntRange
 import net.twisterrob.android.view.color.FastMath
 import net.twisterrob.android.view.color.PI
 import net.twisterrob.android.view.color.fromHsb
@@ -8,17 +10,23 @@ import kotlin.math.sqrt
 
 class RadialHSBGradient : PixelColor {
 
+	@IntRange(from = 0)
 	private var w: Int = 0
+
+	@IntRange(from = 0)
 	private var cx: Int = 0
+
+	@IntRange(from = 0)
 	private var cy: Int = 0
 
-	override fun initializeInvariants(w: Int, h: Int) {
+	override fun initializeInvariants(@IntRange(from = 0) w: Int, @IntRange(from = 0) h: Int) {
 		this.w = w
 		this.cx = w / 2
 		this.cy = w / 2
 	}
 
-	override fun getPixelColorAt(x: Int, y: Int): Int {
+	@ColorInt
+	override fun getPixelColorAt(@IntRange(from = 0/*, to = w*/) x: Int, @IntRange(from = 0/*, to = h*/) y: Int): Int {
 		val angle = FastMath.Atan2Faster.atan2((y - cy).toFloat(), (x - cx).toFloat()) + PI
 		val hue = angle / (PI * 2)
 		val dist = sqrt(((x - cx) * (x - cx) + (y - cy) * (y - cy)).toDouble()).toFloat()

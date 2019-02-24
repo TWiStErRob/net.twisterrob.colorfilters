@@ -1,9 +1,17 @@
 package net.twisterrob.android.view.color.swatches.pixel.drawer
 
+import androidx.annotation.ColorInt
+import androidx.annotation.IntRange
 import net.twisterrob.android.view.color.swatches.pixel.color.PixelColor
 
 class LineByLineBitmapDrawer(
-	bitmap: IntArray, w: Int, h: Int, pixel: PixelColor
+	@ColorInt
+	bitmap: IntArray,
+	@IntRange(from = 0)
+	w: Int,
+	@IntRange(from = 0)
+	h: Int,
+	pixel: PixelColor
 ) : BitmapDrawer(bitmap, w, h, pixel) {
 
 	override fun fillPixels() {

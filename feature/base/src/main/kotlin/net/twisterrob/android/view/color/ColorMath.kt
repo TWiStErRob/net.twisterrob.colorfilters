@@ -3,6 +3,8 @@
 package net.twisterrob.android.view.color
 
 import android.graphics.Color
+import androidx.annotation.ColorInt
+import androidx.annotation.FloatRange
 
 const val PI: Float = kotlin.math.PI.toFloat()
 
@@ -39,9 +41,15 @@ fun ofMap(value: Float, inputMin: Float, inputMax: Float, outputMin: Float, outp
  * @param saturation `[0, 1]`
  * @param brightness `[0, 1]`
  * @param alpha      `[0, 1]`
- * @return RGBA color
+ * @return ARGB color
  */
-fun fromHsb(hue: Float, saturation: Float, brightness: Float, alpha: Float): Int {
+@ColorInt
+fun fromHsb(
+	@FloatRange(from = 0.0, to = 1.0) hue: Float,
+	@FloatRange(from = 0.0, to = 1.0) saturation: Float,
+	@FloatRange(from = 0.0, to = 1.0) brightness: Float,
+	@FloatRange(from = 0.0, to = 1.0) alpha: Float
+): Int {
 	var r = 0f
 	var g = 0f
 	var b = 0f
@@ -104,4 +112,5 @@ fun fromHsb(hue: Float, saturation: Float, brightness: Float, alpha: Float): Int
 			((b * 255).toInt() shl 0)
 }
 
+@ColorInt
 fun randomColor(): Int = fromHsb(Math.random().toFloat(), 1.0f, 1.0f, 1.0f)

@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import androidx.annotation.ColorInt
+import androidx.core.graphics.toColorInt
 import net.twisterrob.android.view.color.ColorPickerView
 import net.twisterrob.android.view.listeners.TextWatcherAdapter
 import net.twisterrob.colorfilters.android.ColorFilterFragment
@@ -156,7 +158,7 @@ class LightingFragment : ColorFilterFragment() {
 			editor.addTextChangedListener(object : TextWatcherAdapter() {
 				override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
 					try {
-						val color = Color.parseColor("#" + s.toString())
+						val color = "#${s}".toColorInt()
 						updateColor(color, UpdateOrigin.Editor)
 						editor.error = null
 					} catch (ex: RuntimeException) {
@@ -165,14 +167,14 @@ class LightingFragment : ColorFilterFragment() {
 				}
 			})
 			colorView.colorChangedListener = object : ColorPickerView.OnColorChangedListener {
-				override fun colorChanged(color: Int) {
+				override fun colorChanged(@ColorInt color: Int) {
 					updateColor(color, UpdateOrigin.Picker)
 				}
 			}
 			keyboard.registerEditText(editor)
 		}
 
-		fun updateColor(color: Int, origin: UpdateOrigin?) {
+		fun updateColor(@ColorInt color: Int, origin: UpdateOrigin?) {
 			if (pendingUpdate) {
 				return
 			}

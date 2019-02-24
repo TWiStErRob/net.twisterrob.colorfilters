@@ -2,20 +2,25 @@ package net.twisterrob.android.view.color.swatches;
 
 import android.graphics.*;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.FloatRange;
 import androidx.annotation.NonNull;
 
 import net.twisterrob.android.view.color.ColorMath;
 
 // Based on https://github.com/android/platform_development/blob/android-sdk-adt_r20/samples/ApiDemos/src/com/example/android/apis/graphics/ColorPickerDialog.java
 public class APIDemoSwatch extends Swatch {
-	private static final int AREA_CENTER = 1;
+	private static final int /*AreaCode*/ AREA_CENTER = 1;
+
+	@ColorInt
 	private static final int[] COLORS =
 			new int[] {0xFFFF0000, 0xFFFF00FF, 0xFF0000FF, 0xFF00FFFF, 0xFF00FF00, 0xFFFFFF00, 0xFFFF0000};
+
 	private static final Shader SHADER = new SweepGradient(0, 0, COLORS, null);
 
 	protected final @NonNull Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 	protected final @NonNull Paint mCenterPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-	private int currentArea;
+	private /*AreaCode*/ int currentArea;
 
 	public APIDemoSwatch() {
 		mPaint.setShader(SHADER);
@@ -23,17 +28,17 @@ public class APIDemoSwatch extends Swatch {
 	}
 
 	@Override
-	public int getCurrentColor() {
+	public @ColorInt int getCurrentColor() {
 		return mCenterPaint.getColor();
 	}
 
 	@Override
-	public void setCurrentColor(int color) {
+	public void setCurrentColor(@ColorInt int color) {
 		mCenterPaint.setColor(color);
 	}
 
 	@Override
-	public void setCurrentArea(int areaCode) {
+	public void setCurrentArea(/*AreaCode*/ int areaCode) {
 		currentArea = areaCode;
 	}
 
@@ -65,14 +70,14 @@ public class APIDemoSwatch extends Swatch {
 	}
 
 	@Override
-	public int getAreaCode(float x, float y) {
+	public /*AreaCode*/ int getAreaCode(float x, float y) {
 		x -= getBounds().exactCenterX();
 		y -= getBounds().exactCenterY();
 		return Math.sqrt(x * x + y * y) <= getCenterRadius()? AREA_CENTER : AREA_DEFAULT;
 	}
 
 	@Override
-	public int findColor(int area, float x, float y) {
+	public int findColor(/*AreaCode*/ int area, float x, float y) {
 		switch (area) {
 			case AREA_DEFAULT:
 				x -= getBounds().exactCenterX();
@@ -87,7 +92,7 @@ public class APIDemoSwatch extends Swatch {
 	}
 
 	@Override
-	public boolean triggersColorChange(int area) {
+	public boolean triggersColorChange(/*AreaCode*/ int area) {
 		return area == AREA_CENTER;
 	}
 
@@ -107,7 +112,11 @@ public class APIDemoSwatch extends Swatch {
 		 * @param unit   which color to pick in {@code [0, 1)} range
 		 * @return interpolated color
 		 */
-		public static int interpColor(int colors[], float unit) {
+		@ColorInt
+		public static int interpColor(
+				@ColorInt int colors[],
+				@FloatRange(from = 0.0, to = 1.0, toInclusive = false) float unit
+		) {
 			if (unit <= 0) { // (-∞, 0] = 0
 				return colors[0];
 			}
@@ -152,8 +161,11 @@ public class APIDemoSwatch extends Swatch {
 		 * @param y y coordinate
 		 * @return angle mapped to {@code [0, 1)} (see table)
 		 */
+		@FloatRange(from = 0.0, to = 1.0, toInclusive = false)
 		public static float angleAsUnit(float x, float y) {
-			float angle = (float)Math.atan2(y, x); // [-pi, pi]
+			@FloatRange(from = -ColorMath.PI, to = ColorMath.PI)
+			float angle = (float)Math.atan2(y, x);
+
 			float unit = angle / (2 * ColorMath.PI); // [-0.5, +0.5]
 			if (unit < 0) {
 				unit += 1; // [-0.5, 0) -> [0.5, 1)

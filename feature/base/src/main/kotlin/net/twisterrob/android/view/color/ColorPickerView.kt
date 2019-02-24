@@ -11,6 +11,7 @@ import android.util.TypedValue.COMPLEX_UNIT_DIP
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
+import androidx.annotation.ColorInt
 import androidx.appcompat.widget.AppCompatImageView
 import net.twisterrob.android.view.color.swatches.APIDemoSwatch
 import net.twisterrob.android.view.color.swatches.PixelAbsoluteSwatch
@@ -28,7 +29,7 @@ import kotlin.math.sqrt
 open class ColorPickerView : AppCompatImageView {
 
 	interface OnColorChangedListener {
-		fun colorChanged(color: Int)
+		fun colorChanged(@ColorInt color: Int)
 	}
 
 	var colorChangedListener: OnColorChangedListener? = null
@@ -91,9 +92,9 @@ open class ColorPickerView : AppCompatImageView {
 		setImageDrawable(swatch)
 	}
 
-	var color: Int // by swatch.currentColor
+	@get:ColorInt var color: Int // by swatch.currentColor
 		get() = swatch.currentColor
-		set(color) {
+		set(@ColorInt color) {
 			if (color == swatch.currentColor) {
 				return
 			}

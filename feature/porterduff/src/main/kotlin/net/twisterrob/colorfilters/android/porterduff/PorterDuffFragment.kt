@@ -36,12 +36,14 @@ import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.SeekBar
 import android.widget.TextView
+import androidx.annotation.ColorInt
+import androidx.core.graphics.alpha
+import androidx.core.graphics.toColorInt
 import net.twisterrob.android.view.CheckableButtonManager
 import net.twisterrob.android.view.color.ColorPickerView
 import net.twisterrob.android.view.listeners.OnSeekBarChangeAdapter
 import net.twisterrob.android.view.listeners.TextWatcherAdapter
 import net.twisterrob.colorfilters.android.ColorFilterFragment
-import net.twisterrob.colorfilters.android.alpha
 import net.twisterrob.colorfilters.android.keyboard.KeyboardHandler
 import net.twisterrob.colorfilters.android.keyboard.KeyboardMode
 import net.twisterrob.colorfilters.android.replaceAlpha
@@ -94,6 +96,7 @@ class PorterDuffFragment : ColorFilterFragment() {
 	private lateinit var rgbLabel: TextView
 	private lateinit var alphaSlider: SeekBar
 	private lateinit var colorPreview: View
+	@ColorInt
 	private var currentColor: Int = 0
 	private val currentMode: PorterDuff.Mode get() = MODES.getValue(modes.checked!!.id)
 	private val modes = CheckableButtonManager()
@@ -117,7 +120,7 @@ class PorterDuffFragment : ColorFilterFragment() {
 		rgbLabel = view.findViewById(R.id.colorRGBLabel)
 		colorView = view.findViewById(R.id.color)
 		colorView.colorChangedListener = object : ColorPickerView.OnColorChangedListener {
-			override fun colorChanged(color: Int) {
+			override fun colorChanged(@ColorInt color: Int) {
 				updateColor(color.replaceAlphaFrom(currentColor), UpdateOrigin.Picker)
 			}
 		}
@@ -128,7 +131,7 @@ class PorterDuffFragment : ColorFilterFragment() {
 		editor.addTextChangedListener(object : TextWatcherAdapter() {
 			override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
 				try {
-					val color = Color.parseColor("#" + s.toString())
+					val color = "#${s}".toColorInt()
 					updateColor(color, UpdateOrigin.Editor)
 					editor.error = null
 				} catch (ex: RuntimeException) {
@@ -171,7 +174,7 @@ class PorterDuffFragment : ColorFilterFragment() {
 		})
 	}
 
-	private fun updateColor(color: Int, origin: UpdateOrigin?) {
+	private fun updateColor(@ColorInt color: Int, origin: UpdateOrigin?) {
 		if (pendingUpdate) {
 			return
 		}
@@ -183,7 +186,7 @@ class PorterDuffFragment : ColorFilterFragment() {
 				editor.setText(color.toARGBHexString())
 			}
 			if (origin != UpdateOrigin.Alpha) {
-				alphaSlider.progress = color.alpha()
+				alphaSlider.progress = color.alpha
 			}
 			if (origin != UpdateOrigin.Picker) {
 				colorView.color = color

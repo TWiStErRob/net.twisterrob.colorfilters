@@ -4,16 +4,18 @@ import android.graphics.Bitmap
 import android.graphics.Bitmap.CompressFormat
 import android.graphics.Bitmap.Config
 import android.graphics.Color
+import androidx.annotation.ColorInt
+import androidx.annotation.IntRange
+import androidx.core.graphics.alpha
+import androidx.core.graphics.blue
+import androidx.core.graphics.green
+import androidx.core.graphics.red
 import net.twisterrob.android.view.color.FastMath
 import net.twisterrob.android.view.color.PI
 import net.twisterrob.android.view.color.fromHsb
 import net.twisterrob.android.view.color.ofMap
 import net.twisterrob.android.view.color.swatches.pixel.color.PixelColor
 import net.twisterrob.android.view.color.swatches.pixel.drawer.LineByLineBitmapDrawer
-import net.twisterrob.colorfilters.android.alpha
-import net.twisterrob.colorfilters.android.blue
-import net.twisterrob.colorfilters.android.green
-import net.twisterrob.colorfilters.android.red
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.util.zip.ZipEntry
@@ -58,17 +60,23 @@ object LogoGenerator {
 
 	private class RadialHSBGradientLogo : PixelColor {
 
+		@IntRange(from = 0)
 		private var w: Int = 0
+
+		@IntRange(from = 0)
 		private var cx: Int = 0
+
+		@IntRange(from = 0)
 		private var cy: Int = 0
 
-		override fun initializeInvariants(w: Int, h: Int) {
+		override fun initializeInvariants(@IntRange(from = 0) w: Int, @IntRange(from = 0) h: Int) {
 			this.w = w / 2 / 6
 			this.cx = w / 2
 			this.cy = w / 2
 		}
 
-		override fun getPixelColorAt(x: Int, y: Int): Int {
+		@ColorInt
+		override fun getPixelColorAt(@IntRange(from = 0/*, to = w*/) x: Int, @IntRange(from = 0/*, to = h*/) y: Int): Int {
 			val angle = FastMath.Atan2Faster.atan2((y - cy).toFloat(), (x - cx).toFloat()) + PI // [0, 2pi]
 			val dist = sqrt(((x - cx) * (x - cx) + (y - cy) * (y - cy)).toDouble()).toFloat()
 			val bri = ofMap(dist, 4 * w, 6 * w, 1, 0)
@@ -85,11 +93,12 @@ object LogoGenerator {
 		 * Twisted desaturation with off-ratios.
 		 * CONSIDER desaturating by setting sat before the color is calculated
 		 */
-		private fun desaturate(color: Int): Int {
-			val r = (0.4 * color.red() + 0.4 * color.green() + 0.2 * color.blue()).toInt()
-			val g = (0.2 * color.red() + 0.6 * color.green() + 0.2 * color.blue()).toInt()
-			val b = (0.1 * color.red() + 0.5 * color.green() + 0.4 * color.blue()).toInt()
-			return Color.argb(color.alpha(), r, g, b)
+		@ColorInt
+		private fun desaturate(@ColorInt color: Int): Int {
+			val r = (0.4 * color.red + 0.4 * color.green + 0.2 * color.blue).toInt()
+			val g = (0.2 * color.red + 0.6 * color.green + 0.2 * color.blue).toInt()
+			val b = (0.1 * color.red + 0.5 * color.green + 0.4 * color.blue).toInt()
+			return Color.argb(color.alpha, r, g, b)
 		}
 	}
 }

@@ -3,14 +3,22 @@ package net.twisterrob.android.view.color.swatches.pixel.drawer
 import android.os.Handler
 import android.os.HandlerThread
 import android.os.Looper
+import androidx.annotation.ColorInt
+import androidx.annotation.IntRange
 import net.twisterrob.android.view.color.swatches.pixel.color.PixelColor
 
 typealias BitmapDrawerFactory = (bitmap: IntArray, w: Int, h: Int, pixel: PixelColor) -> BitmapDrawer
 
 abstract class BitmapDrawer(
+	@ColorInt
 	val bitmap: IntArray,
+
+	@IntRange(from = 0)
 	val w: Int,
+
+	@IntRange(from = 0)
 	val h: Int,
+
 	val pixel: PixelColor
 ) {
 
