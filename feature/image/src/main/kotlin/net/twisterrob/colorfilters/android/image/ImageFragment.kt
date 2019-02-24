@@ -248,7 +248,7 @@ class ImageFragment : Fragment() {
 		preview.colorFilter = colorFilter
 	}
 
-	val current: Bitmap? get() = original.drawable.asBitmap()
+	val current: Bitmap? get() = original.drawable?.asBitmap()
 
 	fun renderPreview(): Bitmap {
 		val od = original.drawable!!
