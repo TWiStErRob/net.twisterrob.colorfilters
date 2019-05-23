@@ -1,21 +1,13 @@
-# IDEA
-.gradle/
-.idea/
-*.ipr
-*.iws
+/.gradle
+/.idea
+/local.properties
+/temp
+/build
+/*.ipr
+/*.iws
+/captures
+/projectFilesBackup
+/gradled.bat
+/.git
 *.iml
-projectFilesBackup
-
-# Gradle
-build/
-
-# Android
-local.properties
-captures
-
-# VCS
-.svn/
-
-# Project
-temp/
-gradled.bat
+build
