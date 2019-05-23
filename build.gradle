@@ -13,6 +13,7 @@ allprojects { project ->
 			}
 			lintOptions {
 				warningsAsErrors = true
+				checkReleaseBuilds = false
 				// REPORT this is not working in AS
 				// workaround? java.nio.file.Files.createSymbolicLink in settings.gradle
 				lintConfig = rootProject.file('config/lint/lint.xml')
