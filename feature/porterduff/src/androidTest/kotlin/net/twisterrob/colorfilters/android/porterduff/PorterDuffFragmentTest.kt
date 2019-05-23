@@ -1,7 +1,7 @@
 package net.twisterrob.colorfilters.android.porterduff
 
-import android.support.test.filters.LargeTest
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.LargeTest
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.verify
 import net.twisterrob.colorfilters.android.ColorFilterFragment
