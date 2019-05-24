@@ -45,7 +45,7 @@ abstract class ColorFilterFragment : Fragment() {
 	protected val prefs: SharedPreferences
 		get() = PreferenceManager.getDefaultSharedPreferences(requireContext().applicationContext)
 
-	override fun onAttach(context: Context?) = super.onAttach(context).also {
+	override fun onAttach(context: Context) = super.onAttach(context).also {
 		listener = context as Listener
 	}
 
