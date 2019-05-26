@@ -21,9 +21,11 @@ allprojects { project ->
 				baselineFile = rootProject.file("config/lint/baseline ${cleanPath}.xml")
 			}
 			if (plugin instanceof com.android.build.gradle.LibraryPlugin) {
-				libraryVariants.all {
+				libraryVariants.all { variant ->
 					// TODEL replace with https://issuetracker.google.com/issues/72050365 once released.
-					it.generateBuildConfig.enabled = false
+					variant.generateBuildConfigProvider.configure { task ->
+						task.enabled = false
+					}
 				}
 			}
 			configurations.all {
