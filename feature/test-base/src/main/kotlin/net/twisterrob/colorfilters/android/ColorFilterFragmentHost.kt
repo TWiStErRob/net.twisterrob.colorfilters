@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.nhaarman.mockitokotlin2.mock
@@ -40,7 +39,10 @@ class ColorFilterFragmentHost(
 		setContentView(R.layout.fragment_host_activity)
 
 		if (savedInstanceState == null) {
-			val fragment = Fragment.instantiate(this, intent.getStringExtra(EXTRA_FRAGMENT))
+			val fragment = supportFragmentManager
+				.fragmentFactory
+				.instantiate(classLoader, intent.getStringExtra(EXTRA_FRAGMENT)!!)
+
 			supportFragmentManager
 				.beginTransaction()
 				.add(R.id.fragment_container, fragment)

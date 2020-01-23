@@ -5,17 +5,9 @@ dependencies {
 
 	implementation project(':feature:keyboard:contract')
 
-	api "androidx.annotation:annotation:1.0.2"
-	api "androidx.appcompat:appcompat:1.0.2"
-	// TODEL androidx.appcompat:appcompat:1.1.x+
-	// Fix Warning: androidx.vectordrawable.graphics.drawable.AnimationUtilsCompat:
-	// can't find referenced class androidx.interpolator.view.animation.*Interpolator
-	implementation "androidx.interpolator:interpolator:1.0.0"
-	api "androidx.core:core-ktx:1.0.2"
-	api "androidx.drawerlayout:drawerlayout:1.0.0"
-	api "androidx.fragment:fragment-ktx:1.0.0"
-	// TODEL androidx.fragment:fragment:1.1.x+
-	// Warning: androidx.fragment.app.Fragment*Adapter:
-	// can't find superclass or interface androidx.viewpager.widget.PagerAdapter
-	implementation "androidx.viewpager:viewpager:1.0.0"
+	api("androidx.annotation:annotation:1.1.0")
+	api("androidx.appcompat:appcompat:1.1.0")
+	api("androidx.core:core-ktx:1.1.0")
+	api("androidx.drawerlayout:drawerlayout:1.0.0")
+	api("androidx.fragment:fragment-ktx:1.1.0")
 }
