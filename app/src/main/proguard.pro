@@ -2,6 +2,11 @@
 # Targeting minSdkVersion 14 so JDK8 is not available yet
 -dontnote kotlin.internal.jdk8.JDK8PlatformImplementations
 
+# TODO Probably a rouge rule from Android keeping every constructor with param "context"
+# Note: the configuration keeps the entry point '...', but not the descriptor class '...'
+-dontnote kotlin.coroutines.AbstractCoroutineContextElement
+-dontnote kotlinx.coroutines.android.AndroidExceptionPreHandler
+
 # Note: kotlin.coroutines.jvm.internal.DebugMetadataKt accesses a declared field 'label' dynamically
 # let's keep its name to make sure that reflection works
 -keepclassmembernames class kotlin.coroutines.jvm.internal.BaseContinuationImpl {
