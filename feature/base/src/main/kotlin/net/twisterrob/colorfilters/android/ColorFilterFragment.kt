@@ -24,6 +24,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
+import androidx.preference.PreferenceManager
 import net.twisterrob.colorfilters.android.keyboard.KeyboardHandler
 import net.twisterrob.colorfilters.android.keyboard.KeyboardMode
 import net.twisterrob.colorfilters.base.R
@@ -41,9 +42,8 @@ abstract class ColorFilterFragment : Fragment() {
 	protected val isPortrait: Boolean
 		get() = resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
 
-	@Suppress("DEPRECATION") // TOFIX use androidx.preference
 	protected val prefs: SharedPreferences
-		get() = android.preference.PreferenceManager.getDefaultSharedPreferences(requireContext().applicationContext)
+		get() = PreferenceManager.getDefaultSharedPreferences(requireContext().applicationContext)
 
 	override fun onAttach(context: Context) = super.onAttach(context).also {
 		listener = context as Listener

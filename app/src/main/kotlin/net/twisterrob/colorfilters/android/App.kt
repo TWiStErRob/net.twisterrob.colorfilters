@@ -4,13 +4,13 @@ import android.app.Application
 import android.content.Context
 import android.net.Uri
 import androidx.core.content.FileProvider
+import androidx.preference.PreferenceManager
 import java.io.File
 
 class App : Application() {
 
 	override fun onCreate() = super.onCreate().also {
-		@Suppress("DEPRECATION") // TOFIX use androidx.preference
-		android.preference.PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
+		PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
 	}
 
 	companion object {

@@ -26,6 +26,7 @@ import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.preference.PreferenceManager
 import kotlin.math.max
 
 private const val PREF_IMAGE_URL = "Image.url"
@@ -240,9 +241,8 @@ class ImageFragment : Fragment() {
 		BitmapKeeper.into(requireFragmentManager(), preview, noListener)
 	}
 
-	@Suppress("DEPRECATION") // TOFIX use androidx.preference
 	private val prefs: SharedPreferences
-		get() = android.preference.PreferenceManager.getDefaultSharedPreferences(requireContext().applicationContext)
+		get() = PreferenceManager.getDefaultSharedPreferences(requireContext().applicationContext)
 
 	fun setColorFilter(colorFilter: ColorFilter?) {
 		preview.colorFilter = colorFilter

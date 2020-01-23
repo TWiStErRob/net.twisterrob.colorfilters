@@ -20,6 +20,7 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.transaction
+import androidx.preference.PreferenceManager
 import net.twisterrob.colorfilters.android.about.AboutActivity
 import net.twisterrob.colorfilters.android.image.ImageFragment
 import net.twisterrob.colorfilters.android.image.LogoGenerator
@@ -60,9 +61,8 @@ class MainActivity : AppCompatActivity(), ColorFilterFragment.Listener, ImageFra
 			NATIVE
 		}
 
-	@Suppress("DEPRECATION") // TOFIX use androidx.preference
 	private val prefs: SharedPreferences by lazy {
-		android.preference.PreferenceManager.getDefaultSharedPreferences(this.applicationContext)
+		PreferenceManager.getDefaultSharedPreferences(this.applicationContext)
 	}
 
 	override fun onCreate(savedInstanceState: Bundle?) {
