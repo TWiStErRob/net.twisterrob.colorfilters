@@ -178,11 +178,12 @@ open class ColorPickerView : AppCompatImageView {
 				MotionEvent.ACTION_MOVE -> {
 					updateLongTap(x, y)
 					if (trackedArea != Swatch.AREA_INVALID) {
-						if (trackedArea == inCenter && !isContinuousMode) {
-							highlightArea = inCenter
-						} else {
-							highlightArea = Swatch.AREA_INVALID
-						}
+						highlightArea =
+							if (trackedArea == inCenter && !isContinuousMode) {
+								inCenter
+							} else {
+								Swatch.AREA_INVALID
+							}
 						val color = swatch.findColor(trackedArea, x, y)
 						if (isContinuousMode) {
 							this@ColorPickerView.color = color

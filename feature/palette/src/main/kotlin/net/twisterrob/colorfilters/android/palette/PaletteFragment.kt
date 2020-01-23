@@ -34,6 +34,7 @@ import net.twisterrob.colorfilters.android.keyboard.KeyboardHandler
 import net.twisterrob.colorfilters.android.keyboard.KeyboardMode
 import net.twisterrob.colorfilters.android.palette.PaletteFragment.PaletteAdapter.Display
 import net.twisterrob.colorfilters.android.toRGBHexString
+import kotlin.math.max
 import net.twisterrob.colorfilters.base.R as baseR
 
 private const val PREF_PALETTE_NUM_COLORS = "Palette.numColors"
@@ -87,7 +88,7 @@ class PaletteFragment : ColorFilterFragment() {
 		lastImage = bitmap
 		if (bitmap != null) {
 			val wasAtMax = resizeDimenSlider.max == resizeDimenSlider.progress
-			resizeDimenSlider.max = Math.max(bitmap.width, bitmap.height) - 1
+			resizeDimenSlider.max = max(bitmap.width, bitmap.height) - 1
 			if (wasAtMax) {
 				updateResizeDimen(resizeDimenSlider.max + 1, null)
 			}
@@ -387,7 +388,7 @@ class PaletteFragment : ColorFilterFragment() {
 		// REPORT report this not being flagged for i18n,
 		// it should be because all usages are setText()
 		// TODO return String.format(Locale.getDefault(), "%d", number);
-		private fun Int.asString(): CharSequence = Integer.toString(this)
+		private fun Int.asString(): CharSequence = this.toString()
 
 		// TODO return NumberFormat.getInstance().parse(s.toString()).intValue();
 		private fun String.fromString(): Int = Integer.parseInt(this)

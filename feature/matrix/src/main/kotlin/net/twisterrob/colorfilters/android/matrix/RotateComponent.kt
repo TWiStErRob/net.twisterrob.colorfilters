@@ -7,6 +7,7 @@ import android.widget.SeekBar
 import android.widget.TextView
 import net.twisterrob.android.view.listeners.OnSeekBarChangeAdapter
 import net.twisterrob.colorfilters.android.formatRoot
+import kotlin.math.roundToInt
 
 internal class RotateComponent(
 	view: View,
@@ -74,6 +75,6 @@ internal class RotateComponent(
 	}
 
 	private var value: Int
-		get() = Math.round(get(slider, FULL_ROT.toFloat(), 0f))
+		get() = get(slider, FULL_ROT.toFloat(), 0f).roundToInt()
 		set(value) = set(slider, FULL_ROT.toFloat(), 0f, value.toFloat())
 }

@@ -116,19 +116,19 @@ class SwatchChooser(swatches: Collection<Swatch>) : Drawable(), View.OnTouchList
 	 */
 	private fun side2(w: Int, h: Int, n: Int): Double {
 		val px = ceil(sqrt((n * w / h).toDouble()))
-		val sx: Double
-		val sy: Double
-		if (floor(px * h / w) * px < n) { //does not fit, h / (w/px) = px * h/w
-			sx = h / ceil(px * h / w)
-		} else {
-			sx = w / px
-		}
+		val sx =
+			if (floor(px * h / w) * px < n) { // does not fit, h / (w/px) = px * h/w
+				h / ceil(px * h / w)
+			} else {
+				w / px
+			}
 		val py = ceil(sqrt((n * h / w).toDouble()))
-		if (floor(py * w / h) * py < n) { //does not fit
-			sy = w / ceil(w * py / h)
-		} else {
-			sy = h / py
-		}
+		val sy =
+			if (floor(py * w / h) * py < n) { // does not fit
+				w / ceil(w * py / h)
+			} else {
+				h / py
+			}
 		return max(sx, sy)
 	}
 

@@ -3,6 +3,6 @@
 	android:versionName="TEST">
 
 	<!-- label and versionName must be set to be able to open the About screen -->
-	<application android:label="@string/cf_about_application_title"></application>
+	<application android:label="@string/cf_about_application_title" />
 
 </manifest>

@@ -5,26 +5,7 @@ import android.annotation.TargetApi
 import android.graphics.Color
 import android.graphics.ColorFilter
 import android.graphics.PorterDuff
-import android.graphics.PorterDuff.Mode.ADD
-import android.graphics.PorterDuff.Mode.CLEAR
-import android.graphics.PorterDuff.Mode.DARKEN
-import android.graphics.PorterDuff.Mode.DST
-import android.graphics.PorterDuff.Mode.DST_ATOP
-import android.graphics.PorterDuff.Mode.DST_IN
-import android.graphics.PorterDuff.Mode.DST_OUT
-import android.graphics.PorterDuff.Mode.DST_OVER
-import android.graphics.PorterDuff.Mode.LIGHTEN
-import android.graphics.PorterDuff.Mode.MULTIPLY
-import android.graphics.PorterDuff.Mode.OVERLAY
-import android.graphics.PorterDuff.Mode.SCREEN
-import android.graphics.PorterDuff.Mode.SRC
-import android.graphics.PorterDuff.Mode.SRC_ATOP
-import android.graphics.PorterDuff.Mode.SRC_IN
-import android.graphics.PorterDuff.Mode.SRC_OUT
-import android.graphics.PorterDuff.Mode.SRC_OVER
-import android.graphics.PorterDuff.Mode.XOR
 import android.graphics.PorterDuffColorFilter
-import android.os.Build
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
@@ -55,34 +36,34 @@ private const val PREF_PORTERDUFF_COLOR = "PorterDuffColorFilter.color"
 private const val PREF_PORTERDUFF_MODE = "PorterDuffColorFilter.mode"
 private const val PREF_PORTERDUFF_SWATCH = "PorterDuffColorFilter.colorSwatch"
 
-@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+@TargetApi(VERSION_CODES.HONEYCOMB)
 private val MODES = (mapOf(
-	R.id.mode_clear to CLEAR,
-	R.id.mode_src to SRC,
-	R.id.mode_dst to DST,
-	R.id.mode_src_over to SRC_OVER,
-	R.id.mode_dst_over to DST_OVER,
-	R.id.mode_src_in to SRC_IN,
-	R.id.mode_dst_in to DST_IN,
-	R.id.mode_src_out to SRC_OUT,
-	R.id.mode_dst_out to DST_OUT,
-	R.id.mode_src_atop to SRC_ATOP,
-	R.id.mode_dst_atop to DST_ATOP,
-	R.id.mode_xor to XOR,
-	R.id.mode_darken to DARKEN,
-	R.id.mode_lighten to LIGHTEN,
-	R.id.mode_multiply to MULTIPLY,
-	R.id.mode_screen to SCREEN
+	R.id.mode_clear to PorterDuff.Mode.CLEAR,
+	R.id.mode_src to PorterDuff.Mode.SRC,
+	R.id.mode_dst to PorterDuff.Mode.DST,
+	R.id.mode_src_over to PorterDuff.Mode.SRC_OVER,
+	R.id.mode_dst_over to PorterDuff.Mode.DST_OVER,
+	R.id.mode_src_in to PorterDuff.Mode.SRC_IN,
+	R.id.mode_dst_in to PorterDuff.Mode.DST_IN,
+	R.id.mode_src_out to PorterDuff.Mode.SRC_OUT,
+	R.id.mode_dst_out to PorterDuff.Mode.DST_OUT,
+	R.id.mode_src_atop to PorterDuff.Mode.SRC_ATOP,
+	R.id.mode_dst_atop to PorterDuff.Mode.DST_ATOP,
+	R.id.mode_xor to PorterDuff.Mode.XOR,
+	R.id.mode_darken to PorterDuff.Mode.DARKEN,
+	R.id.mode_lighten to PorterDuff.Mode.LIGHTEN,
+	R.id.mode_multiply to PorterDuff.Mode.MULTIPLY,
+	R.id.mode_screen to PorterDuff.Mode.SCREEN
 ) + if (VERSION_CODES.HONEYCOMB <= VERSION.SDK_INT) mapOf(
-	R.id.mode_add to ADD,
-	R.id.mode_overlay to OVERLAY
+	R.id.mode_add to PorterDuff.Mode.ADD,
+	R.id.mode_overlay to PorterDuff.Mode.OVERLAY
 ) else emptyMap()).toSortedMap()
 
 private val DEFAULT_COLOR = Color.argb(0xff, 0x00, 0x00, 0x00)
 @SuppressLint("ObsoleteSdkInt")
-@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+@TargetApi(VERSION_CODES.HONEYCOMB)
 private val DEFAULT_MODE =
-	if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+	if (VERSION.SDK_INT < VERSION_CODES.HONEYCOMB) {
 		PorterDuff.Mode.SCREEN
 	} else {
 		PorterDuff.Mode.OVERLAY
@@ -163,7 +144,7 @@ class PorterDuffFragment : ColorFilterFragment() {
 		for (id in MODES.keys) {
 			modes.addButton(view.findViewById<RadioButton>(id))
 		}
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+		if (VERSION.SDK_INT < VERSION_CODES.HONEYCOMB) {
 			view.findViewById<View>(R.id.mode_add).isEnabled = false
 			view.findViewById<View>(R.id.mode_overlay).isEnabled = false
 		}

@@ -91,9 +91,7 @@ class MainActivity : AppCompatActivity(), ColorFilterFragment.Listener, ImageFra
 				getText(R.string.cf_porterduff_title),
 				getText(R.string.cf_matrix_title),
 				getText(R.string.cf_palette_title)
-			) + if (!BuildConfig.DEBUG) emptyArray<CharSequence>() else arrayOf(
-				getText(R.string.cf_resfont_title)
-			)
+			) + if (!BuildConfig.DEBUG) emptyArray() else arrayOf(getText(R.string.cf_resfont_title))
 		)
 		actionBar.setListNavigationCallbacks(adapter, ActionBar.OnNavigationListener { position, _ ->
 			try {
