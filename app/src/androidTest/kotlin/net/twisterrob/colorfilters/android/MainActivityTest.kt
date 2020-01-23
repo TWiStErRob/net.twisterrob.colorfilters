@@ -11,7 +11,7 @@ import org.junit.runner.RunWith
 @LargeTest
 class MainActivityTest {
 
-	@Rule @JvmField val activityRule = ActivityTestRule(MainActivity::class.java)
+	@get:Rule val activityRule = ActivityTestRule(MainActivity::class.java)
 
 	@Test fun opensLightingScreen() {
 		val main = MainActivityActor()
@@ -41,6 +41,14 @@ class MainActivityTest {
 		val main = MainActivityActor()
 
 		val screen = main.choosePaletteScreen()
+
+		screen.assertDisplayed()
+	}
+
+	@Test fun opensSettings() {
+		val main = MainActivityActor()
+
+		val screen = main.openSettings()
 
 		screen.assertDisplayed()
 	}

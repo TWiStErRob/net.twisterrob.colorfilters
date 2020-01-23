@@ -3,12 +3,14 @@ package net.twisterrob.colorfilters.android
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.withClassName
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withParent
 import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import net.twisterrob.colorfilters.android.lighting.LightingScreenActor
 import net.twisterrob.colorfilters.android.matrix.MatrixScreenActor
 import net.twisterrob.colorfilters.android.palette.PaletteScreenActor
@@ -36,6 +38,12 @@ class MainActivityActor {
 	fun choosePaletteScreen(): PaletteScreenActor {
 		chooseScreen(R.string.cf_palette_title)
 		return PaletteScreenActor()
+	}
+
+	fun openSettings(): PreferencesActivityActor {
+		openActionBarOverflowOrOptionsMenu(getInstrumentation().targetContext)
+		onView(withText(R.string.cf_pref_title)).perform(click(click()))
+		return PreferencesActivityActor()
 	}
 
 	private fun chooseScreen(@StringRes screenTitle: Int) {

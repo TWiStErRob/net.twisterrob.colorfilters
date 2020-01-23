@@ -1,17 +1,24 @@
 package net.twisterrob.colorfilters.android
 
-import android.annotation.TargetApi
-import android.os.Build
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceFragmentCompat
 
-@Suppress("DEPRECATION") // TOFIX use androidx.preference 
-class PreferencesActivity : android.preference.PreferenceActivity() {
-
-	override fun onCreate(savedInstanceState: Bundle?) = super.onCreate(savedInstanceState).also {
-		@Suppress("DEPRECATION") // looking for a replacement, this is the simplest I know
-		addPreferencesFromResource(R.xml.preferences)
+class PreferencesActivity : AppCompatActivity() {
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		setContentView(R.layout.activity_settings)
+		if (savedInstanceState == null) {
+			supportFragmentManager
+				.beginTransaction()
+				.add(R.id.prefs_container, PreferencesFragment())
+				.commit()
+		}
 	}
 
-	@TargetApi(Build.VERSION_CODES.KITKAT)
-	override fun isValidFragment(fragmentName: String) = false
+	class PreferencesFragment : PreferenceFragmentCompat() {
+		override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+			setPreferencesFromResource(R.xml.preferences, rootKey)
+		}
+	}
 }
