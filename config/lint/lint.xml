@@ -16,6 +16,10 @@
 	<issue id="SyntheticAccessor" severity="ignore">
 		<!-- Don't want to deal with it yet -->
 	</issue>
+	<issue id="ImplicitSamInstance" severity="ignore">
+		<!-- Don't want to deal with it yet -->
+	</issue>
+
 	<issue id="UnusedResources">
 		<!-- Not used, but can't do anything about it :) -->
 		<ignore regexp="R\.bool\.in_prod" />
@@ -41,15 +45,17 @@
 		     duplicate check doesn't take HTML contents into account -->
 		<ignore regexp="used in `(cf_matrix_.*)` and `\1`" />
 
+		<!-- Ignore resources from exploded AARs in Gradle caches, don't care about duplications in abc_* -->
 		<!-- TODEL https://issuetracker.google.com/issues/113673427 -->
-		<ignore path="**/caches/transforms-1/files-1.1/*" />
+		<ignore path="**/caches/transforms-*/files-*/*" />
 	</issue>
 
 	<!-- REPORT MissingRegistered lint only shows one result with checkDependencies = true
 	     to repro remove ignore from `<ColorPickerView />` and run :app:lint. -->
 	<issue id="MissingRegistered">
 		<!-- REPORT MissingRegistered doesn't find classes for library modules, even though checkDependencies = true -->
-		<ignore path="**/activity_color_filter.xml" regexp="net.twisterrob.colorfilters.android.image.ImageFragment" />
+		<ignore path="**/activity_color_filter.xml"
+			regexp="net.twisterrob.colorfilters.android.image.ImageFragment" />
 		<ignore path="**/activity_color_filter.xml"
 		        regexp="net.twisterrob.colorfilters.android.keyboard.KeyboardView" />
 	</issue>

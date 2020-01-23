@@ -21,7 +21,13 @@ allprojects { project ->
 				baselineFile = rootProject.file("config/lint/baseline ${cleanPath}.xml")
 			}
 			if (plugin instanceof com.android.build.gradle.LibraryPlugin) {
+				defaultConfig {
+					// Enable multidex for all libraries.
+					// This will transfer to androidTest apps in those libraries, but not the app.
+					multiDexEnabled = true
+				}
 				libraryVariants.all { variant ->
+					if (project.path == ':feature:about') return
 					// TODEL replace with https://issuetracker.google.com/issues/72050365 once released.
 					variant.generateBuildConfigProvider.configure { task ->
 						task.enabled = false

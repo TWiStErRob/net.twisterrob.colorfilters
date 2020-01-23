@@ -1,5 +1,6 @@
 package net.twisterrob.android.view.color.swatches;
 
+import android.annotation.SuppressLint;
 import android.graphics.*;
 
 import androidx.annotation.ColorInt;
@@ -114,7 +115,7 @@ public class APIDemoSwatch extends Swatch {
 		 */
 		@ColorInt
 		public static int interpColor(
-				@ColorInt int colors[],
+				@ColorInt int[] colors,
 				@FloatRange(from = 0.0, to = 1.0, toInclusive = false) float unit
 		) {
 			if (unit <= 0) { // (-∞, 0] = 0
@@ -161,6 +162,7 @@ public class APIDemoSwatch extends Swatch {
 		 * @param y y coordinate
 		 * @return angle mapped to {@code [0, 1)} (see table)
 		 */
+		@SuppressLint("Range") // TODO Looks like `if (unit < 0)` should be // [-0.5, 0] -> [0.5, 1]
 		@FloatRange(from = 0.0, to = 1.0, toInclusive = false)
 		public static float angleAsUnit(float x, float y) {
 			@FloatRange(from = -ColorMath.PI, to = ColorMath.PI)

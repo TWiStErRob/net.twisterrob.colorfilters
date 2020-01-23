@@ -8,10 +8,8 @@ import android.graphics.Bitmap
 import android.graphics.Bitmap.CompressFormat
 import android.graphics.BitmapFactory
 import android.graphics.ColorFilter
-import android.inputmethodservice.KeyboardView
 import android.net.Uri
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -52,7 +50,7 @@ class MainActivity : AppCompatActivity(), ColorFilterFragment.Listener, ImageFra
 		get() = kbd ?: KeyboardHandlerFactory().create(
 			prefs.findKeyboardMode(),
 			window,
-			findViewById<View>(R.id.keyboard) as KeyboardView
+			findViewById<View>(R.id.keyboard) as @kotlin.Suppress("DEPRECATION") android.inputmethodservice.KeyboardView
 		).also { kbd = it }
 
 	private fun SharedPreferences.findKeyboardMode(): KeyboardMode =
@@ -62,8 +60,9 @@ class MainActivity : AppCompatActivity(), ColorFilterFragment.Listener, ImageFra
 			NATIVE
 		}
 
+	@Suppress("DEPRECATION") // TOFIX use androidx.preference
 	private val prefs: SharedPreferences by lazy {
-		PreferenceManager.getDefaultSharedPreferences(this.applicationContext)
+		android.preference.PreferenceManager.getDefaultSharedPreferences(this.applicationContext)
 	}
 
 	override fun onCreate(savedInstanceState: Bundle?) {

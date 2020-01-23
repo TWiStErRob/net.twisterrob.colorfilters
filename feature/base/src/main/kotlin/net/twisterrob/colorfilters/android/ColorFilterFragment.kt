@@ -12,7 +12,6 @@ import android.graphics.ColorFilter
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.Spanned
@@ -42,8 +41,9 @@ abstract class ColorFilterFragment : Fragment() {
 	protected val isPortrait: Boolean
 		get() = resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
 
+	@Suppress("DEPRECATION") // TOFIX use androidx.preference
 	protected val prefs: SharedPreferences
-		get() = PreferenceManager.getDefaultSharedPreferences(requireContext().applicationContext)
+		get() = android.preference.PreferenceManager.getDefaultSharedPreferences(requireContext().applicationContext)
 
 	override fun onAttach(context: Context) = super.onAttach(context).also {
 		listener = context as Listener
@@ -152,14 +152,13 @@ abstract class ColorFilterFragment : Fragment() {
 		@SuppressLint("ObsoleteSdkInt")
 		@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 		fun copyToClipboard(context: Context, title: CharSequence, content: CharSequence) {
-			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-				@Suppress("DEPRECATION")
+			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) @Suppress("DEPRECATION") {
 				val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as android.text.ClipboardManager
 				clipboard.text = content
 			} else {
 				val clipboard =
 					context.getSystemService(Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
-				clipboard.primaryClip = android.content.ClipData.newPlainText(title, content)
+				clipboard.setPrimaryClip(android.content.ClipData.newPlainText(title, content))
 			}
 		}
 	}

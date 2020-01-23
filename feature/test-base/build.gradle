@@ -5,25 +5,19 @@ dependencies {
 
 	implementation project(':feature:base')
 
-	api "androidx.test:runner:1.1.1"
-	api "androidx.test:rules:1.1.1"
-	api "androidx.test.espresso:espresso-core:3.1.1"
-	api "androidx.test.ext:junit:1.1.0"
+	api("androidx.multidex:multidex:2.0.0")
+	api("androidx.multidex:multidex-instrumentation:2.0.0")
 
-	api 'junit:junit:4.12'
-	api 'org.hamcrest:hamcrest-library:2.1'
+	api("androidx.test:runner:1.2.0")
+	api("androidx.test:rules:1.2.0")
+	api("androidx.test.espresso:espresso-core:3.2.0")
+	api("androidx.test.ext:junit:1.1.1")
 
-	api("org.mockito:mockito-core:${VERSION_MOCKITO}") {
-		// TODEL https://issuetracker.google.com/issues/117686566
-		exclude group: "net.bytebuddy", module: "byte-buddy-agent"
-	}
-	api("org.mockito:mockito-android:${VERSION_MOCKITO}") {
-		// TODEL https://issuetracker.google.com/issues/117686566
-		exclude group: "net.bytebuddy", module: "byte-buddy-agent"
-	}
-	api("com.nhaarman:mockito-kotlin:1.6.0") {
-		// TODEL https://issuetracker.google.com/issues/117686566
-		exclude group: "net.bytebuddy", module: "byte-buddy-agent"
-	}
-	api "org.jetbrains.kotlin:kotlin-reflect:${VERSION_KOTLIN}"
+	api("junit:junit:${VERSION_JUNIT}")
+	api("org.hamcrest:hamcrest-library:2.2")
+
+	api("org.mockito:mockito-core:${VERSION_MOCKITO}")
+	api("org.mockito:mockito-android:${VERSION_MOCKITO}")
+	api("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
+	api("org.jetbrains.kotlin:kotlin-reflect:${VERSION_KOTLIN}")
 }

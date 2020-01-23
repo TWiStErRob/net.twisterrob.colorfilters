@@ -85,10 +85,8 @@ class SwatchChooser(swatches: Collection<Swatch>) : Drawable(), View.OnTouchList
 		for (i in swatches.indices) {
 			val beforeDraw = canvas.save()
 			try {
-				if (locations[i] == null) {
-					continue
-				}
-				swatchBounds.set(locations[i]) // copy location
+				val location = locations[i] ?: continue
+				swatchBounds.set(location) // copy location
 				canvas.translate(swatchBounds.left.toFloat(), swatchBounds.top.toFloat()) // offset canvas
 				swatchBounds.offsetTo(0, 0) // unoffset rect
 

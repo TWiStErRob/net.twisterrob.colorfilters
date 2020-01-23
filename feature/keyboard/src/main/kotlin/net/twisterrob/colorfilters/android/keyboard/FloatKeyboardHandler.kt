@@ -1,3 +1,4 @@
+@file:Suppress("DEPRECATION")
 package net.twisterrob.colorfilters.android.keyboard
 
 import android.inputmethodservice.Keyboard

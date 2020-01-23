@@ -3,9 +3,9 @@ package net.twisterrob.colorfilters.android
 import android.annotation.TargetApi
 import android.os.Build
 import android.os.Bundle
-import android.preference.PreferenceActivity
 
-class PreferencesActivity : PreferenceActivity() {
+@Suppress("DEPRECATION") // TOFIX use androidx.preference 
+class PreferencesActivity : android.preference.PreferenceActivity() {
 
 	override fun onCreate(savedInstanceState: Bundle?) = super.onCreate(savedInstanceState).also {
 		@Suppress("DEPRECATION") // looking for a replacement, this is the simplest I know

@@ -15,7 +15,6 @@ import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.os.Parcelable
-import android.preference.PreferenceManager
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.Menu
@@ -241,8 +240,9 @@ class ImageFragment : Fragment() {
 		BitmapKeeper.into(requireFragmentManager(), preview, noListener)
 	}
 
+	@Suppress("DEPRECATION") // TOFIX use androidx.preference
 	private val prefs: SharedPreferences
-		get() = PreferenceManager.getDefaultSharedPreferences(requireContext().applicationContext)
+		get() = android.preference.PreferenceManager.getDefaultSharedPreferences(requireContext().applicationContext)
 
 	fun setColorFilter(colorFilter: ColorFilter?) {
 		preview.colorFilter = colorFilter

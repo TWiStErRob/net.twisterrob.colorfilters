@@ -1,9 +1,5 @@
 -verbose
 
-# Prevent https://sourceforge.net/p/proguard/bugs/712/ in ProGuard 6.0.x until 6.1 is released
--keep class module-info
-# above doesn't work, so let's turn off this code
--dontobfuscate
 # keep everything in order to try to not crash the tests
 -dontshrink
 -dontoptimize
@@ -34,8 +30,6 @@
 -dontnote android.support.test.runner.**
 -dontnote android.support.test.internal.**
 -dontnote android.support.test.rule.**
-
--dontwarn com.nhaarman.mockito_kotlin.createinstance.InstanceCreator
 
 -dontnote org.xmlpull.v1.XmlPullParser
 -dontwarn org.xmlpull.v1.XmlPullParser
