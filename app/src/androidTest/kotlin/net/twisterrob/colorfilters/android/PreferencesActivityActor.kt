@@ -50,6 +50,7 @@ class PreferencesActivityActor {
 	}
 
 	fun openAbout(): AboutActivityActor {
+		onView(withText(R.string.cf_about_title)).perform(click())
 		return AboutActivityActor()
 	}
 }
