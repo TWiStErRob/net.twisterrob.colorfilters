@@ -38,7 +38,7 @@ dependencies {
 	implementation(kotlin("gradle-plugin"))
 
 	configurations.all { resolutionStrategy.cacheChangingModulesFor(0, TimeUnit.SECONDS) /* -SNAPSHOT */ }
-	implementation("com.android.tools.build:gradle:4.2.2")
+	implementation("com.android.tools.build:gradle:7.1.2")
 	implementation("net.twisterrob.gradle:twister-quality:${VERSION_PLUGIN_QUALITY}")
 	implementation("net.twisterrob.gradle:twister-convention-plugins:${VERSION_PLUGIN_ANDROID}")
 
