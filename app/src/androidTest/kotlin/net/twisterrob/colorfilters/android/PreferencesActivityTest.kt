@@ -2,7 +2,6 @@ package net.twisterrob.colorfilters.android
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import androidx.test.rule.ActivityTestRule
 import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
@@ -12,7 +11,8 @@ import org.junit.runner.RunWith
 @LargeTest
 class PreferencesActivityTest {
 
-	@get:Rule val activityRule = ActivityTestRule(PreferencesActivity::class.java)
+	@Suppress("DEPRECATION")
+	@get:Rule val activityRule = androidx.test.rule.ActivityTestRule(PreferencesActivity::class.java)
 
 	@Test fun opens() {
 		val prefs = PreferencesActivityActor()

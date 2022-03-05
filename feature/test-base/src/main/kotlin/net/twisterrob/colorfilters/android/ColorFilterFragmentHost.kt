@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.rule.ActivityTestRule
 import com.nhaarman.mockitokotlin2.mock
 import net.twisterrob.colorfilters.android.testbase.R
 import org.mockito.Answers
@@ -17,7 +16,7 @@ import kotlin.reflect.KClass
  * Includes some Magic ported from TestPackageIntentRule and TestActivityCompat in Inventory.
  */
 class ColorFilterFragmentHost(
-	val listener: ColorFilterFragment.Listener = mock(defaultAnswer = Answers.RETURNS_DEEP_STUBS)
+	val listener: ColorFilterFragment.Listener = mock(defaultAnswer = Answers.RETURNS_DEEP_STUBS),
 ) :
 	AppCompatActivity(),
 	ColorFilterFragment.Listener by listener {
@@ -59,8 +58,8 @@ class ColorFilterFragmentHost(
 
 		const val EXTRA_FRAGMENT = "fragment"
 
-		fun <T : ColorFilterFragment> rule(clazz: KClass<T>): ActivityTestRule<ColorFilterFragmentHost> {
-			return object : ActivityTestRule<ColorFilterFragmentHost>(ColorFilterFragmentHost::class.java) {
+		fun <T : ColorFilterFragment> rule(clazz: KClass<T>): @Suppress("DEPRECATION") androidx.test.rule.ActivityTestRule<ColorFilterFragmentHost> {
+			return object : @Suppress("DEPRECATION") androidx.test.rule.ActivityTestRule<ColorFilterFragmentHost>(ColorFilterFragmentHost::class.java) {
 				/**
 				 * Magical reference to the intent launching the activity in order to launch activity in test package.
 				 */
