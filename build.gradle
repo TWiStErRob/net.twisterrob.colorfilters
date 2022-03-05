@@ -26,15 +26,7 @@ allprojects { project ->
 					// This will transfer to androidTest apps in those libraries, but not the app.
 					multiDexEnabled = true
 				}
-				libraryVariants.all { variant ->
-					if (project.path == ':feature:about') {
-						return
-					}
-					// TODEL replace with https://issuetracker.google.com/issues/72050365 once released.
-					variant.generateBuildConfigProvider.configure { task ->
-						task.enabled = false
-					}
-				}
+				buildFeatures.buildConfig = project.path == ':feature:about'
 			}
 			configurations.all {
 				it.resolutionStrategy {
