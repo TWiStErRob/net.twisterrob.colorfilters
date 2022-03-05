@@ -12,3 +12,8 @@ gradlew verifyReleaseResources lint violationReportHtml
 ```
 gradlew connectedCheck mergeAndroidReports --continue
 ```
+
+### Rerun a UI test and re-merge
+```
+gradlew :feature:about:connectedCheck & gradlew -x connectedDebugAndroidTest mergeAndroidReports
+```

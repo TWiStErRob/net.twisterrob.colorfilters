@@ -55,4 +55,6 @@ task clean(type: Delete) {
 
 // https://developer.android.com/studio/test/command-line#multi-module-reports-instrumented-tests
 // Needs to be last, because it forces evaluation of projects (evaluationDependsOnChildren), and that breaks other plugins.
+// TODEL https://issuetracker.google.com/issues/222730176
+subprojects.each { evaluationDependsOn(it.path) } // evaluationDependsOnSubprojects()
 apply plugin: 'android-reporting'
