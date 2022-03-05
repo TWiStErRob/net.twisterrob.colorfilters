@@ -28,6 +28,7 @@ val props = Properties().apply {
 	load(file("../gradle.properties").inputStream())
 }
 
+val VERSION_AGP: String by props
 val VERSION_PLUGIN_QUALITY: String by props
 val VERSION_PLUGIN_ANDROID: String by props
 val VERSION_MOCKITO: String by props
@@ -38,7 +39,7 @@ dependencies {
 	implementation(kotlin("gradle-plugin"))
 
 	configurations.all { resolutionStrategy.cacheChangingModulesFor(0, TimeUnit.SECONDS) /* -SNAPSHOT */ }
-	implementation("com.android.tools.build:gradle:7.1.2")
+	implementation("com.android.tools.build:gradle:${VERSION_AGP}")
 	implementation("net.twisterrob.gradle:twister-quality:${VERSION_PLUGIN_QUALITY}")
 	implementation("net.twisterrob.gradle:twister-convention-plugins:${VERSION_PLUGIN_ANDROID}")
 
