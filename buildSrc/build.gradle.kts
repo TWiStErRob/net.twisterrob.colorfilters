@@ -6,11 +6,11 @@ plugins {
 	kotlin("jvm") version "1.3.61"
 }
 repositories {
-	jcenter()
 	google()
+	mavenCentral()
+	maven { name = "ajoberstar-backup"; setUrl("https://ajoberstar.org/bintray-backup/") }
 	maven { setUrl("http://localhost/maven") }
 	maven { name = "Gradle libs (for Kotlin-DSL)"; setUrl("https://repo.gradle.org/gradle/libs-releases-local/") }
-	maven { name = "TWiStErRob"; setUrl("https://dl.bintray.com/twisterrob/maven") }
 }
 
 configurations.all {
