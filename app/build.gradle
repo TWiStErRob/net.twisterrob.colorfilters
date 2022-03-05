@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompileWithWorkers
+
 apply plugin: 'net.twisterrob.android-app'
 apply plugin: 'net.twisterrob.kotlin'
 
@@ -38,20 +40,37 @@ android {
 			// This needs a bit of trickery, because srcDir don't support filters properly (on a per-directory basis).
 			// So include a root folder where each module can be separately added, and exclude tests as relative paths.
 			// rootDir cannot be used because kaptAndroidTest would try to hash .gradle/fileContent/fileContent.lock
+//			println(kotlin.srcDirs)
 			File root = new File(rootDir, 'feature')
 			kotlin.srcDir root
 			// Explicitly include sources of app/androidTest
-			kotlin.include "net/twisterrob/colorfilters/"
-			// Include Actors and helpers (non-test files) from other modules
+			//kotlin.include "net/twisterrob/colorfilters/"
+//			// Exclude production code
+			kotlin.exclude "**/src/main/kotlin/"
+//			// Include Actors and helpers (non-test files) from other modules
+			kotlin.exclude("**/*Test.kt")
+			kotlin.exclude("**/build/")
 			configurations['implementation'].dependencies.withType(ProjectDependency) {
 				evaluationDependsOn it.dependencyProject.path // get .android ready
 				it.dependencyProject.android.sourceSets.androidTest.kotlin.srcDirs.each { File dir ->
 					def relative = root.toPath().relativize(dir.toPath()).toFile()
+//					println("androidTest: $dir - > $relative")
 					kotlin.include "$relative/"
-					kotlin.exclude "$relative/**/*Test.*"
+//					kotlin.srcDir(dir)
+//					kotlin.exclude "src/main/kotlin/"
 				}
 			}
-			//kotlin.files.each { println it }
+//			afterEvaluate {
+//				kotlin.sourceFiles.each { println ("kotlin.sourceFiles: $it") }
+//				tasks.named("compileDebugAndroidTestKotlin").configure { task ->
+//					task.doFirst {
+//						KotlinCompileWithWorkers t = task
+//						t.getSourceRoots$kotlin_gradle_plugin().kotlinSourceFiles.files.each { println it }
+//						task.inputs.sourceFiles.files.each { println ("${task}.inputs.sourceFiles: $it") }
+//						throw new Exception()
+//					}
+//				}
+//			}
 		}
 	}
 	lintOptions {
