@@ -41,9 +41,6 @@ dependencies {
 	implementation("com.android.tools.build:gradle:4.2.2")
 	implementation("net.twisterrob.gradle:twister-quality:${VERSION_PLUGIN_QUALITY}")
 	implementation("net.twisterrob.gradle:twister-convention-plugins:${VERSION_PLUGIN_ANDROID}")
-	// Prevent https://sourceforge.net/p/proguard/bugs/712/ in ProGuard 6.0.x (default in AGP 3.4)
-	// Alternative: `-keep class module-info` and/or `-dontobfuscate` in proguard.pro
-	implementation("net.sf.proguard:proguard-gradle:6.2.2")
 
 	testImplementation("junit:junit:${VERSION_JUNIT}")
 	testImplementation("org.mockito:mockito-core:${VERSION_MOCKITO}")
