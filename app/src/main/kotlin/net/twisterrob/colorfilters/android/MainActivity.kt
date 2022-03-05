@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity(), ColorFilterFragment.Listener, ImageFra
 		get() = kbd ?: KeyboardHandlerFactory().create(
 			prefs.findKeyboardMode(),
 			window,
-			findViewById<View>(R.id.keyboard) as @kotlin.Suppress("DEPRECATION") android.inputmethodservice.KeyboardView
+			findViewById<View>(R.id.keyboard) as @Suppress("DEPRECATION") android.inputmethodservice.KeyboardView
 		).also { kbd = it }
 
 	private fun SharedPreferences.findKeyboardMode(): KeyboardMode =
@@ -277,6 +277,7 @@ class MainActivity : AppCompatActivity(), ColorFilterFragment.Listener, ImageFra
 	}
 
 	companion object {
+
 		private const val PREF_COLORFILTER_SELECTED = "ColorFilter.selected"
 		private const val PREF_COLORFILTER_PREVIEW = "ColorFilter.images"
 		private const val COLORFILTER_DEFAULT = 0

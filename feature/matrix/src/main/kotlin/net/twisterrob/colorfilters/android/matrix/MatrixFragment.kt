@@ -18,6 +18,7 @@ import net.twisterrob.colorfilters.android.matrix.Component.Companion.COMP_R
 class MatrixFragment : ColorFilterFragment() {
 
 	companion object {
+
 		private val SAVE_ORDER_MAP = OrderComponent::class.java.simpleName
 		private val SAVE_EDITOR_DIRTY = MatrixComponent::class.java.simpleName
 	}
@@ -157,6 +158,7 @@ class MatrixFragment : ColorFilterFragment() {
 	}.toString()
 
 	private inner class CentralRefreshListener : Component.RefreshListener {
+
 		private var enabled: Boolean = true
 
 		override fun refresh(recombine: Boolean) {

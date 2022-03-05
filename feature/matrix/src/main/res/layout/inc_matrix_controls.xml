@@ -7,6 +7,7 @@
 	tools:showIn="@layout/fragment_matrix"
 	tools:ignore="SelectableText"
 	>
+
 	<View
 		android:id="@+id/verticalHalf"
 		android:layout_width="0dp"
@@ -92,4 +93,5 @@
 		<TextView android:id="@+id/edit_sat" style="@style/slider_value" tools:text="1.00" />
 		<!-- @formatter:on -->
 	</LinearLayout>
+
 </RelativeLayout>

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	>
+
 	<CheckBoxPreference
 		android:key="@string/cf_pref_keyboard"
 		android:title="@string/cf_pref_keyboard_title"
 		android:defaultValue="@string/cf_pref_keyboard_default"
 		android:summary="@string/cf_pref_keyboard_info"
 		/>
+
 	<Preference
 		android:title="@string/cf_about_title"
 		android:summary="@string/app_name"
@@ -15,4 +19,5 @@
 			android:targetPackage="@string/app_package"
 			/>
 	</Preference>
+
 </PreferenceScreen>

@@ -14,6 +14,7 @@ class PixelAbsoluteSwatch(
 ) : Swatch() {
 
 	private var drawerFactory = originalFactory
+
 	@ColorInt
 	private var bitmap: IntArray? = null
 	override var currentColor: Int = Color.TRANSPARENT

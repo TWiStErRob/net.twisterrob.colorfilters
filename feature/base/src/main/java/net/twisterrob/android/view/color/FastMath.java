@@ -71,17 +71,17 @@ public class FastMath {
 	}
 
 	//http://atoms.alife.co.uk/sqrt/index.html
-/*
- * Integer Square Root function
- * Contributors include Arne Steinarson for the basic approximation idea, Dann
- * Corbit and Mathew Hendry for the first cut at the algorithm, Lawrence Kirby
- * for the rearrangement, improvments and range optimization, Paul Hsieh
- * for the round-then-adjust idea, Tim Tyler, for the Java port
- * and Jeff Lawson for a bug-fix and some code to improve accuracy.
- *
- *
- * v0.02 - 2003/09/07
- */
+	/*
+	 * Integer Square Root function
+	 * Contributors include Arne Steinarson for the basic approximation idea, Dann
+	 * Corbit and Mathew Hendry for the first cut at the algorithm, Lawrence Kirby
+	 * for the rearrangement, improvments and range optimization, Paul Hsieh
+	 * for the round-then-adjust idea, Tim Tyler, for the Java port
+	 * and Jeff Lawson for a bug-fix and some code to improve accuracy.
+	 *
+	 *
+	 * v0.02 - 2003/09/07
+	 */
 
 	/**
 	 * Faster replacements for (int)(java.lang.Math.sqrt(integer))

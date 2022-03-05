@@ -15,14 +15,18 @@
 		android:textIsSelectable="true"
 		tools:text="fgColor=&quot;-FF0088AA"
 		/>
+
 	<View style="@style/table_horizontal_divider" />
+
 	<TextView
 		android:id="@+id/resolved"
 		android:layout_gravity="center_vertical"
 		android:textIsSelectable="true"
 		tools:text="FF0088AA"
 		/>
+
 	<View style="@style/table_horizontal_divider" />
+
 	<TextView
 		android:id="@+id/resultWhite"
 		android:layout_gravity="center_vertical"
@@ -31,7 +35,9 @@
 		tools:textColor="#ff0000"
 		tools:text="text"
 		/>
+
 	<View style="@style/table_horizontal_divider" />
+
 	<TextView
 		android:id="@+id/resultBlack"
 		android:layout_gravity="center_vertical"
@@ -40,4 +46,5 @@
 		tools:textColor="#ff0000"
 		tools:text="text"
 		/>
+
 </TableRow>

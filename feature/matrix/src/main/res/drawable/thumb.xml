@@ -3,6 +3,7 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:shape="oval"
 	>
+
 	<gradient
 		android:centerColor="#6bd"
 		android:endColor="#0fff"
@@ -11,4 +12,5 @@
 		android:type="radial"
 		/>
 	<size android:width="20dp" android:height="20dp" />
+
 </shape>

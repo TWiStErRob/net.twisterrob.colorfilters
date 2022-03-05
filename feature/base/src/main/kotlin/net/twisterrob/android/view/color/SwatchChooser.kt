@@ -18,6 +18,7 @@ import kotlin.math.sqrt
 class SwatchChooser(swatches: Collection<Swatch>) : Drawable(), View.OnTouchListener {
 
 	interface OnSwatchChangeListener {
+
 		fun swatchSelected(swatch: Swatch)
 	}
 

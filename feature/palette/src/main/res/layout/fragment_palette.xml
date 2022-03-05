@@ -7,6 +7,7 @@
 	android:orientation="vertical"
 	tools:context=".PaletteFragment"
 	>
+
 	<LinearLayout
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
@@ -14,6 +15,7 @@
 		android:layout_marginRight="@dimen/margin"
 		android:orientation="horizontal"
 		>
+
 		<TextView
 			tools:id="@id/numLabel"
 			android:layout_width="wrap_content"
@@ -22,6 +24,7 @@
 			android:labelFor="@id/numEditor"
 			tools:ignore="HardcodedText"
 			/>
+
 		<SeekBar
 			android:id="@+id/numColors"
 			android:layout_width="0dp"
@@ -33,6 +36,7 @@
 			android:max="98"
 			tools:progress="16"
 			/>
+
 		<TextView
 			android:id="@+id/numPalette"
 			android:layout_width="wrap_content"
@@ -46,6 +50,7 @@
 			tools:text="99"
 			tools:ignore="HardcodedText"
 			/>
+
 		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -55,6 +60,7 @@
 			android:textAppearance="@style/TextAppearance.AppCompat.Medium"
 			tools:ignore="HardcodedText"
 			/>
+
 		<EditText
 			android:id="@+id/numEditor"
 			android:layout_width="wrap_content"
@@ -68,7 +74,9 @@
 			android:singleLine="true"
 			tools:text="99"
 			/>
+
 	</LinearLayout>
+
 	<LinearLayout
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
@@ -76,6 +84,7 @@
 		android:layout_marginRight="@dimen/margin"
 		android:orientation="horizontal"
 		>
+
 		<TextView
 			tools:id="@id/resizeDimenLabel"
 			android:layout_width="wrap_content"
@@ -84,6 +93,7 @@
 			android:labelFor="@id/resizeDimenEditor"
 			tools:ignore="HardcodedText"
 			/>
+
 		<SeekBar
 			android:id="@+id/resizeDimen"
 			android:layout_width="0dp"
@@ -95,6 +105,7 @@
 			android:max="600"
 			tools:progress="192"
 			/>
+
 		<EditText
 			android:id="@+id/resizeDimenEditor"
 			android:layout_width="wrap_content"
@@ -107,7 +118,9 @@
 			android:singleLine="true"
 			tools:text="192"
 			/>
+
 	</LinearLayout>
+
 	<ListView
 		android:id="@android:id/list"
 		android:layout_width="fill_parent"
@@ -115,4 +128,5 @@
 		android:layout_weight="1"
 		android:choiceMode="singleChoice"
 		/>
+
 </LinearLayout>

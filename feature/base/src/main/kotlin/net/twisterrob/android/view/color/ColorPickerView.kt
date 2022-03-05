@@ -29,6 +29,7 @@ import kotlin.math.sqrt
 open class ColorPickerView : AppCompatImageView {
 
 	interface OnColorChangedListener {
+
 		fun colorChanged(@ColorInt color: Int)
 	}
 

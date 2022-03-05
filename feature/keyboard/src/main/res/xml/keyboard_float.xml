@@ -4,6 +4,8 @@
 	android:keyHeight="@dimen/keySize"
 	android:keyWidth="@dimen/keySize"
 	>
+
+	<!-- @formatter:off -->
 	<Row>
 		<!-- negate: ¬ -->
 		<Key android:codes="177" android:isRepeatable="false" android:keyLabel="&#x00B1;" />
@@ -30,4 +32,6 @@
 		<!-- done: ETB (End of Transmission Block) -->
 		<Key android:codes="23" android:isRepeatable="false" android:keyIcon="@android:drawable/ic_media_play" />
 	</Row>
+	<!-- @formatter:on -->
+
 </Keyboard>

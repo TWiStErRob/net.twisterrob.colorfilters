@@ -1,7 +1,12 @@
 package net.twisterrob.android.view.color.swatches;
 
 import android.annotation.SuppressLint;
-import android.graphics.*;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.Shader;
+import android.graphics.SweepGradient;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.FloatRange;

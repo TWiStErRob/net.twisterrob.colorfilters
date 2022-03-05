@@ -56,6 +56,7 @@ class ColorFilterFragmentHost(
 	}
 
 	companion object {
+
 		const val EXTRA_FRAGMENT = "fragment"
 
 		fun <T : ColorFilterFragment> rule(clazz: KClass<T>): ActivityTestRule<ColorFilterFragmentHost> {

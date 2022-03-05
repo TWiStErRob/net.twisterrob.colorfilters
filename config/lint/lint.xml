@@ -57,7 +57,7 @@
 		<ignore path="**/activity_color_filter.xml"
 			regexp="net.twisterrob.colorfilters.android.image.ImageFragment" />
 		<ignore path="**/activity_color_filter.xml"
-		        regexp="net.twisterrob.colorfilters.android.keyboard.KeyboardView" />
+			regexp="net.twisterrob.colorfilters.android.keyboard.KeyboardView" />
 	</issue>
 
 </lint>

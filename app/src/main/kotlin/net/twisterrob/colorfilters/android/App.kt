@@ -14,6 +14,7 @@ class App : Application() {
 	}
 
 	companion object {
+
 		fun getShareableCachePath(context: Context, path: String): File =
 			context.cacheDir.resolve(path)
 

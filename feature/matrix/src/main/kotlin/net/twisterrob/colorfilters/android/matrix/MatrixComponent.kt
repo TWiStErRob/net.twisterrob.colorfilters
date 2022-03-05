@@ -136,6 +136,7 @@ internal class MatrixComponent(
 	}
 
 	companion object {
+
 		private const val PREF_MATRIX_ITEM = "Matrix/"
 		private const val HEIGHT = 4
 		private const val WIDTH = 5

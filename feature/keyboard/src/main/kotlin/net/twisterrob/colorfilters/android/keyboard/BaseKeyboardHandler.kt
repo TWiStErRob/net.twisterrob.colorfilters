@@ -1,4 +1,5 @@
 @file:Suppress("DEPRECATION")
+
 package net.twisterrob.colorfilters.android.keyboard
 
 import android.annotation.SuppressLint
@@ -122,12 +123,14 @@ abstract class BaseKeyboardHandler(
 	}
 
 	private inner class MyOnClickListener : View.OnClickListener {
+
 		override fun onClick(v: View) {
 			showCustomKeyboard(v)
 		}
 	}
 
 	private inner class MyOnFocusChangeListener : View.OnFocusChangeListener {
+
 		override fun onFocusChange(v: View, hasFocus: Boolean) {
 			if (hasFocus) {
 				showCustomKeyboard(v)

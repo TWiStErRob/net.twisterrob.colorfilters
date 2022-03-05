@@ -12,6 +12,7 @@
 	<!-- LabelFor: each cell is labeled by row and column headings -->
 	<!-- AutoFill: these are numbers, cannot be auto-filled by Android -->
 	<TableRow tools:ID="@+id/header">
+
 		<TextView
 			android:id="@+id/matrix_reset"
 			android:layout_width="wrap_content"
@@ -62,4 +63,5 @@
 		<EditText android:id="@+id/matrix_t" style="@style/matrix" tools:text="t" />
 	</TableRow>
 	<!-- @formatter:on -->
+
 </TableLayout>

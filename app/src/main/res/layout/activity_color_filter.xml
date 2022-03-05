@@ -8,12 +8,14 @@
 	tools:menu="fragment_image,fragment_color_filter,activity_color_filter"
 	tools:context=".MainActivity"
 	>
+
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:layout_above="@+id/keyboard"
 		android:orientation="vertical"
 		>
+
 		<fragment
 			android:id="@+id/images"
 			android:name="net.twisterrob.colorfilters.android.image.ImageFragment"
@@ -26,6 +28,7 @@
 			android:layout_weight="0.35"
 			tools:layout="@layout/fragment_image"
 			/>
+
 		<FrameLayout
 			android:id="@+id/container"
 			android:layout_width="match_parent"
@@ -34,6 +37,7 @@
 			android:focusableInTouchMode="true"
 			tools:background="@android:color/darker_gray"
 			/>
+
 	</LinearLayout>
 
 	<net.twisterrob.colorfilters.android.keyboard.KeyboardView
@@ -47,4 +51,5 @@
 		android:keyBackground="@drawable/keyboard_key"
 		tools:ignore="NegativeMargin"
 		/>
+
 </RelativeLayout>

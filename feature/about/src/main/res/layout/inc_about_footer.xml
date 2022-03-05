@@ -7,12 +7,14 @@
 	android:orientation="vertical"
 	tools:context=".AboutActivity"
 	>
+
 	<TextView
 		style="?android:listSeparatorTextViewStyle"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:text="@string/cf_about_faq_title"
 		/>
+
 	<TextView
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
@@ -22,12 +24,14 @@
 		android:layout_marginBottom="@dimen/margin"
 		android:text="@string/cf_about_faq"
 		/>
+
 	<TextView
 		style="?android:listSeparatorTextViewStyle"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:text="@string/cf_about_tips_title"
 		/>
+
 	<TextView
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
@@ -37,4 +41,5 @@
 		android:layout_marginBottom="@dimen/margin"
 		android:text="@string/cf_about_tips"
 		/>
+
 </LinearLayout>

@@ -1,7 +1,7 @@
 package net.twisterrob.android.view
 
 import android.widget.CompoundButton
-import java.util.*
+import java.util.LinkedList
 
 class CheckableButtonManager : CompoundButton.OnCheckedChangeListener {
 
@@ -51,6 +51,7 @@ class CheckableButtonManager : CompoundButton.OnCheckedChangeListener {
 	}
 
 	companion object {
+
 		private const val safeMode = false
 	}
 }

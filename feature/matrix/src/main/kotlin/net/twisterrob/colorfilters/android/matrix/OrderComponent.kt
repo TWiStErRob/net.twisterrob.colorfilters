@@ -20,6 +20,7 @@ internal class OrderComponent(
 ) : Component(view, listener) {
 
 	companion object {
+
 		private const val PREF_ORDER_MAP = "Order.map/"
 		private val IDENTITY_MAPPING = intArrayOf(0, 1, 2, 3, 4)
 	}
@@ -151,6 +152,7 @@ internal class OrderComponent(
 	) : View.OnDragListener {
 
 		interface ChangeListener {
+
 			fun dropped(source: ViewGroup, target: ViewGroup)
 		}
 

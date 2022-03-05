@@ -15,6 +15,7 @@ internal abstract class Component(
 ) {
 
 	internal interface RefreshListener {
+
 		fun refresh(recombine: Boolean)
 	}
 

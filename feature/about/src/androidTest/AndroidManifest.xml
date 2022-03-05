@@ -1,6 +1,8 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+	xmlns:android="http://schemas.android.com/apk/res/android"
 	package="net.twisterrob.colorfilters.android.about.test"
-	android:versionName="TEST">
+	android:versionName="TEST"
+	>
 
 	<!-- label and versionName must be set to be able to open the About screen -->
 	<application android:label="@string/cf_about_application_title" />

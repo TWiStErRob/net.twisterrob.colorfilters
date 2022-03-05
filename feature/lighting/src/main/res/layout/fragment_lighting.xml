@@ -8,6 +8,7 @@
 	tools:context=".LightingFragment"
 	tools:ignore="RelativeOverlap"
 	>
+
 	<View
 		android:id="@+id/middle"
 		android:layout_width="0dp"
@@ -28,6 +29,7 @@
 		android:labelFor="@id/mulEditor"
 		tools:ignore="HardcodedText"
 		/>
+
 	<EditText
 		android:id="@+id/mulEditor"
 		android:layout_width="wrap_content"
@@ -42,6 +44,7 @@
 		android:singleLine="true"
 		tools:text="FFFFFF"
 		/>
+
 	<TextView
 		android:id="@+id/mulRGBLabel"
 		android:layout_width="wrap_content"
@@ -53,6 +56,7 @@
 		android:textIsSelectable="true"
 		tools:text="255, 255, 255, 255"
 		/>
+
 	<View
 		android:id="@+id/mulPreview"
 		android:layout_width="wrap_content"
@@ -67,6 +71,7 @@
 		android:focusable="true"
 		tools:background="@android:color/black"
 		/>
+
 	<net.twisterrob.android.view.color.ColorPickerView
 		android:id="@+id/mulColor"
 		android:layout_width="fill_parent"
@@ -86,6 +91,7 @@
 		android:labelFor="@id/addEditor"
 		tools:ignore="HardcodedText"
 		/>
+
 	<EditText
 		android:id="@+id/addEditor"
 		android:layout_width="wrap_content"
@@ -100,6 +106,7 @@
 		android:singleLine="true"
 		tools:text="FFFFFF"
 		/>
+
 	<TextView
 		android:id="@+id/addRGBLabel"
 		android:layout_width="wrap_content"
@@ -111,6 +118,7 @@
 		android:textIsSelectable="true"
 		tools:text="255, 255, 255, 255"
 		/>
+
 	<View
 		android:id="@+id/addPreview"
 		android:layout_width="wrap_content"
@@ -125,6 +133,7 @@
 		android:focusable="true"
 		tools:background="@android:color/black"
 		/>
+
 	<net.twisterrob.android.view.color.ColorPickerView
 		android:id="@+id/addColor"
 		android:layout_width="fill_parent"
@@ -134,4 +143,5 @@
 		android:layout_toRightOf="@id/middle"
 		tools:ignore="MissingRegistered"
 		/>
+
 </RelativeLayout>

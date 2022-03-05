@@ -385,6 +385,7 @@ class PaletteFragment : ColorFilterFragment() {
 		get() = PaletteAdapter.Display.values()[swatchDisplay.selectedItemId.toInt()]
 
 	companion object {
+
 		// REPORT report this not being flagged for i18n,
 		// it should be because all usages are setText()
 		// TODO return String.format(Locale.getDefault(), "%d", number);
@@ -400,11 +401,13 @@ class PaletteFragment : ColorFilterFragment() {
 	}
 
 	private class PaletteAdapter : BaseAdapter() {
+
 		var palette: Palette? = null
 			private set
 		private var swatches: List<Swatch?> = emptyList()
 
 		private class ViewHolder(view: View) {
+
 			val colorText: TextView = view.findViewById(R.id.color)
 			val titleText: TextView = view.findViewById(R.id.titleText)
 			val bodyText: TextView = view.findViewById(R.id.bodyText)
@@ -492,24 +495,29 @@ class PaletteFragment : ColorFilterFragment() {
 		) {
 
 			get___Swatch("get???Swatch()") {
+
 				override fun getSwatches(palette: Palette): List<Swatch?> = listOf(
 					palette.vibrantSwatch, palette.lightVibrantSwatch, palette.darkVibrantSwatch,
 					palette.mutedSwatch, palette.lightMutedSwatch, palette.darkMutedSwatch
 				)
 			},
 			getSwatches("getSwatches()") {
+
 				override fun getSwatches(palette: Palette): List<Swatch> =
 					palette.swatches
 			},
 			getSwatchesByHSL("getSwatches() by HSL") {
+
 				override fun getSwatches(palette: Palette): List<Swatch> =
 					palette.swatches.sortedWith(compareBy({ it.hsl[0] }, { it.hsl[1] }, { it.hsl[2] }))
 			},
 			getSwatchesByPopulationAsc("getSwatches() by population ASC") {
+
 				override fun getSwatches(palette: Palette): List<Swatch> =
 					palette.swatches.sortedBy { it.population }
 			},
 			getSwatchesByPopulationDesc("getSwatches() by population DESC") {
+
 				override fun getSwatches(palette: Palette): List<Swatch> =
 					palette.swatches.sortedByDescending { it.population }
 			};
@@ -517,6 +525,7 @@ class PaletteFragment : ColorFilterFragment() {
 			abstract fun getSwatches(palette: Palette): List<Swatch?>
 
 			companion object {
+
 				val DEFAULT = get___Swatch
 			}
 		}

@@ -23,6 +23,7 @@ abstract class BitmapDrawer(
 ) {
 
 	interface Callback {
+
 		fun drawStared()
 
 		fun drawProgress()
@@ -90,6 +91,7 @@ abstract class BitmapDrawer(
 	}
 
 	private class BitmapDrawerThread : HandlerThread(BitmapDrawerThread::class.java.simpleName) {
+
 		internal val mHandler: Handler?
 
 		init {
@@ -103,11 +105,13 @@ abstract class BitmapDrawer(
 	}
 
 	private class Async(private val factory: BitmapDrawerFactory) : BitmapDrawerFactory by factory {
+
 		override fun invoke(bitmap: IntArray, w: Int, h: Int, pixel: PixelColor) =
 			factory(bitmap, w, h, pixel).apply { enableAsync() }
 	}
 
 	private class Sync(private val factory: BitmapDrawerFactory) : BitmapDrawerFactory by factory {
+
 		override fun invoke(bitmap: IntArray, w: Int, h: Int, pixel: PixelColor) =
 			factory(bitmap, w, h, pixel).apply { disableAsync() }
 	}

@@ -7,17 +7,20 @@
 	android:layout_margin="@dimen/activity_margin"
 	tools:context=".PorterDuffFragment"
 	>
+
 	<RelativeLayout
 		android:id="@+id/colorContainer"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		>
+
 		<View
 			android:id="@+id/middle"
 			android:layout_width="0dp"
 			android:layout_height="0dp"
 			android:layout_centerHorizontal="true"
 			/>
+
 		<EditText
 			android:id="@+id/colorEditor"
 			android:layout_width="wrap_content"
@@ -32,6 +35,7 @@
 			android:singleLine="true"
 			tools:text="FFFFFFFF"
 			/>
+
 		<TextView
 			android:id="@+id/colorRGBLabel"
 			android:layout_width="wrap_content"
@@ -43,6 +47,7 @@
 			android:textIsSelectable="true"
 			tools:text="255, 255, 255, 255"
 			/>
+
 		<View
 			android:id="@+id/colorPreview"
 			android:layout_width="wrap_content"
@@ -57,6 +62,7 @@
 			android:focusable="true"
 			tools:background="@android:color/black"
 			/>
+
 		<SeekBar
 			android:id="@+id/colorAlpha"
 			android:layout_width="wrap_content"
@@ -68,6 +74,7 @@
 			android:focusableInTouchMode="true"
 			android:max="255"
 			/>
+
 		<net.twisterrob.android.view.color.ColorPickerView
 			android:id="@+id/color"
 			android:layout_width="fill_parent"
@@ -76,6 +83,7 @@
 			tools:visibility="visible"
 			tools:ignore="MissingRegistered"
 			/>
+
 	</RelativeLayout>
 
 	<!-- TODO spinner with prev/next buttons on left/right -->
@@ -86,6 +94,7 @@
 		android:layout_marginBottom="@dimen/margin"
 		android:layout_below="@id/colorContainer"
 		>
+
 		<TableLayout
 			android:id="@+id/modes"
 			android:layout_width="fill_parent"
@@ -126,5 +135,7 @@
 			</TableRow>
 			<!-- @formatter:on -->
 		</TableLayout>
+
 	</ScrollView>
+
 </RelativeLayout>

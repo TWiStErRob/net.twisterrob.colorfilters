@@ -1,4 +1,5 @@
 @file:Suppress("DEPRECATION")
+
 package net.twisterrob.colorfilters.android.keyboard
 
 import android.inputmethodservice.Keyboard
@@ -25,6 +26,7 @@ class FloatNavKeyboardHandler(
 	}
 
 	private inner class FloatNavKeyboardActionListener : FloatKeyboardHandler.FloatKeyboardActionListener() {
+
 		override fun onKey(editor: EditText, primaryCode: Int, keyCodes: IntArray): Boolean {
 			when (primaryCode) {
 				KEY_NAV_W, KEY_NAV_N, KEY_NAV_E, KEY_NAV_S,

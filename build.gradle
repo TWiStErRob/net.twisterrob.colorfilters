@@ -27,7 +27,9 @@ allprojects { project ->
 					multiDexEnabled = true
 				}
 				libraryVariants.all { variant ->
-					if (project.path == ':feature:about') return
+					if (project.path == ':feature:about') {
+						return
+					}
 					// TODEL replace with https://issuetracker.google.com/issues/72050365 once released.
 					variant.generateBuildConfigProvider.configure { task ->
 						task.enabled = false

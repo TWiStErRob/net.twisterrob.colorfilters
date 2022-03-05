@@ -34,6 +34,7 @@ abstract class Swatch : Drawable() {
 	open fun triggersColorChange(trackedArea: AreaCode): Boolean = true
 
 	companion object {
+
 		const val AREA_INVALID: AreaCode = -1
 		const val AREA_DEFAULT: AreaCode = 0
 	}

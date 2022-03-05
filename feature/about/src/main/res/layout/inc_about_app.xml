@@ -6,6 +6,7 @@
 	android:layout_height="wrap_content"
 	android:gravity="center"
 	>
+
 	<LinearLayout
 		android:id="@+id/about_app"
 		android:layout_width="wrap_content"
@@ -15,6 +16,7 @@
 		android:layout_centerVertical="true"
 		android:orientation="vertical"
 		>
+
 		<TextView
 			android:id="@+id/about_name"
 			android:layout_width="wrap_content"
@@ -25,6 +27,7 @@
 			android:textIsSelectable="false"
 			tools:text="\@string/app_name"
 			/>
+
 		<TextView
 			android:id="@+id/about_version"
 			android:layout_width="wrap_content"
@@ -34,6 +37,7 @@
 			android:textIsSelectable="false"
 			tools:text="@string/cf_about_version"
 			/>
+
 		<TextView
 			android:id="@+id/about_package"
 			android:layout_width="wrap_content"
@@ -45,6 +49,7 @@
 			tools:text="\@string/app_package"
 			tools:visibility="visible"
 			/>
+
 		<TextView
 			android:id="@+id/about_feedback"
 			android:layout_width="wrap_content"
@@ -54,7 +59,9 @@
 			android:text="@string/cf_about_feedback"
 			android:gravity="center"
 			/>
+
 	</LinearLayout>
+
 	<ImageView
 		android:id="@+id/about_icon"
 		android:layout_width="144dp"
@@ -65,4 +72,5 @@
 		android:contentDescription="@null"
 		tools:src="@android:drawable/sym_def_app_icon"
 		/>
+
 </RelativeLayout>

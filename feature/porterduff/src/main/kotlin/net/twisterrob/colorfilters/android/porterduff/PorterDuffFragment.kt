@@ -60,6 +60,7 @@ private val MODES = (mapOf(
 ) else emptyMap()).toSortedMap()
 
 private val DEFAULT_COLOR = Color.argb(0xff, 0x00, 0x00, 0x00)
+
 @SuppressLint("ObsoleteSdkInt")
 @TargetApi(VERSION_CODES.HONEYCOMB)
 private val DEFAULT_MODE =
@@ -77,6 +78,7 @@ class PorterDuffFragment : ColorFilterFragment() {
 	private lateinit var rgbLabel: TextView
 	private lateinit var alphaSlider: SeekBar
 	private lateinit var colorPreview: View
+
 	@ColorInt
 	private var currentColor: Int = 0
 	private val currentMode: PorterDuff.Mode get() = MODES.getValue(modes.checked!!.id)
@@ -231,9 +233,9 @@ class PorterDuffFragment : ColorFilterFragment() {
 
 	override fun generateCode(): String {
 		return "new PorterDuffColorFilter(" +
-				"${currentColor.toARGBHexString("0x")}," +
-				" PorterDuff.Mode.${currentMode.name}" +
-				");"
+			"${currentColor.toARGBHexString("0x")}," +
+			" PorterDuff.Mode.${currentMode.name}" +
+			");"
 	}
 
 	private enum class UpdateOrigin {

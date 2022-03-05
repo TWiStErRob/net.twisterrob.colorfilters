@@ -36,6 +36,7 @@ private const val REQUEST_CODE_PERMISSION_PICTURE = 1236
 class ImageFragment : Fragment() {
 
 	interface Listener {
+
 		fun reset()
 		fun imageChanged()
 	}

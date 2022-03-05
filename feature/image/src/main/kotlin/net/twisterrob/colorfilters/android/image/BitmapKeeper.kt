@@ -30,6 +30,7 @@ class BitmapKeeper : Fragment() {
 	private var uri: Uri? = null
 
 	interface Listener {
+
 		fun loadComplete()
 	}
 

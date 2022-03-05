@@ -8,6 +8,7 @@
 	tools:showIn="@layout/activity_color_filter"
 	tools:context=".ImageFragment"
 	>
+
 	<ImageView
 		android:id="@+id/original"
 		android:layout_width="0dp"
@@ -18,6 +19,7 @@
 		android:contentDescription="@string/cf_image_original_cd"
 		android:scaleType="centerCrop"
 		/>
+
 	<ImageView
 		android:id="@+id/preview"
 		android:layout_width="0dp"
@@ -28,4 +30,5 @@
 		android:contentDescription="@string/cf_image_preview_cd"
 		android:scaleType="centerCrop"
 		/>
+
 </LinearLayout>

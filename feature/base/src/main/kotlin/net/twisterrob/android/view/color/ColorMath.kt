@@ -107,9 +107,9 @@ fun fromHsb(
 		}
 	}
 	return (alpha * 255).toInt() shl 24 or
-			((r * 255).toInt() shl 16) or
-			((g * 255).toInt() shl 8) or
-			((b * 255).toInt() shl 0)
+		((r * 255).toInt() shl 16) or
+		((g * 255).toInt() shl 8) or
+		((b * 255).toInt() shl 0)
 }
 
 @ColorInt

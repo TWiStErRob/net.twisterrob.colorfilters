@@ -4,6 +4,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	>
+
 	<TableLayout
 		android:id="@+id/table"
 		android:layout_width="match_parent"
@@ -11,24 +12,34 @@
 		android:shrinkColumns="2,1,3,5"
 		android:stretchColumns="4,6"
 		>
+
 		<TableRow
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:padding="@dimen/margin"
 			>
-			<TextView
-				android:text="@string/cf_resfont_type_xml" />
+
+			<TextView android:text="@string/cf_resfont_type_xml" />
+
 			<View style="@style/table_horizontal_divider" />
-			<TextView
-				android:text="@string/cf_resfont_type_resolved" />
+
+			<TextView android:text="@string/cf_resfont_type_resolved" />
+
 			<View style="@style/table_horizontal_divider" />
+
 			<TextView
 				android:layout_span="3"
 				android:text="@string/cf_resfont_type_rendered"
 				/>
+
 		</TableRow>
+
 		<include layout="@layout/inc_resfont_row" />
+
 		<include layout="@layout/inc_resfont_row" />
+
 		<include layout="@layout/inc_resfont_row" />
+
 	</TableLayout>
+
 </ScrollView>

@@ -1,4 +1,5 @@
 @file:Suppress("DEPRECATION")
+
 package net.twisterrob.colorfilters.android.keyboard
 
 import android.content.Context
@@ -19,10 +20,10 @@ import android.util.AttributeSet
 class KeyboardView : android.inputmethodservice.KeyboardView {
 
 	constructor(context: Context, attrs: AttributeSet) :
-			super(context, attrs)
+		super(context, attrs)
 
 	constructor(context: Context, attrs: AttributeSet, defStyle: Int) :
-			super(context, attrs, defStyle)
+		super(context, attrs, defStyle)
 
 	/**
 	 * [Key.gap][Keyboard.Key.gap] is handled differently in [Key&#39;s constructor][Keyboard.Key.constructor]:
