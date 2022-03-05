@@ -7,3 +7,9 @@ dependencies {
 
 	androidTestImplementation project(':test-base')
 }
+
+android {
+	buildTypes.all {
+		buildConfigField("String", "EMAIL", "\"papp.robert.s@gmail.com\"")
+	}
+}

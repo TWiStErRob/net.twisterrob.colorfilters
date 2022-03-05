@@ -1,38 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<issues format="5" by="lint 3.4.2" client="gradle" variant="all" version="3.4.2">
-
-    <issue id="UnusedResources" message="The resource `R.xml.preferences` appears to be unused"
-        errorLine1="&lt;PreferenceScreen xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;>"
-        errorLine2="^">
-        <location file="src\main\res\xml\preferences.xml" line="2" column="1" />
-    </issue>
-
-    <issue id="UnusedResources"
-        message="The resource `R.string.cf_pref_keyboard_title` appears to be unused"
-        errorLine1=" &lt;string name=&quot;cf_pref_keyboard_title&quot;>Experimental Keyboards&lt;/string>"
-        errorLine2="         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location file="src\main\res\values\strings.xml" line="15" column="10" />
-    </issue>
-
-    <issue id="UnusedResources"
-        message="The resource `R.string.cf_pref_keyboard_info` appears to be unused"
-        errorLine1=" &lt;string name=&quot;cf_pref_keyboard_info&quot;>Use special built-in keyboards for color and floating point number inputs.&lt;/string>"
-        errorLine2="         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location file="src\main\res\values\strings.xml" line="16" column="10" />
-    </issue>
-
-    <issue id="UnusedResources"
-        message="The resource `R.string.cf_pref_keyboard_default` appears to be unused"
-        errorLine1=" &lt;string name=&quot;cf_pref_keyboard_default&quot;>true&lt;/string>"
-        errorLine2="         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location file="src\main\res\values\strings.xml" line="17" column="10" />
-    </issue>
-
-    <issue
-        id="IconMissingDensityFolder"
-        message="Missing density variation folders in `src\\main\\res`: drawable-hdpi, drawable-mdpi, drawable-xhdpi">
-        <location
-            file="src\main\res"/>
-    </issue>
+<issues format="5" by="lint 4.2.2" client="gradle" variant="all" version="4.2.2">
 
 </issues>

@@ -33,6 +33,12 @@
 		<!-- Accessed dynamically by ResourceFontFragment.createRow -->
 		<ignore regexp="R\.string\.cf_resfont_.*_code" />
 	</issue>
+
+	<issue id="IconMissingDensityFolder">
+		<!-- REPORT Baseline uses absolute paths so have to ignore here -->
+		<ignore regexp="feature.keyboard.src.main.res" />
+	</issue>
+
 	<issue id="IconColors">
 		<!-- menu/activity_color_filter.xml/action_logo uses ic_launcher.png as an icon,
 		     so it'll be classified as an ActionBar icon.
@@ -48,16 +54,6 @@
 		<!-- Ignore resources from exploded AARs in Gradle caches, don't care about duplications in abc_* -->
 		<!-- TODEL https://issuetracker.google.com/issues/113673427 -->
 		<ignore path="**/caches/transforms-*/files-*/*" />
-	</issue>
-
-	<!-- REPORT MissingRegistered lint only shows one result with checkDependencies = true
-	     to repro remove ignore from `<ColorPickerView />` and run :app:lint. -->
-	<issue id="MissingRegistered">
-		<!-- REPORT MissingRegistered doesn't find classes for library modules, even though checkDependencies = true -->
-		<ignore path="**/activity_color_filter.xml"
-			regexp="net.twisterrob.colorfilters.android.image.ImageFragment" />
-		<ignore path="**/activity_color_filter.xml"
-			regexp="net.twisterrob.colorfilters.android.keyboard.KeyboardView" />
 	</issue>
 
 </lint>

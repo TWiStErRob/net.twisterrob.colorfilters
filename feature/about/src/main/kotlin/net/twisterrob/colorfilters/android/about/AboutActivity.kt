@@ -2,7 +2,6 @@ package net.twisterrob.colorfilters.android.about
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.app.ListActivity
 import android.content.Intent
 import android.content.pm.PackageManager.NameNotFoundException
 import android.net.Uri
@@ -14,7 +13,8 @@ import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
 
-class AboutActivity : ListActivity() {
+@Suppress("DEPRECATION")
+class AboutActivity : android.app.ListActivity() {
 
 	private lateinit var licenceContents: Array<CharSequence>
 
