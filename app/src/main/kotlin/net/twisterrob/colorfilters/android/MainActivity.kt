@@ -163,7 +163,7 @@ class MainActivity : AppCompatActivity(), ColorFilterFragment.Listener, ImageFra
 					val biggest = zip
 						.entries()
 						.asSequence()
-						.maxBy { it.size }
+						.maxByOrNull { it.size }
 						?: error("No images in $logoZip")
 					zip.getInputStream(biggest).use { BitmapFactory.decodeStream(it) }
 				})
