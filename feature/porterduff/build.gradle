@@ -7,4 +7,5 @@ dependencies {
 	implementation project(':feature:keyboard:contract')
 
 	androidTestImplementation project(':test-base')
+	androidTestImplementation project(':feature:porterduff:test-fixtures')
 }

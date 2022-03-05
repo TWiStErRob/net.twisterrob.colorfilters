@@ -6,6 +6,7 @@ dependencies {
 	implementation project(":feature:base")
 
 	androidTestImplementation project(':test-base')
+	androidTestImplementation project(':feature:about:test-fixtures')
 }
 
 android {

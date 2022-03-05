@@ -1,0 +1,7 @@
+apply plugin: 'net.twisterrob.android-library'
+apply plugin: 'net.twisterrob.kotlin'
+
+dependencies {
+	api project(":feature:matrix")
+	implementation project(':test-base')
+}
