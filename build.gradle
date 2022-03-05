@@ -52,3 +52,7 @@ allprojects { project ->
 task clean(type: Delete) {
 	delete rootProject.buildDir
 }
+
+// https://developer.android.com/studio/test/command-line#multi-module-reports-instrumented-tests
+// Needs to be last, because it forces evaluation of projects (evaluationDependsOnChildren), and that breaks other plugins.
+apply plugin: 'android-reporting'

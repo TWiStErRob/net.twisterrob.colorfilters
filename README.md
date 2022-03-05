@@ -7,3 +7,8 @@ gradlew assemble :app:assembleDebugAndroidTest compileDebugUnitTestSources compi
 ```
 gradlew verifyReleaseResources lint violationReportHtml
 ```
+
+### Run all UI tests
+```
+gradlew connectedCheck mergeAndroidReports --continue
+```
