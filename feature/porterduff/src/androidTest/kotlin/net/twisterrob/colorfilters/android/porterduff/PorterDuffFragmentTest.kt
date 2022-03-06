@@ -5,8 +5,8 @@ import androidx.test.filters.LargeTest
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.verify
 import net.twisterrob.colorfilters.android.ColorFilterFragment
-import net.twisterrob.colorfilters.android.ColorFilterFragmentHost
 import net.twisterrob.colorfilters.android.keyboard.KeyboardHandler
+import net.twisterrob.colorfilters.android.test.ui.ColorFilterFragmentHost
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
