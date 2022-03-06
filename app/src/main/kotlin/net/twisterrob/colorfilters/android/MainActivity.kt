@@ -200,14 +200,11 @@ class MainActivity : AppCompatActivity(), ColorFilterFragment.Listener, ImageFra
 			kbd = null
 			val fragment = currentFragment
 			if (fragment != null) {
-				// force recreating the fragment to pick up the new keyboard (in case it changed in settings)
-				supportFragmentManager
-					.beginTransaction()
-					.detach(fragment)
-					.attach(fragment)
-					// .commit won't work because onResume is called after onActivityResult
-					// and at this state we're "after onSaveInstanceState"
-					.commitAllowingStateLoss()
+				// Force recreating the fragment to pick up the new keyboard (in case it changed in settings).
+				// Using .commit won't work because onResume is called after onActivityResult,
+				// and at this state we're "after onSaveInstanceState".
+				supportFragmentManager.beginTransaction().detach(fragment).commitAllowingStateLoss()
+				supportFragmentManager.beginTransaction().attach(fragment).commitAllowingStateLoss()
 			}
 			return
 		}
