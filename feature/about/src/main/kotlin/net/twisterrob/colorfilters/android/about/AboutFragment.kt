@@ -2,7 +2,7 @@ package net.twisterrob.colorfilters.android.about
 
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager.NameNotFoundException
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
@@ -14,10 +14,6 @@ import android.widget.ListView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.children
 import androidx.fragment.app.ListFragment
-import net.twisterrob.colorfilters.android.about.R.array
-import net.twisterrob.colorfilters.android.about.R.bool
-import net.twisterrob.colorfilters.android.about.R.layout
-import net.twisterrob.colorfilters.android.about.R.string
 import net.twisterrob.colorfilters.android.about.databinding.DialogAboutLicenceBinding
 import net.twisterrob.colorfilters.android.about.databinding.IncAboutAppBinding
 import net.twisterrob.colorfilters.android.about.databinding.IncAboutFooterBinding
@@ -35,7 +31,7 @@ class AboutFragment : ListFragment() {
 		super.onCreateView(inflater, container, savedInstanceState)!!.apply {
 			val original = findViewById<View>(android.R.id.list)
 			val parent = original.parent as ViewGroup
-			val list = inflater.inflate(layout.about_fragment_list, parent, false)
+			val list = inflater.inflate(R.layout.about_fragment_list, parent, false)
 			parent.replace(original, list)
 		}
 
@@ -48,11 +44,11 @@ class AboutFragment : ListFragment() {
 
 		listAdapter = ArrayAdapter.createFromResource(
 			listView.context,
-			array.cf_about_licences,
+			R.array.cf_about_licences,
 			android.R.layout.simple_list_item_1
 		)
 
-		licenceContents = listView.resources.getTextArray(array.cf_about_licences_content)
+		licenceContents = listView.resources.getTextArray(R.array.cf_about_licences_content)
 
 		val footer = IncAboutFooterBinding.inflate(layoutInflater, listView, false)
 		listView.addFooterView(footer.root, null, false)
@@ -65,12 +61,12 @@ class AboutFragment : ListFragment() {
 				data = Uri.parse("mailto:" + BuildConfig.EMAIL)
 				putExtra(Intent.EXTRA_EMAIL, arrayOf(BuildConfig.EMAIL))
 				val subject = getString(
-					string.cf_about_feedback_subject,
+					R.string.cf_about_feedback_subject,
 					getString(context.applicationInfo.labelRes)
 				)
 				putExtra(Intent.EXTRA_SUBJECT, subject)
 				val body = getString(
-					string.cf_about_feedback_body,
+					R.string.cf_about_feedback_body,
 					context.packageName, context.applicationContext.versionName
 				)
 				putExtra(Intent.EXTRA_TEXT, body)
@@ -82,13 +78,13 @@ class AboutFragment : ListFragment() {
 			isSelected = true
 		}
 		binding.aboutVersion.apply {
-			text = getString(string.cf_about_version, context.applicationContext.versionName)
+			text = getString(R.string.cf_about_version, context.applicationContext.versionName)
 			isSelected = true
 		}
 		binding.aboutPackage.apply {
 			text = context.applicationContext.packageName
 			isSelected = true
-			visibility = if (resources.getBoolean(bool.in_test)) View.VISIBLE else View.GONE
+			visibility = if (resources.getBoolean(R.bool.in_test)) View.VISIBLE else View.GONE
 		}
 		binding.aboutIcon.apply {
 			setImageResource(context.applicationInfo.icon)
@@ -117,7 +113,7 @@ class AboutFragment : ListFragment() {
 private val Context.versionName: String
 	get() = try {
 		packageManager.getPackageInfo(packageName, 0).versionName
-	} catch (e: NameNotFoundException) {
+	} catch (e: PackageManager.NameNotFoundException) {
 		"error"
 	}
 
