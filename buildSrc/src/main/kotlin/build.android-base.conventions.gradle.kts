@@ -1,4 +1,5 @@
 import com.android.build.api.dsl.CommonExtension
+import com.android.build.api.dsl.LibraryDefaultConfig
 import com.android.build.api.dsl.LibraryExtension
 
 plugins {
@@ -21,6 +22,12 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 (project.extensions["android"] as CommonExtension<*, *, *, *>).apply android@{
 	defaultConfig {
 		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+		if (this@android is LibraryExtension) {
+			this@defaultConfig as LibraryDefaultConfig
+			// Enable multidex for all libraries.
+			// This will transfer to androidTest apps in those libraries, but not the app.
+			multiDexEnabled = true
+		}
 	}
 	lint {
 		warningsAsErrors = true
@@ -32,13 +39,13 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 		baseline = rootProject.file("config/lint/baseline ${cleanPath}.xml")
 	}
 	if (this@android is LibraryExtension) {
-		defaultConfig {
-			// Enable multidex for all libraries.
-			// This will transfer to androidTest apps in those libraries, but not the app.
-			multiDexEnabled = true
-		}
+		// Disable BuildConfig class generation for features and components, we only need it in :app.
 		buildFeatures.buildConfig = false
 	}
+}
+
+// Central Kotlin configuration.
+run {
 	val VERSION_KOTLIN: String by project.properties
 	configurations.all {
 		resolutionStrategy {
@@ -50,14 +57,17 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 }
 
 // TODEL https://github.com/TWiStErRob/net.twisterrob.gradle/issues/214
-afterEvaluate {
-	val lint = project.tasks.withType<com.android.build.gradle.internal.lint.LintModelWriterTask>()
-	val ex = tasks.named("extractMinificationRules")
-	lint.configureEach { dependsOn(ex) }
-	if (project.path == ":app") {
-		afterEvaluate { // double-jump is required because this gets applied before the build plugin.
-			val min = tasks.named("generateReleaseMinificationRules")
-			lint.configureEach { dependsOn(min) }
+run {
+	afterEvaluate {
+		val lintTasks = project.tasks
+			.withType<com.android.build.gradle.internal.lint.LintModelWriterTask>()
+		val ex = tasks.named("extractMinificationRules")
+		lintTasks.configureEach { dependsOn(ex) }
+		if (project.path == ":app") {
+			afterEvaluate { // double-jump is required because this gets applied before the build plugin.
+				val min = tasks.named("generateReleaseMinificationRules")
+				lintTasks.configureEach { dependsOn(min) }
+			}
 		}
 	}
 }
