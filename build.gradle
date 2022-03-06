@@ -59,8 +59,8 @@ allprojects { project ->
 	}
 }
 
-task clean(type: Delete) {
-	delete rootProject.buildDir
+tasks.register("clean", Delete) {
+	delete(rootProject.buildDir)
 }
 
 // https://developer.android.com/studio/test/command-line#multi-module-reports-instrumented-tests
