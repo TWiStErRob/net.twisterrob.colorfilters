@@ -64,6 +64,12 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 			}
 		}
 	}
+	packagingOptions {
+		resources { 
+			excludes.add("META-INF/LICENSE.md")
+			excludes.add("META-INF/LICENSE-notice.md")
+		}
+	}
 	testOptions {
 		unitTests.all {
 			it.useJUnitPlatform()
