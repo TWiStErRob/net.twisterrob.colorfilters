@@ -2,6 +2,6 @@ apply plugin: 'net.twisterrob.android-library'
 apply plugin: 'net.twisterrob.kotlin'
 
 dependencies {
-	api project(":feature:about")
-	implementation project(':test-base')
+	compileOnly project(":feature:about")
+	compileOnly project(':test-base')
 }
