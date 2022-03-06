@@ -1,7 +1,6 @@
 plugins {
 	id("net.twisterrob.android-library")
-	id("net.twisterrob.kotlin")
-	id("net.twisterrob.quality")
+	id("build.android-base.conventions")
 }
 
 dependencies {

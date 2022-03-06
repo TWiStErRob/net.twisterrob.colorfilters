@@ -47,16 +47,6 @@ allprojects { project ->
 			}
 		}
 	}
-
-	project.tasks.withType(JavaCompile) {
-		it.options.compilerArgs << '-Xlint:all' << '-Werror'
-	}
-
-	project.tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile) {
-		kotlinOptions {
-			allWarningsAsErrors = true
-		}
-	}
 }
 
 tasks.register("clean", Delete) {
