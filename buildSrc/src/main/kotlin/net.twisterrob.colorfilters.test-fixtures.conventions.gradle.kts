@@ -5,5 +5,5 @@ plugins {
 
 dependencies {
 	compileOnly(project(project.path.removeSuffix(":test-fixtures")))
-	compileOnly(project(":test-base"))
+	compileOnly(project(":component:test-base-ui"))
 }

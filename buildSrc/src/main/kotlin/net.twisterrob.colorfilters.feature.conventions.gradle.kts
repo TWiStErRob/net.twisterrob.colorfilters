@@ -6,6 +6,6 @@ plugins {
 dependencies {
 	implementation(project(":feature:base"))
 
-	androidTestImplementation(project(":test-base"))
+	androidTestImplementation(project(":component:test-base-ui"))
 	androidTestImplementation(project("${project.path}:test-fixtures"))
 }

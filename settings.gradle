@@ -10,8 +10,8 @@ include ':feature:matrix', ':feature:matrix:test-fixtures'
 include ':feature:palette', ':feature:palette:test-fixtures'
 include ':feature:resfont', ':feature:resfont:test-fixtures'
 
-include ':feature:base', 'test-base'
-project(":test-base").projectDir = file('feature/test-base')
+include ':feature:base'
+include(":component:test-base-ui")
 include(":component:test-base-unit")
 
 include ':feature:image'

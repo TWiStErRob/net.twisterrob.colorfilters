@@ -1,6 +1,6 @@
 <manifest
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	package="net.twisterrob.colorfilters.android.testbase"
+	package="net.twisterrob.colorfilters.android.test.ui"
 	>
 
 	<application>
