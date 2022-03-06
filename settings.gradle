@@ -12,6 +12,7 @@ include ':feature:resfont', ':feature:resfont:test-fixtures'
 
 include ':feature:base', 'test-base'
 project(":test-base").projectDir = file('feature/test-base')
+include(":component:test-base-unit")
 
 include ':feature:image'
 include ':feature:keyboard', ':feature:keyboard:contract'

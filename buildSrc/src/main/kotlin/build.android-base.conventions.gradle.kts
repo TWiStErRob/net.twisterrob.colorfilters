@@ -64,6 +64,14 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 			}
 		}
 	}
+	testOptions {
+		unitTests.all {
+			it.useJUnitPlatform()
+			it.testLogging {
+				events("passed", "skipped", "failed")
+			}
+		}
+	}
 	if (this@android is LibraryExtension) {
 		// Disable BuildConfig class generation for features and components, we only need it in :app.
 		buildFeatures.buildConfig = false
