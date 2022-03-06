@@ -1,7 +1,5 @@
 package net.twisterrob.colorfilters.android.about
 
-import android.annotation.SuppressLint
-import android.app.AlertDialog.Builder
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager.NameNotFoundException
@@ -12,15 +10,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.ImageView
 import android.widget.ListView
-import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.children
 import androidx.fragment.app.ListFragment
 import net.twisterrob.colorfilters.android.about.R.array
 import net.twisterrob.colorfilters.android.about.R.bool
 import net.twisterrob.colorfilters.android.about.R.layout
 import net.twisterrob.colorfilters.android.about.R.string
+import net.twisterrob.colorfilters.android.about.databinding.DialogAboutLicenceBinding
+import net.twisterrob.colorfilters.android.about.databinding.IncAboutAppBinding
+import net.twisterrob.colorfilters.android.about.databinding.IncAboutFooterBinding
+import net.twisterrob.colorfilters.android.about.databinding.IncAboutHeaderBinding
 
 class AboutFragment : ListFragment() {
 
@@ -39,63 +40,64 @@ class AboutFragment : ListFragment() {
 		}
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-		val context = requireContext()
 		super.onViewCreated(view, savedInstanceState)
-		listView.apply {
-			val header = layoutInflater.inflate(layout.inc_about_header, this, false)!!
-			addHeaderView(header, null, false)
-			val footer = layoutInflater.inflate(layout.inc_about_footer, this, false)!!
-			addFooterView(footer, null, false)
-		}
+
+		val header = IncAboutHeaderBinding.inflate(layoutInflater, listView, false)
+		listView.addHeaderView(header.root, null, false)
+		setupHeader(header.aboutAbout)
+
 		listAdapter = ArrayAdapter.createFromResource(
-			context,
+			listView.context,
 			array.cf_about_licences,
 			android.R.layout.simple_list_item_1
 		)
 
-		licenceContents = resources.getTextArray(array.cf_about_licences_content)
+		licenceContents = listView.resources.getTextArray(array.cf_about_licences_content)
 
-		// views inside ListView.headerView
-		view.findViewById<TextView>(R.id.about_feedback)!!.apply {
-			setOnClickListener {
-				val intent = Intent(Intent.ACTION_VIEW).apply {
-					data = Uri.parse("mailto:" + BuildConfig.EMAIL)
-					putExtra(Intent.EXTRA_EMAIL, arrayOf(BuildConfig.EMAIL))
-					val subject = getString(
-						string.cf_about_feedback_subject,
-						getString(context.applicationInfo.labelRes)
-					)
-					putExtra(Intent.EXTRA_SUBJECT, subject)
-					val body = getString(
-						string.cf_about_feedback_body,
-						context.packageName, context.applicationContext.versionName
-					)
-					putExtra(Intent.EXTRA_TEXT, body)
-				}
-				startActivity(intent)
+		val footer = IncAboutFooterBinding.inflate(layoutInflater, listView, false)
+		listView.addFooterView(footer.root, null, false)
+	}
+
+	private fun setupHeader(binding: IncAboutAppBinding) {
+		val context = binding.root.context
+		binding.aboutFeedback.setOnClickListener {
+			val intent = Intent(Intent.ACTION_VIEW).apply {
+				data = Uri.parse("mailto:" + BuildConfig.EMAIL)
+				putExtra(Intent.EXTRA_EMAIL, arrayOf(BuildConfig.EMAIL))
+				val subject = getString(
+					string.cf_about_feedback_subject,
+					getString(context.applicationInfo.labelRes)
+				)
+				putExtra(Intent.EXTRA_SUBJECT, subject)
+				val body = getString(
+					string.cf_about_feedback_body,
+					context.packageName, context.applicationContext.versionName
+				)
+				putExtra(Intent.EXTRA_TEXT, body)
 			}
+			startActivity(intent)
 		}
-		view.findViewById<TextView>(R.id.about_name)!!.apply {
+		binding.aboutName.apply {
 			setText(context.applicationInfo.labelRes)
 			isSelected = true
 		}
-		view.findViewById<TextView>(R.id.about_version)!!.apply {
+		binding.aboutVersion.apply {
 			text = getString(string.cf_about_version, context.applicationContext.versionName)
 			isSelected = true
 		}
-		view.findViewById<TextView>(R.id.about_package)!!.apply {
+		binding.aboutPackage.apply {
 			text = context.applicationContext.packageName
 			isSelected = true
 			visibility = if (resources.getBoolean(bool.in_test)) View.VISIBLE else View.GONE
 		}
-		view.findViewById<ImageView>(R.id.about_icon)!!.apply {
+		binding.aboutIcon.apply {
 			setImageResource(context.applicationInfo.icon)
 		}
 	}
 
 	override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {
 		val currentItem = l.adapter.getItem(position) as CharSequence
-		Builder(requireActivity()).apply {
+		AlertDialog.Builder(requireActivity()).apply {
 			setTitle(currentItem)
 			setPositiveButton(android.R.string.ok, null)
 			setView(createContents(licenceContents[id.toInt()]))
@@ -103,15 +105,13 @@ class AboutFragment : ListFragment() {
 		}.show()
 	}
 
-	private fun createContents(content: CharSequence): View {
-		@SuppressLint("InflateParams")
-		val view = layoutInflater.inflate(layout.dialog_about_licence, null)!!
-		view.findViewById<TextView>(android.R.id.message)!!.apply {
-			text = content
-			movementMethod = LinkMovementMethod.getInstance()
-		}
-		return view
-	}
+	private fun createContents(content: CharSequence): View =
+		DialogAboutLicenceBinding.inflate(layoutInflater)
+			.apply {
+				message.text = content
+				message.movementMethod = LinkMovementMethod.getInstance()
+			}
+			.root
 }
 
 private val Context.versionName: String

@@ -15,7 +15,10 @@
 		android:text="@string/cf_about_application_title"
 		/>
 
-	<include layout="@layout/inc_about_app" />
+	<include
+		android:id="@+id/about_about"
+		layout="@layout/inc_about_app"
+		/>
 
 	<TextView
 		style="?android:listSeparatorTextViewStyle"
