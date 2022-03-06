@@ -10,13 +10,18 @@ plugins {
 	id("net.twisterrob.quality")
 }
 
+val javaVersion = JavaVersion.VERSION_1_8
+
 tasks.withType<JavaCompile> {
+	sourceCompatibility = javaVersion.toString()
+	targetCompatibility = javaVersion.toString()
 	options.compilerArgs = options.compilerArgs + "-Xlint:all"
 	options.compilerArgs = options.compilerArgs + "-Werror"
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 	kotlinOptions {
+		jvmTarget = javaVersion.toString()
 		allWarningsAsErrors = true
 	}
 }
