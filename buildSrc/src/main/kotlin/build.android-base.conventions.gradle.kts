@@ -8,6 +8,7 @@ import net.twisterrob.gradle.android.androidComponents
 plugins {
 	id("net.twisterrob.kotlin")
 	id("net.twisterrob.quality")
+	id("io.gitlab.arturbosch.detekt")
 }
 
 val javaVersion = JavaVersion.VERSION_1_8

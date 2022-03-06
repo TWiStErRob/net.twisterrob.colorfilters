@@ -3,6 +3,7 @@ plugins {
 	id("net.twisterrob.quality")
 	// https://developer.android.com/studio/test/command-line#multi-module-reports-instrumented-tests
 	id("android-reporting")
+	id("io.gitlab.arturbosch.detekt")
 }
 
 // TODEL https://issuetracker.google.com/issues/222730176

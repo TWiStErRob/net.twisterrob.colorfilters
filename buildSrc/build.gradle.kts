@@ -15,6 +15,7 @@ val props = Properties().apply {
 }
 
 val VERSION_KOTLIN: String by props
+val VERSION_DETEKT: String by props
 val VERSION_AGP: String by props
 val VERSION_PLUGIN_QUALITY: String by props
 val VERSION_PLUGIN_ANDROID: String by props
@@ -24,6 +25,7 @@ val VERSION_JUNIT: String by props
 dependencies {
 	compileOnly(gradleApi())
 	implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:${VERSION_KOTLIN}")
+	implementation("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${VERSION_DETEKT}")
 
 	configurations.all { resolutionStrategy.cacheChangingModulesFor(0, TimeUnit.SECONDS) /* -SNAPSHOT */ }
 	implementation("com.android.tools.build:gradle:${VERSION_AGP}")
