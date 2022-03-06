@@ -36,6 +36,7 @@ class BitmapKeeper : Fragment() {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
+		@Suppress("DEPRECATION") // TODO group: ViewModel
 		retainInstance = true
 	}
 

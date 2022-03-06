@@ -140,6 +140,7 @@ class MainActivity : AppCompatActivity(), ColorFilterFragment.Listener, ImageFra
 
 			R.id.action_settings -> {
 				// no actual result, just want a notification of return from preferences
+				@Suppress("DEPRECATION") // TODO group: ActivityResultContract
 				startActivityForResult(
 					Intent(applicationContext, PreferencesActivity::class.java),
 					Activity.RESULT_FIRST_USER
@@ -210,6 +211,7 @@ class MainActivity : AppCompatActivity(), ColorFilterFragment.Listener, ImageFra
 			}
 			return
 		}
+		@Suppress("DEPRECATION") // TODO group: ActivityResultContract
 		super.onActivityResult(requestCode, resultCode, data)
 	}
 

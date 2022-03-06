@@ -122,6 +122,7 @@ class ImageFragment : Fragment() {
 		}.apply()
 	}
 
+	@Suppress("SameParameterValue")
 	private fun checkPermission(
 		permission: String,
 		requestCode: Int,
@@ -134,6 +135,7 @@ class ImageFragment : Fragment() {
 			if (rationale != null && shouldShowRequestPermissionRationale(permission)) {
 				rationale()
 			} else {
+				@Suppress("DEPRECATION") // TODO group: ActivityResultContract
 				requestPermissions(arrayOf(permission), requestCode)
 			}
 			return false
@@ -172,7 +174,9 @@ class ImageFragment : Fragment() {
 				} else {
 					startLoadImage(false)
 				}
-			else -> super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+			else ->
+				@Suppress("DEPRECATION") // TODO group: ActivityResultContract
+				super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 		}
 	}
 
@@ -199,6 +203,7 @@ class ImageFragment : Fragment() {
 			putExtra(Intent.EXTRA_INITIAL_INTENTS, camIntents.toTypedArray<Parcelable>())
 		}
 
+		@Suppress("DEPRECATION") // TODO group: ActivityResultContract
 		startActivityForResult(chooserIntent, REQUEST_CODE_GET_PICTURE)
 	}
 
@@ -220,6 +225,7 @@ class ImageFragment : Fragment() {
 				}
 			}
 		}
+		@Suppress("DEPRECATION") // TODO group: ActivityResultContract
 		super.onActivityResult(requestCode, resultCode, data)
 	}
 
