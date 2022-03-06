@@ -3,6 +3,9 @@ import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.LibraryDefaultConfig
 import com.android.build.api.dsl.LibraryExtension
 import com.android.build.gradle.AppExtension
+import io.gitlab.arturbosch.detekt.Detekt
+import io.gitlab.arturbosch.detekt.extensions.DetektExtension
+import io.gitlab.arturbosch.detekt.report.ReportMergeTask
 import net.twisterrob.gradle.android.androidComponents
 
 plugins {
@@ -89,4 +92,39 @@ run {
 			}
 		}
 	}
+}
+
+(project.extensions.getByName<DetektExtension>("detekt")).apply {
+	ignoreFailures = true
+	buildUponDefaultConfig = true
+	allRules = true
+	config = rootProject.files("config/detekt/detekt.yml")
+	baseline = rootProject.file("config/detekt/detekt-baseline-${project.name}.xml")
+	basePath = rootProject.projectDir.absolutePath
+
+	parallel = true
+
+	tasks.withType<Detekt>().configureEach {
+		// Target version of the generated JVM bytecode. It is used for type resolution.
+		jvmTarget = javaVersion.toString()
+		reports {
+			html.required.set(true) // human
+			xml.required.set(true) // checkstyle
+			txt.required.set(true) // console
+			// https://sarifweb.azurewebsites.net
+			sarif.required.set(true) // Github Code Scanning
+		}
+	}
+}
+
+val detektReportMergeSarif = rootProject.tasks.named<ReportMergeTask>("detektReportMergeSarif")
+tasks.withType<Detekt> {
+	finalizedBy(detektReportMergeSarif)
+	detektReportMergeSarif.configure { input.from(this@withType.sarifReportFile) }
+}
+
+val detektReportMergeXml = rootProject.tasks.named<ReportMergeTask>("detektReportMergeXml")
+tasks.withType<Detekt> {
+	finalizedBy(detektReportMergeXml)
+	detektReportMergeXml.configure { input.from(this@withType.xmlReportFile) }
 }

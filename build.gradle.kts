@@ -2,8 +2,15 @@ plugins {
 	id("net.twisterrob.root")
 	id("net.twisterrob.quality")
 	// https://developer.android.com/studio/test/command-line#multi-module-reports-instrumented-tests
-	id("android-reporting")
 	id("io.gitlab.arturbosch.detekt")
+}
+
+// Register root tasks before evaluating subprojects.
+tasks.register<io.gitlab.arturbosch.detekt.report.ReportMergeTask>("detektReportMergeSarif") {
+	output.set(rootProject.buildDir.resolve("reports/detekt/merge.sarif"))
+}
+tasks.register<io.gitlab.arturbosch.detekt.report.ReportMergeTask>("detektReportMergeXml") {
+	output.set(rootProject.buildDir.resolve("reports/detekt/merge.xml"))
 }
 
 // TODEL https://issuetracker.google.com/issues/222730176
@@ -11,6 +18,7 @@ plugins {
 // com.android.build.gradle.internal.plugins.ReportingPlugin reads the subprojects in afterEvaluate,
 // so this will run at the right time for it to observe evaluated children.
 subprojects.forEach { evaluationDependsOn(it.path) } // evaluationDependsOnSubprojects()
+apply(plugin = "android-reporting")
 
 tasks.register<Delete>("clean") {
 	delete(rootProject.buildDir)
