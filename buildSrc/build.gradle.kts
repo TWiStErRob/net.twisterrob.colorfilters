@@ -36,3 +36,9 @@ dependencies {
 	testImplementation("org.mockito:mockito-core:${VERSION_MOCKITO}")
 	testImplementation(gradleApi())
 }
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+	kotlinOptions {
+		allWarningsAsErrors = true
+	}
+}
