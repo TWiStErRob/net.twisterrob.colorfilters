@@ -9,7 +9,8 @@ import io.gitlab.arturbosch.detekt.report.ReportMergeTask
 import net.twisterrob.gradle.android.androidComponents
 
 plugins {
-	id("net.twisterrob.kotlin")
+	id("kotlin-android")
+	id("kotlin-kapt")
 	id("net.twisterrob.quality")
 	id("io.gitlab.arturbosch.detekt")
 }
@@ -71,9 +72,6 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 		}
 	}
 	testOptions {
-		configurations.all {
-			exclude(group = "org.jetbrains.kotlin", module = "kotlin-test")
-		}
 		unitTests.all {
 			it.useJUnitPlatform {
 			}
@@ -92,7 +90,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 run {
 	val VERSION_KOTLIN: String by project.properties
 	dependencies {
-		implementation(platform("org.jetbrains.kotlin:kotlin-bom:${VERSION_KOTLIN}"))
+		add("implementation", platform("org.jetbrains.kotlin:kotlin-bom:${VERSION_KOTLIN}"))
 	}
 }
 
