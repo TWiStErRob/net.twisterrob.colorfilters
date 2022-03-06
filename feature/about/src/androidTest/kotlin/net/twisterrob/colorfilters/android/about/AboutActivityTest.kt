@@ -16,7 +16,7 @@ class AboutActivityTest {
 	@Suppress("DEPRECATION")
 	@get:Rule val activityRule = androidx.test.rule.ActivityTestRule(AboutActivity::class.java)
 
-	@Test fun opensLightingScreen() {
+	@Test fun opensAboutScreen() {
 		val about = AboutActivityActor()
 
 		about.assertDisplayed()

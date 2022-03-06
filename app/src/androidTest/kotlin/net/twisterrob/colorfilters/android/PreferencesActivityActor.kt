@@ -50,7 +50,8 @@ class PreferencesActivityActor {
 	}
 
 	fun openAbout(): AboutActivityActor {
-		onView(withText(R.string.cf_about_title)).perform(click())
+		onView(withText(net.twisterrob.colorfilters.android.about.R.string.cf_about_title))
+			.perform(click())
 		return AboutActivityActor()
 	}
 }

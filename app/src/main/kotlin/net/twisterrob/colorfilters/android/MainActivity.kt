@@ -157,7 +157,8 @@ class MainActivity : AppCompatActivity(), ColorFilterFragment.Listener, ImageFra
 					type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(logoZip.extension)
 					putExtra(Intent.EXTRA_STREAM, logoUri)
 				}
-				startActivity(Intent.createChooser(intent, getText(R.string.cf_share_picker_title)))
+				val title = getText(net.twisterrob.colorfilters.base.R.string.cf_share_picker_title)
+				startActivity(Intent.createChooser(intent, title))
 
 				images.load(ZipFile(logoZip).let { zip ->
 					val biggest = zip

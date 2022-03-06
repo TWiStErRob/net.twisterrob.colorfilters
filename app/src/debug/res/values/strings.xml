@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">Color Filters (DEBUG)</string>
+
+	<string name="app_name">Color Filters in Android SDK (DEBUG)</string>
+	<string name="cf_main_title">Color Filters (DEBUG)</string>
+
 </resources>

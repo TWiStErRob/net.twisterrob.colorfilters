@@ -10,4 +10,5 @@ dependencies {
 	implementation "androidx.palette:palette-ktx:1.0.0"
 
 	androidTestImplementation project(':test-base')
+	androidTestImplementation project(':feature:palette:test-fixtures')
 }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">Color Filters</string>
+	<string name="app_name">Color Filters in Android SDK</string>
 
+	<string name="cf_main_title">Color Filters</string>
 	<string name="cf_lighting_title">Lighting</string>
 	<string name="cf_porterduff_title">Porter/Duff</string>
 	<string name="cf_matrix_title">Color Matrix</string>

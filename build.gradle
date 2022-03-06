@@ -26,21 +26,25 @@ allprojects { project ->
 					// This will transfer to androidTest apps in those libraries, but not the app.
 					multiDexEnabled = true
 				}
-				libraryVariants.all { variant ->
-					if (project.path == ':feature:about') {
-						return
-					}
-					// TODEL replace with https://issuetracker.google.com/issues/72050365 once released.
-					variant.generateBuildConfigProvider.configure { task ->
-						task.enabled = false
-					}
-				}
+				buildFeatures.buildConfig = project.path == ':feature:about'
 			}
 			configurations.all {
 				it.resolutionStrategy {
 					force("org.jetbrains.kotlin:kotlin-stdlib:${VERSION_KOTLIN}")
 					force("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${VERSION_KOTLIN}")
 					exclude group: "androidx.legacy"
+				}
+			}
+		}
+		// TODEL https://github.com/TWiStErRob/net.twisterrob.gradle/issues/214
+		afterEvaluate {
+			def lintTasks = project.tasks.withType(com.android.build.gradle.internal.lint.LintModelWriterTask)
+			def ex = tasks.named("extractMinificationRules")
+			lintTasks.configureEach { it.dependsOn(ex) }
+			if (project.path == ':app') {
+				afterEvaluate { // double-jump is required because this gets applied before the build plugin.
+					def min = tasks.named("generateReleaseMinificationRules")
+					lintTasks.configureEach { it.dependsOn(min) }
 				}
 			}
 		}
@@ -60,3 +64,9 @@ allprojects { project ->
 task clean(type: Delete) {
 	delete rootProject.buildDir
 }
+
+// https://developer.android.com/studio/test/command-line#multi-module-reports-instrumented-tests
+// Needs to be last, because it forces evaluation of projects (evaluationDependsOnChildren), and that breaks other plugins.
+// TODEL https://issuetracker.google.com/issues/222730176
+subprojects.each { evaluationDependsOn(it.path) } // evaluationDependsOnSubprojects()
+apply plugin: 'android-reporting'

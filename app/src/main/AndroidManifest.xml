@@ -14,7 +14,8 @@
 
 		<activity
 			android:name=".MainActivity"
-			android:label="@string/app_name"
+			android:label="@string/cf_main_title"
+			android:exported="true"
 			>
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
