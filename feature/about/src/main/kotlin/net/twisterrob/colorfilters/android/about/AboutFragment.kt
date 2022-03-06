@@ -67,7 +67,7 @@ class AboutFragment : ListFragment() {
 				putExtra(Intent.EXTRA_SUBJECT, subject)
 				val body = getString(
 					R.string.cf_about_feedback_body,
-					context.packageName, context.applicationContext.versionName
+					context.applicationContext.packageName, context.applicationContext.versionName
 				)
 				putExtra(Intent.EXTRA_TEXT, body)
 			}
