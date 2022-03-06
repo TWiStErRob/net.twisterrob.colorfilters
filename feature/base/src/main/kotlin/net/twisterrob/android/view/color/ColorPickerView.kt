@@ -2,6 +2,7 @@ package net.twisterrob.android.view.color
 
 import android.annotation.TargetApi
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.PointF
 import android.os.Build
@@ -12,6 +13,8 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
 import androidx.annotation.ColorInt
+import androidx.annotation.Dimension
+import androidx.annotation.Px
 import androidx.appcompat.widget.AppCompatImageView
 import net.twisterrob.android.view.color.swatches.APIDemoSwatch
 import net.twisterrob.android.view.color.swatches.PixelAbsoluteSwatch
@@ -109,15 +112,15 @@ open class ColorPickerView : AppCompatImageView {
 	 */
 	override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-		val RATIO = 1f / 1f
+		val ratio = 1f / 1f
 
 		var width = measuredWidth
 		var height = measuredHeight
 		val widthWithoutPadding = width - paddingLeft - paddingRight
 		val heightWithoutPadding = height - paddingTop - paddingBottom
 
-		val maxWidth = (heightWithoutPadding * RATIO).toInt()
-		val maxHeight = (widthWithoutPadding / RATIO).toInt()
+		val maxWidth = (heightWithoutPadding * ratio).toInt()
+		val maxHeight = (widthWithoutPadding / ratio).toInt()
 
 		if (maxWidth < maxHeight) {
 			width = maxWidth + paddingLeft + paddingRight
@@ -153,6 +156,8 @@ open class ColorPickerView : AppCompatImageView {
 
 		private val longTapStart = PointF()
 
+		// Shortcuts and many different events, so it's ought to be complex.
+		@Suppress("ReturnCount", "LongMethod", "ComplexMethod")
 		override fun onTouch(v: View, event: MotionEvent): Boolean {
 			if (drawable is SwatchChooser) {
 				return (drawable as SwatchChooser).onTouch(v, event)
@@ -221,6 +226,7 @@ open class ColorPickerView : AppCompatImageView {
 			return unhandled(event)
 		}
 
+		@Suppress("FunctionOnlyReturningConstant") // Consistent with [handled].
 		private fun unhandled(@Suppress("UNUSED_PARAMETER") event: MotionEvent) = false
 
 		private fun handled(event: MotionEvent) = true.also {
@@ -276,7 +282,11 @@ open class ColorPickerView : AppCompatImageView {
 				this@ColorPickerView.swatch = swatch
 			}
 		}
-		chooser.setTileMargin(TypedValue.applyDimension(COMPLEX_UNIT_DIP, 4f, resources.displayMetrics).toInt())
+		chooser.setTileMargin(resources.dpToPx(@Suppress("MagicNumber") 4f))
 		setImageDrawable(chooser)
 	}
 }
+
+@Px
+private fun Resources.dpToPx(@Dimension(unit = Dimension.DP) dp: Float): Int =
+	TypedValue.applyDimension(COMPLEX_UNIT_DIP, dp, displayMetrics).toInt()

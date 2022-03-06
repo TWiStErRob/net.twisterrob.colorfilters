@@ -8,6 +8,8 @@ import net.twisterrob.android.view.listeners.OnSeekBarChangeAdapter
 import net.twisterrob.colorfilters.android.formatRoot
 
 private const val NO_SCALE: Float = 1f
+private const val SCALE_MIN: Float = -1f
+private const val SCALE_MAX: Float = 2f
 private const val PREF_SCALE_R = "Scale.scaleR"
 private const val PREF_SCALE_G = "Scale.scaleG"
 private const val PREF_SCALE_B = "Scale.scaleB"
@@ -78,6 +80,7 @@ internal class ScaleComponent(
 		val gScale = getValue(COMP_G)
 		val bScale = getValue(COMP_B)
 		val aScale = getValue(COMP_A)
+		@Suppress("ComplexCondition")
 		if (rScale != NO_SCALE || gScale != NO_SCALE || bScale != NO_SCALE || aScale != NO_SCALE) {
 			sb.append("\ntemp.setScale(")
 				.append(getDisplay(rScale)).append(", ")
@@ -90,13 +93,18 @@ internal class ScaleComponent(
 		return false
 	}
 
-	private fun getDisplay(value: Float): String = "%.2f".formatRoot(value)
+	private fun getDisplay(value: Float): String =
+		"%.2f".formatRoot(value)
 
-	private fun getValue(component: Int): Float = get(scaleRGBA[component], 3f, -1f)
+	private fun getValue(component: Int): Float =
+		get(scaleRGBA[component], SCALE_MAX - SCALE_MIN, SCALE_MIN)
 
-	private fun getValue(scaleBar: SeekBar): Float = get(scaleBar, 3f, -1f)
+	private fun getValue(scaleBar: SeekBar): Float =
+		get(scaleBar, SCALE_MAX - SCALE_MIN, SCALE_MIN)
 
-	private fun setValue(component: Int, value: Float) = set(scaleRGBA[component], 3f, -1f, value)
+	private fun setValue(component: Int, value: Float) =
+		set(scaleRGBA[component], SCALE_MAX - SCALE_MIN, SCALE_MIN, value)
 
-	private fun setValue(scaleBar: SeekBar, value: Float) = set(scaleBar, 3f, -1f, value)
+	private fun setValue(scaleBar: SeekBar, value: Float) =
+		set(scaleBar, SCALE_MAX - SCALE_MIN, SCALE_MIN, value)
 }

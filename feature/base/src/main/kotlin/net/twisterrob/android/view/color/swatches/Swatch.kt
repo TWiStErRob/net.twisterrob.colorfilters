@@ -23,11 +23,17 @@ abstract class Swatch : Drawable() {
 
 	open fun getAreaCode(x: Float, y: Float): AreaCode = AREA_DEFAULT
 
-	open fun setCurrentArea(areaCode: AreaCode) {}
+	open fun setCurrentArea(areaCode: AreaCode) {
+		// Track area code, most swatches have only one area. Optional override.
+	}
 
-	override fun setAlpha(@IntRange(from = 0, to = 255) alpha: Int) {}
+	override fun setAlpha(@IntRange(from = 0, to = 255) alpha: Int) {
+		// Default implementation, alpha is not supported, will mostly render custom draw.
+	}
 
-	override fun setColorFilter(cf: ColorFilter?) {}
+	override fun setColorFilter(cf: ColorFilter?) {
+		// Default implementation, color filters are not supported, will mostly render custom draw.
+	}
 
 	override fun getOpacity(): Int = PixelFormat.UNKNOWN
 

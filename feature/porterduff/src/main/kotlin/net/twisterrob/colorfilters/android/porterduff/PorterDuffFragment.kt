@@ -59,7 +59,9 @@ private val MODES = (mapOf(
 	R.id.mode_overlay to PorterDuff.Mode.OVERLAY
 ) else emptyMap()).toSortedMap()
 
-private val DEFAULT_COLOR = Color.argb(0xff, 0x00, 0x00, 0x00)
+@Suppress("MagicNumber")
+@ColorInt
+private val DEFAULT_COLOR: Int = Color.argb(0xff, 0x00, 0x00, 0x00)
 
 @SuppressLint("ObsoleteSdkInt")
 @TargetApi(VERSION_CODES.HONEYCOMB)
@@ -117,7 +119,7 @@ class PorterDuffFragment : ColorFilterFragment() {
 					val color = "#${s}".toColorInt()
 					updateColor(color, UpdateOrigin.Editor)
 					editor.error = null
-				} catch (ex: RuntimeException) {
+				} catch (@Suppress("TooGenericExceptionCaught") ex: RuntimeException) {
 					//Log.w(TAG, "Cannot parse color: " + s, ex);
 					editor.error = ex.message + " " + s
 				}
@@ -150,11 +152,11 @@ class PorterDuffFragment : ColorFilterFragment() {
 			view.findViewById<View>(R.id.mode_add).isEnabled = false
 			view.findViewById<View>(R.id.mode_overlay).isEnabled = false
 		}
-		modes.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { _, isChecked ->
+		modes.setOnCheckedChangeListener { _, isChecked ->
 			if (isChecked) {
 				updateFilter()
 			}
-		})
+		}
 	}
 
 	private fun updateColor(@ColorInt color: Int, origin: UpdateOrigin?) {

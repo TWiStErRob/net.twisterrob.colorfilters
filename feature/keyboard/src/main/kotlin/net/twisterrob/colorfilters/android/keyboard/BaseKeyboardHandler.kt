@@ -78,8 +78,9 @@ abstract class BaseKeyboardHandler(
 				val setShowSoftInputOnFocus =
 					editText::class.java.getMethod("setShowSoftInputOnFocus", Boolean::class.java)
 				setShowSoftInputOnFocus(editText, false)
-			} catch (ex: Exception) {
-				Log.w("HACK", "Could turn of input focus for EditText: $editText", ex)
+			} catch (@Suppress("TooGenericExceptionCaught") ex: Exception) {
+				// It's a hack, anything can go wrong.
+				Log.w("HACK", "Could not turn off input focus for EditText: $editText", ex)
 			}
 		}
 		editText.isFocusable = true
@@ -150,6 +151,7 @@ abstract class BaseKeyboardHandler(
 			return findView() as? EditText
 		}
 
+		@Suppress("ComplexMethod") // Curious if this can be improved, but not now.
 		override fun onKey(primaryCode: Int, keyCodes: IntArray) {
 			val editor = findEdit()
 			if (editor == null) {
@@ -222,9 +224,20 @@ abstract class BaseKeyboardHandler(
 			editor.setSelection(start, end)
 		}
 
-		override fun swipeDown() {}
-		override fun swipeLeft() {}
-		override fun swipeRight() {}
-		override fun swipeUp() {}
+		override fun swipeDown() {
+			// Swiping gestures are not handled on these keyboards.
+		}
+
+		override fun swipeLeft() {
+			// Swiping gestures are not handled on these keyboards.
+		}
+
+		override fun swipeRight() {
+			// Swiping gestures are not handled on these keyboards.
+		}
+
+		override fun swipeUp() {
+			// Swiping gestures are not handled on these keyboards.
+		}
 	}
 }

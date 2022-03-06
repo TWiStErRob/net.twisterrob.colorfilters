@@ -14,10 +14,11 @@ class StepBitmapDrawer(
 	pixel: PixelColor
 ) : BitmapDrawer(bitmap, w, h, pixel) {
 
+	@Suppress("NestedBlockDepth") // Needs a rethink.
 	override fun fillPixels() {
 		val w = this.w
 		val h = this.h
-		val iterations = 3
+		val iterations = @Suppress("MagicNumber") 3
 		val iterationStep = 1 // must be relative prime to iterations (e.g.: 5,3)
 		for (stepY in 0 until iterations) {
 			for (stepX in 0 until iterations) {

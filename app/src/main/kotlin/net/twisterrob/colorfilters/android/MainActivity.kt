@@ -16,6 +16,7 @@ import android.view.MenuItem
 import android.view.View
 import android.webkit.MimeTypeMap
 import android.widget.ArrayAdapter
+import androidx.annotation.IntRange
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -103,7 +104,8 @@ class MainActivity : AppCompatActivity(), ColorFilterFragment.Listener, ImageFra
 					}
 				}
 				return@OnNavigationListener true
-			} catch (ex: RuntimeException) {
+			} catch (@Suppress("TooGenericExceptionCaught", "SwallowedException") ex: RuntimeException) {
+				// TODO don't know what can go wrong here, but if it happens don't do anything.
 				return@OnNavigationListener false
 			}
 		})
@@ -130,6 +132,7 @@ class MainActivity : AppCompatActivity(), ColorFilterFragment.Listener, ImageFra
 		return true
 	}
 
+	@Suppress("ReturnCount") // This is how onOptionsItemSelected is structured.
 	@SuppressLint("LogConditional")
 	override fun onOptionsItemSelected(item: MenuItem): Boolean {
 		when (item.itemId) {
@@ -179,20 +182,24 @@ class MainActivity : AppCompatActivity(), ColorFilterFragment.Listener, ImageFra
 				return true
 			}
 
-			else -> return super.onOptionsItemSelected(item)
+			else -> {
+				return super.onOptionsItemSelected(item)
+			}
 		}
 	}
 
 	private fun updateImagesVisibility() {
-		supportFragmentManager.beginTransaction().apply {
-			val fragment = currentFragment
-			if (imageToggleItem.isChecked && fragment != null && fragment.needsImages) {
-				show(images)
-			} else {
-				hide(images)
+		supportFragmentManager
+			.beginTransaction()
+			.run {
+				val fragment = currentFragment
+				if (imageToggleItem.isChecked && fragment != null && fragment.needsImages) {
+					show(images)
+				} else {
+					hide(images)
+				}
 			}
-			commitAllowingStateLoss()
-		}
+			.commitAllowingStateLoss()
 	}
 
 	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -223,6 +230,7 @@ class MainActivity : AppCompatActivity(), ColorFilterFragment.Listener, ImageFra
 		super.onBackPressed()
 	}
 
+	@Suppress("MagicNumber")
 	private fun createFragment(position: Int): ColorFilterFragment =
 		when (position) {
 			0 -> LightingFragment()
@@ -230,9 +238,10 @@ class MainActivity : AppCompatActivity(), ColorFilterFragment.Listener, ImageFra
 			2 -> MatrixFragment()
 			3 -> PaletteFragment()
 			4 -> ResourceFontFragment()
-			else -> throw IllegalStateException("Unknown position $position")
+			else -> error("Unknown position $position")
 		}
 
+	@Suppress("MagicNumber")
 	private fun getPosition(fragment: Fragment?): Int =
 		when (fragment) {
 			is LightingFragment -> 0
@@ -241,7 +250,7 @@ class MainActivity : AppCompatActivity(), ColorFilterFragment.Listener, ImageFra
 			is PaletteFragment -> 3
 			is ResourceFontFragment -> 4
 			null -> -1
-			else -> throw IllegalStateException("Unknown fragment $fragment")
+			else -> error("Unknown fragment $fragment")
 		}
 
 	override fun colorFilterChanged(colorFilter: ColorFilter?) {
@@ -260,7 +269,7 @@ class MainActivity : AppCompatActivity(), ColorFilterFragment.Listener, ImageFra
 		val file = App.getShareableCachePath(this, "temp.jpg")
 		file.outputStream().use {
 			val shareContent = images.renderPreview()
-			val saved = shareContent.compress(CompressFormat.JPEG, 100, it)
+			val saved = shareContent.compress(CompressFormat.JPEG, MAX_QUALITY, it)
 			check(saved) {
 				error("Couldn't save generated shared content to ${file.absolutePath}")
 			}
@@ -281,5 +290,8 @@ class MainActivity : AppCompatActivity(), ColorFilterFragment.Listener, ImageFra
 		private const val PREF_COLORFILTER_SELECTED = "ColorFilter.selected"
 		private const val PREF_COLORFILTER_PREVIEW = "ColorFilter.images"
 		private const val COLORFILTER_DEFAULT = 0
+
+		@IntRange(from = 0, to = 100)
+		private const val MAX_QUALITY: Int = 100
 	}
 }
