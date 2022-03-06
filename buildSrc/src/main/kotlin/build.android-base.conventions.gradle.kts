@@ -65,14 +65,18 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 		}
 	}
 	packagingOptions {
-		resources { 
+		resources {
 			excludes.add("META-INF/LICENSE.md")
 			excludes.add("META-INF/LICENSE-notice.md")
 		}
 	}
 	testOptions {
+		configurations.all {
+			exclude(group = "org.jetbrains.kotlin", module = "kotlin-test")
+		}
 		unitTests.all {
-			it.useJUnitPlatform()
+			it.useJUnitPlatform {
+			}
 			it.testLogging {
 				events("passed", "skipped", "failed")
 			}
