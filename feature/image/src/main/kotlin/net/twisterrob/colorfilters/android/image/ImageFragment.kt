@@ -88,8 +88,8 @@ class ImageFragment : Fragment() {
 				return
 			}
 		} else {
-			val originalLoaded = BitmapKeeper.into(requireFragmentManager(), original, loadListener)
-			val previewLoaded = BitmapKeeper.into(requireFragmentManager(), preview, noListener)
+			val originalLoaded = BitmapKeeper.into(parentFragmentManager, original, loadListener)
+			val previewLoaded = BitmapKeeper.into(parentFragmentManager, preview, noListener)
 			if (originalLoaded && previewLoaded) {
 				return
 			}
@@ -112,7 +112,7 @@ class ImageFragment : Fragment() {
 
 	override fun onStop() {
 		super.onStop()
-		val uri = BitmapKeeper.getUri(requireFragmentManager())
+		val uri = BitmapKeeper.getUri(parentFragmentManager)
 		prefs.edit().apply {
 			if (uri != null) {
 				putString(PREF_IMAGE_URL, uri.toString())
@@ -224,22 +224,22 @@ class ImageFragment : Fragment() {
 	}
 
 	private fun loadDefaults() {
-		BitmapKeeper.clear(requireFragmentManager())
+		BitmapKeeper.clear(parentFragmentManager)
 		original.setImageResource(R.drawable.default_image)
 		preview.setImageResource(R.drawable.default_image)
 		loadListener.loadComplete()
 	}
 
 	fun load(uri: Uri) {
-		BitmapKeeper.save(requireFragmentManager(), uri)
-		BitmapKeeper.into(requireFragmentManager(), original, loadListener)
-		BitmapKeeper.into(requireFragmentManager(), preview, noListener)
+		BitmapKeeper.save(parentFragmentManager, uri)
+		BitmapKeeper.into(parentFragmentManager, original, loadListener)
+		BitmapKeeper.into(parentFragmentManager, preview, noListener)
 	}
 
 	fun load(bitmap: Bitmap) {
-		BitmapKeeper.save(requireFragmentManager(), bitmap)
-		BitmapKeeper.into(requireFragmentManager(), original, loadListener)
-		BitmapKeeper.into(requireFragmentManager(), preview, noListener)
+		BitmapKeeper.save(parentFragmentManager, bitmap)
+		BitmapKeeper.into(parentFragmentManager, original, loadListener)
+		BitmapKeeper.into(parentFragmentManager, preview, noListener)
 	}
 
 	private val prefs: SharedPreferences
