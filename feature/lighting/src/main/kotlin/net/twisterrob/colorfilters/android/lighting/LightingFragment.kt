@@ -113,8 +113,8 @@ class LightingFragment : ColorFilterFragment() {
 	}
 
 	override fun onDestroyView() {
-		keyboard.unregisterEditText(view!!.findViewById(R.id.mulEditor))
-		keyboard.unregisterEditText(view!!.findViewById(R.id.addEditor))
+		keyboard.unregisterEditText(requireView().findViewById(R.id.mulEditor))
+		keyboard.unregisterEditText(requireView().findViewById(R.id.addEditor))
 		super.onDestroyView()
 	}
 
