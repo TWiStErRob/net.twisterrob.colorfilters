@@ -32,6 +32,10 @@
 		     this is reported on :app, even though the resource is in :resfont; and it's not reported there. -->
 		<!-- Accessed dynamically by ResourceFontFragment.createRow -->
 		<ignore regexp="R\.string\.cf_resfont_.*_code" />
+
+		<!-- These are all used by :app's KeyboardView. -->
+		<ignore path="**/res/drawable/keyboard_key.xml" />
+		<ignore path="**/res/drawable-*/keyboard_key_*.9.png" />
 	</issue>
 
 	<issue id="IconMissingDensityFolder">
