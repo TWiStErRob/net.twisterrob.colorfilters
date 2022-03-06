@@ -1,8 +1,8 @@
-apply plugin: 'net.twisterrob.android-library'
-apply plugin: 'net.twisterrob.kotlin'
+plugins {
+	id("net.twisterrob.colorfilters.component.conventions")
+}
 
 dependencies {
-
 	implementation project(':feature:base')
 
 	api("androidx.multidex:multidex:2.0.0")

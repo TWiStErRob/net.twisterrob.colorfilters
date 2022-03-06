@@ -8,7 +8,7 @@ include ':feature:lighting', ':feature:lighting:test-fixtures'
 include ':feature:porterduff', ':feature:porterduff:test-fixtures'
 include ':feature:matrix', ':feature:matrix:test-fixtures'
 include ':feature:palette', ':feature:palette:test-fixtures'
-include ':feature:resfont'
+include ':feature:resfont', ':feature:resfont:test-fixtures'
 
 include ':feature:base', 'test-base'
 project(":test-base").projectDir = file('feature/test-base')
