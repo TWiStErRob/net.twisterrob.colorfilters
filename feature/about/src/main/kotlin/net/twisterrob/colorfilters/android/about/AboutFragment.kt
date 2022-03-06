@@ -93,12 +93,11 @@ class AboutFragment : ListFragment() {
 
 	override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {
 		val currentItem = l.adapter.getItem(position) as CharSequence
-		AlertDialog.Builder(requireActivity()).apply {
-			setTitle(currentItem)
-			setPositiveButton(android.R.string.ok, null)
-			setView(createContents(licenceContents[id.toInt()]))
-			create()
-		}.show()
+		AlertDialog.Builder(requireActivity())
+			.setTitle(currentItem)
+			.setPositiveButton(android.R.string.ok, null)
+			.setView(createContents(licenceContents[id.toInt()]))
+			.show()
 	}
 
 	private fun createContents(content: CharSequence): View =

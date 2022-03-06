@@ -2,7 +2,6 @@ package net.twisterrob.colorfilters.android
 
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -23,6 +22,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import net.twisterrob.colorfilters.android.keyboard.KeyboardHandler
@@ -96,16 +96,16 @@ abstract class ColorFilterFragment : Fragment() {
 				append("\n") //NON-NLS
 				append(generateFormattedCode())
 			}
-		AlertDialog.Builder(requireActivity()).apply {
-			setTitle(getText(titleResourceId))
-			setMessage(getInfoMessage(descriptionResourceId))
-			setPositiveButton(R.string.cf_info_ok) { dialog, _ -> dialog.dismiss() }
-			setNeutralButton(R.string.cf_info_copy) { dialog, _ ->
+		AlertDialog.Builder(requireActivity())
+			.setTitle(getText(titleResourceId))
+			.setMessage(getInfoMessage(descriptionResourceId))
+			.setPositiveButton(R.string.cf_info_ok) { dialog, _ -> dialog.dismiss() }
+			.setNeutralButton(R.string.cf_info_copy) { dialog, _ ->
 				dialog.dismiss()
 				copyToClipboard(requireContext(), getText(titleResourceId), generateCode())
 				Toast.makeText(requireActivity(), R.string.cf_info_copy_toast, Toast.LENGTH_SHORT).show()
 			}
-		}.show()
+			.show()
 	}
 
 	override fun onDestroyView() = super.onDestroyView().also {
