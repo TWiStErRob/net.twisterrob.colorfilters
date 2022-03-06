@@ -64,11 +64,8 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 // Central Kotlin configuration.
 run {
 	val VERSION_KOTLIN: String by project.properties
-	configurations.all {
-		resolutionStrategy {
-			force("org.jetbrains.kotlin:kotlin-stdlib:${VERSION_KOTLIN}")
-			force("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${VERSION_KOTLIN}")
-		}
+	dependencies {
+		implementation(platform("org.jetbrains.kotlin:kotlin-bom:${VERSION_KOTLIN}"))
 	}
 }
 
