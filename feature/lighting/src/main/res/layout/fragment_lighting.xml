@@ -12,7 +12,7 @@
 	<View
 		android:id="@+id/middle"
 		android:layout_width="0dp"
-		android:layout_height="fill_parent"
+		android:layout_height="match_parent"
 		android:layout_marginLeft="@dimen/margin"
 		android:layout_marginRight="@dimen/margin"
 		android:layout_centerHorizontal="true"
@@ -74,8 +74,8 @@
 
 	<net.twisterrob.android.view.color.ColorPickerView
 		android:id="@+id/mulColor"
-		android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
 		android:layout_marginTop="@dimen/margin"
 		android:layout_below="@id/mulRGBLabel"
 		android:layout_toLeftOf="@id/middle"
@@ -136,8 +136,8 @@
 
 	<net.twisterrob.android.view.color.ColorPickerView
 		android:id="@+id/addColor"
-		android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
 		android:layout_marginTop="@dimen/margin"
 		android:layout_below="@id/addRGBLabel"
 		android:layout_toRightOf="@id/middle"
