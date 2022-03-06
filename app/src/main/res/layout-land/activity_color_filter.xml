@@ -26,7 +26,7 @@
 			tools:background="@android:color/darker_gray"
 			/>
 
-		<fragment
+		<androidx.fragment.app.FragmentContainerView
 			android:id="@+id/images"
 			android:name="net.twisterrob.colorfilters.android.image.ImageFragment"
 			android:layout_width="0dp"
@@ -44,7 +44,7 @@
 	<net.twisterrob.colorfilters.android.keyboard.KeyboardView
 		android:id="@+id/keyboard"
 		android:layout_width="wrap_content"
-		android:layout_height="fill_parent"
+		android:layout_height="match_parent"
 		android:layout_marginLeft="-4dp"
 		android:layout_alignParentRight="true"
 		android:layout_centerVertical="true"

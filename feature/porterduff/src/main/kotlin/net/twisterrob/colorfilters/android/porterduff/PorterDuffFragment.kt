@@ -222,7 +222,7 @@ class PorterDuffFragment : ColorFilterFragment() {
 
 	private fun setValues(color: Int, mode: PorterDuff.Mode, swatchIndex: Int) {
 		val modeId = findView(mode)
-		view!!.findViewById<CompoundButton>(modeId).isChecked = true
+		requireView().findViewById<CompoundButton>(modeId).isChecked = true
 		colorView.setSwatch(swatchIndex)
 		updateColor(color, null)
 	}

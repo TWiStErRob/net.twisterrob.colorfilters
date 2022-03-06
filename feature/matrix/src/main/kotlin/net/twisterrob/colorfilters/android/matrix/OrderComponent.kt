@@ -5,13 +5,14 @@ import android.annotation.TargetApi
 import android.content.SharedPreferences
 import android.graphics.ColorMatrix
 import android.os.Build
-import android.os.Build.VERSION
-import android.os.Build.VERSION_CODES
 import android.view.DragEvent
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.DragShadowBuilder
 import android.view.ViewGroup
+import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 internal class OrderComponent(
@@ -136,7 +137,7 @@ internal class OrderComponent(
 		}
 
 		private fun startDragAndDrop(view: View): Boolean {
-			return if (VERSION.SDK_INT < VERSION_CODES.N) {
+			return if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
 				@Suppress("DEPRECATION")
 				view.startDrag(null, DragShadowBuilder(view), OrderDragLocalState(view), 0)
 			} else {
@@ -190,10 +191,9 @@ internal class OrderComponent(
 			return true
 		}
 
-		@Suppress("DEPRECATION")
-		private fun setBackground(dropTarget: View, drawableResourceID: Int) {
-			val drawable = dropTarget.resources.getDrawable(drawableResourceID)
-			dropTarget.setBackgroundDrawable(drawable)
+		private fun setBackground(dropTarget: View, @DrawableRes resId: Int) {
+			val drawable = ContextCompat.getDrawable(dropTarget.context, resId)
+			ViewCompat.setBackground(dropTarget, drawable)
 		}
 	}
 

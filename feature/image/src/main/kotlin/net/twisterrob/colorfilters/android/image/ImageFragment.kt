@@ -88,8 +88,8 @@ class ImageFragment : Fragment() {
 				return
 			}
 		} else {
-			val originalLoaded = BitmapKeeper.into(requireFragmentManager(), original, loadListener)
-			val previewLoaded = BitmapKeeper.into(requireFragmentManager(), preview, noListener)
+			val originalLoaded = BitmapKeeper.into(parentFragmentManager, original, loadListener)
+			val previewLoaded = BitmapKeeper.into(parentFragmentManager, preview, noListener)
 			if (originalLoaded && previewLoaded) {
 				return
 			}
@@ -112,7 +112,7 @@ class ImageFragment : Fragment() {
 
 	override fun onStop() {
 		super.onStop()
-		val uri = BitmapKeeper.getUri(requireFragmentManager())
+		val uri = BitmapKeeper.getUri(parentFragmentManager)
 		prefs.edit().apply {
 			if (uri != null) {
 				putString(PREF_IMAGE_URL, uri.toString())
@@ -122,6 +122,7 @@ class ImageFragment : Fragment() {
 		}.apply()
 	}
 
+	@Suppress("SameParameterValue")
 	private fun checkPermission(
 		permission: String,
 		requestCode: Int,
@@ -134,6 +135,7 @@ class ImageFragment : Fragment() {
 			if (rationale != null && shouldShowRequestPermissionRationale(permission)) {
 				rationale()
 			} else {
+				@Suppress("DEPRECATION") // TODO group: ActivityResultContract
 				requestPermissions(arrayOf(permission), requestCode)
 			}
 			return false
@@ -172,7 +174,9 @@ class ImageFragment : Fragment() {
 				} else {
 					startLoadImage(false)
 				}
-			else -> super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+			else ->
+				@Suppress("DEPRECATION") // TODO group: ActivityResultContract
+				super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 		}
 	}
 
@@ -199,6 +203,7 @@ class ImageFragment : Fragment() {
 			putExtra(Intent.EXTRA_INITIAL_INTENTS, camIntents.toTypedArray<Parcelable>())
 		}
 
+		@Suppress("DEPRECATION") // TODO group: ActivityResultContract
 		startActivityForResult(chooserIntent, REQUEST_CODE_GET_PICTURE)
 	}
 
@@ -220,26 +225,27 @@ class ImageFragment : Fragment() {
 				}
 			}
 		}
+		@Suppress("DEPRECATION") // TODO group: ActivityResultContract
 		super.onActivityResult(requestCode, resultCode, data)
 	}
 
 	private fun loadDefaults() {
-		BitmapKeeper.clear(requireFragmentManager())
+		BitmapKeeper.clear(parentFragmentManager)
 		original.setImageResource(R.drawable.default_image)
 		preview.setImageResource(R.drawable.default_image)
 		loadListener.loadComplete()
 	}
 
 	fun load(uri: Uri) {
-		BitmapKeeper.save(requireFragmentManager(), uri)
-		BitmapKeeper.into(requireFragmentManager(), original, loadListener)
-		BitmapKeeper.into(requireFragmentManager(), preview, noListener)
+		BitmapKeeper.save(parentFragmentManager, uri)
+		BitmapKeeper.into(parentFragmentManager, original, loadListener)
+		BitmapKeeper.into(parentFragmentManager, preview, noListener)
 	}
 
 	fun load(bitmap: Bitmap) {
-		BitmapKeeper.save(requireFragmentManager(), bitmap)
-		BitmapKeeper.into(requireFragmentManager(), original, loadListener)
-		BitmapKeeper.into(requireFragmentManager(), preview, noListener)
+		BitmapKeeper.save(parentFragmentManager, bitmap)
+		BitmapKeeper.into(parentFragmentManager, original, loadListener)
+		BitmapKeeper.into(parentFragmentManager, preview, noListener)
 	}
 
 	private val prefs: SharedPreferences

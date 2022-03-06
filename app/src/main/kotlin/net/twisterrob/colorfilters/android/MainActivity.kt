@@ -140,6 +140,7 @@ class MainActivity : AppCompatActivity(), ColorFilterFragment.Listener, ImageFra
 
 			R.id.action_settings -> {
 				// no actual result, just want a notification of return from preferences
+				@Suppress("DEPRECATION") // TODO group: ActivityResultContract
 				startActivityForResult(
 					Intent(applicationContext, PreferencesActivity::class.java),
 					Activity.RESULT_FIRST_USER
@@ -199,17 +200,15 @@ class MainActivity : AppCompatActivity(), ColorFilterFragment.Listener, ImageFra
 			kbd = null
 			val fragment = currentFragment
 			if (fragment != null) {
-				// force recreating the fragment to pick up the new keyboard (in case it changed in settings)
-				supportFragmentManager
-					.beginTransaction()
-					.detach(fragment)
-					.attach(fragment)
-					// .commit won't work because onResume is called after onActivityResult
-					// and at this state we're "after onSaveInstanceState"
-					.commitAllowingStateLoss()
+				// Force recreating the fragment to pick up the new keyboard (in case it changed in settings).
+				// Using .commit won't work because onResume is called after onActivityResult,
+				// and at this state we're "after onSaveInstanceState".
+				supportFragmentManager.beginTransaction().detach(fragment).commitAllowingStateLoss()
+				supportFragmentManager.beginTransaction().attach(fragment).commitAllowingStateLoss()
 			}
 			return
 		}
+		@Suppress("DEPRECATION") // TODO group: ActivityResultContract
 		super.onActivityResult(requestCode, resultCode, data)
 	}
 
