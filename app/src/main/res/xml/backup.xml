@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data-extraction-rules>
+
+	<cloud-backup disableIfNoEncryptionCapabilities="false">
+		<include domain="root" path="."/>
+	</cloud-backup>
+
+	<data-transfer>
+		<include domain="root" path="."/>
+	</data-transfer>
+
+</data-extraction-rules>
