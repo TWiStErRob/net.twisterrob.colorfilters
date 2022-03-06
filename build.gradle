@@ -1,8 +1,6 @@
-apply plugin: 'net.twisterrob.root'
-apply plugin: 'net.twisterrob.quality'
-
-allprojects {
-	apply plugin: 'net.twisterrob.quality'
+plugins {
+	id("net.twisterrob.root")
+	id("net.twisterrob.quality")
 }
 
 allprojects { project ->
