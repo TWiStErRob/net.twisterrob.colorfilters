@@ -1,16 +1,19 @@
 package net.twisterrob.colorfilters.android.about
 
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.children
 import androidx.fragment.app.ListFragment
@@ -71,7 +74,16 @@ class AboutFragment : ListFragment() {
 				)
 				putExtra(Intent.EXTRA_TEXT, body)
 			}
-			startActivity(intent)
+			try {
+				startActivity(intent)
+			} catch (ex: ActivityNotFoundException) {
+				Log.w("ColorFilters", "Cannot send email via intent.", ex)
+				Toast.makeText(
+					requireContext(),
+					getString(R.string.cf_about_feedback_fail, BuildConfig.EMAIL),
+					Toast.LENGTH_LONG
+				).show()
+			}
 		}
 		binding.aboutName.apply {
 			setText(context.applicationInfo.labelRes)

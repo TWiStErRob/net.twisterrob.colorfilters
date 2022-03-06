@@ -8,6 +8,7 @@
 	<string name="cf_about_feedback_subject">%1$s feedback</string>
 	<!-- %1: app_name, %2: app_package, %3: app_version -->
 	<string name="cf_about_feedback_body">Package: %1$s\nVersion: %2$s\n\nHey,\nI have some comments regarding your app:\n</string>
+	<string name="cf_about_feedback_fail">Cannot send feedback email to %1$s.</string>
 
 	<string name="cf_about_tips_title">Tips and Tricks</string>
 	<string name="cf_about_tips">
