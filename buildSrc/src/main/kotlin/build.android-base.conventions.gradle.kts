@@ -18,37 +18,33 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 }
 
 @Suppress("UnstableApiUsage")
-project.plugins.withType<com.android.build.gradle.BasePlugin> plugin@{
-	val android = project.extensions["android"] as CommonExtension<*, *, *, *>
-	android.apply android@{
+(project.extensions["android"] as CommonExtension<*, *, *, *>).apply android@{
+	defaultConfig {
+		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+	}
+	lint {
+		warningsAsErrors = true
+		checkReleaseBuilds = false
+		// REPORT this is not working in AS
+		// workaround? java.nio.file.Files.createSymbolicLink in settings.gradle
+		lintConfig = rootProject.file("config/lint/lint.xml")
+		val cleanPath = project.path.substring(1).replace(':', '+')
+		baseline = rootProject.file("config/lint/baseline ${cleanPath}.xml")
+	}
+	if (this@android is LibraryExtension) {
 		defaultConfig {
-			testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+			// Enable multidex for all libraries.
+			// This will transfer to androidTest apps in those libraries, but not the app.
+			multiDexEnabled = true
 		}
-		lint {
-			warningsAsErrors = true
-			checkReleaseBuilds = false
-			// REPORT this is not working in AS
-			// workaround? java.nio.file.Files.createSymbolicLink in settings.gradle
-			lintConfig = rootProject.file("config/lint/lint.xml")
-			val cleanPath = project.path.substring(1).replace(':', '+')
-			baseline = rootProject.file("config/lint/baseline ${cleanPath}.xml")
-		}
-		if (this@plugin is com.android.build.gradle.LibraryPlugin) {
-			this@android as LibraryExtension
-			defaultConfig {
-				// Enable multidex for all libraries.
-				// This will transfer to androidTest apps in those libraries, but not the app.
-				multiDexEnabled = true
-			}
-			buildFeatures.buildConfig = project.path == ":feature:about"
-		}
-		val VERSION_KOTLIN: String by project.properties
-		configurations.all {
-			resolutionStrategy {
-				force("org.jetbrains.kotlin:kotlin-stdlib:${VERSION_KOTLIN}")
-				force("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${VERSION_KOTLIN}")
-				exclude(group = "androidx.legacy")
-			}
+		buildFeatures.buildConfig = false
+	}
+	val VERSION_KOTLIN: String by project.properties
+	configurations.all {
+		resolutionStrategy {
+			force("org.jetbrains.kotlin:kotlin-stdlib:${VERSION_KOTLIN}")
+			force("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${VERSION_KOTLIN}")
+			exclude(group = "androidx.legacy")
 		}
 	}
 }

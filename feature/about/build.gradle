@@ -3,6 +3,7 @@ plugins {
 }
 
 android {
+	buildFeatures.buildConfig = true
 	buildTypes.all {
 		buildConfigField("String", "EMAIL", "\"papp.robert.s@gmail.com\"")
 	}
