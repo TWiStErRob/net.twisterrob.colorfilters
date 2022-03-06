@@ -1,8 +1,7 @@
-apply plugin: 'net.twisterrob.android-library'
-apply plugin: 'net.twisterrob.kotlin'
+plugins {
+	id("net.twisterrob.colorfilters.feature.conventions")
+}
 
 dependencies {
-
-	implementation project(':feature:base')
 	implementation project(':feature:keyboard:contract')
 }

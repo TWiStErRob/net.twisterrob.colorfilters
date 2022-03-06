@@ -1,15 +1,9 @@
-apply plugin: 'net.twisterrob.android-library'
-apply plugin: 'net.twisterrob.kotlin'
-
-dependencies {
-
-	implementation project(":feature:base")
-
-	androidTestImplementation project(':test-base')
-	androidTestImplementation project(':feature:about:test-fixtures')
+plugins {
+	id("net.twisterrob.colorfilters.feature.conventions")
 }
 
 android {
+	buildFeatures.buildConfig = true
 	buildTypes.all {
 		buildConfigField("String", "EMAIL", "\"papp.robert.s@gmail.com\"")
 	}

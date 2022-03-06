@@ -1,7 +1,3 @@
-apply plugin: 'net.twisterrob.android-library'
-apply plugin: 'net.twisterrob.kotlin'
-
-dependencies {
-	compileOnly project(":feature:palette")
-	compileOnly project(':test-base')
+plugins {
+	id("net.twisterrob.colorfilters.test-fixtures.conventions")
 }
