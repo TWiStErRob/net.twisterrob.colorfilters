@@ -68,7 +68,6 @@ run {
 		resolutionStrategy {
 			force("org.jetbrains.kotlin:kotlin-stdlib:${VERSION_KOTLIN}")
 			force("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${VERSION_KOTLIN}")
-			exclude(group = "androidx.legacy")
 		}
 	}
 }
