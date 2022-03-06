@@ -3,6 +3,7 @@ import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.LibraryDefaultConfig
 import com.android.build.api.dsl.LibraryExtension
 import com.android.build.gradle.AppExtension
+import net.twisterrob.gradle.android.androidComponents
 
 plugins {
 	id("net.twisterrob.kotlin")
@@ -47,6 +48,12 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 		lintConfig = rootProject.file("config/lint/lint.xml")
 		val cleanPath = project.path.substring(1).replace(':', '+')
 		baseline = rootProject.file("config/lint/baseline ${cleanPath}.xml")
+		// TODEL https://issuetracker.google.com/issues/170658134
+		androidComponents.finalizeDsl {
+			if (buildFeatures.viewBinding == true || project.path == ":app") {
+				disable += "UnusedIds"
+			}
+		}
 	}
 	if (this@android is LibraryExtension) {
 		// Disable BuildConfig class generation for features and components, we only need it in :app.

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
 	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
 	package="net.twisterrob.colorfilters.android"
 	>
 
@@ -10,7 +11,11 @@
 		android:icon="@drawable/ic_launcher"
 		android:allowBackup="true"
 		android:fullBackupContent="true"
+		android:dataExtractionRules="@xml/backup"
+		tools:ignore="UnusedAttribute,DataExtractionRules"
 		>
+		<!-- lint:UnusedAttribute dataExtractionRules is API 31+, but is necessary. -->
+		<!-- lint:DataExtractionRules is provided, valid, but still flagged by Android Studio B. -->
 
 		<activity
 			android:name=".MainActivity"
