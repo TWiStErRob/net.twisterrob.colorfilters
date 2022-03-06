@@ -20,15 +20,25 @@ class NullKeyboardHandler(
 		keyboardView.setOnKeyboardActionListener(null)
 	}
 
-	override fun registerEditText(editText: EditText) {}
+	override fun registerEditText(editText: EditText) {
+		// No op, stubbed out for "null" keyboard.
+	}
 
-	override fun unregisterEditText(editText: EditText) {}
+	override fun unregisterEditText(editText: EditText) {
+		// No op, stubbed out for "null" keyboard.
+	}
 
-	override fun handleBack(): Boolean = false
+	override fun handleBack(): Boolean =
+		// No op, stubbed out for "null" keyboard, the keyboard doesn't need to react to "back".
+		false
 
-	override fun showCustomKeyboard(v: View) {}
+	override fun showCustomKeyboard(v: View) {
+		// No op, stubbed out for "null" keyboard.
+	}
 
-	override fun hideCustomKeyboard() {}
+	override fun hideCustomKeyboard() {
+		// No op, stubbed out for "null" keyboard.
+	}
 
 	companion object {
 

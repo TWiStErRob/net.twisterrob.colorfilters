@@ -123,7 +123,9 @@ abstract class ColorFilterFragment : Fragment() {
 	}
 
 	protected abstract fun generateCode(): CharSequence
+
 	private fun generateFormattedCode(): CharSequence =
+		@Suppress("MagicNumber")
 		SpannableString(generateCode()).apply {
 			setSpan(TypefaceSpan("monospace"), 0, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
 			setSpan(RelativeSizeSpan(0.6f), 0, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)

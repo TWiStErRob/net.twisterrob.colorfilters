@@ -1,0 +1,9 @@
+complexity:
+  TooManyFunctions:
+    active: false
+
+style: 
+  MaxLineLength:
+    excludeCommentStatements: true
+  ReturnCount: 
+    max: 3

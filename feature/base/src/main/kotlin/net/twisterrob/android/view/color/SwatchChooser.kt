@@ -47,6 +47,7 @@ class SwatchChooser(swatches: Collection<Swatch>) : Drawable(), View.OnTouchList
 		image = null
 	}
 
+	@Suppress("NestedBlockDepth") // Needs a rethink.
 	private fun layout() {
 		val bounds = bounds
 		val w = bounds.width()
@@ -61,7 +62,7 @@ class SwatchChooser(swatches: Collection<Swatch>) : Drawable(), View.OnTouchList
 		val nx = w / s
 		val ny = h / s
 		val left = (w - nx * s) / 2
-		val realNY = (swatches.size.toFloat() / nx.toFloat() + 0.5f).toInt()
+		val realNY = ceil(swatches.size.toFloat() / nx.toFloat()).toInt()
 		val top = (h - realNY * s) / 2
 		s -= margin * 2 // reserve size for margin
 		val swatchBounds = Rect(left, top, left + s, top + s)
@@ -134,9 +135,11 @@ class SwatchChooser(swatches: Collection<Swatch>) : Drawable(), View.OnTouchList
 	}
 
 	override fun setAlpha(alpha: Int) {
+		// Alpha not supported.
 	}
 
 	override fun setColorFilter(cf: ColorFilter?) {
+		// Color filters are not supported, will always render custom draw.
 	}
 
 	override fun getOpacity() = PixelFormat.UNKNOWN

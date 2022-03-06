@@ -22,7 +22,10 @@ fun @receiver:ColorInt Int.toARGBDecString(separator: String = ", "): String =
 	"%d%s%d%s%d%s%d".formatRoot(alpha, separator, red, separator, green, separator, blue)
 
 fun @receiver:ColorInt Int.toRGBHexString(prefix: String = ""): String =
-	"%s%06X".formatRoot(prefix, 0xFFFFFF and this)
+	"%s%06X".formatRoot(prefix, this and RGB_MASK)
 
 fun @receiver:ColorInt Int.toARGBHexString(prefix: String = ""): String =
 	"%s%08X".formatRoot(prefix, this)
+
+@ColorInt
+private const val RGB_MASK: Int = 0xFFFFFF

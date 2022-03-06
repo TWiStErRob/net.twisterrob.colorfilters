@@ -48,7 +48,9 @@ class ResourceFontFragment : ColorFilterFragment() {
 
 	override fun createFilter(): ColorFilter? = null
 
-	override fun reset() {}
+	override fun reset() {
+		// There are no interactions on this screen, cannot reset state.
+	}
 
 	override val needsImages = false
 
@@ -79,7 +81,9 @@ class ResourceFontFragment : ColorFilterFragment() {
 			resultBlack.text = resultText
 			resultWhite.text = resultText
 			resolved.text = getColor(resultText)
-		} catch (ex: Exception) {
+		} catch (@Suppress("TooGenericExceptionCaught") ex: Exception) {
+			// Anything can happen, make sure we don't crash, 
+			// but rather handle it nicely by showing the error to the user (developer).
 			setError(row, ex)
 		}
 
@@ -112,7 +116,9 @@ class ResourceFontFragment : ColorFilterFragment() {
 			resultBlack.text = resultText
 			resultWhite.text = resultText
 			resolved.text = getColor(resultText)
-		} catch (ex: Exception) {
+		} catch (@Suppress("TooGenericExceptionCaught") ex: Exception) {
+			// Anything can happen, make sure we don't crash, 
+			// but rather handle it nicely by showing the error to the user (developer).
 			setError(row, ex)
 		}
 

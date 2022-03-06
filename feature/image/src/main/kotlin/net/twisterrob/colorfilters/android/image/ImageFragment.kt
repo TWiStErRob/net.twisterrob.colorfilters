@@ -47,7 +47,9 @@ class ImageFragment : Fragment() {
 		}
 	}
 	private val noListener = object : BitmapKeeper.Listener {
-		override fun loadComplete() {}
+		override fun loadComplete() {
+			// No op.
+		}
 	}
 
 	private lateinit var original: ImageView
@@ -207,6 +209,7 @@ class ImageFragment : Fragment() {
 		startActivityForResult(chooserIntent, REQUEST_CODE_GET_PICTURE)
 	}
 
+	@Suppress("NestedBlockDepth") // Outer when is readable; TODO group: ActivityResultContract
 	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 		when (requestCode) {
 			REQUEST_CODE_GET_PICTURE -> {

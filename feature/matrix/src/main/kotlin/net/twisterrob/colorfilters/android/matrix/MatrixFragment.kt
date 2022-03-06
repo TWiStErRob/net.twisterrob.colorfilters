@@ -146,16 +146,17 @@ class MatrixFragment : ColorFilterFragment() {
 	private val ordered: Array<Component>
 		get() = order.order(rotates[COMP_R], rotates[COMP_G], rotates[COMP_B], scale, saturation)
 
-	override fun generateCode(): String = StringBuilder().apply {
-		if (dirty) {
-			editor.appendTo(this)
-		} else {
-			append("ColorMatrix matrix = new ColorMatrix();\n")
-			append("ColorMatrix temp = new ColorMatrix();\n")
-			ordered.forEach { if (it.appendTo(this)) append('\n') }
-			append("\nreturn matrix;")
+	override fun generateCode(): String =
+		buildString {
+			if (dirty) {
+				editor.appendTo(this)
+			} else {
+				append("ColorMatrix matrix = new ColorMatrix();\n")
+				append("ColorMatrix temp = new ColorMatrix();\n")
+				ordered.forEach { if (it.appendTo(this)) append('\n') }
+				append("\nreturn matrix;")
+			}
 		}
-	}.toString()
 
 	private inner class CentralRefreshListener : Component.RefreshListener {
 

@@ -25,6 +25,7 @@ class RadialHSBGradient : PixelColor {
 		this.cy = w / 2
 	}
 
+	@Suppress("MagicNumber")
 	@ColorInt
 	override fun getPixelColorAt(@IntRange(from = 0/*, to = w*/) x: Int, @IntRange(from = 0/*, to = h*/) y: Int): Int {
 		val angle = FastMath.Atan2Faster.atan2((y - cy).toFloat(), (x - cx).toFloat()) + PI

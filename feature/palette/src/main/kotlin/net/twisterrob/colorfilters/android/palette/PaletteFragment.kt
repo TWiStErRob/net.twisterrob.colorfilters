@@ -33,6 +33,7 @@ import net.twisterrob.colorfilters.android.formatRoot
 import net.twisterrob.colorfilters.android.keyboard.KeyboardHandler
 import net.twisterrob.colorfilters.android.keyboard.KeyboardMode
 import net.twisterrob.colorfilters.android.palette.PaletteFragment.PaletteAdapter.Display
+import net.twisterrob.colorfilters.android.replaceAlpha
 import net.twisterrob.colorfilters.android.toRGBHexString
 import kotlin.math.max
 import net.twisterrob.colorfilters.base.R as baseR
@@ -73,8 +74,8 @@ class PaletteFragment : ColorFilterFragment() {
 		if (pos < 0) {
 			return null
 		}
-		var color = swatchList.adapter.getItemId(pos).toInt()
-		color = (0x00FFFFFF and color) or 0x60000000 // replace alpha
+		val selectedColor = swatchList.adapter.getItemId(pos).toInt()
+		val color = selectedColor.replaceAlpha(@Suppress("MagicNumber") 0x60)
 		return PorterDuffColorFilter(color, PorterDuff.Mode.SRC_OVER)
 	}
 
@@ -142,7 +143,7 @@ class PaletteFragment : ColorFilterFragment() {
 					val numColors = s.toString().fromString()
 					updateNumColors(numColors, UpdateOrigin.Editor)
 					numColorEditor.error = null
-				} catch (ex: RuntimeException) {
+				} catch (@Suppress("TooGenericExceptionCaught") ex: RuntimeException) {
 					//Log.w(TAG, "Cannot parse color: " + s, ex);
 					numColorEditor.error = ex.message + " " + s
 				}
@@ -163,7 +164,7 @@ class PaletteFragment : ColorFilterFragment() {
 					val resizeDimen = s.toString().fromString()
 					updateResizeDimen(resizeDimen, UpdateOrigin.Editor)
 					resizeDimenEditor.error = null
-				} catch (ex: RuntimeException) {
+				} catch (@Suppress("TooGenericExceptionCaught") ex: RuntimeException) {
 					//Log.w(TAG, "Cannot parse color: ${s}", ex)
 					resizeDimenEditor.error = ex.message + " " + s
 				}
@@ -335,7 +336,8 @@ class PaletteFragment : ColorFilterFragment() {
 			val numColors = prefs.getInt(PREF_PALETTE_NUM_COLORS, DEFAULT_NUM_COLORS)
 			val resizeDimen = prefs.getInt(PREF_PALETTE_RESIZE_DIMEN, DEFAULT_RESIZE_DIMEN)
 			val displayString = prefs.getString(PREF_PALETTE_DISPLAY, Display.DEFAULT.name)!!
-			val display = PaletteAdapter.Display.valueOf(displayString)
+			val display = runCatching { PaletteAdapter.Display.valueOf(displayString) }
+				.getOrDefault(Display.DEFAULT) // Fall back in case of migration issues.
 			setValues(numColors, resizeDimen, display)
 		} else {
 			swatchDisplay.setSelection(savedInstanceState.getInt(PREF_PALETTE_DISPLAY, Display.DEFAULT.ordinal))
@@ -367,8 +369,8 @@ class PaletteFragment : ColorFilterFragment() {
 		updateResizeDimen(resizeDimen, null)
 	}
 
-	override fun generateCode() =
-		StringBuilder().apply {
+	override fun generateCode(): String =
+		buildString {
 			append("Palette palette = Palette\n")
 			append("\t\t.from(bitmap)\n")
 			if (currentNumColors != DEFAULT_NUM_COLORS) {
@@ -379,7 +381,7 @@ class PaletteFragment : ColorFilterFragment() {
 			}
 			append("\t\t.generate()\n")
 			append(";")
-		}.toString()
+		}
 
 	private val currentSort: PaletteAdapter.Display
 		get() = PaletteAdapter.Display.values()[swatchDisplay.selectedItemId.toInt()]
@@ -446,6 +448,7 @@ class PaletteFragment : ColorFilterFragment() {
 			if (swatch != null) {
 				val hsl = swatch.hsl
 				val type = getType(swatch)
+				@Suppress("MagicNumber")
 				holder.colorText.text = "%s\n%.0f°, %.0f%%, %.0f%%%s".formatRoot(
 					swatch.rgb.toRGBHexString("#"),
 					hsl[0], hsl[1] * 100, hsl[2] * 100,
@@ -489,7 +492,7 @@ class PaletteFragment : ColorFilterFragment() {
 			this.notifyDataSetChanged()
 		}
 
-		@Suppress("EnumEntryName")
+		@Suppress("EnumEntryName", "EnumNaming")
 		enum class Display(
 			val title: String
 		) {
