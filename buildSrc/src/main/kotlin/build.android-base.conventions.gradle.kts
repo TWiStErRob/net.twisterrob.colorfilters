@@ -1,6 +1,8 @@
+import com.android.build.api.dsl.ApplicationDefaultConfig
 import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.LibraryDefaultConfig
 import com.android.build.api.dsl.LibraryExtension
+import com.android.build.gradle.AppExtension
 
 plugins {
 	id("net.twisterrob.kotlin")
@@ -20,6 +22,14 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 
 @Suppress("UnstableApiUsage")
 (project.extensions["android"] as CommonExtension<*, *, *, *>).apply android@{
+	defaultConfig {
+		minSdk = 14
+		if (this@android is AppExtension) {
+			this@defaultConfig as ApplicationDefaultConfig
+			targetSdk = 31
+		}
+		compileSdk = 31
+	}
 	defaultConfig {
 		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 		if (this@android is LibraryExtension) {
