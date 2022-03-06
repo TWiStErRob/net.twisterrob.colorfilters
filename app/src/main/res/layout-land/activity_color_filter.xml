@@ -26,7 +26,7 @@
 			tools:background="@android:color/darker_gray"
 			/>
 
-		<fragment
+		<androidx.fragment.app.FragmentContainerView
 			android:id="@+id/images"
 			android:name="net.twisterrob.colorfilters.android.image.ImageFragment"
 			android:layout_width="0dp"
