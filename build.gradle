@@ -3,52 +3,6 @@ plugins {
 	id("net.twisterrob.quality")
 }
 
-allprojects { project ->
-	project.plugins.withType(com.android.build.gradle.BasePlugin) { plugin ->
-		project.android {
-			defaultConfig {
-				testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-			}
-			lintOptions {
-				warningsAsErrors = true
-				checkReleaseBuilds = false
-				// REPORT this is not working in AS
-				// workaround? java.nio.file.Files.createSymbolicLink in settings.gradle
-				lintConfig = rootProject.file('config/lint/lint.xml')
-				def cleanPath = project.path.substring(1).replace(':', '+')
-				baselineFile = rootProject.file("config/lint/baseline ${cleanPath}.xml")
-			}
-			if (plugin instanceof com.android.build.gradle.LibraryPlugin) {
-				defaultConfig {
-					// Enable multidex for all libraries.
-					// This will transfer to androidTest apps in those libraries, but not the app.
-					multiDexEnabled = true
-				}
-				buildFeatures.buildConfig = project.path == ':feature:about'
-			}
-			configurations.all {
-				it.resolutionStrategy {
-					force("org.jetbrains.kotlin:kotlin-stdlib:${VERSION_KOTLIN}")
-					force("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${VERSION_KOTLIN}")
-					exclude group: "androidx.legacy"
-				}
-			}
-		}
-		// TODEL https://github.com/TWiStErRob/net.twisterrob.gradle/issues/214
-		afterEvaluate {
-			def lintTasks = project.tasks.withType(com.android.build.gradle.internal.lint.LintModelWriterTask)
-			def ex = tasks.named("extractMinificationRules")
-			lintTasks.configureEach { it.dependsOn(ex) }
-			if (project.path == ':app') {
-				afterEvaluate { // double-jump is required because this gets applied before the build plugin.
-					def min = tasks.named("generateReleaseMinificationRules")
-					lintTasks.configureEach { it.dependsOn(min) }
-				}
-			}
-		}
-	}
-}
-
 tasks.register("clean", Delete) {
 	delete(rootProject.buildDir)
 }
