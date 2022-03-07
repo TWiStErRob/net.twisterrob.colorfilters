@@ -44,7 +44,13 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 		compileSdk = 31
 	}
 	defaultConfig {
+		dependencies {
+			val VERSION_JUNIT5_ANDROIDTEST: String by project.properties
+			add("androidTestRuntimeOnly", "de.mannodermaus.junit5:android-test-runner:${VERSION_JUNIT5_ANDROIDTEST}")
+		}
 		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+		testInstrumentationRunnerArguments["runnerBuilder"] = "de.mannodermaus.junit5.AndroidJUnit5Builder"
+
 		if (this@android is LibraryExtension) {
 			this@defaultConfig as LibraryDefaultConfig
 			// Enable multidex for all libraries.
