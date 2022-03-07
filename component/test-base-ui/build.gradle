@@ -4,16 +4,21 @@ plugins {
 
 dependencies {
 	implementation project(':feature:base')
+	implementation("junit:junit:${VERSION_JUNIT4}")
+	implementation("androidx.test:rules:1.4.0")
 
 	api("androidx.multidex:multidex:2.0.0")
 	api("androidx.multidex:multidex-instrumentation:2.0.0")
 
-	api("androidx.test:runner:1.4.0")
-	api("androidx.test:rules:1.4.0")
-	api("androidx.test.espresso:espresso-core:3.4.0")
-	api("androidx.test.ext:junit-ktx:1.1.3")
+	api("androidx.test:runner:1.4.0") {
+		// Exclude junit:junit, because all tests are using Jupiter.
+		exclude group: "junit", module: "junit"
+	}
+	api("androidx.test.espresso:espresso-core:3.4.0") {
+		// Exclude junit:junit, because all tests are using Jupiter.
+		exclude group: "junit", module: "junit"
+	}
 
-	api("junit:junit:${VERSION_JUNIT4}")
 	api("org.hamcrest:hamcrest:2.2")
 
 	api("org.mockito:mockito-core:${VERSION_MOCKITO}")
@@ -21,5 +26,8 @@ dependencies {
 	api("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
 
 	api("org.junit.jupiter:junit-jupiter-api:${VERSION_JUNIT5}")
-	api("de.mannodermaus.junit5:android-test-core:${VERSION_JUNIT5_ANDROIDTEST}")
+	api("de.mannodermaus.junit5:android-test-core:${VERSION_JUNIT5_ANDROIDTEST}") {
+		// Exclude junit:junit, because all tests are using Jupiter.
+		exclude group: "junit", module: "junit"
+	}
 }
