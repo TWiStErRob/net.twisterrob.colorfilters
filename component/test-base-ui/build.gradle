@@ -1,0 +1,40 @@
+plugins {
+	id("net.twisterrob.colorfilters.component.conventions")
+}
+
+dependencies {
+	implementation project(':feature:base')
+	implementation("junit:junit:${VERSION_JUNIT4}")
+	implementation("androidx.test:rules:1.4.0")
+
+	api("androidx.multidex:multidex:2.0.0")
+	api("androidx.multidex:multidex-instrumentation:2.0.0")
+
+	api("androidx.test:runner:1.4.0") {
+		// Exclude junit:junit, because all tests are using Jupiter.
+		exclude group: "junit", module: "junit"
+	}
+	api("androidx.test.espresso:espresso-core:3.4.0") {
+		// Exclude junit:junit, because all tests are using Jupiter.
+		exclude group: "junit", module: "junit"
+	}
+
+	// REPORT false positive: //noinspection FragmentGradleConfiguration
+	// REPORT false positive: <issue id="FragmentGradleConfiguration"><ignore path="**/component/test-base-ui/buid.gradle" />
+	// Only baseline worked. 😌
+	// This line is present so that FragmentScenario is reachable in UI test code.
+	//noinspection FragmentGradleConfiguration registered correctly in :feature:base with debugImplementation.
+	api("androidx.fragment:fragment-testing:1.4.1")
+
+	api("org.hamcrest:hamcrest:2.2")
+
+	api("org.mockito:mockito-core:${VERSION_MOCKITO}")
+	api("org.mockito:mockito-android:${VERSION_MOCKITO}")
+	api("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
+
+	api("org.junit.jupiter:junit-jupiter-api:${VERSION_JUNIT5}")
+	api("de.mannodermaus.junit5:android-test-core:${VERSION_JUNIT5_ANDROIDTEST}") {
+		// Exclude junit:junit, because all tests are using Jupiter.
+		exclude group: "junit", module: "junit"
+	}
+}

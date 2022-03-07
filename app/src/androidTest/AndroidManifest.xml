@@ -6,7 +6,7 @@
 	<application>
 
 		<activity
-			android:name="net.twisterrob.colorfilters.android.ColorFilterFragmentHost"
+			android:name="net.twisterrob.colorfilters.android.test.ui.ColorFilterFragmentHost"
 			android:process="net.twisterrob.colorfilters.debug"
 			/>
 

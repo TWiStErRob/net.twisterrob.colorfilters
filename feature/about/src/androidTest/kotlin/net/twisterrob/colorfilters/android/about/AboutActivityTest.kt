@@ -1,20 +1,18 @@
 package net.twisterrob.colorfilters.android.about
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
+import de.mannodermaus.junit5.ActivityScenarioExtension
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.RegisterExtension
 
-@RunWith(AndroidJUnit4::class)
 @LargeTest
 class AboutActivityTest {
 
 	/**
 	 * `android:label` and `android:versionName` must be set to be able to open the About screen.
 	 */
-	@Suppress("DEPRECATION")
-	@get:Rule val activityRule = androidx.test.rule.ActivityTestRule(AboutActivity::class.java)
+	@RegisterExtension @JvmField
+	val activityRule = ActivityScenarioExtension.launch<AboutActivity>()
 
 	@Test fun opensAboutScreen() {
 		val about = AboutActivityActor()

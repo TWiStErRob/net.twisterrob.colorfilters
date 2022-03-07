@@ -16,7 +16,7 @@ dependencies {
 }
 
 dependencies {
-	androidTestImplementation project(':test-base')
+	androidTestImplementation project(':component:test-base-ui')
 	androidTestImplementation project(':feature:lighting:test-fixtures')
 	androidTestImplementation project(':feature:porterduff:test-fixtures')
 	androidTestImplementation project(':feature:matrix:test-fixtures')

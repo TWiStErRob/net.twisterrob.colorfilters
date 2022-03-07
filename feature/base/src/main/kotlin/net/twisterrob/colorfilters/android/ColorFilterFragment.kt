@@ -136,7 +136,7 @@ abstract class ColorFilterFragment : Fragment() {
 
 	open val needsImages = true
 
-	interface Listener {
+	interface Listener { // TODO group: ViewModel
 
 		val keyboard: KeyboardHandler
 

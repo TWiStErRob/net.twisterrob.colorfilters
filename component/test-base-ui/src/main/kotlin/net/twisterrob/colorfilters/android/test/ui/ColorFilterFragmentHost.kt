@@ -1,4 +1,4 @@
-package net.twisterrob.colorfilters.android
+package net.twisterrob.colorfilters.android.test.ui
 
 import android.content.Context
 import android.content.Intent
@@ -8,7 +8,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.test.platform.app.InstrumentationRegistry
 import com.nhaarman.mockitokotlin2.mock
-import net.twisterrob.colorfilters.android.testbase.R
+import net.twisterrob.colorfilters.android.ColorFilterFragment
 import org.mockito.Answers
 import kotlin.reflect.KClass
 

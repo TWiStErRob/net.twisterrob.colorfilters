@@ -1,17 +1,15 @@
 package net.twisterrob.colorfilters.android
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
+import de.mannodermaus.junit5.ActivityScenarioExtension
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.RegisterExtension
 
-@RunWith(AndroidJUnit4::class)
 @LargeTest
 class MainActivityTest {
 
-	@Suppress("DEPRECATION")
-	@get:Rule val activityRule = androidx.test.rule.ActivityTestRule(MainActivity::class.java)
+	@RegisterExtension @JvmField
+	val activityRule = ActivityScenarioExtension.launch<MainActivity>()
 
 	@Test fun opensLightingScreen() {
 		val main = MainActivityActor()

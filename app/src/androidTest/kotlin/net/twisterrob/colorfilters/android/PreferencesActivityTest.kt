@@ -1,18 +1,16 @@
 package net.twisterrob.colorfilters.android
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import org.junit.Ignore
-import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
+import de.mannodermaus.junit5.ActivityScenarioExtension
+import org.junit.jupiter.api.Disabled
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.RegisterExtension
 
-@RunWith(AndroidJUnit4::class)
 @LargeTest
 class PreferencesActivityTest {
 
-	@Suppress("DEPRECATION")
-	@get:Rule val activityRule = androidx.test.rule.ActivityTestRule(PreferencesActivity::class.java)
+	@RegisterExtension @JvmField
+	val activityRule = ActivityScenarioExtension.launch<PreferencesActivity>()
 
 	@Test fun opens() {
 		val prefs = PreferencesActivityActor()
@@ -28,7 +26,7 @@ class PreferencesActivityTest {
 		about.assertDisplayed()
 	}
 
-	@Ignore("Clear shared preferences before launching this.")
+	@Disabled("Clear shared preferences before launching this.")
 	@Test fun togglesExperimentalKeyboards() {
 		val prefs = PreferencesActivityActor()
 		prefs.assertExperimentalKeyboards(true)

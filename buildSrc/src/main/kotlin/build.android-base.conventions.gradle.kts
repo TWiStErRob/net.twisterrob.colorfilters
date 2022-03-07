@@ -3,13 +3,15 @@ import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.LibraryDefaultConfig
 import com.android.build.api.dsl.LibraryExtension
 import com.android.build.gradle.AppExtension
+import com.android.build.gradle.internal.tasks.DexMergingTask
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import io.gitlab.arturbosch.detekt.report.ReportMergeTask
 import net.twisterrob.gradle.android.androidComponents
 
 plugins {
-	id("net.twisterrob.kotlin")
+	id("kotlin-android")
+	id("kotlin-kapt")
 	id("net.twisterrob.quality")
 	id("io.gitlab.arturbosch.detekt")
 }
@@ -32,6 +34,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 
 @Suppress("UnstableApiUsage")
 (project.extensions["android"] as CommonExtension<*, *, *, *>).apply android@{
+	@Suppress("MagicNumber")
 	defaultConfig {
 		minSdk = 14
 		if (this@android is AppExtension) {
@@ -41,7 +44,13 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 		compileSdk = 31
 	}
 	defaultConfig {
+		dependencies {
+			val VERSION_JUNIT5_ANDROIDTEST: String by project.properties
+			add("androidTestRuntimeOnly", "de.mannodermaus.junit5:android-test-runner:${VERSION_JUNIT5_ANDROIDTEST}")
+		}
 		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+		testInstrumentationRunnerArguments["runnerBuilder"] = "de.mannodermaus.junit5.AndroidJUnit5Builder"
+
 		if (this@android is LibraryExtension) {
 			this@defaultConfig as LibraryDefaultConfig
 			// Enable multidex for all libraries.
@@ -64,9 +73,37 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 			}
 		}
 	}
+	packagingOptions {
+		resources {
+			excludes.add("META-INF/LICENSE.md")
+			excludes.add("META-INF/LICENSE-notice.md")
+		}
+	}
+	testOptions {
+		unitTests.all {
+			it.useJUnitPlatform {
+			}
+			it.testLogging {
+				events("passed", "skipped", "failed")
+			}
+		}
+	}
 	if (this@android is LibraryExtension) {
 		// Disable BuildConfig class generation for features and components, we only need it in :app.
 		buildFeatures.buildConfig = false
+	}
+}
+
+configurations.all {
+	resolutionStrategy.eachDependency {
+		if (requested.group == "org.hamcrest" && requested.name == "hamcrest-library") {
+			useTarget("${target.group}:hamcrest:${target.version}")
+			because("Since 2.2 hamcrest-core and hamcrest-library are deprecated.")
+		}
+		if (requested.group == "org.hamcrest" && requested.name == "hamcrest-core") {
+			useTarget("${target.group}:hamcrest:${target.version}")
+			because("Since 2.2 hamcrest-core and hamcrest-library are deprecated.")
+		}
 	}
 }
 
@@ -74,7 +111,8 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 run {
 	val VERSION_KOTLIN: String by project.properties
 	dependencies {
-		implementation(platform("org.jetbrains.kotlin:kotlin-bom:${VERSION_KOTLIN}"))
+		add("implementation", platform("org.jetbrains.kotlin:kotlin-bom:${VERSION_KOTLIN}"))
+		add("implementation", "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${VERSION_KOTLIN}")
 	}
 }
 
@@ -127,4 +165,20 @@ val detektReportMergeXml = rootProject.tasks.named<ReportMergeTask>("detektRepor
 tasks.withType<Detekt> {
 	finalizedBy(detektReportMergeXml)
 	detektReportMergeXml.configure { input.from(this@withType.xmlReportFile) }
+}
+
+// Prevent the following error by allowing only a few parallel executions of these tasks:
+// > com.android.builder.dexing.DexArchiveMergerException: Error while merging dex archives:
+// > Caused by: java.lang.OutOfMemoryError: Java heap space
+// > Expiring Daemon because JVM heap space is exhausted
+@Suppress("MagicNumber")
+val instances = (Runtime.getRuntime().maxMemory() / 1e9 - 1).toInt().coerceAtLeast(1)
+registerLimitTasksService("dexMergingTaskLimiter", instances)
+afterEvaluate { // To get numberOfBuckets populated.
+	tasks.withType<DexMergingTask>().configureEach {
+		if (numberOfBuckets.get() == 1) { // Implies DexMergingAction.MERGE_ALL|MERGE_EXTERNAL_LIBS.
+			@Suppress("UnstableApiUsage")
+			usesService(gradle.sharedServices.registrations.getAt("dexMergingTaskLimiter").service)
+		}
+	}
 }
