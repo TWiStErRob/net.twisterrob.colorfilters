@@ -19,6 +19,10 @@ dependencies {
 		exclude group: "junit", module: "junit"
 	}
 
+	// This line is present so that FragmentScenario is reachable in UI test code.
+	//noinspection FragmentGradleConfiguration registered correctly in :feature:base with debugImplementation.
+	api("androidx.fragment:fragment-testing:1.4.1")
+
 	api("org.hamcrest:hamcrest:2.2")
 
 	api("org.mockito:mockito-core:${VERSION_MOCKITO}")
