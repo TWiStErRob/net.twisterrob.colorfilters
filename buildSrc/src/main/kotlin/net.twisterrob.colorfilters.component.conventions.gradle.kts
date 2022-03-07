@@ -5,4 +5,6 @@ plugins {
 
 dependencies {
 	testImplementation(project(":component:test-base-unit"))
+
+	androidTestImplementation(project(":component:test-base-ui"))
 }
