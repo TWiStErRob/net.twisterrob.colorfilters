@@ -3,6 +3,7 @@ import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.LibraryDefaultConfig
 import com.android.build.api.dsl.LibraryExtension
 import com.android.build.gradle.AppExtension
+import com.android.build.gradle.internal.tasks.DexMergingTask
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import io.gitlab.arturbosch.detekt.report.ReportMergeTask
@@ -158,4 +159,20 @@ val detektReportMergeXml = rootProject.tasks.named<ReportMergeTask>("detektRepor
 tasks.withType<Detekt> {
 	finalizedBy(detektReportMergeXml)
 	detektReportMergeXml.configure { input.from(this@withType.xmlReportFile) }
+}
+
+// Prevent the following error by allowing only a few parallel executions of these tasks:
+// > com.android.builder.dexing.DexArchiveMergerException: Error while merging dex archives:
+// > Caused by: java.lang.OutOfMemoryError: Java heap space
+// > Expiring Daemon because JVM heap space is exhausted
+@Suppress("MagicNumber")
+val instances = (Runtime.getRuntime().maxMemory() / 1e9 - 1).toInt().coerceAtLeast(1)
+registerLimitTasksService("dexMergingTaskLimiter", instances)
+afterEvaluate { // To get numberOfBuckets populated.
+	tasks.withType<DexMergingTask>().configureEach {
+		if (numberOfBuckets.get() == 1) { // Implies DexMergingAction.MERGE_ALL|MERGE_EXTERNAL_LIBS.
+			@Suppress("UnstableApiUsage")
+			usesService(gradle.sharedServices.registrations.getAt("dexMergingTaskLimiter").service)
+		}
+	}
 }
