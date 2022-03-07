@@ -6,4 +6,6 @@ plugins {
 dependencies {
 	compileOnly(project(project.path.removeSuffix(":test-fixtures")))
 	compileOnly(project(":component:test-base-ui"))
+
+	androidTestImplementation(project(":component:test-base-ui"))
 }
