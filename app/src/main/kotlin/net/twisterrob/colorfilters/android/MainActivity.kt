@@ -36,7 +36,10 @@ import net.twisterrob.colorfilters.android.porterduff.PorterDuffFragment
 import net.twisterrob.colorfilters.android.resources.ResourceFontFragment
 import java.util.zip.ZipFile
 
-class MainActivity : AppCompatActivity(), ColorFilterFragment.Listener, ImageFragment.Listener {
+class MainActivity : AppCompatActivity()
+	, ColorFilterFragment.Listener // TODO group: ViewModel
+	, ImageFragment.Listener // TODO group: ViewModel
+{
 
 	private lateinit var images: ImageFragment
 	private var kbd: KeyboardHandler? = null

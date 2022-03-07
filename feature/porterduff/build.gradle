@@ -4,4 +4,6 @@ plugins {
 
 dependencies {
 	implementation project(':feature:keyboard:contract')
+
+	androidTestImplementation("junit:junit:${VERSION_JUNIT4}")
 }
