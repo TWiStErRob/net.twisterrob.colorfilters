@@ -1,6 +1,5 @@
 package net.twisterrob.colorfilters.android.porterduff
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.verify
@@ -10,9 +9,7 @@ import net.twisterrob.colorfilters.android.test.ui.ColorFilterFragmentHost
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
 @LargeTest
 class PorterDuffFragmentTest {
 
