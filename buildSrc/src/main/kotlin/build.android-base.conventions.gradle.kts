@@ -33,6 +33,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 
 @Suppress("UnstableApiUsage")
 (project.extensions["android"] as CommonExtension<*, *, *, *>).apply android@{
+	@Suppress("MagicNumber")
 	defaultConfig {
 		minSdk = 14
 		if (this@android is AppExtension) {
@@ -83,6 +84,19 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 	if (this@android is LibraryExtension) {
 		// Disable BuildConfig class generation for features and components, we only need it in :app.
 		buildFeatures.buildConfig = false
+	}
+}
+
+configurations.all {
+	resolutionStrategy.eachDependency {
+		if (requested.group == "org.hamcrest" && requested.name == "hamcrest-library") {
+			useTarget("${target.group}:hamcrest:${target.version}")
+			because("Since 2.2 hamcrest-core and hamcrest-library are deprecated.")
+		}
+		if (requested.group == "org.hamcrest" && requested.name == "hamcrest-core") {
+			useTarget("${target.group}:hamcrest:${target.version}")
+			because("Since 2.2 hamcrest-core and hamcrest-library are deprecated.")
+		}
 	}
 }
 

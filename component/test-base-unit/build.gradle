@@ -6,7 +6,7 @@ dependencies {
 	api(platform("org.junit:junit-bom:${VERSION_JUNIT5}"))
 	api("org.junit.jupiter:junit-jupiter")
 
-	api("org.hamcrest:hamcrest-library:2.2")
+	api("org.hamcrest:hamcrest:2.2")
 
 	api("org.mockito:mockito-inline:${VERSION_MOCKITO}")
 	api("org.mockito.kotlin:mockito-kotlin:${VERSION_MOCKITO_KOTLIN}")

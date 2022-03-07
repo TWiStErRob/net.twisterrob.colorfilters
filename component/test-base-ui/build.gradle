@@ -14,7 +14,7 @@ dependencies {
 	api("androidx.test.ext:junit-ktx:1.1.3")
 
 	api("junit:junit:${VERSION_JUNIT4}")
-	api("org.hamcrest:hamcrest-library:2.2")
+	api("org.hamcrest:hamcrest:2.2")
 
 	api("org.mockito:mockito-core:${VERSION_MOCKITO}")
 	api("org.mockito:mockito-android:${VERSION_MOCKITO}")
