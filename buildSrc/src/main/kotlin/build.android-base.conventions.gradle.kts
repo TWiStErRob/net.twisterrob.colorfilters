@@ -47,9 +47,11 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 		dependencies {
 			val VERSION_JUNIT5_ANDROIDTEST: String by project.properties
 			add("androidTestRuntimeOnly", "de.mannodermaus.junit5:android-test-runner:${VERSION_JUNIT5_ANDROIDTEST}")
+			//add("androidTestUtil", "androidx.test.services:test-services:...")
 		}
 		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 		testInstrumentationRunnerArguments["runnerBuilder"] = "de.mannodermaus.junit5.AndroidJUnit5Builder"
+		//testInstrumentationRunnerArguments["useTestStorageService"] = "true"
 
 		if (this@android is LibraryExtension) {
 			this@defaultConfig as LibraryDefaultConfig
