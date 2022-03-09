@@ -132,3 +132,65 @@ jobs:
             echo "Detekt report file '${mergedReport}' does not exist."
             exit 2
           fi
+
+  instrumentation:
+    name: 🧪 Instrumentation Tests
+    runs-on: macos-latest
+    timeout-minutes: 15
+    steps:
+      - name: Set up JDKs.
+        run: |
+          echo "JAVA8_HOME=$JAVA_HOME_8_X64" | tee --append $GITHUB_ENV
+          echo "JAVA11_HOME=$JAVA_HOME_11_X64" | tee --append $GITHUB_ENV
+          echo "JAVA_HOME=$JAVA_HOME_11_X64" | tee --append $GITHUB_ENV
+          
+      - name: Set up Android SDK.
+        uses: android-actions/setup-android@v2
+
+      - name: Install Android SDK components
+        run: |
+          # Uninstall NDK, because it's not used and it emits a warning:
+          # Warning: Observed package id 'ndk;21.4.7075529' in inconsistent location '/usr/local/lib/android/sdk/ndk-bundle' (Expected '/usr/local/lib/android/sdk/ndk/21.4.7075529')
+          echo sdkmanager --uninstall "ndk;21.4.7075529"
+          sdkmanager --uninstall "ndk;21.4.7075529"
+          # The following are already done by setup-android@v2 action:
+          # sdkmanager --install "cmdline-tools;latest"
+          # sdkmanager --install "tools"
+          # sdkmanager --install "platform-tools"
+          # Install Android API used to build the project.
+          echo sdkmanager --install "platforms;android-31"
+          sdkmanager --install "platforms;android-31"
+
+      - name: Checkout ${{ github.ref }} branch in ${{ github.repository }} repository.
+        uses: actions/checkout@v2
+
+      - name: Run Instrumentation Tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          script: ./gradlew connectedCheck mergeAndroidReports --continue
+
+      - name: Upload "Instrumentation Test Results".
+        if: success() || failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Instrumentation Test Results
+          path: ${{ github.workspace }}/**/build/outputs/androidTest-results/connected/
+
+      - name: Upload "Instrumentation Merged Results".
+        if: success() || failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Instrumentation Merged Results
+          path: ${{ github.workspace }}/build/androidTest-results/
+
+      - name: Publish Instrumentation Test Results
+        if: success() || failure()
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        with:
+          check_name: "🔔 Test: Instrumentation Results"
+          comment_title: Instrumentation Test Results
+          report_individual_runs: true
+          test_changes_limit: 0
+          files: ${{ github.workspace }}/**/build/androidTest-results/connected/TEST-*.xml
+          # Not including: ${{ github.workspace }}/build/androidTest-results/ as it's duplicated.
