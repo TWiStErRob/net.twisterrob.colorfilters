@@ -185,7 +185,7 @@ jobs:
           # Exclude names with colon: https://issuetracker.google.com/issues/223643506
           path: |
             ${{ github.workspace }}/build/androidTest-results/
-            !*:*
+            !**/*:*
 
   instrumentation-publish:
     name: 📝 Publish Instrumentation Test Results
