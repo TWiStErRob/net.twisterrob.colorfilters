@@ -190,24 +190,6 @@ jobs:
             ${{ github.workspace }}/build/androidTest-results/
             !**/*:*
 
-  instrumentation-publish:
-    name: 📝 Publish Instrumentation Test Results
-    runs-on: ubuntu-latest
-    needs: instrumentation
-    # The dependency job might be skipped, we don't need to run this job then.
-    if: success() || failure()
-    timeout-minutes: 2
-    steps:
-      - name: Download 'Instrumentation Test Results'
-        uses: actions/download-artifact@v2
-        with:
-          name: Instrumentation Test Results
-          path: artifacts/Instrumentation Test Results
-
-      #- name: Display structure of downloaded files
-      #  run: ls -R
-      #  working-directory: artifacts
-
       - name: Publish Instrumentation Test Results
         if: success() || failure()
         uses: EnricoMi/publish-unit-test-result-action@v1
@@ -216,4 +198,4 @@ jobs:
           comment_title: Instrumentation Test Results
           report_individual_runs: true
           test_changes_limit: 0
-          files: artifacts/Instrumentation Test Results/**/connected/TEST-*.xml
+          files: ${{ github.workspace }}/**/build/outputs/androidTest-results/connected/TEST-*.xml
