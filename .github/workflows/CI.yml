@@ -143,7 +143,7 @@ jobs:
           echo "JAVA8_HOME=$JAVA_HOME_8_X64" | tee -a $GITHUB_ENV
           echo "JAVA11_HOME=$JAVA_HOME_11_X64" | tee -a $GITHUB_ENV
           echo "JAVA_HOME=$JAVA_HOME_11_X64" | tee -a $GITHUB_ENV
-          
+
       - name: Set up Android SDK.
         uses: android-actions/setup-android@v2
 
