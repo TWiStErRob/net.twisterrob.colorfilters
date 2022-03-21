@@ -204,9 +204,9 @@ jobs:
           name: Instrumentation Test Results
           path: artifacts/Instrumentation Test Results
 
-      - name: Display structure of downloaded files
-        run: ls -R
-        working-directory: artifacts
+      #- name: Display structure of downloaded files
+      #  run: ls -R
+      #  working-directory: artifacts
 
       - name: Publish Instrumentation Test Results
         if: success() || failure()
@@ -216,4 +216,4 @@ jobs:
           comment_title: Instrumentation Test Results
           report_individual_runs: true
           test_changes_limit: 0
-          files: artifacts/Instrumentation Test Results/TEST-*.xml
+          files: artifacts/Instrumentation Test Results/**/connected/TEST-*.xml
