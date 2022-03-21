@@ -175,7 +175,10 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Instrumentation Test Results
-          path: ${{ github.workspace }}/**/build/outputs/androidTest-results/connected/
+          # Exclude names with colon: https://issuetracker.google.com/issues/223643506
+          path: |
+            ${{ github.workspace }}/**/build/outputs/androidTest-results/connected/
+            !**/*:*
 
       - name: Upload "Instrumentation Merged Results".
         if: success() || failure()
@@ -185,7 +188,7 @@ jobs:
           # Exclude names with colon: https://issuetracker.google.com/issues/223643506
           path: |
             ${{ github.workspace }}/build/androidTest-results/
-            !**/*(AVD)*/
+            !**/*:*
 
   instrumentation-publish:
     name: 📝 Publish Instrumentation Test Results
