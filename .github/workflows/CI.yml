@@ -136,7 +136,7 @@ jobs:
   instrumentation:
     name: 🧪 Instrumentation Tests
     runs-on: macos-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - name: Set up JDKs.
         run: |
