@@ -61,9 +61,14 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Lint Results HTMLs
-          path: |
-            ${{ github.workspace }}/**/build/reports/lint-results*.html
-            ${{ github.workspace }}/build/reports/violations.*
+          path: ${{ github.workspace }}/**/build/reports/lint-results*.html
+
+      - name: Upload "Lint Merged Results".
+        if: success() || failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Lint Merged Results
+          path: ${{ github.workspace }}/build/reports/violations.*
 
       - name: Fail if there are violations
         if: success() || failure()
@@ -99,16 +104,14 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Detekt Results
-          path: |
-            ${{ github.workspace }}/**/build/reports/detekt/detekt.*
+          path: ${{ github.workspace }}/**/build/reports/detekt/detekt.*
 
       - name: Upload "Detekt Merged Results".
         if: success() || failure()
         uses: actions/upload-artifact@v2
         with:
           name: Detekt Merged Results
-          path: |
-            ${{ github.workspace }}/build/reports/detekt/merge.*
+          path: ${{ github.workspace }}/build/reports/detekt/merge.*
 
       - name: Fail if Detekt is missing merged report or has warnings.
         if: success() || failure()
