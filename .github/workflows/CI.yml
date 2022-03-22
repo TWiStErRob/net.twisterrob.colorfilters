@@ -204,7 +204,7 @@ jobs:
         if: success() || failure()
         uses: EnricoMi/publish-unit-test-result-action/composite@v1
         with:
-          check_name: "🔔 Test: Instrumentation Test Results"
+          check_name: "🔔 Test: Instrumentation Results"
           comment_title: Instrumentation Test Results
           report_individual_runs: true
           test_changes_limit: 0
