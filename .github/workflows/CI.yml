@@ -1,0 +1,211 @@
+name: CI
+on:
+  push
+concurrency:
+  # Documentation suggests ${{ github.head_ref }}, but that's only available on pull_request/pull_request_target triggers, so using ${{ github.ref }}.
+  # On master, we want all builds to complete even if merging happens faster to make it easier to discover at which point something broke.
+  # More info: https://stackoverflow.com/a/68422069/253468:
+  group: ${{ github.ref == 'refs/heads/master' && format('ci-master-{0}', github.sha) || format('ci-{0}', github.ref) }}
+  cancel-in-progress: true
+jobs:
+  build:
+    name: 🔨 Build & Verify
+    runs-on: ubuntu-latest
+    # A local build took 20 seconds, CI takes 3 minutes with setup.
+    # Because it's cloud, give it a bit of a buffer and constrain.
+    timeout-minutes: 10
+    steps:
+      - name: Set up JDKs.
+        run: |
+          echo "JAVA8_HOME=$JAVA_HOME_8_X64" | tee --append $GITHUB_ENV
+          echo "JAVA11_HOME=$JAVA_HOME_11_X64" | tee --append $GITHUB_ENV
+          echo "JAVA_HOME=$JAVA_HOME_11_X64" | tee --append $GITHUB_ENV
+
+      - name: Set up Android SDK.
+        uses: android-actions/setup-android@v2
+
+      - name: Install Android SDK components
+        run: |
+          # Uninstall NDK, because it's not used and it emits a warning:
+          # Warning: Observed package id 'ndk;21.4.7075529' in inconsistent location '/usr/local/lib/android/sdk/ndk-bundle' (Expected '/usr/local/lib/android/sdk/ndk/21.4.7075529')
+          echo sdkmanager --uninstall "ndk;21.4.7075529"
+          sdkmanager --uninstall "ndk;21.4.7075529"
+          # The following are already done by setup-android@v2 action:
+          # sdkmanager --install "cmdline-tools;latest"
+          # sdkmanager --install "tools"
+          # sdkmanager --install "platform-tools"
+          # Install Android API used to build the project.
+          echo sdkmanager --install "platforms;android-31"
+          sdkmanager --install "platforms;android-31"
+
+      - name: Checkout ${{ github.ref }} branch in ${{ github.repository }} repository.
+        uses: actions/checkout@v2
+
+      - name: Build & Verify project.
+        run: >
+          ./gradlew
+          --no-daemon
+          --no-build-cache
+          --continue
+          --stacktrace
+          assemble
+          lint
+          detekt
+          test
+          check
+          violationReportHtml
+          violationCountFile
+
+      - name: Upload "Lint Results".
+        if: success() || failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Lint Results HTMLs
+          path: ${{ github.workspace }}/**/build/reports/lint-results*.html
+
+      - name: Upload "Lint Merged Results".
+        if: success() || failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Lint Merged Results
+          path: ${{ github.workspace }}/build/reports/violations.*
+
+      - name: Fail if there are violations
+        if: success() || failure()
+        run: |
+          count=$(cat "${{ github.workspace }}/build/reports/violations.count")
+          if [[ "$count" != "0" ]]; then
+            echo "There were $count violations"
+            exit 1
+          else
+            echo "No violations found."
+            exit 0
+          fi
+
+      - name: Upload "Unit Test Results".
+        if: success() || failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Unit Test Results
+          path: ${{ github.workspace }}/**/build/reports/tests/*/
+
+      - name: Publish Unit Test Results
+        if: success() || failure()
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        with:
+          check_name: "🔔 Test: Unit Results"
+          comment_title: Unit Test Results
+          report_individual_runs: true
+          test_changes_limit: 0
+          files: ${{ github.workspace }}/**/build/test-results/*/TEST-*.xml
+
+      - name: Upload "Detekt Results".
+        if: success() || failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Detekt Results
+          path: ${{ github.workspace }}/**/build/reports/detekt/detekt.*
+
+      - name: Upload "Detekt Merged Results".
+        if: success() || failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Detekt Merged Results
+          path: ${{ github.workspace }}/build/reports/detekt/merge.*
+
+      - name: Fail if Detekt is missing merged report or has warnings.
+        if: success() || failure()
+        run: |
+          mergedReport=build/reports/detekt/merge.xml
+          if [ ! -f "${mergedReport}" ]; then # -f: Path exists and is regular file.
+            echo "Detekt report file '${mergedReport}' does not exist."
+            exit 2
+          fi
+          count=$(grep --count '<file name=' "${mergedReport}" || true) 
+          if [ $count != 0 ]; then 
+            echo "There were $count Detekt failures in '${mergedReport}'."
+            exit 3
+          fi
+
+      - name: Publish Detekt Results
+        uses: github/codeql-action/upload-sarif@v1
+        if: success() || failure()
+        with:
+          checkout_path: ${{ github.workspace }}
+          sarif_file: ${{ github.workspace }}/build/reports/detekt/merge.sarif
+
+      - name: Fail if Detekt is missing Sarif report for publishing on GitHub.
+        if: success() || failure()
+        run: |
+          mergedReport=build/reports/detekt/merge.sarif
+          if [ ! -f "${mergedReport}" ]; then # -f: Path exists and is regular file.
+            echo "Detekt report file '${mergedReport}' does not exist."
+            exit 2
+          fi
+
+  instrumentation:
+    name: 🧪 Instrumentation Tests
+    runs-on: macos-latest
+    timeout-minutes: 25
+    steps:
+      - name: Set up JDKs.
+        run: |
+          echo "JAVA8_HOME=$JAVA_HOME_8_X64" | tee -a $GITHUB_ENV
+          echo "JAVA11_HOME=$JAVA_HOME_11_X64" | tee -a $GITHUB_ENV
+          echo "JAVA_HOME=$JAVA_HOME_11_X64" | tee -a $GITHUB_ENV
+
+      - name: Set up Android SDK.
+        uses: android-actions/setup-android@v2
+
+      - name: Install Android SDK components
+        run: |
+          # Uninstall NDK, because it's not used and it emits a warning:
+          # Warning: Observed package id 'ndk;21.4.7075529' in inconsistent location '/usr/local/lib/android/sdk/ndk-bundle' (Expected '/usr/local/lib/android/sdk/ndk/21.4.7075529')
+          echo sdkmanager --uninstall "ndk;21.4.7075529"
+          sdkmanager --uninstall "ndk;21.4.7075529"
+          # The following are already done by setup-android@v2 action:
+          # sdkmanager --install "cmdline-tools;latest"
+          # sdkmanager --install "tools"
+          # sdkmanager --install "platform-tools"
+          # Install Android API used to build the project.
+          echo sdkmanager --install "platforms;android-31"
+          sdkmanager --install "platforms;android-31"
+
+      - name: Checkout ${{ github.ref }} branch in ${{ github.repository }} repository.
+        uses: actions/checkout@v2
+
+      - name: Run Instrumentation Tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          script: ./gradlew connectedCheck mergeAndroidReports --continue
+
+      - name: Upload "Instrumentation Test Results".
+        if: success() || failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Instrumentation Test Results
+          # Exclude names with colon: https://issuetracker.google.com/issues/223643506
+          path: |
+            ${{ github.workspace }}/**/build/outputs/androidTest-results/connected/
+            !**/*:*
+
+      - name: Upload "Instrumentation Merged Results".
+        if: success() || failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Instrumentation Merged Results
+          # Exclude names with colon: https://issuetracker.google.com/issues/223643506
+          path: |
+            ${{ github.workspace }}/build/androidTest-results/
+            !**/*:*
+
+      - name: Publish Instrumentation Test Results
+        if: success() || failure()
+        uses: EnricoMi/publish-unit-test-result-action/composite@v1
+        with:
+          check_name: "🔔 Test: Instrumentation Results"
+          comment_title: Instrumentation Test Results
+          report_individual_runs: true
+          test_changes_limit: 0
+          files: ${{ github.workspace }}/**/build/outputs/androidTest-results/connected/TEST-*.xml
