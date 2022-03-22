@@ -194,6 +194,8 @@ jobs:
         if: success() || failure()
         uses: EnricoMi/publish-unit-test-result-action@v1
         with:
+          root_log_level: DEBUG
+          log_level: DEBUG
           check_name: "🔔 Test: Instrumentation Test Results"
           comment_title: Instrumentation Test Results
           report_individual_runs: true
