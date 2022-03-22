@@ -101,6 +101,13 @@ jobs:
           name: Detekt Results
           path: |
             ${{ github.workspace }}/**/build/reports/detekt/detekt.*
+
+      - name: Upload "Detekt Merged Results".
+        if: success() || failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Detekt Merged Results
+          path: |
             ${{ github.workspace }}/build/reports/detekt/merge.*
 
       - name: Fail if Detekt is missing merged report or has warnings.
