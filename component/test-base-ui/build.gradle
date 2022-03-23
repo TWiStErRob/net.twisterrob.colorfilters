@@ -28,9 +28,9 @@ dependencies {
 
 	api("org.hamcrest:hamcrest:2.2")
 
-	api("org.mockito:mockito-core:${VERSION_MOCKITO}")
-	api("org.mockito:mockito-android:${VERSION_MOCKITO}")
-	api("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
+	api(libs.mockito.core)
+	api(libs.mockito.android)
+	api(libs.mockito.kotlin.old)
 
 	api("org.junit.jupiter:junit-jupiter-api:${VERSION_JUNIT5}")
 	api("de.mannodermaus.junit5:android-test-core:${VERSION_JUNIT5_ANDROIDTEST}") {

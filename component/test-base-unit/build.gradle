@@ -8,8 +8,8 @@ dependencies {
 
 	api("org.hamcrest:hamcrest:2.2")
 
-	api("org.mockito:mockito-inline:${VERSION_MOCKITO}")
-	api("org.mockito.kotlin:mockito-kotlin:${VERSION_MOCKITO_KOTLIN}")
+	api(libs.mockito.inline)
+	api(libs.mockito.kotlin)
 }
 
 configurations.all {

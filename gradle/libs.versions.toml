@@ -3,9 +3,19 @@
 glide = "4.11.0"
 junit4 = "4.13.2"
 
+# https://github.com/mockito/mockito/releases
+mockito="4.3.1"
+mockito-kotlin="4.0.0"
+
 [libraries]
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide"}
 junit4 = { module = "junit:junit", version.ref = "junit4" }
+
+mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
+mockito-inline = { module = "org.mockito:mockito-inline", version.ref = "mockito" }
+mockito-android = { module = "org.mockito:mockito-android", version.ref = "mockito" }
+mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockito-kotlin" }
+mockito-kotlin-old = { module = "com.nhaarman.mockitokotlin2:mockito-kotlin", version = "2.2.0" }
 
 [bundles]
 
