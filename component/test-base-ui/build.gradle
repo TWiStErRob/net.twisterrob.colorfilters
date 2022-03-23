@@ -4,7 +4,7 @@ plugins {
 
 dependencies {
 	implementation project(':feature:base')
-	implementation("junit:junit:${VERSION_JUNIT4}")
+	implementation(libs.junit4)
 	implementation("androidx.test:rules:1.4.0")
 
 	api("androidx.multidex:multidex:2.0.0")

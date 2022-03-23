@@ -7,5 +7,5 @@ dependencies {
 
 	// TODEL https://github.com/TWiStErRob/net.twisterrob.colorfilters/issues/41
 	androidTestImplementation("androidx.test:rules:1.4.0")
-	androidTestImplementation("junit:junit:${VERSION_JUNIT4}")
+	androidTestImplementation(libs.junit4)
 }

@@ -1,9 +1,11 @@
 [versions]
 # https://github.com/bumptech/glide/releases
 glide = "4.11.0"
+junit4 = "4.13.2"
 
 [libraries]
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide"}
+junit4 = { module = "junit:junit", version.ref = "junit4" }
 
 [bundles]
 
