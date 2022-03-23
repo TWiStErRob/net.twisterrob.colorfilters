@@ -5,7 +5,7 @@ plugins {
 dependencies {
 	implementation project(':feature:base')
 
-	implementation("com.github.bumptech.glide:glide:${VERSION_GLIDE}") {
+	implementation(libs.glide) {
 		exclude group: 'com.android.support'
 	}
 }
