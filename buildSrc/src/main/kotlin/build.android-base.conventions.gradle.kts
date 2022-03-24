@@ -112,10 +112,9 @@ configurations.all {
 
 // Central Kotlin configuration.
 run {
-	val VERSION_KOTLIN: String by project.properties
 	dependencies {
-		add("implementation", platform("org.jetbrains.kotlin:kotlin-bom:${VERSION_KOTLIN}"))
-		add("implementation", "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${VERSION_KOTLIN}")
+		add("implementation", platform(libs.kotlin))
+		add("implementation", libs.kotlin.stdlib.jdk8)
 	}
 }
 

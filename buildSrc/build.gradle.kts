@@ -1,34 +1,21 @@
-@file:Suppress("PropertyName")
-
-import java.util.Properties
-
 plugins {
 	`kotlin-dsl`
 }
+
 repositories {
 	google()
 	mavenCentral()
 }
 
-val props = Properties().apply {
-	load(file("../gradle.properties").inputStream())
-}
-
-val VERSION_KOTLIN: String by props
-val VERSION_DETEKT: String by props
-val VERSION_AGP: String by props
-val VERSION_PLUGIN_QUALITY: String by props
-val VERSION_PLUGIN_ANDROID: String by props
-
 dependencies {
 	compileOnly(gradleApi())
-	implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:${VERSION_KOTLIN}")
-	implementation("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${VERSION_DETEKT}")
+	implementation(libs.kotlin.gradle)
+	implementation(libs.kotlin.detekt)
 
 	configurations.all { resolutionStrategy.cacheChangingModulesFor(0, TimeUnit.SECONDS) /* -SNAPSHOT */ }
-	implementation("com.android.tools.build:gradle:${VERSION_AGP}")
-	implementation("net.twisterrob.gradle:twister-quality:${VERSION_PLUGIN_QUALITY}")
-	implementation("net.twisterrob.gradle:twister-convention-plugins:${VERSION_PLUGIN_ANDROID}")
+	implementation(libs.android.gradle)
+	implementation(libs.twisterrob.quality)
+	implementation(libs.twisterrob.android)
 	implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 }
 
