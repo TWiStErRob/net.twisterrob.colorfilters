@@ -29,6 +29,7 @@ dependencies {
 	implementation("com.android.tools.build:gradle:${VERSION_AGP}")
 	implementation("net.twisterrob.gradle:twister-quality:${VERSION_PLUGIN_QUALITY}")
 	implementation("net.twisterrob.gradle:twister-convention-plugins:${VERSION_PLUGIN_ANDROID}")
+	implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {

@@ -16,6 +16,8 @@ plugins {
 	id("io.gitlab.arturbosch.detekt")
 }
 
+val libs = the<org.gradle.accessors.dm.LibrariesForLibs>()
+
 val javaVersion = JavaVersion.VERSION_1_8
 
 tasks.withType<JavaCompile> {
