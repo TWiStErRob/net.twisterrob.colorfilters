@@ -1,3 +1,5 @@
+import static VersionCatalogExt.exclude
+
 plugins {
 	id("net.twisterrob.colorfilters.component.conventions")
 }
@@ -6,6 +8,6 @@ dependencies {
 	implementation(projects.feature.base)
 
 	implementation(libs.glide) {
-		exclude(ExcludeConvertersKt.asGroup(libs.androidx.support))
+		exclude(it, libs.androidx.support, null)
 	}
 }
