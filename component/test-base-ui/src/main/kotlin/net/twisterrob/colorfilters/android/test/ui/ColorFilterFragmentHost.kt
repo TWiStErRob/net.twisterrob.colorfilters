@@ -7,9 +7,9 @@ import android.view.LayoutInflater
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.test.platform.app.InstrumentationRegistry
-import com.nhaarman.mockitokotlin2.mock
 import net.twisterrob.colorfilters.android.ColorFilterFragment
 import org.mockito.Answers
+import org.mockito.kotlin.mock
 import kotlin.reflect.KClass
 
 /**

@@ -32,7 +32,7 @@ dependencies {
 
 	api(libs.mockito.core)
 	api(libs.mockito.android)
-	api(libs.mockito.kotlin.old)
+	api(libs.mockito.kotlin)
 
 	api(libs.junit5.api)
 	api(libs.junit5.android) {
