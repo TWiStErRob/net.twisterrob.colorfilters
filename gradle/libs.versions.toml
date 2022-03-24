@@ -14,6 +14,8 @@ androidx-test = "1.4.0"
 androidx-test-espresso = "3.4.0"
 
 junit4 = "4.13.2"
+jmh = "1.34"
+hamcrest = "2.2"
 
 # https://github.com/mockito/mockito/releases
 mockito="4.3.1"
@@ -64,6 +66,7 @@ androidx-test-espresso-core = { module = "androidx.test.espresso:espresso-core" 
 
 junit4 = { module = "junit:junit", version.ref = "junit4" }
 junit5 = { module = "org.junit:junit-bom", version.ref = "junit5" }
+junit5-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit5" }
 junit5-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit5" }
 junit5-android = { module = "de.mannodermaus.junit5:android-test-core", version.ref = "junit5-androidtest" }
 junit5-android-runner = { module = "de.mannodermaus.junit5:android-test-runner", version.ref = "junit5-androidtest" }
@@ -73,6 +76,10 @@ mockito-inline = { module = "org.mockito:mockito-inline", version.ref = "mockito
 mockito-android = { module = "org.mockito:mockito-android", version.ref = "mockito" }
 mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockito-kotlin" }
 mockito-kotlin-old = { module = "com.nhaarman.mockitokotlin2:mockito-kotlin", version = "2.2.0" }
+
+hamcrest = { module = "org.hamcrest:hamcrest", version.ref = "hamcrest" }
+jmh = { module = "org.openjdk.jmh:jmh-core", version.ref = "jmh" }
+jmh-processor = { module = "org.openjdk.jmh:jmh-generator-annprocess", version.ref = "jmh" }
 
 [bundles]
 

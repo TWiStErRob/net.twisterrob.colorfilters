@@ -26,7 +26,7 @@ dependencies {
 	//noinspection FragmentGradleConfiguration registered correctly in :feature:base with debugImplementation.
 	api(libs.androidx.test.fragment)
 
-	api("org.hamcrest:hamcrest:2.2")
+	api(libs.hamcrest)
 
 	api(libs.mockito.core)
 	api(libs.mockito.android)

@@ -4,9 +4,9 @@ plugins {
 
 dependencies {
 	api(platform(libs.junit5))
-	api("org.junit.jupiter:junit-jupiter")
+	api(libs.junit5.jupiter)
 
-	api("org.hamcrest:hamcrest:2.2")
+	api(libs.hamcrest)
 
 	api(libs.mockito.inline)
 	api(libs.mockito.kotlin)
