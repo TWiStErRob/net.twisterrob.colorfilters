@@ -3,7 +3,7 @@ plugins {
 }
 
 dependencies {
-	implementation project(':feature:base')
+	implementation(projects.feature.base)
 	implementation(libs.junit4)
 	implementation(libs.androidx.test.rules)
 

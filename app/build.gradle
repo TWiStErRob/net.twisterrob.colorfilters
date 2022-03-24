@@ -4,24 +4,24 @@ plugins {
 }
 
 dependencies {
-	implementation project(':feature:base')
-	implementation project(':feature:image')
-	implementation project(':feature:lighting')
-	implementation project(':feature:porterduff')
-	implementation project(':feature:matrix')
-	implementation project(':feature:palette')
-	implementation project(':feature:resfont')
-	implementation project(':feature:keyboard')
-	implementation project(':feature:about')
+	implementation(projects.feature.base)
+	implementation(projects.feature.image)
+	implementation(projects.feature.lighting)
+	implementation(projects.feature.porterduff)
+	implementation(projects.feature.matrix)
+	implementation(projects.feature.palette)
+	implementation(projects.feature.resfont)
+	implementation(projects.feature.keyboard)
+	implementation(projects.feature.about)
 }
 
 dependencies {
-	androidTestImplementation project(':component:test-base-ui')
-	androidTestImplementation project(':feature:lighting:test-fixtures')
-	androidTestImplementation project(':feature:porterduff:test-fixtures')
-	androidTestImplementation project(':feature:matrix:test-fixtures')
-	androidTestImplementation project(':feature:palette:test-fixtures')
-	androidTestImplementation project(':feature:about:test-fixtures')
+	androidTestImplementation(projects.component.testBaseUi)
+	androidTestImplementation(projects.feature.lighting.testFixtures)
+	androidTestImplementation(projects.feature.porterduff.testFixtures)
+	androidTestImplementation(projects.feature.matrix.testFixtures)
+	androidTestImplementation(projects.feature.palette.testFixtures)
+	androidTestImplementation(projects.feature.about.testFixtures)
 }
 
 android {
