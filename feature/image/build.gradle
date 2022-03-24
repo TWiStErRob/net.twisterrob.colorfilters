@@ -6,6 +6,6 @@ dependencies {
 	implementation(projects.feature.base)
 
 	implementation(libs.glide) {
-		exclude group: 'com.android.support'
+		exclude(ExcludeConvertersKt.asGroup(libs.androidx.support))
 	}
 }

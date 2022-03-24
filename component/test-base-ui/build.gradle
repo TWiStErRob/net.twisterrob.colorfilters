@@ -11,12 +11,12 @@ dependencies {
 	api(libs.androidx.multidex.instrumentation)
 
 	api(libs.androidx.test.runner) {
-		// Exclude junit:junit, because all tests are using Jupiter.
-		exclude group: "junit", module: "junit"
+		// Exclude JUnit 4, because all tests are using Jupiter.
+		exclude(ExcludeConvertersKt.asCoordinate(libs.junit4))
 	}
 	api(libs.androidx.test.espresso.core) {
-		// Exclude junit:junit, because all tests are using Jupiter.
-		exclude group: "junit", module: "junit"
+		// Exclude JUnit 4, because all tests are using Jupiter.
+		exclude(ExcludeConvertersKt.asCoordinate(libs.junit4))
 	}
 
 	// REPORT false positive: //noinspection FragmentGradleConfiguration
@@ -34,7 +34,7 @@ dependencies {
 
 	api(libs.junit5.api)
 	api(libs.junit5.android) {
-		// Exclude junit:junit, because all tests are using Jupiter.
-		exclude group: "junit", module: "junit"
+		// Exclude JUnit 4, because all tests are using Jupiter.
+		exclude(ExcludeConvertersKt.asCoordinate(libs.junit4))
 	}
 }
