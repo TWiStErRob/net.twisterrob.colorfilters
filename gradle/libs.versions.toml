@@ -16,6 +16,7 @@ junit4 = { module = "junit:junit", version.ref = "junit4" }
 junit5 = { module = "org.junit:junit-bom", version.ref = "junit5" }
 junit5-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit5" }
 junit5-android = { module = "de.mannodermaus.junit5:android-test-core", version.ref = "junit5-androidtest" }
+junit5-android-runner = { module = "de.mannodermaus.junit5:android-test-runner", version.ref = "junit5-androidtest" }
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
 mockito-inline = { module = "org.mockito:mockito-inline", version.ref = "mockito" }
 mockito-android = { module = "org.mockito:mockito-android", version.ref = "mockito" }

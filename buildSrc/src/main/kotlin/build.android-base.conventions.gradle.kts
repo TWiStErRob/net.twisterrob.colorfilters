@@ -47,8 +47,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 	}
 	defaultConfig {
 		dependencies {
-			val VERSION_JUNIT5_ANDROIDTEST: String by project.properties
-			add("androidTestRuntimeOnly", "de.mannodermaus.junit5:android-test-runner:${VERSION_JUNIT5_ANDROIDTEST}")
+			add("androidTestRuntimeOnly", libs.junit5.android.runner)
 			//add("androidTestUtil", "androidx.test.services:test-services:...")
 		}
 		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
