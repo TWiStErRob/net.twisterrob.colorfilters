@@ -5,16 +5,16 @@ plugins {
 dependencies {
 	implementation project(':feature:base')
 	implementation(libs.junit4)
-	implementation("androidx.test:rules:1.4.0")
+	implementation(libs.androidx.test.rules)
 
-	api("androidx.multidex:multidex:2.0.0")
-	api("androidx.multidex:multidex-instrumentation:2.0.0")
+	api(libs.androidx.multidex)
+	api(libs.androidx.multidex.instrumentation)
 
-	api("androidx.test:runner:1.4.0") {
+	api(libs.androidx.test.runner) {
 		// Exclude junit:junit, because all tests are using Jupiter.
 		exclude group: "junit", module: "junit"
 	}
-	api("androidx.test.espresso:espresso-core:3.4.0") {
+	api(libs.androidx.test.espresso.core) {
 		// Exclude junit:junit, because all tests are using Jupiter.
 		exclude group: "junit", module: "junit"
 	}
@@ -24,7 +24,7 @@ dependencies {
 	// Only baseline worked. 😌
 	// This line is present so that FragmentScenario is reachable in UI test code.
 	//noinspection FragmentGradleConfiguration registered correctly in :feature:base with debugImplementation.
-	api("androidx.fragment:fragment-testing:1.4.1")
+	api(libs.androidx.test.fragment)
 
 	api("org.hamcrest:hamcrest:2.2")
 
