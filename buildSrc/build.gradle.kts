@@ -16,7 +16,8 @@ dependencies {
 	implementation(libs.android.gradle)
 	implementation(libs.twisterrob.quality)
 	implementation(libs.twisterrob.android)
-	implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
+	// TODEL https://github.com/gradle/gradle/issues/15383
+	implementation(files(libs::class.java.protectionDomain.codeSource.location))
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
