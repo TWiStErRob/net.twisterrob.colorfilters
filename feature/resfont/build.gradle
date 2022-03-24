@@ -3,5 +3,5 @@ plugins {
 }
 
 dependencies {
-	implementation project(':feature:keyboard:contract')
+	implementation(projects.feature.keyboard.contract)
 }

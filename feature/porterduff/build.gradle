@@ -3,8 +3,9 @@ plugins {
 }
 
 dependencies {
-	implementation project(':feature:keyboard:contract')
+	implementation(projects.feature.keyboard.contract)
 
-	androidTestImplementation("androidx.test:rules:1.4.0")
-	androidTestImplementation("junit:junit:${VERSION_JUNIT4}")
+	// TODEL https://github.com/TWiStErRob/net.twisterrob.colorfilters/issues/41
+	androidTestImplementation(libs.androidx.test.rules)
+	androidTestImplementation(libs.junit4)
 }

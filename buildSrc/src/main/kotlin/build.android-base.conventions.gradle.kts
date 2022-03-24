@@ -16,6 +16,8 @@ plugins {
 	id("io.gitlab.arturbosch.detekt")
 }
 
+val libs = the<org.gradle.accessors.dm.LibrariesForLibs>()
+
 val javaVersion = JavaVersion.VERSION_1_8
 
 tasks.withType<JavaCompile> {
@@ -45,8 +47,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 	}
 	defaultConfig {
 		dependencies {
-			val VERSION_JUNIT5_ANDROIDTEST: String by project.properties
-			add("androidTestRuntimeOnly", "de.mannodermaus.junit5:android-test-runner:${VERSION_JUNIT5_ANDROIDTEST}")
+			add("androidTestRuntimeOnly", libs.junit5.android.runner)
 			//add("androidTestUtil", "androidx.test.services:test-services:...")
 		}
 		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -111,10 +112,9 @@ configurations.all {
 
 // Central Kotlin configuration.
 run {
-	val VERSION_KOTLIN: String by project.properties
 	dependencies {
-		add("implementation", platform("org.jetbrains.kotlin:kotlin-bom:${VERSION_KOTLIN}"))
-		add("implementation", "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${VERSION_KOTLIN}")
+		add("implementation", platform(libs.kotlin))
+		add("implementation", libs.kotlin.stdlib.jdk8)
 	}
 }
 

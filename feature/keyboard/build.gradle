@@ -1,7 +1,3 @@
 plugins {
 	id("net.twisterrob.colorfilters.component.conventions")
 }
-
-dependencies {
-	api project('contract')
-}

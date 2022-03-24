@@ -9,5 +9,5 @@ dependencies {
 	testImplementation(project(":component:test-base-unit"))
 
 	androidTestImplementation(project(":component:test-base-ui"))
-	androidTestImplementation(project("${project.path}:test-fixtures"))
+	androidTestImplementation(project("test-fixtures"))
 }

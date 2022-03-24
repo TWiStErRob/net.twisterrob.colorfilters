@@ -3,22 +3,22 @@ plugins {
 }
 
 dependencies {
-	api(platform("org.junit:junit-bom:${VERSION_JUNIT5}"))
-	api("org.junit.jupiter:junit-jupiter")
+	api(platform(libs.junit5))
+	api(libs.junit5.jupiter)
 
-	api("org.hamcrest:hamcrest:2.2")
+	api(libs.hamcrest)
 
-	api("org.mockito:mockito-inline:${VERSION_MOCKITO}")
-	api("org.mockito.kotlin:mockito-kotlin:${VERSION_MOCKITO_KOTLIN}")
+	api(libs.mockito.inline)
+	api(libs.mockito.kotlin)
 }
 
-configurations.all {
-	resolutionStrategy.eachDependency {
-		if (requested.group == "org.mockito" && requested.name == "mockito-inline") {
-			useTarget("${target.group}:mockito-android:${target.version}")
+configurations.all { Configuration configuration ->
+	configuration.resolutionStrategy.eachDependency { dep -> 
+		if (dep.requested.module == libs.mockito.inline.get().module) {
+			dep.useTarget(libs.mockito.android)
 			// mockito-inline coming from `api`.
 			// mockito-android coming from automatic androidTest dependency.
-			because("Fix `2 files found with path 'mockito-extensions/org.mockito.plugins.MockMaker'`")
+			dep.because("Fix `2 files found with path 'mockito-extensions/org.mockito.plugins.MockMaker'`")
 		}
 	}
 }

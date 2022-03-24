@@ -1,22 +1,24 @@
+import static VersionCatalogExt.exclude
+
 plugins {
 	id("net.twisterrob.colorfilters.component.conventions")
 }
 
 dependencies {
-	implementation project(':feature:base')
-	implementation("junit:junit:${VERSION_JUNIT4}")
-	implementation("androidx.test:rules:1.4.0")
+	implementation(projects.feature.base)
+	implementation(libs.junit4)
+	implementation(libs.androidx.test.rules)
 
-	api("androidx.multidex:multidex:2.0.0")
-	api("androidx.multidex:multidex-instrumentation:2.0.0")
+	api(libs.androidx.multidex)
+	api(libs.androidx.multidex.instrumentation)
 
-	api("androidx.test:runner:1.4.0") {
-		// Exclude junit:junit, because all tests are using Jupiter.
-		exclude group: "junit", module: "junit"
+	api(libs.androidx.test.runner) {
+		// Exclude JUnit 4, because all tests are using Jupiter.
+		exclude(it, libs.junit4)
 	}
-	api("androidx.test.espresso:espresso-core:3.4.0") {
-		// Exclude junit:junit, because all tests are using Jupiter.
-		exclude group: "junit", module: "junit"
+	api(libs.androidx.test.espresso.core) {
+		// Exclude JUnit 4, because all tests are using Jupiter.
+		exclude(it, libs.junit4)
 	}
 
 	// REPORT false positive: //noinspection FragmentGradleConfiguration
@@ -24,17 +26,17 @@ dependencies {
 	// Only baseline worked. 😌
 	// This line is present so that FragmentScenario is reachable in UI test code.
 	//noinspection FragmentGradleConfiguration registered correctly in :feature:base with debugImplementation.
-	api("androidx.fragment:fragment-testing:1.4.1")
+	api(libs.androidx.test.fragment)
 
-	api("org.hamcrest:hamcrest:2.2")
+	api(libs.hamcrest)
 
-	api("org.mockito:mockito-core:${VERSION_MOCKITO}")
-	api("org.mockito:mockito-android:${VERSION_MOCKITO}")
-	api("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
+	api(libs.mockito.core)
+	api(libs.mockito.android)
+	api(libs.mockito.kotlin.old)
 
-	api("org.junit.jupiter:junit-jupiter-api:${VERSION_JUNIT5}")
-	api("de.mannodermaus.junit5:android-test-core:${VERSION_JUNIT5_ANDROIDTEST}") {
-		// Exclude junit:junit, because all tests are using Jupiter.
-		exclude group: "junit", module: "junit"
+	api(libs.junit5.api)
+	api(libs.junit5.android) {
+		// Exclude JUnit 4, because all tests are using Jupiter.
+		exclude(it, libs.junit4)
 	}
 }

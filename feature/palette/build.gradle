@@ -3,8 +3,8 @@ plugins {
 }
 
 dependencies {
-	implementation project(':feature:keyboard:contract')
+	implementation(projects.feature.keyboard.contract)
 
-	implementation "androidx.palette:palette:1.0.0"
-	implementation "androidx.palette:palette-ktx:1.0.0"
+	implementation(libs.androidx.palette)
+	implementation(libs.androidx.palette.ktx)
 }
