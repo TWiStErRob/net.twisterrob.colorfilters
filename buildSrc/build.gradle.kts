@@ -2,11 +2,6 @@ plugins {
 	`kotlin-dsl`
 }
 
-repositories {
-	google()
-	mavenCentral()
-}
-
 dependencies {
 	compileOnly(gradleApi())
 	implementation(libs.kotlin.gradle)
