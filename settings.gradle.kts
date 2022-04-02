@@ -19,6 +19,20 @@ include(":component:test-base-unit")
 include(":feature:image")
 include(":feature:keyboard", ":feature:keyboard:contract")
 
+dependencyResolutionManagement {
+	repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+	repositories {
+		google {
+			content {
+				includeGroupByRegex("""^com\.android(\..*)?$""")
+				includeGroupByRegex("""^com\.google\..*$""")
+				includeGroupByRegex("""^androidx\..*$""")
+			}
+		}
+		mavenCentral()
+	}
+}
+
 /**
  * @see <a href="https://github.com/gradle/gradle/issues/19069">Feature request</a>
  */
