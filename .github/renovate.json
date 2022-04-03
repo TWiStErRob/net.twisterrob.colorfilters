@@ -4,5 +4,13 @@
     "group:allNonMajor",
     ":disableDependencyDashboard"
   ],
-  "ignorePaths": []
+  "ignorePaths": [],
+  "packageRules": [
+    {
+      "matchPackageNames": [
+        "passed:skipped"
+      ],
+      "enabled": false
+    }
+  ]
 }
