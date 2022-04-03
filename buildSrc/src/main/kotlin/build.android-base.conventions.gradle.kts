@@ -68,7 +68,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 		// workaround? java.nio.file.Files.createSymbolicLink in settings.gradle
 		lintConfig = rootProject.file("config/lint/lint.xml")
 		val cleanPath = project.path.substring(1).replace(':', '+')
-		baseline = rootProject.file("config/lint/baseline ${cleanPath}.xml")
+		baseline = rootProject.file("config/lint/baseline/${cleanPath}.xml")
 		// TODEL https://issuetracker.google.com/issues/170658134
 		androidComponents.finalizeDsl {
 			if (buildFeatures.viewBinding == true || project.path == ":app") {

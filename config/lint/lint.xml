@@ -63,11 +63,11 @@
 	<issue id="InvalidPackage">
 
 		<!--
-			gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.12.7\8b23f1a6afed2b787102a3625c1cfddc56b17a73\byte-buddy-agent-1.12.7.jar
+			gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.12.8\a84042b14eb2751c732f2d6ee22d6bf51005114b\byte-buddy-agent-1.12.8.jar
 	        Invalid package reference in net.bytebuddy:byte-buddy-agent; not included in Android: `java.lang.instrument`. Referenced from `net.bytebuddy.agent.ByteBuddyAgent`.
 			Invalid package reference in net.bytebuddy:byte-buddy-agent; not included in Android: `java.lang.management`. Referenced from `net.bytebuddy.agent.ByteBuddyAgent.ProcessProvider.ForCurrentVm.ForLegacyVm`.
 		-->
-		<ignore path="**/byte-buddy-agent-1.12.7.jar" />
+		<ignore path="**/byte-buddy-agent-1.12.8.jar" />
 
 	</issue>
 
