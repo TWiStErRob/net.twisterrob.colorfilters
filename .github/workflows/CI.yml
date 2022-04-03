@@ -58,14 +58,14 @@ jobs:
 
       - name: Upload "Lint Results".
         if: success() || failure()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Lint Results HTMLs
           path: ${{ github.workspace }}/**/build/reports/lint-results*.html
 
       - name: Upload "Lint Merged Results".
         if: success() || failure()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Lint Merged Results
           path: ${{ github.workspace }}/build/reports/violations.*
@@ -84,7 +84,7 @@ jobs:
 
       - name: Upload "Unit Test Results".
         if: success() || failure()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Unit Test Results
           path: ${{ github.workspace }}/**/build/reports/tests/*/
@@ -101,14 +101,14 @@ jobs:
 
       - name: Upload "Detekt Results".
         if: success() || failure()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Detekt Results
           path: ${{ github.workspace }}/**/build/reports/detekt/detekt.*
 
       - name: Upload "Detekt Merged Results".
         if: success() || failure()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Detekt Merged Results
           path: ${{ github.workspace }}/build/reports/detekt/merge.*
@@ -182,7 +182,7 @@ jobs:
 
       - name: Upload "Instrumentation Test Results".
         if: success() || failure()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Instrumentation Test Results
           # Exclude names with colon: https://issuetracker.google.com/issues/223643506
@@ -192,7 +192,7 @@ jobs:
 
       - name: Upload "Instrumentation Merged Results".
         if: success() || failure()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Instrumentation Merged Results
           # Exclude names with colon: https://issuetracker.google.com/issues/223643506
