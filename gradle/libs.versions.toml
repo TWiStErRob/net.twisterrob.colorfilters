@@ -36,7 +36,7 @@ twisterrob="0.14.1"
 # https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md
 kotlin="1.6.21"
 # https://github.com/detekt/detekt/releases
-kotlin-detekt="1.19.0"
+kotlin-detekt="1.20.0"
 
 [libraries]
 kotlin = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin" }
