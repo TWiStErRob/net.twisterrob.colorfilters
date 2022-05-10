@@ -35,7 +35,7 @@ class FastMathTest {
 
 			val result = FastMath.Atan2Faster.atan2(y, x)
 
-			assertEquals("atan2($y, $x) -> $expected", expected, result, 1e-3f)
+			assertEquals(expected, result, 1e-3f, "atan2($y, $x) -> $expected")
 		}
 	}
 
