@@ -3,10 +3,7 @@ package net.twisterrob.android.view.color
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.lessThan
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.DynamicTest
-import org.junit.jupiter.api.DynamicTest.dynamicTest
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.TestFactory
 import org.openjdk.jmh.annotations.Benchmark
 import org.openjdk.jmh.annotations.Level
 import org.openjdk.jmh.annotations.Mode
@@ -28,22 +25,19 @@ import kotlin.reflect.KFunction
 
 class FastMathTest {
 
-	@TestFactory
-	fun atan2MatchesBuiltin(): Iterator<DynamicTest> =
-		(0..360)
-			.asSequence()
-			.map { angle ->
-				val r = 1
-				val x = r * (cos(angle.toFloat()))
-				val y = r * (sin(angle.toFloat()))
-				val expected = atan2(y, x)
-				dynamicTest("atan2($y, $x) -> $expected") {
-					val result = FastMath.Atan2Faster.atan2(y, x)
+	@Test
+	fun atan2MatchesBuiltin() {
+		(0..360).forEach { angle ->
+			val r = 1
+			val x = r * (cos(angle.toFloat()))
+			val y = r * (sin(angle.toFloat()))
+			val expected = atan2(y, x)
 
-					assertEquals(expected, result, 1e-3f)
-				}
-			}
-			.iterator()
+			val result = FastMath.Atan2Faster.atan2(y, x)
+
+			assertEquals(expected, result, 1e-3f, "atan2($y, $x) -> $expected")
+		}
+	}
 
 	@Test
 	fun atan2FasterThanBuiltin() {
