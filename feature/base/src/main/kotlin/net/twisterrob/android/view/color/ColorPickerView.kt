@@ -79,11 +79,10 @@ open class ColorPickerView : AppCompatImageView {
 		if (this::swatch.isInitialized) swatch else null
 
 	fun setSwatch(swatchIndex: Int) {
-		if (0 <= swatchIndex && swatchIndex < swatches.size) {
-			setSwatch(swatches[swatchIndex])
-		} else {
-			throw IllegalArgumentException("Invalid index: $swatchIndex, there are only ${swatches.size} swatches.")
+		require(0 <= swatchIndex && swatchIndex < swatches.size) {
+			"Invalid index: $swatchIndex, there are only ${swatches.size} swatches."
 		}
+		setSwatch(swatches[swatchIndex])
 	}
 
 	fun setSwatch(swatch: Swatch) {
