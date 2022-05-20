@@ -32,7 +32,7 @@ private const val PREF_PORTERDUFF_COLOR = "PorterDuffColorFilter.color"
 private const val PREF_PORTERDUFF_MODE = "PorterDuffColorFilter.mode"
 private const val PREF_PORTERDUFF_SWATCH = "PorterDuffColorFilter.colorSwatch"
 
-private val MODES = sortedMapOf(
+private val MODES = mapOf(
 	R.id.mode_clear to PorterDuff.Mode.CLEAR,
 	R.id.mode_src to PorterDuff.Mode.SRC,
 	R.id.mode_dst to PorterDuff.Mode.DST,
@@ -128,7 +128,7 @@ class PorterDuffFragment : ColorFilterFragment() {
 			}
 		}
 
-		(view.findViewById<View>(findView(DEFAULT_MODE)) as CompoundButton).isChecked = true
+		view.findViewById<CompoundButton>(findView(DEFAULT_MODE)).isChecked = true
 		for (id in MODES.keys) {
 			modes.addButton(view.findViewById<RadioButton>(id))
 		}

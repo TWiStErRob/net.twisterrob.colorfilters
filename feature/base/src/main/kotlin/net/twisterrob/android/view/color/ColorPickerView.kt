@@ -25,6 +25,7 @@ import net.twisterrob.android.view.color.swatches.pixel.color.RadialHueGradient
 import net.twisterrob.android.view.color.swatches.pixel.drawer.CenterBitmapDrawer
 import net.twisterrob.android.view.color.swatches.pixel.drawer.ColumnByColumnBitmapDrawer
 import net.twisterrob.android.view.color.swatches.pixel.drawer.LineByLineBitmapDrawer
+import java.lang.IllegalArgumentException
 import kotlin.math.sqrt
 
 open class ColorPickerView : AppCompatImageView {
@@ -74,16 +75,15 @@ open class ColorPickerView : AppCompatImageView {
 			touch.isContinuousMode = continuousMode
 		}
 
-	fun getSwatch(): Swatch? {
-		return swatch
-	}
+	fun getSwatch(): Swatch? =
+		if (this::swatch.isInitialized) swatch else null
 
-	fun setSwatch(swatchIndex: Int): Boolean {
+	fun setSwatch(swatchIndex: Int) {
 		if (0 <= swatchIndex && swatchIndex < swatches.size) {
 			setSwatch(swatches[swatchIndex])
-			return true
+		} else {
+			throw IllegalArgumentException("Invalid index: $swatchIndex, there are only ${swatches.size} swatches.")
 		}
-		return false
 	}
 
 	fun setSwatch(swatch: Swatch) {

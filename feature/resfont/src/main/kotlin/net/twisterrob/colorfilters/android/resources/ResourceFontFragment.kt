@@ -13,6 +13,7 @@ import android.widget.TableRow
 import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.core.text.HtmlCompat
+import androidx.core.text.getSpans
 import net.twisterrob.colorfilters.android.ColorFilterFragment
 import net.twisterrob.colorfilters.android.keyboard.KeyboardMode
 import net.twisterrob.colorfilters.android.resfont.R
@@ -130,9 +131,8 @@ class ResourceFontFragment : ColorFilterFragment() {
 
 	private fun getColor(text: CharSequence): String? {
 		if (text is Spanned) {
-			val spans: Array<ForegroundColorSpan>? = text.getSpans(0, text.length, ForegroundColorSpan::class.java)
-			// empty spans is also null
-			if (spans != null && spans.isNotEmpty()) {
+			val spans = text.getSpans<ForegroundColorSpan>(0, text.length)
+			if (spans.isNotEmpty()) {
 				return spans.joinToString(",\n") { span ->
 					span.foregroundColor.toARGBHexString()
 				}
