@@ -18,6 +18,7 @@ import androidx.core.graphics.alpha
 import androidx.core.graphics.toColorInt
 import net.twisterrob.android.view.CheckableButtonManager
 import net.twisterrob.android.view.color.ColorPickerView
+import net.twisterrob.android.view.color.ColorPickerView.Companion.KEEP_SWATCH
 import net.twisterrob.android.view.listeners.OnSeekBarChangeAdapter
 import net.twisterrob.android.view.listeners.TextWatcherAdapter
 import net.twisterrob.colorfilters.android.ColorFilterFragment
@@ -56,7 +57,6 @@ private val MODES = mapOf(
 @ColorInt
 private val DEFAULT_COLOR: Int = @Suppress("MagicNumber") Color.argb(0xff, 0x00, 0x00, 0x00)
 private val DEFAULT_MODE = PorterDuff.Mode.OVERLAY
-private const val KEEP_SWATCH = 0
 
 class PorterDuffFragment : ColorFilterFragment() {
 

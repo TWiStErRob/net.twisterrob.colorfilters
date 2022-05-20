@@ -25,7 +25,6 @@ import net.twisterrob.android.view.color.swatches.pixel.color.RadialHueGradient
 import net.twisterrob.android.view.color.swatches.pixel.drawer.CenterBitmapDrawer
 import net.twisterrob.android.view.color.swatches.pixel.drawer.ColumnByColumnBitmapDrawer
 import net.twisterrob.android.view.color.swatches.pixel.drawer.LineByLineBitmapDrawer
-import java.lang.IllegalArgumentException
 import kotlin.math.sqrt
 
 open class ColorPickerView : AppCompatImageView {
@@ -79,6 +78,9 @@ open class ColorPickerView : AppCompatImageView {
 		if (this::swatch.isInitialized) swatch else null
 
 	fun setSwatch(swatchIndex: Int) {
+		if (swatchIndex == KEEP_SWATCH) {
+			return
+		}
 		require(0 <= swatchIndex && swatchIndex < swatches.size) {
 			"Invalid index: $swatchIndex, there are only ${swatches.size} swatches."
 		}
@@ -280,6 +282,11 @@ open class ColorPickerView : AppCompatImageView {
 		}
 		chooser.setTileMargin(resources.dpToPx(@Suppress("MagicNumber") 4f))
 		setImageDrawable(chooser)
+	}
+
+	companion object {
+
+		const val KEEP_SWATCH: Int = -1
 	}
 }
 
