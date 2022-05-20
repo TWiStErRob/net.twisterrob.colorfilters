@@ -1,3 +1,7 @@
 plugins {
 	id("net.twisterrob.colorfilters.component.conventions")
 }
+
+dependencies {
+	implementation(libs.androidx.core.ktx)
+}

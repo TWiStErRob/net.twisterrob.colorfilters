@@ -1,7 +1,6 @@
 package net.twisterrob.colorfilters.android.matrix
 
 import android.annotation.SuppressLint
-import android.annotation.TargetApi
 import android.content.SharedPreferences
 import android.graphics.ColorMatrix
 import android.os.Build
@@ -14,7 +13,6 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 
-@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 internal class OrderComponent(
 	view: View,
 	listener: Component.RefreshListener
@@ -52,7 +50,6 @@ internal class OrderComponent(
 			refreshUI()
 		}
 
-	@SuppressLint("ObsoleteSdkInt")
 	override fun setupUI() {
 		for (i in swaps.indices) {
 			val left = places[i]
@@ -60,13 +57,11 @@ internal class OrderComponent(
 			swaps[i].setOnClickListener { swapper.dropped(left, right) }
 		}
 
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			for (place in places) {
-				place.setOnDragListener(ItemDragListener(swapper))
-			}
-			for (comp in comps) {
-				comp.setOnTouchListener(DragStartListener())
-			}
+		for (place in places) {
+			place.setOnDragListener(ItemDragListener(swapper))
+		}
+		for (comp in comps) {
+			comp.setOnTouchListener(DragStartListener())
 		}
 	}
 

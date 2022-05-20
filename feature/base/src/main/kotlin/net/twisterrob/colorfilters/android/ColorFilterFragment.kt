@@ -1,7 +1,7 @@
 package net.twisterrob.colorfilters.android
 
-import android.annotation.SuppressLint
-import android.annotation.TargetApi
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -9,7 +9,6 @@ import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.ColorFilter
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
@@ -23,6 +22,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import net.twisterrob.colorfilters.android.keyboard.KeyboardHandler
@@ -151,17 +151,9 @@ abstract class ColorFilterFragment : Fragment() {
 
 	companion object {
 
-		@SuppressLint("ObsoleteSdkInt")
-		@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 		fun copyToClipboard(context: Context, title: CharSequence, content: CharSequence) {
-			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) @Suppress("DEPRECATION") {
-				val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as android.text.ClipboardManager
-				clipboard.text = content
-			} else {
-				val clipboard =
-					context.getSystemService(Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
-				clipboard.setPrimaryClip(android.content.ClipData.newPlainText(title, content))
-			}
+			val clipboard: ClipboardManager = context.getSystemService()!!
+			clipboard.setPrimaryClip(ClipData.newPlainText(title, content))
 		}
 	}
 }

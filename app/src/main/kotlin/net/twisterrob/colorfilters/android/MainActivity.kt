@@ -13,7 +13,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.webkit.MimeTypeMap
 import android.widget.ArrayAdapter
 import androidx.annotation.IntRange
@@ -52,11 +51,13 @@ class MainActivity : AppCompatActivity()
 		get() = images.current
 
 	override val keyboard: KeyboardHandler
-		get() = kbd ?: KeyboardHandlerFactory().create(
-			prefs.findKeyboardMode(),
-			window,
-			findViewById<View>(R.id.keyboard) as @Suppress("DEPRECATION") android.inputmethodservice.KeyboardView
-		).also { kbd = it }
+		get() {
+			if (kbd == null) {
+				kbd = KeyboardHandlerFactory()
+					.create(prefs.findKeyboardMode(), window, findViewById(R.id.keyboard))
+			} 
+			return kbd!!
+		}
 
 	private fun SharedPreferences.findKeyboardMode(): KeyboardMode =
 		if (this.getBoolean(getString(R.string.cf_pref_keyboard), false)) {

@@ -1,38 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><!-- Supported HTML: StringBlock.get -->
+<resources xmlns:tools="http://schemas.android.com/tools">
+	<!-- Supported HTML: StringBlock.get -->
+	<!-- lint:TypographyQuotes ignoring because these are code snippets. -->
 
-	<string name="cf_resfont_info_title"><![CDATA[<font color="…">]]></string>
+	<string name="cf_resfont_info_title" tools:ignore="TypographyQuotes"><![CDATA[<font color="…">]]></string>
 	<string name="cf_resfont_info">See my blog post:
 		<a href="http://www.twisterrob.net/blog/2016/09/android-xml-colors.html"
 			>Color support for XML string resources in Android</a></string>
-	<string name="cf_resfont_fg_argb_code"><![CDATA[fgcolor="#FFFF0000"]]></string>
+	<string name="cf_resfont_fg_argb_code" tools:ignore="TypographyQuotes"><![CDATA[fgcolor="#FFFF0000"]]></string>
 	<string name="cf_resfont_fg_argb"><font fgcolor="#FFFF0000">text</font></string>
-	<string name="cf_resfont_fg_rgb_code"><![CDATA[fgcolor="#FF0000"]]></string>
+	<string name="cf_resfont_fg_rgb_code" tools:ignore="TypographyQuotes"><![CDATA[fgcolor="#FF0000"]]></string>
 	<string name="cf_resfont_fg_rgb"><font fgcolor="#FF0000">text</font></string>
-	<string name="cf_resfont_fg_named_code"><![CDATA[fgcolor="red"]]></string>
+	<string name="cf_resfont_fg_named_code" tools:ignore="TypographyQuotes"><![CDATA[fgcolor="red"]]></string>
 	<string name="cf_resfont_fg_named"><font fgcolor="red">text</font></string>
-	<string name="cf_resfont_fg_neg_code"><![CDATA[fgcolor="-#00010000"]]></string>
+	<string name="cf_resfont_fg_neg_code" tools:ignore="TypographyQuotes"><![CDATA[fgcolor="-#00010000"]]></string>
 	<string name="cf_resfont_fg_neg"><font fgcolor="-#00010000">text</font></string>
-	<string name="cf_resfont_fg_color_code"><![CDATA[fgcolor="@darker_gray"]]></string>
+	<string name="cf_resfont_fg_color_code" tools:ignore="TypographyQuotes"><![CDATA[fgcolor="@darker_gray"]]></string>
 	<string name="cf_resfont_fg_color"><font fgcolor="@darker_gray">text</font></string>
-	<string name="cf_resfont_col_argb_code"><![CDATA[color="#FFFF0000"]]></string>
+	<string name="cf_resfont_col_argb_code" tools:ignore="TypographyQuotes"><![CDATA[color="#FFFF0000"]]></string>
 	<string name="cf_resfont_col_argb"><font color="#FFFF0000">text</font></string>
-	<string name="cf_resfont_col_rgb_code"><![CDATA[color="#FF0000"]]></string>
+	<string name="cf_resfont_col_rgb_code" tools:ignore="TypographyQuotes"><![CDATA[color="#FF0000"]]></string>
 	<string name="cf_resfont_col_rgb"><font color="#FF0000">text</font></string>
-	<string name="cf_resfont_col_neg_code"><![CDATA[color="-#00010000"]]></string>
+	<string name="cf_resfont_col_neg_code" tools:ignore="TypographyQuotes"><![CDATA[color="-#00010000"]]></string>
 	<string name="cf_resfont_col_neg"><font color="-#00010000">text</font></string>
-	<string name="cf_resfont_col_named_code"><![CDATA[color="red"]]></string>
+	<string name="cf_resfont_col_named_code" tools:ignore="TypographyQuotes"><![CDATA[color="red"]]></string>
 	<string name="cf_resfont_col_named"><font color="red">text</font></string>
-	<string name="cf_resfont_col_color_code"><![CDATA[color="@darker_gray"]]></string>
+	<string name="cf_resfont_col_color_code" tools:ignore="TypographyQuotes"><![CDATA[color="@darker_gray"]]></string>
 	<string name="cf_resfont_col_color"><font color="@darker_gray">text</font></string>
-	<string name="cf_resfont_col_all_named_code"><![CDATA[fgcolor="#FFFF0000"\ncolor="red"]]></string>
+	<string name="cf_resfont_col_all_named_code" tools:ignore="TypographyQuotes"><![CDATA[fgcolor="#FFFF0000"\ncolor="red"]]></string>
 	<string name="cf_resfont_col_all_named"><font fgcolor="#FFFF0000" color="red">text</font></string>
-	<string name="cf_resfont_col_all_semi_code"><![CDATA[fgcolor="#7FFF0000"]]></string>
+	<string name="cf_resfont_col_all_semi_code" tools:ignore="TypographyQuotes"><![CDATA[fgcolor="#7FFF0000"]]></string>
 	<string name="cf_resfont_col_all_semi"><font fgcolor="#7FFF0000">text</font></string>
-	<string name="cf_resfont_col_old_code"><![CDATA[fgcolor="#FFFF0000"\ncolor="-#00010000"]]></string>
+	<string name="cf_resfont_col_old_code" tools:ignore="TypographyQuotes"><![CDATA[fgcolor="#FFFF0000"\ncolor="-#00010000"]]></string>
 	<string name="cf_resfont_col_old"><font fgcolor="#FFFF0000" color="-#00010000">text</font></string>
-	<string name="cf_resfont_html_code"><![CDATA[HTML\ncolor="#FF0000"]]></string>
-	<string name="cf_resfont_html"><![CDATA[<font color="#FF0000">text</font>]]></string>
+	<string name="cf_resfont_html_code" tools:ignore="TypographyQuotes"><![CDATA[HTML\ncolor="#FF0000"]]></string>
+	<string name="cf_resfont_html" tools:ignore="TypographyQuotes"><![CDATA[<font color="#FF0000">text</font>]]></string>
 	<string name="cf_resfont_type_xml">XML</string>
 	<string name="cf_resfont_type_resolved">Resolved color</string>
 	<string name="cf_resfont_type_rendered">Rendered</string>

@@ -65,9 +65,20 @@
 		<!--
 			gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.12.9/f58bf71d15e827fa47e9b37e63156b333e3389d3/byte-buddy-agent-1.12.9.jar
 	        Invalid package reference in net.bytebuddy:byte-buddy-agent; not included in Android: `java.lang.instrument`. Referenced from `net.bytebuddy.agent.ByteBuddyAgent`.
+		-->
+		<ignore regexp="^Invalid package reference in net.bytebuddy:byte-buddy-agent; not included in Android: `java\.lang\.instrument`\. Referenced from `net\.bytebuddy\.agent\.ByteBuddyAgent`\.$" />
+
+		<!--
+			gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.12.9/f58bf71d15e827fa47e9b37e63156b333e3389d3/byte-buddy-agent-1.12.9.jar
 			Invalid package reference in net.bytebuddy:byte-buddy-agent; not included in Android: `java.lang.management`. Referenced from `net.bytebuddy.agent.ByteBuddyAgent.ProcessProvider.ForCurrentVm.ForLegacyVm`.
 		-->
-		<ignore path="**/byte-buddy-agent-1.12.9.jar" />
+		<ignore regexp="^Invalid package reference in net.bytebuddy:byte-buddy-agent; not included in Android: `java\.lang\.management`\. Referenced from `net\.bytebuddy\.agent\.ByteBuddyAgent\.ProcessProvider\.ForCurrentVm\.ForLegacyVm`\.$" />
+
+		<!--
+			gradle\caches\modules-2\files-2.1\org.jetbrains.kotlinx\kotlinx-coroutines-core-jvm\1.5.2\f4cc07a50437659e0043e7da762809a46932b6a0\kotlinx-coroutines-core-jvm-1.5.2.jar
+			Invalid package reference in org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm; not included in Android: java.lang.instrument. Referenced from kotlinx.coroutines.debug.AgentPremain.
+		-->
+		<ignore regexp="^Invalid package reference in org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm; not included in Android: `java\.lang\.instrument`\. Referenced from `kotlinx\.coroutines\.debug\.AgentPremain`\.$" />
 
 	</issue>
 

@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.core.graphics.toColorInt
 import net.twisterrob.android.view.color.ColorPickerView
+import net.twisterrob.android.view.color.ColorPickerView.Companion.KEEP_SWATCH
 import net.twisterrob.android.view.listeners.TextWatcherAdapter
 import net.twisterrob.colorfilters.android.ColorFilterFragment
 import net.twisterrob.colorfilters.android.keyboard.KeyboardHandler
@@ -26,7 +27,6 @@ private const val PREF_LIGHTING_ADD_SWATCH = "LightingColorFilter.addSwatch"
 private val DEFAULT_MUL = Color.argb(0xff, 0xff, 0xff, 0xff)
 @Suppress("MagicNumber")
 private val DEFAULT_ADD = Color.argb(0xff, 0x00, 0x00, 0x00)
-private const val KEEP_SWATCH = -1
 
 class LightingFragment : ColorFilterFragment() {
 

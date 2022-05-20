@@ -2,10 +2,7 @@ package net.twisterrob.colorfilters.android.resources
 
 import android.annotation.SuppressLint
 import android.graphics.ColorFilter
-import android.os.Build.VERSION
-import android.os.Build.VERSION_CODES
 import android.os.Bundle
-import android.text.Html
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
@@ -15,6 +12,8 @@ import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.annotation.StringRes
+import androidx.core.text.HtmlCompat
+import androidx.core.text.getSpans
 import net.twisterrob.colorfilters.android.ColorFilterFragment
 import net.twisterrob.colorfilters.android.keyboard.KeyboardMode
 import net.twisterrob.colorfilters.android.resfont.R
@@ -77,7 +76,10 @@ class ResourceFontFragment : ColorFilterFragment() {
 
 		source.text = getString(R.string.cf_resfont_html_code)
 		try {
-			val resultText = fromHtml(R.string.cf_resfont_html)
+			val resultText = HtmlCompat.fromHtml(
+				getString(R.string.cf_resfont_html),
+				HtmlCompat.FROM_HTML_MODE_LEGACY
+			)
 			resultBlack.text = resultText
 			resultWhite.text = resultText
 			resolved.text = getColor(resultText)
@@ -88,15 +90,6 @@ class ResourceFontFragment : ColorFilterFragment() {
 		}
 
 		return row.also { table.addView(row) }
-	}
-
-	@Suppress("deprecation")
-	private fun fromHtml(@StringRes htmlRes: Int): CharSequence {
-		return if (VERSION.SDK_INT < VERSION_CODES.N) {
-			Html.fromHtml(getString(htmlRes))
-		} else {
-			Html.fromHtml(getString(htmlRes), Html.FROM_HTML_MODE_LEGACY)
-		}
 	}
 
 	private fun createRow(table: TableLayout, @StringRes test: Int): TableRow {
@@ -138,9 +131,8 @@ class ResourceFontFragment : ColorFilterFragment() {
 
 	private fun getColor(text: CharSequence): String? {
 		if (text is Spanned) {
-			val spans: Array<ForegroundColorSpan>? = text.getSpans(0, text.length, ForegroundColorSpan::class.java)
-			// empty spans is also null
-			if (spans != null && spans.isNotEmpty()) {
+			val spans = text.getSpans<ForegroundColorSpan>(0, text.length)
+			if (spans.isNotEmpty()) {
 				return spans.joinToString(",\n") { span ->
 					span.foregroundColor.toARGBHexString()
 				}

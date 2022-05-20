@@ -1,13 +1,9 @@
 package net.twisterrob.colorfilters.android.porterduff
 
-import android.annotation.SuppressLint
-import android.annotation.TargetApi
 import android.graphics.Color
 import android.graphics.ColorFilter
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
-import android.os.Build.VERSION
-import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +18,7 @@ import androidx.core.graphics.alpha
 import androidx.core.graphics.toColorInt
 import net.twisterrob.android.view.CheckableButtonManager
 import net.twisterrob.android.view.color.ColorPickerView
+import net.twisterrob.android.view.color.ColorPickerView.Companion.KEEP_SWATCH
 import net.twisterrob.android.view.listeners.OnSeekBarChangeAdapter
 import net.twisterrob.android.view.listeners.TextWatcherAdapter
 import net.twisterrob.colorfilters.android.ColorFilterFragment
@@ -36,8 +33,7 @@ private const val PREF_PORTERDUFF_COLOR = "PorterDuffColorFilter.color"
 private const val PREF_PORTERDUFF_MODE = "PorterDuffColorFilter.mode"
 private const val PREF_PORTERDUFF_SWATCH = "PorterDuffColorFilter.colorSwatch"
 
-@TargetApi(VERSION_CODES.HONEYCOMB)
-private val MODES = (mapOf(
+private val MODES = mapOf(
 	R.id.mode_clear to PorterDuff.Mode.CLEAR,
 	R.id.mode_src to PorterDuff.Mode.SRC,
 	R.id.mode_dst to PorterDuff.Mode.DST,
@@ -53,25 +49,14 @@ private val MODES = (mapOf(
 	R.id.mode_darken to PorterDuff.Mode.DARKEN,
 	R.id.mode_lighten to PorterDuff.Mode.LIGHTEN,
 	R.id.mode_multiply to PorterDuff.Mode.MULTIPLY,
-	R.id.mode_screen to PorterDuff.Mode.SCREEN
-) + if (VERSION_CODES.HONEYCOMB <= VERSION.SDK_INT) mapOf(
-	R.id.mode_add to PorterDuff.Mode.ADD,
-	R.id.mode_overlay to PorterDuff.Mode.OVERLAY
-) else emptyMap()).toSortedMap()
+	R.id.mode_screen to PorterDuff.Mode.SCREEN,
+	R.id.mode_add to PorterDuff.Mode.ADD, // minSdk = VERSION_CODES.HONEYCOMB
+	R.id.mode_overlay to PorterDuff.Mode.OVERLAY, // minSdk = VERSION_CODES.HONEYCOMB
+)
 
-@Suppress("MagicNumber")
 @ColorInt
-private val DEFAULT_COLOR: Int = Color.argb(0xff, 0x00, 0x00, 0x00)
-
-@SuppressLint("ObsoleteSdkInt")
-@TargetApi(VERSION_CODES.HONEYCOMB)
-private val DEFAULT_MODE =
-	if (VERSION.SDK_INT < VERSION_CODES.HONEYCOMB) {
-		PorterDuff.Mode.SCREEN
-	} else {
-		PorterDuff.Mode.OVERLAY
-	}
-private const val KEEP_SWATCH = 0
+private val DEFAULT_COLOR: Int = @Suppress("MagicNumber") Color.argb(0xff, 0x00, 0x00, 0x00)
+private val DEFAULT_MODE = PorterDuff.Mode.OVERLAY
 
 class PorterDuffFragment : ColorFilterFragment() {
 
@@ -98,7 +83,6 @@ class PorterDuffFragment : ColorFilterFragment() {
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
 		inflater.inflate(R.layout.fragment_porterduff, container, false)
 
-	@SuppressLint("ObsoleteSdkInt")
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
@@ -144,13 +128,9 @@ class PorterDuffFragment : ColorFilterFragment() {
 			}
 		}
 
-		(view.findViewById<View>(findView(DEFAULT_MODE)) as CompoundButton).isChecked = true
+		view.findViewById<CompoundButton>(findView(DEFAULT_MODE)).isChecked = true
 		for (id in MODES.keys) {
 			modes.addButton(view.findViewById<RadioButton>(id))
-		}
-		if (VERSION.SDK_INT < VERSION_CODES.HONEYCOMB) {
-			view.findViewById<View>(R.id.mode_add).isEnabled = false
-			view.findViewById<View>(R.id.mode_overlay).isEnabled = false
 		}
 		modes.setOnCheckedChangeListener { _, isChecked ->
 			if (isChecked) {

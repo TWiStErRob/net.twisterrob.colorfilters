@@ -1,9 +1,7 @@
 package net.twisterrob.colorfilters.android.matrix
 
-import android.annotation.TargetApi
 import android.content.SharedPreferences
 import android.graphics.ColorMatrix
-import android.os.Build
 import android.view.View
 import android.widget.EditText
 import net.twisterrob.android.view.listeners.TextWatcherAdapter
@@ -45,7 +43,6 @@ internal class MatrixComponent(
 		setupFocus()
 	}
 
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	private fun setupFocus() {
 		for (y in 0 until HEIGHT) {
 			for (x in 0 until WIDTH) {
@@ -54,9 +51,7 @@ internal class MatrixComponent(
 				editors[i].nextFocusRightId = getIDAtIndex(y * WIDTH + (x + 1 + WIDTH) % WIDTH)
 				editors[i].nextFocusUpId = getIDAtIndex((y - 1 + HEIGHT) % HEIGHT * WIDTH + x)
 				editors[i].nextFocusDownId = getIDAtIndex((y + 1 + HEIGHT) % HEIGHT * WIDTH + x)
-				if (Build.VERSION_CODES.HONEYCOMB <= Build.VERSION.SDK_INT) {
-					editors[i].nextFocusForwardId = getIDAtIndex(i + 1)
-				}
+				editors[i].nextFocusForwardId = getIDAtIndex(i + 1)
 			}
 		}
 	}
