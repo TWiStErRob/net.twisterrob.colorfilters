@@ -1,11 +1,9 @@
 package net.twisterrob.android.view.color
 
-import android.annotation.TargetApi
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.PointF
-import android.os.Build
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.util.TypedValue.COMPLEX_UNIT_DIP
@@ -131,9 +129,8 @@ open class ColorPickerView : AppCompatImageView {
 		setMeasuredDimension(width, height)
 	}
 
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	override fun getBaseline(): Int {
-		if (Build.VERSION_CODES.HONEYCOMB <= Build.VERSION.SDK_INT && baselineAlignBottom) {
+		if (baselineAlignBottom) {
 			return measuredHeight
 		}
 		return paddingTop + (measuredHeight - paddingTop - paddingBottom) / 2
