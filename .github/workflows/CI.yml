@@ -91,7 +91,7 @@ jobs:
 
       - name: Publish Unit Test Results
         if: success() || failure()
-        uses: EnricoMi/publish-unit-test-result-action@v1
+        uses: EnricoMi/publish-unit-test-result-action@v2
         with:
           check_name: "🔔 Test: Unit Results"
           comment_title: Unit Test Results
@@ -202,7 +202,7 @@ jobs:
 
       - name: Publish Instrumentation Test Results
         if: success() || failure()
-        uses: EnricoMi/publish-unit-test-result-action/composite@v1
+        uses: EnricoMi/publish-unit-test-result-action/composite@v2
         with:
           check_name: "🔔 Test: Instrumentation Results"
           comment_title: Instrumentation Test Results
