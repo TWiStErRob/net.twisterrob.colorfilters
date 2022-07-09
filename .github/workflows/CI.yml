@@ -91,13 +91,13 @@ jobs:
 
       - name: Publish Unit Test Results
         if: success() || failure()
-        uses: EnricoMi/publish-unit-test-result-action@v1
+        uses: EnricoMi/publish-unit-test-result-action@v2
         with:
           check_name: "🔔 Test: Unit Results"
           comment_title: Unit Test Results
           report_individual_runs: true
           test_changes_limit: 0
-          files: ${{ github.workspace }}/**/build/test-results/*/TEST-*.xml
+          junit_files: ${{ github.workspace }}/**/build/test-results/*/TEST-*.xml
 
       - name: Upload "Detekt Results".
         if: success() || failure()
@@ -202,10 +202,10 @@ jobs:
 
       - name: Publish Instrumentation Test Results
         if: success() || failure()
-        uses: EnricoMi/publish-unit-test-result-action/composite@v1
+        uses: EnricoMi/publish-unit-test-result-action/composite@v2
         with:
           check_name: "🔔 Test: Instrumentation Results"
           comment_title: Instrumentation Test Results
           report_individual_runs: true
           test_changes_limit: 0
-          files: ${{ github.workspace }}/**/build/outputs/androidTest-results/connected/TEST-*.xml
+          junit_files: ${{ github.workspace }}/**/build/outputs/androidTest-results/connected/TEST-*.xml
