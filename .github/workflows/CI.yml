@@ -97,7 +97,7 @@ jobs:
           comment_title: Unit Test Results
           report_individual_runs: true
           test_changes_limit: 0
-          files: ${{ github.workspace }}/**/build/test-results/*/TEST-*.xml
+          junit_files: ${{ github.workspace }}/**/build/test-results/*/TEST-*.xml
 
       - name: Upload "Detekt Results".
         if: success() || failure()
@@ -208,4 +208,4 @@ jobs:
           comment_title: Instrumentation Test Results
           report_individual_runs: true
           test_changes_limit: 0
-          files: ${{ github.workspace }}/**/build/outputs/androidTest-results/connected/TEST-*.xml
+          junit_files: ${{ github.workspace }}/**/build/outputs/androidTest-results/connected/TEST-*.xml
