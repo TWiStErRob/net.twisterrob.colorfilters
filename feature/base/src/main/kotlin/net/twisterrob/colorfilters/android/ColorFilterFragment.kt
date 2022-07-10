@@ -19,11 +19,14 @@ import android.text.style.TypefaceSpan
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.getSystemService
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.preference.PreferenceManager
 import net.twisterrob.colorfilters.android.keyboard.KeyboardHandler
 import net.twisterrob.colorfilters.android.keyboard.KeyboardMode
@@ -49,24 +52,26 @@ abstract class ColorFilterFragment : Fragment() {
 		listener = context as Listener
 	}
 
-	override fun onCreate(savedInstanceState: Bundle?) = super.onCreate(savedInstanceState).also {
-		setHasOptionsMenu(true)
+	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+		super.onViewCreated(view, savedInstanceState)
+		requireActivity().addMenuProvider(object : MenuProvider {
+			override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+				menuInflater.inflate(R.menu.fragment_color_filter, menu)
+			}
+
+			override fun onMenuItemSelected(menuItem: MenuItem): Boolean =
+				when (menuItem.itemId) {
+					R.id.action_info -> displayHelp().let { true }
+					R.id.action_share -> share().let { true }
+					else -> false
+				}
+		}, viewLifecycleOwner, Lifecycle.State.RESUMED)
 	}
 
-	override fun onResume() = super.onResume().also {
+	override fun onResume() {
+		super.onResume()
 		listener.fragmentOnResume()
 	}
-
-	override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-		inflater.inflate(R.menu.fragment_color_filter, menu)
-	}
-
-	override fun onOptionsItemSelected(item: MenuItem) =
-		when (item.itemId) {
-			R.id.action_info -> displayHelp().let { true }
-			R.id.action_share -> share().let { true }
-			else -> super.onOptionsItemSelected(item)
-		}
 
 	private fun share() {
 		val image = listener.renderCurrentView(getString(R.string.cf_share_subject), generateCode())
