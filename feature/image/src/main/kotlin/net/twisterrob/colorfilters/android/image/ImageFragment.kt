@@ -25,7 +25,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.preference.PreferenceManager
 import kotlin.math.max
 
@@ -62,16 +64,30 @@ class ImageFragment : Fragment() {
 		listener = context as Listener
 	}
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		setHasOptionsMenu(true)
-	}
-
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
 		inflater.inflate(R.layout.fragment_image, container, false)
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
+		
+		requireActivity().addMenuProvider(object : MenuProvider {
+			override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+				menuInflater.inflate(R.menu.fragment_image, menu)
+			}
+
+			override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+				@Suppress("LiftReturnOrAssignment")
+				when (menuItem.itemId) {
+					R.id.action_image -> {
+						startLoadImage(false)
+						return true
+					}
+					else -> {
+						return false
+					}
+				}
+			}
+		}, viewLifecycleOwner, Lifecycle.State.STARTED)
 
 		original = view.findViewById(R.id.original)
 		original.setOnClickListener { startLoadImage(false) }
@@ -97,19 +113,6 @@ class ImageFragment : Fragment() {
 			}
 		}
 		loadDefaults()
-	}
-
-	override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-		super.onCreateOptionsMenu(menu, inflater)
-		inflater.inflate(R.menu.fragment_image, menu)
-	}
-
-	override fun onOptionsItemSelected(item: MenuItem): Boolean {
-		when (item.itemId) {
-			R.id.action_image -> startLoadImage(false)
-			else -> return super.onOptionsItemSelected(item)
-		}
-		return true
 	}
 
 	override fun onStop() {

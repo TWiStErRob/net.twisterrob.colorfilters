@@ -84,7 +84,8 @@ class LightingFragment : ColorFilterFragment() {
 		}
 	}
 
-	override fun onSaveInstanceState(outState: Bundle) = super.onSaveInstanceState(outState).also {
+	override fun onSaveInstanceState(outState: Bundle) {
+		super.onSaveInstanceState(outState)
 		outState.putInt(PREF_LIGHTING_MUL_SWATCH, mulColor.swatchIndex)
 		outState.putInt(PREF_LIGHTING_ADD_SWATCH, addColor.swatchIndex)
 	}
@@ -105,7 +106,8 @@ class LightingFragment : ColorFilterFragment() {
 		}
 	}
 
-	override fun onStop() = super.onStop().also {
+	override fun onStop() {
+		super.onStop()
 		prefs.edit().apply {
 			putInt(PREF_LIGHTING_MUL, mulColor.color)
 			putInt(PREF_LIGHTING_MUL_SWATCH, mulColor.swatchIndex)

@@ -7,3 +7,10 @@ style:
     excludeCommentStatements: true
   ReturnCount: 
     max: 3
+    excludedFunctions:
+      # Ignore MenuProvider.onMenuItemSelected, Activity.onOptionsItemSelected,
+      # and Fragment.onOptionsItemSelected, because they have a special structure for bug prevention.
+      '
+        onMenuItemSelected,
+        onOptionsItemSelected,
+      '

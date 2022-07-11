@@ -12,12 +12,14 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
 import android.webkit.MimeTypeMap
 import android.widget.ArrayAdapter
 import androidx.annotation.IntRange
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.transaction
 import androidx.preference.PreferenceManager
@@ -82,6 +84,18 @@ class MainActivity : AppCompatActivity()
 			setDisplayHomeAsUpEnabled(true)
 			setHomeAsUpIndicator(R.drawable.ic_launcher)
 		}.also { setupNavigation(it) }
+
+		addMenuProvider(object : MenuProvider {
+			override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+				menuInflater.inflate(R.menu.activity_color_filter, menu)
+				imageToggleItem = menu.findItem(R.id.action_image_toggle)
+				imageToggleItem.isChecked = prefs.getBoolean(PREF_COLORFILTER_PREVIEW, imageToggleItem.isChecked)
+				updateImagesVisibility()
+			}
+
+			override fun onMenuItemSelected(menuItem: MenuItem): Boolean =
+				this@MainActivity.onMenuItemSelected(menuItem)
+		})
 	}
 
 	@Suppress("DEPRECATION")
@@ -115,30 +129,23 @@ class MainActivity : AppCompatActivity()
 		})
 	}
 
-	override fun onResume() = super.onResume().also {
+	override fun onResume() {
+		super.onResume()
 		val position = prefs.getInt(PREF_COLORFILTER_SELECTED, COLORFILTER_DEFAULT)
 		@Suppress("DEPRECATION") // will replace when AndroidX or removed
 		supportActionBar!!.setSelectedNavigationItem(position)
 	}
 
-	override fun onPause() = super.onPause().also {
+	override fun onPause() {
 		val position = getPosition(currentFragment)
 		if (0 <= position) {
 			prefs.edit().putInt(PREF_COLORFILTER_SELECTED, position).apply()
 		}
+		super.onPause()
 	}
 
-	override fun onCreateOptionsMenu(menu: Menu) = super.onCreateOptionsMenu(menu).also {
-		menuInflater.inflate(R.menu.activity_color_filter, menu)
-		imageToggleItem = menu.findItem(R.id.action_image_toggle)
-		imageToggleItem.isChecked = prefs.getBoolean(PREF_COLORFILTER_PREVIEW, imageToggleItem.isChecked)
-		updateImagesVisibility()
-		return true
-	}
-
-	@Suppress("ReturnCount") // This is how onOptionsItemSelected is structured.
 	@SuppressLint("LogConditional")
-	override fun onOptionsItemSelected(item: MenuItem): Boolean {
+	private fun onMenuItemSelected(item: MenuItem): Boolean {
 		when (item.itemId) {
 			android.R.id.home -> {
 				startActivity(Intent(applicationContext, AboutActivity::class.java))
@@ -187,7 +194,7 @@ class MainActivity : AppCompatActivity()
 			}
 
 			else -> {
-				return super.onOptionsItemSelected(item)
+				return false
 			}
 		}
 	}
