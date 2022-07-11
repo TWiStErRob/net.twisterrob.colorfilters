@@ -80,7 +80,7 @@ class ImageFragment : Fragment() {
 					R.id.action_image -> startLoadImage(false).let { true }
 					else -> false
 				}
-		}, viewLifecycleOwner, Lifecycle.State.RESUMED)
+		}, viewLifecycleOwner, Lifecycle.State.STARTED)
 
 		original = view.findViewById(R.id.original)
 		original.setOnClickListener { startLoadImage(false) }

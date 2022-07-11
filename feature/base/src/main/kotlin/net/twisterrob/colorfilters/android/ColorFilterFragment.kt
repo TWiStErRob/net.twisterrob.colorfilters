@@ -65,7 +65,7 @@ abstract class ColorFilterFragment : Fragment() {
 					R.id.action_share -> share().let { true }
 					else -> false
 				}
-		}, viewLifecycleOwner, Lifecycle.State.RESUMED)
+		}, viewLifecycleOwner, Lifecycle.State.STARTED)
 	}
 
 	override fun onResume() {
