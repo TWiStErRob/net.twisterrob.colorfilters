@@ -32,7 +32,6 @@ import net.twisterrob.colorfilters.android.ColorFilterFragment
 import net.twisterrob.colorfilters.android.formatRoot
 import net.twisterrob.colorfilters.android.keyboard.KeyboardHandler
 import net.twisterrob.colorfilters.android.keyboard.KeyboardMode
-import net.twisterrob.colorfilters.android.palette.PaletteFragment.PaletteAdapter.Display
 import net.twisterrob.colorfilters.android.replaceAlpha
 import net.twisterrob.colorfilters.android.toRGBHexString
 import kotlin.math.max
@@ -248,7 +247,7 @@ class PaletteFragment : ColorFilterFragment() {
 			requireContext(),
 			android.R.layout.simple_spinner_dropdown_item,
 			android.R.id.text1,
-			enumValues<Display>().map { it.title }.toTypedArray()
+			enumValues<PaletteAdapter.Display>().map { it.title }.toTypedArray()
 		)
 		swatchDisplay.onItemSelectedListener = object : OnItemSelectedListener {
 			override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
@@ -336,12 +335,12 @@ class PaletteFragment : ColorFilterFragment() {
 			val prefs = prefs
 			val numColors = prefs.getInt(PREF_PALETTE_NUM_COLORS, DEFAULT_NUM_COLORS)
 			val resizeDimen = prefs.getInt(PREF_PALETTE_RESIZE_DIMEN, DEFAULT_RESIZE_DIMEN)
-			val displayString = prefs.getString(PREF_PALETTE_DISPLAY, Display.DEFAULT.name)!!
+			val displayString = prefs.getString(PREF_PALETTE_DISPLAY, PaletteAdapter.Display.DEFAULT.name)!!
 			val display = runCatching { PaletteAdapter.Display.valueOf(displayString) }
-				.getOrDefault(Display.DEFAULT) // Fall back in case of migration issues.
+				.getOrDefault(PaletteAdapter.Display.DEFAULT) // Fall back in case of migration issues.
 			setValues(numColors, resizeDimen, display)
 		} else {
-			swatchDisplay.setSelection(savedInstanceState.getInt(PREF_PALETTE_DISPLAY, Display.DEFAULT.ordinal))
+			swatchDisplay.setSelection(savedInstanceState.getInt(PREF_PALETTE_DISPLAY, PaletteAdapter.Display.DEFAULT.ordinal))
 		}
 	}
 
@@ -361,7 +360,7 @@ class PaletteFragment : ColorFilterFragment() {
 	}
 
 	override fun reset() {
-		setValues(DEFAULT_NUM_COLORS, DEFAULT_RESIZE_DIMEN, Display.DEFAULT)
+		setValues(DEFAULT_NUM_COLORS, DEFAULT_RESIZE_DIMEN, PaletteAdapter.Display.DEFAULT)
 	}
 
 	private fun setValues(numColors: Int, resizeDimen: Int, display: PaletteAdapter.Display) {
