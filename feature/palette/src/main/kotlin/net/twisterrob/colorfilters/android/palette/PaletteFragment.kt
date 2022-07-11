@@ -323,7 +323,8 @@ class PaletteFragment : ColorFilterFragment() {
 		updateFilter()
 	}
 
-	override fun onSaveInstanceState(outState: Bundle) = super.onSaveInstanceState(outState).also {
+	override fun onSaveInstanceState(outState: Bundle) {
+		super.onSaveInstanceState(outState)
 		outState.apply {
 			putInt(PREF_PALETTE_DISPLAY, swatchDisplay.selectedItemPosition)
 		}

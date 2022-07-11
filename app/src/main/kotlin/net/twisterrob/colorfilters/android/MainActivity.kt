@@ -129,17 +129,19 @@ class MainActivity : AppCompatActivity()
 		})
 	}
 
-	override fun onResume() = super.onResume().also {
+	override fun onResume() {
+		super.onResume()
 		val position = prefs.getInt(PREF_COLORFILTER_SELECTED, COLORFILTER_DEFAULT)
 		@Suppress("DEPRECATION") // will replace when AndroidX or removed
 		supportActionBar!!.setSelectedNavigationItem(position)
 	}
 
-	override fun onPause() = super.onPause().also {
+	override fun onPause() {
 		val position = getPosition(currentFragment)
 		if (0 <= position) {
 			prefs.edit().putInt(PREF_COLORFILTER_SELECTED, position).apply()
 		}
+		super.onPause()
 	}
 
 	@Suppress("ReturnCount") // This is how onMenuItemSelected is structured.

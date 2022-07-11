@@ -48,7 +48,8 @@ abstract class ColorFilterFragment : Fragment() {
 	protected val prefs: SharedPreferences
 		get() = PreferenceManager.getDefaultSharedPreferences(requireContext().applicationContext)
 
-	override fun onAttach(context: Context) = super.onAttach(context).also {
+	override fun onAttach(context: Context) {
+		super.onAttach(context)
 		listener = context as Listener
 	}
 
@@ -113,7 +114,8 @@ abstract class ColorFilterFragment : Fragment() {
 			.show()
 	}
 
-	override fun onDestroyView() = super.onDestroyView().also {
+	override fun onDestroyView() {
+		super.onDestroyView()
 		keyboard.hideCustomKeyboard()
 	}
 
