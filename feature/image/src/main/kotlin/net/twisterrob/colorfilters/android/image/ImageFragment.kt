@@ -75,11 +75,18 @@ class ImageFragment : Fragment() {
 				menuInflater.inflate(R.menu.fragment_image, menu)
 			}
 
-			override fun onMenuItemSelected(menuItem: MenuItem): Boolean =
+			override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+				@Suppress("LiftReturnOrAssignment")
 				when (menuItem.itemId) {
-					R.id.action_image -> startLoadImage(false).let { true }
-					else -> false
+					R.id.action_image -> {
+						startLoadImage(false)
+						return true
+					}
+					else -> {
+						return false
+					}
 				}
+			}
 		}, viewLifecycleOwner, Lifecycle.State.STARTED)
 
 		original = view.findViewById(R.id.original)

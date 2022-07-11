@@ -144,7 +144,6 @@ class MainActivity : AppCompatActivity()
 		super.onPause()
 	}
 
-	@Suppress("ReturnCount") // This is how onMenuItemSelected is structured.
 	@SuppressLint("LogConditional")
 	private fun onMenuItemSelected(item: MenuItem): Boolean {
 		when (item.itemId) {

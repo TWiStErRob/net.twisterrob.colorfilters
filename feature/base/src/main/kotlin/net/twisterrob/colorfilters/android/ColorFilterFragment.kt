@@ -60,12 +60,22 @@ abstract class ColorFilterFragment : Fragment() {
 				menuInflater.inflate(R.menu.fragment_color_filter, menu)
 			}
 
-			override fun onMenuItemSelected(menuItem: MenuItem): Boolean =
+			override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+				@Suppress("LiftReturnOrAssignment")
 				when (menuItem.itemId) {
-					R.id.action_info -> displayHelp().let { true }
-					R.id.action_share -> share().let { true }
-					else -> false
+					R.id.action_info -> {
+						displayHelp()
+						return true
+					}
+					R.id.action_share -> {
+						share()
+						return true
+					}
+					else -> {
+						return false
+					}
 				}
+			}
 		}, viewLifecycleOwner, Lifecycle.State.STARTED)
 	}
 
