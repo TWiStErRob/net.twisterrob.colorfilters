@@ -34,7 +34,7 @@ agp="7.2.1"
 twisterrob="0.14.1"
 
 # https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md
-kotlin="1.6.21"
+kotlin="1.7.10"
 # https://github.com/detekt/detekt/releases
 kotlin-detekt="1.20.0"
 
