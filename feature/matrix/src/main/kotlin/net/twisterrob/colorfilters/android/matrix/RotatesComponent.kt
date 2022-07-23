@@ -34,8 +34,8 @@ internal class RotatesComponent(
 		rotates.forEach { it.combineInto(colorMatrix) }
 
 	override fun appendTo(sb: StringBuilder): Boolean =
-		rotates.fold(false) { written, it ->
-			written or it.appendTo(sb)
+		rotates.fold(false) { written, component ->
+			written or component.appendTo(sb)
 		}
 
 	operator fun get(compRGB: Int): Component = rotates[compRGB]
