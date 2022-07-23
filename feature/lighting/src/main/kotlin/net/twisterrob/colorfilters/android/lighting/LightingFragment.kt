@@ -140,7 +140,7 @@ class LightingFragment : ColorFilterFragment() {
 			val add = addColor.color.toRGBHexString("0x")
 			return "new LightingColorFilter(${mul}, ${add});"
 		} else {
-			throw IllegalStateException("No colors available for code generation")
+			error("No colors available for code generation")
 		}
 	}
 

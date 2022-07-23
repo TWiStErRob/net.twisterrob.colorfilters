@@ -107,8 +107,8 @@ internal class OrderComponent(
 	 * @param components must match the order in [comps].
 	 */
 	fun order(vararg components: Component): Array<Component> {
-		if (components.size != map.size) {
-			throw IllegalArgumentException("Invalid number of components")
+		require(components.size == map.size) {
+			"Invalid number of components (${components.size}), there must be ${map.size} of them."
 		}
 		return components.indices
 			.map { index -> components[map[index]] }
