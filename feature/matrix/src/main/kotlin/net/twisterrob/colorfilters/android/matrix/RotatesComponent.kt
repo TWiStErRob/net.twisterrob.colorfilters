@@ -15,28 +15,35 @@ internal class RotatesComponent(
 		RotateComponent(view, listener, COMP_B)
 	)
 
-	override fun setupUI() =
+	override fun setupUI() {
 		rotates.forEach { it.setupUI() }
+	}
 
-	override fun saveToPreferences(editor: SharedPreferences.Editor) =
+	override fun saveToPreferences(editor: SharedPreferences.Editor) {
 		rotates.forEach { it.saveToPreferences(editor) }
+	}
 
-	override fun restoreFromPreferences(prefs: SharedPreferences) =
+	override fun restoreFromPreferences(prefs: SharedPreferences) {
 		rotates.forEach { it.restoreFromPreferences(prefs) }
+	}
 
-	override fun reset() =
+	override fun reset() {
 		rotates.forEach { it.reset() }
+	}
 
-	override fun refreshModel() =
+	override fun refreshModel() {
 		rotates.forEach { it.refreshModel() }
+	}
 
-	override fun combineInto(colorMatrix: ColorMatrix) =
+	override fun combineInto(colorMatrix: ColorMatrix) {
 		rotates.forEach { it.combineInto(colorMatrix) }
+	}
 
 	override fun appendTo(sb: StringBuilder): Boolean =
-		rotates.fold(false) { written, it ->
-			written or it.appendTo(sb)
+		rotates.fold(false) { written, component ->
+			written or component.appendTo(sb)
 		}
 
-	operator fun get(compRGB: Int): Component = rotates[compRGB]
+	operator fun get(compRGB: Int): Component =
+		rotates[compRGB]
 }

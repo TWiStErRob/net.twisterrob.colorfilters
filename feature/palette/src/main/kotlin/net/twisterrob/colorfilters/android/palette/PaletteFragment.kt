@@ -255,7 +255,7 @@ class PaletteFragment : ColorFilterFragment() {
 			}
 
 			override fun onNothingSelected(parent: AdapterView<*>) {
-				throw IllegalStateException("This should not happen.")
+				error("This should not happen.")
 			}
 		}
 
@@ -278,9 +278,7 @@ class PaletteFragment : ColorFilterFragment() {
 		if (pendingUpdate) {
 			return
 		}
-		if (numColors < 1) {
-			throw IllegalArgumentException("numColors must be 1 of greater")
-		}
+		require(1 <= numColors) { "numColors ($numColors) must be 1 of greater" }
 
 		try {
 			pendingUpdate = true
@@ -302,9 +300,7 @@ class PaletteFragment : ColorFilterFragment() {
 		if (pendingUpdate) {
 			return
 		}
-		if (resizeDimen < 1) {
-			throw IllegalArgumentException("resizeDimen must be 1 of greater")
-		}
+		require(1 <= resizeDimen) { "resizeDimen ($resizeDimen) must be 1 of greater" }
 
 		try {
 			pendingUpdate = true

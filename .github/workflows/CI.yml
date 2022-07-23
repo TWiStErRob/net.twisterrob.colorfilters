@@ -113,35 +113,12 @@ jobs:
           name: Detekt Merged Results
           path: ${{ github.workspace }}/build/reports/detekt/merge.*
 
-      - name: Fail if Detekt is missing merged report or has warnings.
-        if: success() || failure()
-        run: |
-          mergedReport=build/reports/detekt/merge.xml
-          if [ ! -f "${mergedReport}" ]; then # -f: Path exists and is regular file.
-            echo "Detekt report file '${mergedReport}' does not exist."
-            exit 2
-          fi
-          count=$(grep --count '<file name=' "${mergedReport}" || true) 
-          if [ $count != 0 ]; then 
-            echo "There were $count Detekt failures in '${mergedReport}'."
-            exit 3
-          fi
-
       - name: Publish Detekt Results
         uses: github/codeql-action/upload-sarif@v2
         if: success() || failure()
         with:
           checkout_path: ${{ github.workspace }}
           sarif_file: ${{ github.workspace }}/build/reports/detekt/merge.sarif
-
-      - name: Fail if Detekt is missing Sarif report for publishing on GitHub.
-        if: success() || failure()
-        run: |
-          mergedReport=build/reports/detekt/merge.sarif
-          if [ ! -f "${mergedReport}" ]; then # -f: Path exists and is regular file.
-            echo "Detekt report file '${mergedReport}' does not exist."
-            exit 2
-          fi
 
   instrumentation:
     name: 🧪 Instrumentation Tests
