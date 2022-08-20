@@ -41,9 +41,9 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 		minSdk = 14
 		if (this@android is AppExtension) {
 			this@defaultConfig as ApplicationDefaultConfig
-			targetSdk = 31
+			targetSdk = 32
 		}
-		compileSdk = 31
+		compileSdk = 32
 	}
 	defaultConfig {
 		dependencies {
