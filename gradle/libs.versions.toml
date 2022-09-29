@@ -31,7 +31,7 @@ agp="7.3.0"
 
 # TODEL net.twisterrob.gradle/issues/214 when fixed
 # https://github.com/TWiStErRob/net.twisterrob.gradle/releases
-twisterrob="0.14.1"
+twisterrob="0.15-SNAPSHOT"
 
 # https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md
 kotlin="1.7.20"
