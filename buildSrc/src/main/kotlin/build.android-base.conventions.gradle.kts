@@ -36,6 +36,8 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 
 @Suppress("UnstableApiUsage")
 (project.extensions["android"] as CommonExtension<*, *, *, *>).apply android@{
+	namespace = "net.twisterrob.colorfilters.android.${project.name}"
+
 	@Suppress("MagicNumber")
 	defaultConfig {
 		minSdk = 14
