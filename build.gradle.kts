@@ -23,3 +23,7 @@ apply(plugin = "android-reporting")
 tasks.register<Delete>("clean") {
 	delete(rootProject.buildDir)
 }
+
+tasks.register("check") {
+	dependsOn(gradle.includedBuilds.map { it.task(":check") })
+}
