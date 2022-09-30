@@ -11,6 +11,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withParent
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
+import net.twisterrob.colorfilters.android.app.R
 import net.twisterrob.colorfilters.android.lighting.LightingScreenActor
 import net.twisterrob.colorfilters.android.matrix.MatrixScreenActor
 import net.twisterrob.colorfilters.android.palette.PaletteScreenActor

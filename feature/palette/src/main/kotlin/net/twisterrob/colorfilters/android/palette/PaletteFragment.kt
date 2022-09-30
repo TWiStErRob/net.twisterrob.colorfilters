@@ -35,7 +35,7 @@ import net.twisterrob.colorfilters.android.keyboard.KeyboardMode
 import net.twisterrob.colorfilters.android.replaceAlpha
 import net.twisterrob.colorfilters.android.toRGBHexString
 import kotlin.math.max
-import net.twisterrob.colorfilters.base.R as baseR
+import net.twisterrob.colorfilters.android.base.R as BaseR
 
 private const val PREF_PALETTE_NUM_COLORS = "Palette.numColors"
 private const val PREF_PALETTE_RESIZE_DIMEN = "Palette.resizeDimen"
@@ -207,7 +207,7 @@ class PaletteFragment : ColorFilterFragment() {
 					.setTitle("Copy swatch to clipboard")
 					.setItems(titles) { _, which ->
 						copyToClipboard(context, titles[which], values[which])
-						val copiedAlert = context.getString(baseR.string.cf_info_copy_toast_arg, titles[which])
+						val copiedAlert = context.getString(BaseR.string.cf_info_copy_toast_arg, titles[which])
 						Toast.makeText(context, copiedAlert, Toast.LENGTH_SHORT).show()
 					}
 					.setNeutralButton("Copy all named swatches") { _, _ ->
@@ -222,7 +222,7 @@ class PaletteFragment : ColorFilterFragment() {
 								res("mutedDark", palette.darkMutedSwatch)
 							)
 						)
-						val copiedAlert = context.getString(baseR.string.cf_info_copy_toast)
+						val copiedAlert = context.getString(BaseR.string.cf_info_copy_toast)
 						Toast.makeText(context, copiedAlert, Toast.LENGTH_SHORT).show()
 					}
 					.show()

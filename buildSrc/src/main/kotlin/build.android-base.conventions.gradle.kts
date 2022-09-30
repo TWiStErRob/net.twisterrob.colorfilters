@@ -36,6 +36,8 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 
 @Suppress("UnstableApiUsage")
 (project.extensions["android"] as CommonExtension<*, *, *, *>).apply android@{
+	namespace = project.namespace
+
 	@Suppress("MagicNumber")
 	defaultConfig {
 		minSdk = 14
@@ -127,7 +129,7 @@ run {
 		lintTasks.configureEach { dependsOn(ex) }
 		if (project.path == ":app") {
 			afterEvaluate { // double-jump is required because this gets applied before the build plugin.
-				val min = tasks.named("generateReleaseMinificationRules")
+				val min = tasks.named("generateReleaseR8MinificationRules")
 				lintTasks.configureEach { dependsOn(min) }
 			}
 		}

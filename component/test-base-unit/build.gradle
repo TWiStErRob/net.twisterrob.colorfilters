@@ -2,6 +2,10 @@ plugins {
 	id("net.twisterrob.colorfilters.component.conventions")
 }
 
+android {
+	namespace = "net.twisterrob.colorfilters.android.test.unit"
+}
+
 dependencies {
 	api(platform(libs.junit5))
 	api(libs.junit5.jupiter)

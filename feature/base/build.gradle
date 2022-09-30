@@ -14,5 +14,10 @@ dependencies {
 	api(libs.androidx.preference.ktx)
 
 	testImplementation(libs.jmh)
+	// REPORT :feature:base:kaptReleaseUnitTestKotlin
+	// > [WARN] Issue detected with org.openjdk.jmh.generators.BenchmarkProcessor.
+	// > Expected 1 originating source file when generating
+	// > ...\feature\base\build\tmp\kapt3\classes\releaseUnitTest\META-INF\CompilerHints,
+	// > but detected 0: [].
 	kaptTest(libs.jmh.processor)
 }
