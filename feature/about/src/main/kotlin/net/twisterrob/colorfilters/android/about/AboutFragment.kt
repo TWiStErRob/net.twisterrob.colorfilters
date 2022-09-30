@@ -3,8 +3,10 @@ package net.twisterrob.colorfilters.android.about
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.util.Log
@@ -123,10 +125,19 @@ class AboutFragment : ListFragment() {
 
 private val Context.versionName: String
 	get() = try {
-		packageManager.getPackageInfo(packageName, 0).versionName
+		packageManager.packageInfoCompat(packageName, 0).versionName
 	} catch (@Suppress("SwallowedException") e: PackageManager.NameNotFoundException) {
 		// Should not happen, even if it does, "error" is a valid version name in that case.
 		"error"
+	}
+
+@Throws(PackageManager.NameNotFoundException::class)
+private fun PackageManager.packageInfoCompat(packageName: String, flags: Long): PackageInfo =
+	if (Build.VERSION_CODES.TIRAMISU <= Build.VERSION.SDK_INT) {
+		getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(flags))
+	} else {
+		@Suppress("DEPRECATION")
+		getPackageInfo(packageName, flags.toInt())
 	}
 
 private fun ViewGroup.replace(original: View, replacement: View) {
