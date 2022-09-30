@@ -75,6 +75,12 @@ class MainActivity : AppCompatActivity()
 		PreferenceManager.getDefaultSharedPreferences(this.applicationContext)
 	}
 
+	init {
+		supportFragmentManager.addFragmentOnAttachListener { _, _ ->
+			kbd = null
+		}
+	}
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_color_filter)
@@ -289,10 +295,6 @@ class MainActivity : AppCompatActivity()
 			}
 		}
 		return App.getShareableCacheUri(this, file)
-	}
-
-	override fun onAttachFragment(fragment: Fragment) {
-		kbd = null
 	}
 
 	override fun fragmentOnResume() {
