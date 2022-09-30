@@ -13,5 +13,5 @@ dependencies {
 }
 
 android {
-	namespace = "net.twisterrob.colorfilters.android.${owningModule.name}.test.fixtures"
+	namespace = "${owningModule.namespace}.fixtures"
 }
