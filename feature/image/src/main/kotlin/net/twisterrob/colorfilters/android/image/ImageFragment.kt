@@ -1,6 +1,7 @@
 package net.twisterrob.colorfilters.android.image
 
 import android.Manifest
+import android.annotation.TargetApi
 import android.app.Activity
 import android.content.ComponentName
 import android.content.Context
@@ -223,8 +224,8 @@ class ImageFragment : Fragment() {
 						return
 					}
 					data.extras?.let { extras ->
-						val extraData = extras.get("data")
-						if (extraData is Bitmap) {
+						val extraData = extras.getBitmap("data")
+						if (extraData != null) {
 							load(extraData)
 							return
 						}
@@ -305,4 +306,13 @@ private fun PackageManager.queryIntentActivitiesCompat(
 	} else {
 		@Suppress("DEPRECATION")
 		queryIntentActivities(intent, flags.toInt())
+	}
+
+@TargetApi(VERSION_CODES.TIRAMISU)
+private fun Bundle.getBitmap(key: String): Bitmap? =
+	if (VERSION.SDK_INT <= VERSION_CODES.TIRAMISU) {
+		getParcelable(key, Bitmap::class.java)
+	} else {
+		@Suppress("DEPRECATION")
+		get(key) as? Bitmap
 	}
