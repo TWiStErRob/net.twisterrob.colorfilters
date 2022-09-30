@@ -1,5 +1,6 @@
 plugins {
 	`kotlin-dsl`
+	id("java-gradle-plugin")
 }
 
 dependencies {
@@ -13,6 +14,17 @@ dependencies {
 	implementation(libs.twisterrob.android)
 	// TODEL https://github.com/gradle/gradle/issues/15383
 	implementation(files(libs::class.java.protectionDomain.codeSource.location))
+}
+
+gradlePlugin {
+	// REPORT Why do I need to do this? It's already in the classpath.
+	// Plus with this I get this warning: from Task :plugins:jar
+	// > :jar: A valid plugin descriptor was found for net.twisterrob.settings.properties but the
+	// > implementation class net.twisterrob.gradle.settings.SettingsPlugin was not found in the jar.
+	plugins.register("net.twisterrob.settings") {
+		id = "net.twisterrob.settings"
+		implementationClass = "net.twisterrob.gradle.settings.SettingsPlugin"
+	}
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {

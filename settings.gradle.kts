@@ -19,6 +19,36 @@ include(":component:test-base-unit")
 include(":feature:image")
 include(":feature:keyboard", ":feature:keyboard:contract")
 
+pluginManagement {
+	includeBuild("gradle/plugins")
+
+	repositories {
+		google {
+			content {
+				includeGroupByRegex("""^com\.android(\..*)?$""")
+				includeGroupByRegex("""^com\.google\..*$""")
+				includeGroupByRegex("""^androidx\..*$""")
+			}
+		}
+		mavenCentral()
+		maven("https://s01.oss.sonatype.org/content/repositories/snapshots/") {
+			name = "Sonatype 01: SNAPSHOTs"
+			content {
+				includeVersionByRegex("""^net\.twisterrob\.gradle$""", ".*", """.*-SNAPSHOT$""")
+				includeVersionByRegex("""^net\.twisterrob\.gradle$""", ".*", """.*-\d{8}\.\d{6}-\d+$""")
+			}
+			mavenContent {
+				// This doesn't allow using specific snapshot, so using versionRegex above.
+				//snapshotsOnly()
+			}
+		}
+	}
+}
+
+plugins {
+	id("net.twisterrob.settings")
+}
+
 dependencyResolutionManagement {
 	repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
 	repositories {
