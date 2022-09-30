@@ -3,6 +3,7 @@ package net.twisterrob.colorfilters.android
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceFragmentCompat
+import net.twisterrob.colorfilters.android.app.R
 
 class PreferencesActivity : AppCompatActivity() {
 

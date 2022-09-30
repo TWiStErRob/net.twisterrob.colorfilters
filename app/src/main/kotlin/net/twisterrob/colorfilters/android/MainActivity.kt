@@ -24,6 +24,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.transaction
 import androidx.preference.PreferenceManager
 import net.twisterrob.colorfilters.android.about.AboutActivity
+import net.twisterrob.colorfilters.android.app.BuildConfig
+import net.twisterrob.colorfilters.android.app.R
 import net.twisterrob.colorfilters.android.image.ImageFragment
 import net.twisterrob.colorfilters.android.image.LogoGenerator
 import net.twisterrob.colorfilters.android.keyboard.KeyboardHandler

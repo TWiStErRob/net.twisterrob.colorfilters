@@ -5,6 +5,7 @@ import android.content.Context
 import android.net.Uri
 import androidx.core.content.FileProvider
 import androidx.preference.PreferenceManager
+import net.twisterrob.colorfilters.android.app.R
 import java.io.File
 
 class App : Application() {

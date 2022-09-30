@@ -28,8 +28,6 @@ android {
 	defaultConfig {
 		applicationId 'net.twisterrob.colorfilters'
 	}
-	namespace = "net.twisterrob.colorfilters.android"
-	testNamespace = "net.twisterrob.colorfilters.test"
 
 	/* 
 	buildTypes {
