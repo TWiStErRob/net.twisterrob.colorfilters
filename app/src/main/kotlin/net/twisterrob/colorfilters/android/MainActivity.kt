@@ -36,6 +36,7 @@ import net.twisterrob.colorfilters.android.palette.PaletteFragment
 import net.twisterrob.colorfilters.android.porterduff.PorterDuffFragment
 import net.twisterrob.colorfilters.android.resources.ResourceFontFragment
 import java.util.zip.ZipFile
+import net.twisterrob.colorfilters.android.base.R as BaseR
 
 class MainActivity : AppCompatActivity()
 	, ColorFilterFragment.Listener // TODO group: ViewModel
@@ -172,7 +173,7 @@ class MainActivity : AppCompatActivity()
 					type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(logoZip.extension)
 					putExtra(Intent.EXTRA_STREAM, logoUri)
 				}
-				val title = getText(net.twisterrob.colorfilters.base.R.string.cf_share_picker_title)
+				val title = getText(BaseR.string.cf_share_picker_title)
 				startActivity(Intent.createChooser(intent, title))
 
 				images.load(ZipFile(logoZip).let { zip ->

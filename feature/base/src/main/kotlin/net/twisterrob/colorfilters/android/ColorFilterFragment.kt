@@ -28,9 +28,9 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.preference.PreferenceManager
+import net.twisterrob.colorfilters.android.base.R
 import net.twisterrob.colorfilters.android.keyboard.KeyboardHandler
 import net.twisterrob.colorfilters.android.keyboard.KeyboardMode
-import net.twisterrob.colorfilters.base.R
 
 abstract class ColorFilterFragment : Fragment() {
 

@@ -2,10 +2,6 @@ plugins {
 	id("net.twisterrob.colorfilters.component.conventions")
 }
 
-android {
-	namespace = "net.twisterrob.colorfilters.base"
-}
-
 dependencies {
 	implementation(projects.feature.keyboard.contract)
 
