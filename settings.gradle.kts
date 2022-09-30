@@ -1,3 +1,5 @@
+import net.twisterrob.gradle.settings.enableFeaturePreviewQuietly
+
 rootProject.name = "ColorFilters"
 
 enableFeaturePreviewQuietly("TYPESAFE_PROJECT_ACCESSORS", "Type-safe project accessors")
@@ -19,6 +21,36 @@ include(":component:test-base-unit")
 include(":feature:image")
 include(":feature:keyboard", ":feature:keyboard:contract")
 
+pluginManagement {
+	includeBuild("gradle/plugins")
+
+	repositories {
+		google {
+			content {
+				includeGroupByRegex("""^com\.android(\..*)?$""")
+				includeGroupByRegex("""^com\.google\..*$""")
+				includeGroupByRegex("""^androidx\..*$""")
+			}
+		}
+		mavenCentral()
+		maven("https://s01.oss.sonatype.org/content/repositories/snapshots/") {
+			name = "Sonatype 01: SNAPSHOTs"
+			content {
+				includeVersionByRegex("""^net\.twisterrob\.gradle$""", ".*", """.*-SNAPSHOT$""")
+				includeVersionByRegex("""^net\.twisterrob\.gradle$""", ".*", """.*-\d{8}\.\d{6}-\d+$""")
+			}
+			mavenContent {
+				// This doesn't allow using specific snapshot, so using versionRegex above.
+				//snapshotsOnly()
+			}
+		}
+	}
+}
+
+plugins {
+	id("net.twisterrob.settings")
+}
+
 dependencyResolutionManagement {
 	repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
 	repositories {
@@ -31,24 +63,4 @@ dependencyResolutionManagement {
 		}
 		mavenCentral()
 	}
-}
-
-/**
- * @see <a href="https://github.com/gradle/gradle/issues/19069">Feature request</a>
- */
-fun Settings.enableFeaturePreviewQuietly(name: String, summary: String) {
-	enableFeaturePreview(name)
-	val logger: Any = org.gradle.util.internal.IncubationLogger::class.java
-		.getDeclaredField("INCUBATING_FEATURE_HANDLER")
-		.apply { isAccessible = true }
-		.get(null)
-
-	@Suppress("UNCHECKED_CAST")
-	val features: MutableSet<String> =
-		org.gradle.internal.featurelifecycle.LoggingIncubatingFeatureHandler::class.java
-			.getDeclaredField("features")
-			.apply { isAccessible = true }
-			.get(logger) as MutableSet<String>
-
-	features.add(summary)
 }
