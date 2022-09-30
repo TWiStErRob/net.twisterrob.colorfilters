@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.content.pm.ResolveInfo
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.ColorFilter
@@ -69,7 +70,7 @@ class ImageFragment : Fragment() {
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
-		
+
 		requireActivity().addMenuProvider(object : MenuProvider {
 			override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
 				menuInflater.inflate(R.menu.fragment_image, menu)
@@ -189,7 +190,7 @@ class ImageFragment : Fragment() {
 		// Camera
 		val captureIntentTemplate = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 		val camIntents = requireContext().packageManager!!
-			.queryIntentActivities(captureIntentTemplate, 0)
+			.queryIntentActivitiesCompat(captureIntentTemplate, 0)
 			.map { res ->
 				Intent(captureIntentTemplate).apply {
 					component = ComponentName(res.activityInfo.packageName, res.activityInfo.name)
@@ -293,3 +294,15 @@ class ImageFragment : Fragment() {
 		return image
 	}
 }
+
+@Throws(PackageManager.NameNotFoundException::class)
+private fun PackageManager.queryIntentActivitiesCompat(
+	intent: Intent,
+	flags: Long
+): List<ResolveInfo> =
+	if (VERSION_CODES.TIRAMISU <= VERSION.SDK_INT) {
+		queryIntentActivities(intent, PackageManager.ResolveInfoFlags.of(flags))
+	} else {
+		@Suppress("DEPRECATION")
+		queryIntentActivities(intent, flags.toInt())
+	}
