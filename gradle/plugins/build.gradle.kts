@@ -32,3 +32,13 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 		allWarningsAsErrors = true
 	}
 }
+
+tasks.named("pluginDescriptors").configure {
+	finalizedBy("validatePlugins")
+}
+
+tasks.withType<ValidatePlugins>().configureEach {
+	ignoreFailures.set(false)
+	failOnWarning.set(true)
+	enableStricterValidation.set(true)
+}
