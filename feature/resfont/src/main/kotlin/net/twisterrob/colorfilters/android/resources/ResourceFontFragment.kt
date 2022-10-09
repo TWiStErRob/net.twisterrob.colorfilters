@@ -1,6 +1,7 @@
 package net.twisterrob.colorfilters.android.resources
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.ColorFilter
 import android.os.Bundle
 import android.text.Spanned
@@ -102,8 +103,7 @@ class ResourceFontFragment : ColorFilterFragment() {
 		val resultWhite: TextView = row.findViewById(R.id.resultWhite)
 		val resolved: TextView = row.findViewById(R.id.resolved)
 
-		val codeRes = resources.getResourceEntryName(test) + "_code"
-		source.setText(resources.getIdentifier(codeRes, "string", requireContext().packageName))
+		source.setText(requireContext().getCodeForText(test))
 		try {
 			val resultText = getText(test)
 			resultBlack.text = resultText
@@ -139,5 +139,12 @@ class ResourceFontFragment : ColorFilterFragment() {
 			}
 		}
 		return null
+	}
+
+	@SuppressLint("DiscouragedApi")
+	@StringRes
+	private fun Context.getCodeForText(@StringRes test: Int): Int {
+		val codeRes = resources.getResourceEntryName(test) + "_code"
+		return resources.getIdentifier(codeRes, "string", packageName)
 	}
 }
