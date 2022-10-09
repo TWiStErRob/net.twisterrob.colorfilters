@@ -222,6 +222,7 @@ class MainActivity : AppCompatActivity()
 			.commitAllowingStateLoss()
 	}
 
+	@Deprecated("Deprecated since https://developer.android.com/jetpack/androidx/releases/fragment#1.3.0-alpha04")
 	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 		if (requestCode == Activity.RESULT_FIRST_USER) {
 			kbd = null
@@ -243,10 +244,12 @@ class MainActivity : AppCompatActivity()
 		currentFragment?.run { reset() }
 	}
 
+	@Deprecated("Deprecated since Android 13 / SDK 33")
 	override fun onBackPressed() {
 		if (kbd?.handleBack() == true) {
 			return
 		}
+		@Suppress("DEPRECATION")
 		super.onBackPressed()
 	}
 
