@@ -249,7 +249,7 @@ class MainActivity : AppCompatActivity()
 		if (kbd?.handleBack() == true) {
 			return
 		}
-		@Suppress("DEPRECATION")
+		@Suppress("DEPRECATION") // TODO https://github.com/TWiStErRob/net.twisterrob.colorfilters/issues/93
 		super.onBackPressed()
 	}
 
