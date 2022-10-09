@@ -310,7 +310,7 @@ private fun PackageManager.queryIntentActivitiesCompat(
 
 @TargetApi(VERSION_CODES.TIRAMISU)
 private fun Bundle.getBitmap(key: String): Bitmap? =
-	if (VERSION.SDK_INT <= VERSION_CODES.TIRAMISU) {
+	if (VERSION_CODES.TIRAMISU <= VERSION.SDK_INT) {
 		getParcelable(key, Bitmap::class.java)
 	} else {
 		@Suppress("DEPRECATION")
