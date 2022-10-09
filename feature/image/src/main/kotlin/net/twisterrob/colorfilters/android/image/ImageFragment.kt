@@ -169,6 +169,7 @@ class ImageFragment : Fragment() {
 		startLoadImage()
 	}
 
+	@Deprecated("Deprecated in Fragment 1.3.0-alpha04 TODO group: ActivityResultContract")
 	override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
 		when (requestCode) {
 			REQUEST_CODE_PERMISSION_PICTURE ->
@@ -215,6 +216,7 @@ class ImageFragment : Fragment() {
 	}
 
 	@Suppress("NestedBlockDepth") // Outer when is readable; TODO group: ActivityResultContract
+	@Deprecated("Deprecated in Fragment 1.3.0-alpha04 TODO group: ActivityResultContract")
 	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 		when (requestCode) {
 			REQUEST_CODE_GET_PICTURE -> {

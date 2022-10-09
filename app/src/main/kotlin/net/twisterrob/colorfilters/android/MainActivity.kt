@@ -222,7 +222,7 @@ class MainActivity : AppCompatActivity()
 			.commitAllowingStateLoss()
 	}
 
-	@Deprecated("Deprecated since https://developer.android.com/jetpack/androidx/releases/fragment#1.3.0-alpha04")
+	@Deprecated("Deprecated in Fragment 1.3.0-alpha04 TODO group: ActivityResultContract")
 	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 		if (requestCode == Activity.RESULT_FIRST_USER) {
 			kbd = null
