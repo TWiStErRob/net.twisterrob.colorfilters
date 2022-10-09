@@ -1,12 +1,14 @@
 package net.twisterrob.colorfilters.android.image
 
 import android.Manifest
+import android.annotation.TargetApi
 import android.app.Activity
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.content.pm.ResolveInfo
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.ColorFilter
@@ -69,7 +71,7 @@ class ImageFragment : Fragment() {
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
-		
+
 		requireActivity().addMenuProvider(object : MenuProvider {
 			override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
 				menuInflater.inflate(R.menu.fragment_image, menu)
@@ -167,6 +169,7 @@ class ImageFragment : Fragment() {
 		startLoadImage()
 	}
 
+	@Deprecated("Deprecated in Fragment 1.3.0-alpha04 TODO group: ActivityResultContract")
 	override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
 		when (requestCode) {
 			REQUEST_CODE_PERMISSION_PICTURE ->
@@ -189,7 +192,7 @@ class ImageFragment : Fragment() {
 		// Camera
 		val captureIntentTemplate = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 		val camIntents = requireContext().packageManager!!
-			.queryIntentActivities(captureIntentTemplate, 0)
+			.queryIntentActivitiesCompat(captureIntentTemplate, 0)
 			.map { res ->
 				Intent(captureIntentTemplate).apply {
 					component = ComponentName(res.activityInfo.packageName, res.activityInfo.name)
@@ -213,6 +216,7 @@ class ImageFragment : Fragment() {
 	}
 
 	@Suppress("NestedBlockDepth") // Outer when is readable; TODO group: ActivityResultContract
+	@Deprecated("Deprecated in Fragment 1.3.0-alpha04 TODO group: ActivityResultContract")
 	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 		when (requestCode) {
 			REQUEST_CODE_GET_PICTURE -> {
@@ -222,8 +226,8 @@ class ImageFragment : Fragment() {
 						return
 					}
 					data.extras?.let { extras ->
-						val extraData = extras.get("data")
-						if (extraData is Bitmap) {
+						val extraData = extras.getBitmap("data")
+						if (extraData != null) {
 							load(extraData)
 							return
 						}
@@ -293,3 +297,24 @@ class ImageFragment : Fragment() {
 		return image
 	}
 }
+
+@Throws(PackageManager.NameNotFoundException::class)
+private fun PackageManager.queryIntentActivitiesCompat(
+	intent: Intent,
+	flags: Long
+): List<ResolveInfo> =
+	if (VERSION_CODES.TIRAMISU <= VERSION.SDK_INT) {
+		queryIntentActivities(intent, PackageManager.ResolveInfoFlags.of(flags))
+	} else {
+		@Suppress("DEPRECATION")
+		queryIntentActivities(intent, flags.toInt())
+	}
+
+@TargetApi(VERSION_CODES.TIRAMISU)
+private fun Bundle.getBitmap(key: String): Bitmap? =
+	if (VERSION_CODES.TIRAMISU <= VERSION.SDK_INT) {
+		getParcelable(key, Bitmap::class.java)
+	} else {
+		@Suppress("DEPRECATION")
+		get(key) as? Bitmap
+	}

@@ -19,20 +19,21 @@ import net.twisterrob.colorfilters.android.keyboard.KeyboardMode
 import net.twisterrob.colorfilters.android.resfont.R
 import net.twisterrob.colorfilters.android.toARGBHexString
 
-@StringRes private val TESTS = intArrayOf(
-	R.string.cf_resfont_fg_argb,
-	R.string.cf_resfont_fg_rgb,
-	R.string.cf_resfont_fg_named,
-	R.string.cf_resfont_fg_color,
-	R.string.cf_resfont_fg_neg,
-	R.string.cf_resfont_col_argb,
-	R.string.cf_resfont_col_rgb,
-	R.string.cf_resfont_col_named,
-	R.string.cf_resfont_col_color,
-	R.string.cf_resfont_col_neg,
-	R.string.cf_resfont_col_all_named,
-	R.string.cf_resfont_col_all_semi,
-	R.string.cf_resfont_col_old
+@StringRes
+private val TESTS = mapOf(
+	R.string.cf_resfont_fg_argb to R.string.cf_resfont_fg_argb_code,
+	R.string.cf_resfont_fg_rgb to R.string.cf_resfont_fg_rgb_code,
+	R.string.cf_resfont_fg_named to R.string.cf_resfont_fg_named_code,
+	R.string.cf_resfont_fg_color to R.string.cf_resfont_fg_color_code,
+	R.string.cf_resfont_fg_neg to R.string.cf_resfont_fg_neg_code,
+	R.string.cf_resfont_col_argb to R.string.cf_resfont_col_argb_code,
+	R.string.cf_resfont_col_rgb to R.string.cf_resfont_col_rgb_code,
+	R.string.cf_resfont_col_named to R.string.cf_resfont_col_named_code,
+	R.string.cf_resfont_col_color to R.string.cf_resfont_col_color_code,
+	R.string.cf_resfont_col_neg to R.string.cf_resfont_col_neg_code,
+	R.string.cf_resfont_col_all_named to R.string.cf_resfont_col_all_named_code,
+	R.string.cf_resfont_col_all_semi to R.string.cf_resfont_col_all_semi_code,
+	R.string.cf_resfont_col_old to R.string.cf_resfont_col_old_code,
 )
 
 class ResourceFontFragment : ColorFilterFragment() {
@@ -59,8 +60,8 @@ class ResourceFontFragment : ColorFilterFragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		val table: TableLayout = view.findViewById(R.id.table)
 		table.removeViews(1, table.childCount - 1) // keep header
-		for (@StringRes test in TESTS) {
-			createRow(table, test)
+		for ((@StringRes test, @StringRes code) in TESTS) {
+			createRow(table, test, code)
 		}
 		addHtmlRow(table)
 	}
@@ -92,7 +93,11 @@ class ResourceFontFragment : ColorFilterFragment() {
 		return row.also { table.addView(row) }
 	}
 
-	private fun createRow(table: TableLayout, @StringRes test: Int): TableRow {
+	private fun createRow(
+		table: TableLayout,
+		@StringRes test: Int,
+		@StringRes code: Int,
+	): TableRow {
 		val inflater = LayoutInflater.from(table.context)
 		val row = inflater.inflate(R.layout.inc_resfont_row, table, false) as TableRow
 		table.addView(row)
@@ -102,8 +107,7 @@ class ResourceFontFragment : ColorFilterFragment() {
 		val resultWhite: TextView = row.findViewById(R.id.resultWhite)
 		val resolved: TextView = row.findViewById(R.id.resolved)
 
-		val codeRes = resources.getResourceEntryName(test) + "_code"
-		source.setText(resources.getIdentifier(codeRes, "string", requireContext().packageName))
+		source.setText(code)
 		try {
 			val resultText = getText(test)
 			resultBlack.text = resultText

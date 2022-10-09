@@ -75,6 +75,12 @@ class MainActivity : AppCompatActivity()
 		PreferenceManager.getDefaultSharedPreferences(this.applicationContext)
 	}
 
+	init {
+		supportFragmentManager.addFragmentOnAttachListener { _, _ ->
+			kbd = null
+		}
+	}
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_color_filter)
@@ -216,6 +222,7 @@ class MainActivity : AppCompatActivity()
 			.commitAllowingStateLoss()
 	}
 
+	@Deprecated("Deprecated in Fragment 1.3.0-alpha04 TODO group: ActivityResultContract")
 	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 		if (requestCode == Activity.RESULT_FIRST_USER) {
 			kbd = null
@@ -237,10 +244,12 @@ class MainActivity : AppCompatActivity()
 		currentFragment?.run { reset() }
 	}
 
+	@Deprecated("Deprecated since Android 13 / SDK 33")
 	override fun onBackPressed() {
 		if (kbd?.handleBack() == true) {
 			return
 		}
+		@Suppress("DEPRECATION") // TODO https://github.com/TWiStErRob/net.twisterrob.colorfilters/issues/93
 		super.onBackPressed()
 	}
 
@@ -289,10 +298,6 @@ class MainActivity : AppCompatActivity()
 			}
 		}
 		return App.getShareableCacheUri(this, file)
-	}
-
-	override fun onAttachFragment(fragment: Fragment) {
-		kbd = null
 	}
 
 	override fun fragmentOnResume() {

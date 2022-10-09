@@ -45,7 +45,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 			this@defaultConfig as ApplicationDefaultConfig
 			targetSdk = 32
 		}
-		compileSdk = 32
+		compileSdk = 33
 	}
 	defaultConfig {
 		dependencies {
