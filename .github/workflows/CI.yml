@@ -90,7 +90,7 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v2
         with:
           check_name: "🔔 Test: Unit Results"
-          comment_title: Unit Test Results
+          comment_mode: off
           report_individual_runs: true
           test_changes_limit: 0
           junit_files: ${{ github.workspace }}/**/build/test-results/*/TEST-*.xml
@@ -174,7 +174,7 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action/composite@v2
         with:
           check_name: "🔔 Test: Instrumentation Results"
-          comment_title: Instrumentation Test Results
+          comment_mode: off
           report_individual_runs: true
           test_changes_limit: 0
           junit_files: ${{ github.workspace }}/**/build/outputs/androidTest-results/connected/TEST-*.xml
