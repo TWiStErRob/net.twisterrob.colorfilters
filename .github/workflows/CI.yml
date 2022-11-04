@@ -37,6 +37,9 @@ jobs:
       - name: Checkout ${{ github.ref }} branch in ${{ github.repository }} repository.
         uses: actions/checkout@v3
 
+      - name: Validate Gradle Wrapper JARs.
+        uses: gradle/wrapper-validation-action@v1
+
       - name: Build & Verify project.
         run: >
           ./gradlew
@@ -52,21 +55,21 @@ jobs:
           violationReportHtml
           violationCountFile
 
-      - name: Upload "Lint Results".
+      - name: Upload "Lint Results" artifact.
         if: success() || failure()
         uses: actions/upload-artifact@v3
         with:
           name: Lint Results HTMLs
           path: ${{ github.workspace }}/**/build/reports/lint-results*.html
 
-      - name: Upload "Lint Merged Results".
+      - name: Upload "Lint Merged Results" artifact.
         if: success() || failure()
         uses: actions/upload-artifact@v3
         with:
           name: Lint Merged Results
           path: ${{ github.workspace }}/build/reports/violations.*
 
-      - name: Fail if there are violations
+      - name: Fail if there are violations.
         if: success() || failure()
         run: |
           count=$(cat "${{ github.workspace }}/build/reports/violations.count")
@@ -78,14 +81,14 @@ jobs:
             exit 0
           fi
 
-      - name: Upload "Unit Test Results".
+      - name: Upload "Unit Test Results" artifact.
         if: success() || failure()
         uses: actions/upload-artifact@v3
         with:
           name: Unit Test Results
           path: ${{ github.workspace }}/**/build/reports/tests/*/
 
-      - name: Publish Unit Test Results
+      - name: Publish "Unit Results" check suite.
         if: success() || failure()
         uses: EnricoMi/publish-unit-test-result-action@v2
         with:
@@ -95,21 +98,21 @@ jobs:
           test_changes_limit: 0
           junit_files: ${{ github.workspace }}/**/build/test-results/*/TEST-*.xml
 
-      - name: Upload "Detekt Results".
+      - name: Upload "Detekt Results" artifact.
         if: success() || failure()
         uses: actions/upload-artifact@v3
         with:
           name: Detekt Results
           path: ${{ github.workspace }}/**/build/reports/detekt/detekt.*
 
-      - name: Upload "Detekt Merged Results".
+      - name: Upload "Detekt Merged Results" artifact.
         if: success() || failure()
         uses: actions/upload-artifact@v3
         with:
           name: Detekt Merged Results
           path: ${{ github.workspace }}/build/reports/detekt/merge.*
 
-      - name: Publish Detekt Results
+      - name: Publish "detekt" GitHub Code Scanning analysis.
         uses: github/codeql-action/upload-sarif@v2
         if: success() || failure()
         with:
@@ -119,7 +122,7 @@ jobs:
   instrumentation:
     name: 🧪 Instrumentation Tests
     runs-on: macos-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
     steps:
       - name: Set up JDKs.
         run: |
@@ -143,13 +146,16 @@ jobs:
       - name: Checkout ${{ github.ref }} branch in ${{ github.repository }} repository.
         uses: actions/checkout@v3
 
-      - name: Run Instrumentation Tests
+      - name: Validate Gradle Wrapper JARs.
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Run Instrumentation Tests on emulator.
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
           script: ./gradlew connectedCheck mergeAndroidReports --continue
 
-      - name: Upload "Instrumentation Test Results".
+      - name: Upload "Instrumentation Test Results" artifact.
         if: success() || failure()
         uses: actions/upload-artifact@v3
         with:
@@ -159,7 +165,7 @@ jobs:
             ${{ github.workspace }}/**/build/outputs/androidTest-results/connected/
             !**/*:*
 
-      - name: Upload "Instrumentation Merged Results".
+      - name: Upload "Instrumentation Merged Results" artifact.
         if: success() || failure()
         uses: actions/upload-artifact@v3
         with:
@@ -169,7 +175,7 @@ jobs:
             ${{ github.workspace }}/build/androidTest-results/
             !**/*:*
 
-      - name: Publish Instrumentation Test Results
+      - name: Publish "Instrumentation Results" check suite.
         if: success() || failure()
         uses: EnricoMi/publish-unit-test-result-action/composite@v2
         with:
