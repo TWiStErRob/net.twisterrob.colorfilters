@@ -1,3 +1,4 @@
+import groovy.json.JsonOutput.toJson
 import net.twisterrob.gradle.settings.enableFeaturePreviewQuietly
 
 rootProject.name = "ColorFilters"
@@ -33,6 +34,12 @@ pluginManagement {
 			}
 		}
 		mavenCentral()
+		gradlePluginPortal {
+			content {
+				includeGroup("com.gradle")
+				includeGroup("com.gradle.enterprise")
+			}
+		}
 		maven("https://s01.oss.sonatype.org/content/repositories/snapshots/") {
 			name = "Sonatype 01: SNAPSHOTs"
 			content {
@@ -48,6 +55,7 @@ pluginManagement {
 }
 
 plugins {
+	id("com.gradle.enterprise") version "3.11.4"
 	id("net.twisterrob.settings")
 }
 
@@ -62,5 +70,45 @@ dependencyResolutionManagement {
 			}
 		}
 		mavenCentral()
+	}
+}
+
+gradleEnterprise {
+	buildScan {
+		termsOfServiceUrl = "https://gradle.com/terms-of-service"
+		termsOfServiceAgree = "yes"
+		// TODO how to use net.twisterrob.sun.plugins.isCI? 
+		if (System.getenv("GITHUB_ACTIONS") == "true") {
+			fun setOutput(name: String, value: Any?) {
+				// Using `appendText` to make sure out outputs are not cleared.
+				// Using `\n` to make sure further outputs are correct.
+				// Using `toJson()` to ensure that any special characters (such as newlines) are escaped.
+				File(System.getenv("GITHUB_OUTPUT")).appendText("${name}=${toJson(value)}\n")
+			}
+
+			buildScanPublished {
+				setOutput("build-scan-url", buildScanUri.toASCIIString())
+			}
+			gradle.addBuildListener(object : BuildAdapter() {
+				@Deprecated("Won't work with configuration caching.")
+				override fun buildFinished(result: BuildResult) {
+					setOutput("result-success", result.failure == null)
+					setOutput("result-text", resultText(result))
+				}
+
+				private fun resultText(result: BuildResult): String =
+					"${result.action} ${resultText(result.failure)}"
+
+				private fun resultText(ex: Throwable?): String =
+					when (ex) {
+						null ->
+							"Successful"
+						is org.gradle.internal.exceptions.LocationAwareException ->
+							"Failed: ${ex.message}"
+						else ->
+							"Failed with ${ex}"
+					}
+			})
+		}
 	}
 }

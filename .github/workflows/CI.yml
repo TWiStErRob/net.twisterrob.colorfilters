@@ -41,6 +41,7 @@ jobs:
         uses: gradle/wrapper-validation-action@v1
 
       - name: Build & Verify project.
+        id: gradle
         run: >
           ./gradlew
           --no-daemon
@@ -54,6 +55,22 @@ jobs:
           check
           violationReportHtml
           violationCountFile
+
+      - name: Publish "Gradle" result and Build Scan URL.
+        if: (success() || failure()) && steps.gradle != null && steps.gradle.outputs.result-success != null
+        uses: actions/github-script@v6
+        with:
+          debug: ${{ secrets.ACTIONS_STEP_DEBUG || false }}
+          script: |
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: ${{ toJSON(fromJSON(steps.gradle.outputs.result-success)) }} === true ? "success" : "failure",
+              context: "CI / Build & Verify / Gradle",
+              description: ${{ toJSON(fromJSON(steps.gradle.outputs.result-text)) }},
+              target_url: ${{ toJSON(fromJSON(steps.gradle.outputs.build-scan-url)) }}
+            });
 
       - name: Upload "Lint Results" artifact.
         if: success() || failure()
@@ -150,10 +167,32 @@ jobs:
         uses: gradle/wrapper-validation-action@v1
 
       - name: Run Instrumentation Tests on emulator.
+        id: gradle
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
-          script: ./gradlew connectedCheck mergeAndroidReports --continue
+          script: >
+            ./gradlew
+            --continue
+            --scan
+            connectedCheck
+            mergeAndroidReports
+
+      - name: Publish "Gradle" result and Build Scan URL.
+        if: (success() || failure()) && steps.gradle != null && steps.gradle.outputs.result-success != null
+        uses: actions/github-script@v6
+        with:
+          debug: ${{ secrets.ACTIONS_STEP_DEBUG || false }}
+          script: |
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: ${{ toJSON(fromJSON(steps.gradle.outputs.result-success)) }} === true ? "success" : "failure",
+              context: "CI / Instrumentation Tests / Gradle",
+              description: ${{ toJSON(fromJSON(steps.gradle.outputs.result-text)) }},
+              target_url: ${{ toJSON(fromJSON(steps.gradle.outputs.build-scan-url)) }}
+            });
 
       - name: Upload "Instrumentation Test Results" artifact.
         if: success() || failure()
