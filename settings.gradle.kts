@@ -88,13 +88,30 @@ gradleEnterprise {
 			}
 
 			buildScanPublished {
-				setOutput("build-scan-url", buildScanUri.toASCIIString())
+				//setOutput("build-scan-url", buildScanUri.toASCIIString())
 			}
 			gradle.addBuildListener(object : BuildAdapter() {
 				@Deprecated("Won't work with configuration caching.")
 				override fun buildFinished(result: BuildResult) {
 					setOutput("result-success", result.failure == null)
 					setOutput("result-text", resultText(result))
+					/*
+					 * Make sure the `build-scan-url` output is always set a valid URI,
+					 * otherwise it might fail then the build scan is not published, for example:
+					 * ```
+					 * Publishing build scan...
+					 * Publishing build scan failed due to network error '[...]' (2 retries remaining)...
+					 * Publishing build scan failed due to network error '[...]' (1 retry remaining)...
+					 * 
+					 * A network error occurred.
+					 * [...]
+					 * Exception: java.net.SocketException: Unexpected end of file from server
+					 * ```
+					 * and then subsequently when used:
+					 * > Error: The template is not valid. .github/workflows/CI.yml (Line: 65, Col: 19):
+					 * > Error reading JToken from JsonReader. Path '', line 0, position 0.
+					 */
+					setOutput("build-scan-url", "#error")
 				}
 
 				private fun resultText(result: BuildResult): String =
