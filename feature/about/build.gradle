@@ -5,7 +5,9 @@ plugins {
 android {
 	buildFeatures {
 		buildConfig = true
-		viewBinding = true
+		viewBinding {
+			enabled = true
+		}
 	}
 	buildTypes.all {
 		buildConfigField("String", "EMAIL", "\"papp.robert.s@gmail.com\"")
