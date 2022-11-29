@@ -11,7 +11,8 @@ androidx-palette = "1.0.0"
 androidx-preference = "1.2.0"
 androidx-multidex = "2.0.1"
 androidx-multidex-instrumentation = "2.0.0"
-androidx-test = "1.5.0"
+androidx-test-rules = "1.5.0"
+androidx-test-runner = "1.5.1"
 androidx-test-espresso = "3.5.0"
 
 junit4 = "4.13.2"
@@ -62,8 +63,8 @@ androidx-multidex = { module = "androidx.multidex:multidex", version.ref = "andr
 androidx-multidex-instrumentation = { module = "androidx.multidex:multidex-instrumentation", version.ref = "androidx-multidex-instrumentation" }
 androidx-support = { group = "com.android.support", name = "unused" }
 
-androidx-test-rules = { module = "androidx.test:rules", version.ref = "androidx-test" }
-androidx-test-runner = { module = "androidx.test:runner", version.ref = "androidx-test" }
+androidx-test-rules = { module = "androidx.test:rules", version.ref = "androidx-test-rules" }
+androidx-test-runner = { module = "androidx.test:runner", version.ref = "androidx-test-runner" }
 androidx-test-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "androidx-test-espresso" }
 
 junit4 = { module = "junit:junit", version.ref = "junit4" }
