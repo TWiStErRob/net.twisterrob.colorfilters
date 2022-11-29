@@ -83,7 +83,8 @@ gradleEnterprise {
 				// Using `appendText` to make sure out outputs are not cleared.
 				// Using `\n` to make sure further outputs are correct.
 				// Using `toJson()` to ensure that any special characters (such as newlines) are escaped.
-				File(System.getenv("GITHUB_OUTPUT")).appendText("${name}=${toJson(value)}\n")
+				File(System.getenv("GITHUB_OUTPUT") ?: error("Missing env: GITHUB_OUTPUT"))
+					.appendText("${name}=${toJson(value)}\n")
 			}
 
 			buildScanPublished {
