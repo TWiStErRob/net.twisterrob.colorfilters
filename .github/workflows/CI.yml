@@ -70,7 +70,7 @@ jobs:
               state: ${{ toJSON(fromJSON(steps.gradle.outputs.result-success)) }} === true ? "success" : "failure",
               context: "CI / Build & Verify / Gradle",
               description: ${{ toJSON(fromJSON(steps.gradle.outputs.result-text)) }},
-              target_url: ${{ toJSON(fromJSON(steps.gradle.outputs.build-scan-url)) }}
+              target_url: ${{ steps.gradle.outputs.build-scan-url && toJSON(fromJSON(steps.gradle.outputs.build-scan-url)) || "undefined" }}
             });
 
       - name: Upload "Lint Results" artifact.
