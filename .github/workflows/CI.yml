@@ -77,7 +77,7 @@ jobs:
               description: description.length > 130
                   ? `${description.substring(0, 130)}…`
                   : description
-              target_url: ${{ steps.gradle.outputs.build-scan-url && toJSON(fromJSON(steps.gradle.outputs.build-scan-url)) || "undefined" }}
+              target_url: ${{ steps.gradle.outputs.build-scan-url && toJSON(fromJSON(steps.gradle.outputs.build-scan-url)) || 'undefined' }}
             });
 
       - name: Upload "Lint Results" artifact.
