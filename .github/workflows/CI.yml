@@ -63,13 +63,20 @@ jobs:
         with:
           debug: ${{ secrets.ACTIONS_STEP_DEBUG || false }}
           script: |
+            const description = ${{ toJSON(fromJSON(steps.gradle.outputs.result-text)) }}
             await github.rest.repos.createCommitStatus({
               owner: context.repo.owner,
               repo: context.repo.repo,
               sha: context.sha,
               state: ${{ toJSON(fromJSON(steps.gradle.outputs.result-success)) }} === true ? "success" : "failure",
               context: "CI / Build & Verify / Gradle",
-              description: ${{ toJSON(fromJSON(steps.gradle.outputs.result-text)) }},
+              // Truncate to be sure it fits:
+              // > HttpError: Validation Failed: {"resource":"Status","code":"custom",
+              // > "field":"description","message":"description is too long (maximum is 140 characters)"}
+              // Max length is 140, give some space for potential Unicode.
+              description: description.length > 130
+                  ? `${description.substring(0, 130)}…`
+                  : description
               target_url: ${{ steps.gradle.outputs.build-scan-url && toJSON(fromJSON(steps.gradle.outputs.build-scan-url)) || "undefined" }}
             });
 

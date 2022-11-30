@@ -105,7 +105,11 @@ gradleEnterprise {
 						null ->
 							"Successful"
 						is org.gradle.internal.exceptions.LocationAwareException ->
-							"Failed: ${ex.message}"
+							// Shorten the trivial part of the file name,
+							// as there's a length limitation in GitHub Actions for message (140 chars).
+							// > Build Failed: Build file '.../build.gradle.kts' line: 20
+							// > A problem occurred configuring project ':feature:about'.
+							"Failed: ${ex.message?.replace(rootDir.absolutePath, "")}"
 						else ->
 							"Failed with ${ex}"
 					}
