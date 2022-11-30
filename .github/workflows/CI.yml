@@ -48,7 +48,6 @@ jobs:
           --no-build-cache
           --continue
           --stacktrace
-          --scan
           assemble
           lint
           detekt
@@ -185,7 +184,6 @@ jobs:
             --no-build-cache
             --continue
             --stacktrace
-            --scan
             connectedCheck
             mergeAndroidReports
 
