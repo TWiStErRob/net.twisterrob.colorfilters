@@ -83,7 +83,8 @@ gradleEnterprise {
 				// Using `appendText` to make sure out outputs are not cleared.
 				// Using `\n` to make sure further outputs are correct.
 				// Using `toJson()` to ensure that any special characters (such as newlines) are escaped.
-				File(System.getenv("GITHUB_OUTPUT")).appendText("${name}=${toJson(value)}\n")
+				File(System.getenv("GITHUB_OUTPUT") ?: error("Missing env: GITHUB_OUTPUT"))
+					.appendText("${name}=${toJson(value)}\n")
 			}
 
 			buildScanPublished {
@@ -104,7 +105,11 @@ gradleEnterprise {
 						null ->
 							"Successful"
 						is org.gradle.internal.exceptions.LocationAwareException ->
-							"Failed: ${ex.message}"
+							// Shorten the trivial part of the file name,
+							// as there's a length limitation in GitHub Actions for message (140 chars).
+							// > Build Failed: Build file '.../build.gradle.kts' line: 20
+							// > A problem occurred configuring project ':feature:about'.
+							"Failed: ${ex.message?.replace(rootDir.absolutePath, "")}"
 						else ->
 							"Failed with ${ex}"
 					}
