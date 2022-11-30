@@ -1,16 +1,25 @@
+config:
+  # If a property in the configuration is deprecated, that'll fail Detekt execution.
+  warningsAsErrors: true
+
+
 complexity:
+
   TooManyFunctions:
     active: false
 
+
 style: 
+
   MaxLineLength:
     excludeCommentStatements: true
-  ReturnCount: 
+
+  ReturnCount:
     max: 3
     excludedFunctions:
-      # Ignore MenuProvider.onMenuItemSelected, Activity.onOptionsItemSelected,
-      # and Fragment.onOptionsItemSelected, because they have a special structure for bug prevention.
-      '
-        onMenuItemSelected,
-        onOptionsItemSelected,
-      '
+      # Ignore, because they have a special structure for bug prevention.
+      # Targeting: MenuProvider.onMenuItemSelected.
+      - 'onMenuItemSelected'
+      # Ignore, because they have a special structure for bug prevention.
+      # Targeting: Activity.onOptionsItemSelected, Fragment.onOptionsItemSelected. 
+      - 'onOptionsItemSelected'
