@@ -75,7 +75,7 @@ jobs:
               // Max length is 140, give some space for potential Unicode.
               description: description.length > 130
                   ? `${description.substring(0, 130)}…`
-                  : description
+                  : description,
               target_url: ${{ steps.gradle.outputs.build-scan-url && toJSON(fromJSON(steps.gradle.outputs.build-scan-url)) || 'undefined' }}
             });
 
@@ -206,7 +206,7 @@ jobs:
               // Max length is 140, give some space for potential Unicode.
               description: description.length > 130
                   ? `${description.substring(0, 130)}…`
-                  : description
+                  : description,
               target_url: ${{ steps.gradle.outputs.build-scan-url && toJSON(fromJSON(steps.gradle.outputs.build-scan-url)) || 'undefined' }}
             });
 
