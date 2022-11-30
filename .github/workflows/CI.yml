@@ -6,7 +6,7 @@ concurrency:
   # On master, we want all builds to complete even if merging happens faster to make it easier to discover at which point something broke.
   # More info: https://stackoverflow.com/a/68422069/253468:
   group: ${{ github.ref == 'refs/heads/master' && format('ci-master-{0}', github.sha) || format('ci-{0}', github.ref) }}
-  #cancel-in-progress: true
+  cancel-in-progress: true
 jobs:
   build:
     name: 🔨 Build & Verify
@@ -48,6 +48,7 @@ jobs:
           --no-build-cache
           --continue
           --stacktrace
+          --scan
           assemble
           lint
           detekt
@@ -184,6 +185,7 @@ jobs:
             --no-build-cache
             --continue
             --stacktrace
+            --scan
             connectedCheck
             mergeAndroidReports
 
