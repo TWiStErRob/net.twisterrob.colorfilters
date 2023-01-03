@@ -5,6 +5,9 @@
 
 	<application
 		android:vmSafeMode="true"
-		/>
+		>
+		<!-- vmSafeMode: disable ART AOT, therefore speeding up deploys. -->
+
+	</application>
 
 </manifest>
