@@ -12,8 +12,8 @@ androidx-preference = "1.2.0"
 androidx-multidex = "2.0.1"
 androidx-multidex-instrumentation = "2.0.0"
 androidx-test-rules = "1.5.0"
-androidx-test-runner = "1.5.1"
-androidx-test-espresso = "3.5.0"
+androidx-test-runner = "1.5.2"
+androidx-test-espresso = "3.5.1"
 
 junit4 = "4.13.2"
 jmh = "1.36"
@@ -28,7 +28,7 @@ junit5-androidtest = "1.3.0"
 
 # TODEL https://issuetracker.google.com/issues/222730176 in root gradle when fixed.
 # TODEL https://issuetracker.google.com/issues/170658134 in lint.xml/build.gradle when fixed.
-agp = "7.3.1"
+agp = "7.4.0-rc03"
 
 # TODEL https://github.com/TWiStErRob/net.twisterrob.gradle/issues/214 when fixed
 # https://github.com/TWiStErRob/net.twisterrob.gradle/releases

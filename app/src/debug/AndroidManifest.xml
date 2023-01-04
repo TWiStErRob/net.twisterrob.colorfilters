@@ -1,10 +1,12 @@
 <manifest
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:sharedUserId="net.twisterrob.colorfilters"
 	>
 
 	<application
 		android:vmSafeMode="true"
-		/>
+		>
+		<!-- vmSafeMode: disable ART AOT, therefore speeding up deploys. -->
+
+	</application>
 
 </manifest>
