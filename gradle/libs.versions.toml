@@ -32,7 +32,7 @@ agp = "7.4.0"
 
 # TODEL https://github.com/TWiStErRob/net.twisterrob.gradle/issues/214 when fixed
 # https://github.com/TWiStErRob/net.twisterrob.gradle/releases
-twisterrob = "0.15-SNAPSHOT"
+twisterrob = "0.15"
 
 # https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md
 kotlin = "1.8.0"
