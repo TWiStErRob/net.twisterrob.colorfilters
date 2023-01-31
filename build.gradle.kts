@@ -30,7 +30,7 @@ tasks.register("check") {
 	dependsOn(gradle.includedBuilds.map { it.task(":check") })
 }
 
-val gradleVersion: String = GradleVersion.current().baseVersion.version
+val gradleVersion: String = GradleVersion.current().version
 
 // TODEL https://issuetracker.google.com/issues/264177800
 if (com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION < "7.4.1") {
