@@ -177,9 +177,6 @@ jobs:
           - reason: "compileSdkVersion"
             android-api: 33
             android-image-type: google_apis
-          - reason: "latest"
-            android-api: 33
-            android-image-type: google_apis
     steps:
       - name: "Set up JDK 17."
         uses: actions/setup-java@v3
