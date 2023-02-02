@@ -162,7 +162,7 @@ jobs:
           - reason: "ART runtime"
             android-api: 21
             android-image-type: default
-          - reason: "Runtime permssions"
+          - reason: "Runtime permissions"
             android-api: 23
             android-image-type: default
           - reason: "Java 8"
