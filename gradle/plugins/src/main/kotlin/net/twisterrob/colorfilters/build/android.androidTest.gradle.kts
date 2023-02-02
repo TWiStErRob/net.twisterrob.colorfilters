@@ -1,6 +1,5 @@
 package net.twisterrob.colorfilters.build
 
-import com.android.build.api.dsl.LibraryDefaultConfig
 import com.android.build.api.dsl.LibraryExtension
 import net.twisterrob.colorfilters.build.dsl.android
 
@@ -13,13 +12,11 @@ android {
 		testInstrumentationRunnerArguments["runnerBuilder"] =
 			"de.mannodermaus.junit5.AndroidJUnit5Builder"
 		//testInstrumentationRunnerArguments["useTestStorageService"] = "true"
-
-		if (this@android is LibraryExtension) {
-			this@defaultConfig as LibraryDefaultConfig
-			// Enable multidex for all libraries.
-			// This will transfer to androidTest apps in those libraries, but not the app.
-			multiDexEnabled = true
-		}
+	}
+	(this@android as? LibraryExtension)?.apply {
+		// Enable multidex for all libraries.
+		// This will transfer to androidTest apps in those libraries, but not the app.
+		defaultConfig.multiDexEnabled = true
 	}
 	packaging {
 		resources {

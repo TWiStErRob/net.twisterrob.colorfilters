@@ -1,5 +1,6 @@
 package net.twisterrob.colorfilters.build
 
+import com.android.build.gradle.AppExtension
 import net.twisterrob.colorfilters.build.dsl.android
 import net.twisterrob.colorfilters.build.dsl.libs
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -31,6 +32,16 @@ plugins.withId("com.android.base") {
 		compileOptions {
 			sourceCompatibility = libs.versions.java.map(JavaVersion::toVersion).get()
 			targetCompatibility = libs.versions.java.map(JavaVersion::toVersion).get()
+
+			// Desugaring setup so that we can use Java 8/11 features on lower APIs.
+			// e.g. to support Mockito 5.x on API 23 and lower.
+			isCoreLibraryDesugaringEnabled = true
+			dependencies {
+				add("coreLibraryDesugaring", libs.android.desugar)
+			}
+			(this@android as? AppExtension)?.apply {
+				defaultConfig.multiDexEnabled = true
+			}
 		}
 	}
 }
