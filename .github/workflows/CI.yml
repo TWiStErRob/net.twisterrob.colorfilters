@@ -168,6 +168,9 @@ jobs:
           - reason: "Java 8"
             android-api: 24
             android-image-type: default
+          - reason: "Java 8v2"
+            android-api: 26
+            android-image-type: default
           - reason: "latest 'default'"
             android-api: 29
             android-image-type: default
