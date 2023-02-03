@@ -8,8 +8,20 @@ concurrency:
   group: ${{ github.ref == 'refs/heads/master' && format('ci-master-{0}', github.sha) || format('ci-{0}', github.ref) }}
   cancel-in-progress: true
 jobs:
+  validate:
+    name: 🦺 Validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Checkout ${{ github.ref }} branch in ${{ github.repository }} repository.
+        uses: actions/checkout@v3
+
+      - name: Validate Gradle Wrapper JARs.
+        uses: gradle/wrapper-validation-action@v1
+
   build:
     name: 🔨 Build & Verify
+    needs: validate
     runs-on: ubuntu-latest
     # A local build took 20 seconds, CI takes 3 minutes with setup.
     # Because it's cloud, give it a bit of a buffer and constrain.
@@ -17,9 +29,6 @@ jobs:
     steps:
       - name: Checkout ${{ github.ref }} branch in ${{ github.repository }} repository.
         uses: actions/checkout@v3
-
-      - name: Validate Gradle Wrapper JARs.
-        uses: gradle/wrapper-validation-action@v1
 
       - name: Build & Verify project.
         id: gradle
@@ -127,14 +136,12 @@ jobs:
 
   instrumentation:
     name: 🧪 Instrumentation Tests
+    needs: validate
     runs-on: macos-latest
     timeout-minutes: 30
     steps:
       - name: Checkout ${{ github.ref }} branch in ${{ github.repository }} repository.
         uses: actions/checkout@v3
-
-      - name: Validate Gradle Wrapper JARs.
-        uses: gradle/wrapper-validation-action@v1
 
       - name: Run Instrumentation Tests on emulator.
         id: gradle
