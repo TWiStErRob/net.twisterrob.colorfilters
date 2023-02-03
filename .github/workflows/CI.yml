@@ -156,8 +156,8 @@ jobs:
         # Some are not available: https://issuetracker.google.com/issues/267458959
         #android-image-type: [default, google_apis]
         include:
-          - reason: "minSdkVersion"
-            android-api: 14
+          - reason: "minSdkVersion + 1"
+            android-api: 15
             android-image-type: default
           - reason: "ART runtime"
             android-api: 21
