@@ -156,30 +156,44 @@ jobs:
         # Some are not available: https://issuetracker.google.com/issues/267458959
         #android-image-type: [default, google_apis]
         include:
+          # This is the first possible emulator that works well:
+          # > system-images;android-10;default;armeabi-v7a
+          # > system-images;android-10;default;x86
+          # > system-images;android-14;default;armeabi-v7a
+          # > system-images;android-15;default;armeabi-v7a
+          # > system-images;android-15;default;x86
           - reason: "minSdkVersion + 1"
             android-api: 15
             android-image-type: default
+            android-arch: x86
           - reason: "ART runtime"
             android-api: 21
             android-image-type: default
+            android-arch: x86_64
           - reason: "Runtime permissions"
             android-api: 23
             android-image-type: default
+            android-arch: x86_64
           - reason: "Java 8"
             android-api: 24
             android-image-type: default
+            android-arch: x86_64
           - reason: "Java 8v2"
             android-api: 26
             android-image-type: default
+            android-arch: x86_64
           - reason: "latest 'default'"
             android-api: 29
             android-image-type: default
+            android-arch: x86_64
           - reason: "targetSdkVersion"
             android-api: 32
             android-image-type: google_apis
+            android-arch: x86_64
           - reason: "compileSdkVersion"
             android-api: 33
             android-image-type: google_apis
+            android-arch: x86_64
     steps:
       - name: "Set up JDK 17."
         uses: actions/setup-java@v3
@@ -196,7 +210,7 @@ jobs:
         with:
           api-level: ${{ matrix.android-api }}
           target: ${{ matrix.android-image-type }}
-          arch: x86_64
+          arch: ${{ matrix.android-arch }}
           script: >
             ./gradlew
             --no-daemon
