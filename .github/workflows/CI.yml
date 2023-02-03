@@ -8,37 +8,33 @@ concurrency:
   group: ${{ github.ref == 'refs/heads/master' && format('ci-master-{0}', github.sha) || format('ci-{0}', github.ref) }}
   cancel-in-progress: true
 jobs:
-  build:
-    name: 🔨 Build & Verify
+  validate:
+    name: 🦺 Validation
     runs-on: ubuntu-latest
-    # A local build took 20 seconds, CI takes 3 minutes with setup.
-    # Because it's cloud, give it a bit of a buffer and constrain.
-    timeout-minutes: 15
+    timeout-minutes: 2
     steps:
-      - name: Set up JDKs.
-        run: |
-          echo "JAVA8_HOME=$JAVA_HOME_8_X64" | tee --append $GITHUB_ENV
-          echo "JAVA11_HOME=$JAVA_HOME_11_X64" | tee --append $GITHUB_ENV
-          echo "JAVA_HOME=$JAVA_HOME_11_X64" | tee --append $GITHUB_ENV
-
-      - name: Set up Android SDK.
-        uses: android-actions/setup-android@v2
-
-      - name: Install Android SDK components
-        run: |
-          # The following are already done by setup-android@v2 action:
-          # sdkmanager --install "cmdline-tools;latest"
-          # sdkmanager --install "tools"
-          # sdkmanager --install "platform-tools"
-          # Install Android API used to build the project.
-          echo sdkmanager --install "platforms;android-32"
-          sdkmanager --install "platforms;android-32"
-
       - name: Checkout ${{ github.ref }} branch in ${{ github.repository }} repository.
         uses: actions/checkout@v3
 
       - name: Validate Gradle Wrapper JARs.
         uses: gradle/wrapper-validation-action@v1
+
+  build:
+    name: 🔨 Build & Verify
+    needs: validate
+    runs-on: ubuntu-latest
+    # A local build took 20 seconds, CI takes 3 minutes with setup.
+    # Because it's cloud, give it a bit of a buffer and constrain.
+    timeout-minutes: 15
+    steps:
+      - name: Set up JDK 17.
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: zulu
+
+      - name: Checkout ${{ github.ref }} branch in ${{ github.repository }} repository.
+        uses: actions/checkout@v3
 
       - name: Build & Verify project.
         id: gradle
@@ -146,33 +142,18 @@ jobs:
 
   instrumentation:
     name: 🧪 Instrumentation Tests
+    needs: validate
     runs-on: macos-latest
     timeout-minutes: 30
     steps:
-      - name: Set up JDKs.
-        run: |
-          echo "JAVA8_HOME=$JAVA_HOME_8_X64" | tee -a $GITHUB_ENV
-          echo "JAVA11_HOME=$JAVA_HOME_11_X64" | tee -a $GITHUB_ENV
-          echo "JAVA_HOME=$JAVA_HOME_11_X64" | tee -a $GITHUB_ENV
-
-      - name: Set up Android SDK.
-        uses: android-actions/setup-android@v2
-
-      - name: Install Android SDK components
-        run: |
-          # The following are already done by setup-android@v2 action:
-          # sdkmanager --install "cmdline-tools;latest"
-          # sdkmanager --install "tools"
-          # sdkmanager --install "platform-tools"
-          # Install Android API used to build the project.
-          echo sdkmanager --install "platforms;android-32"
-          sdkmanager --install "platforms;android-32"
-
+      - name: Set up JDK 17.
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: zulu
+ 
       - name: Checkout ${{ github.ref }} branch in ${{ github.repository }} repository.
         uses: actions/checkout@v3
-
-      - name: Validate Gradle Wrapper JARs.
-        uses: gradle/wrapper-validation-action@v1
 
       - name: Run Instrumentation Tests on emulator.
         id: gradle
