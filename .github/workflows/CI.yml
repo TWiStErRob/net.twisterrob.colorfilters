@@ -174,14 +174,6 @@ jobs:
             android-api: 23
             android-image-type: default
             android-arch: x86_64
-          - reason: "Java 8"
-            android-api: 24
-            android-image-type: default
-            android-arch: x86_64
-          - reason: "Java 8v2"
-            android-api: 26
-            android-image-type: default
-            android-arch: x86_64
           - reason: "latest 'default'"
             android-api: 29
             android-image-type: default
