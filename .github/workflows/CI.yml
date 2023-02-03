@@ -27,6 +27,12 @@ jobs:
     # Because it's cloud, give it a bit of a buffer and constrain.
     timeout-minutes: 15
     steps:
+      - name: Set up JDK 17.
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: zulu
+
       - name: Checkout ${{ github.ref }} branch in ${{ github.repository }} repository.
         uses: actions/checkout@v3
 
@@ -140,6 +146,12 @@ jobs:
     runs-on: macos-latest
     timeout-minutes: 30
     steps:
+      - name: Set up JDK 17.
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: zulu
+ 
       - name: Checkout ${{ github.ref }} branch in ${{ github.repository }} repository.
         uses: actions/checkout@v3
 
