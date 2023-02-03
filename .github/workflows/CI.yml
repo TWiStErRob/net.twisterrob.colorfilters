@@ -15,25 +15,6 @@ jobs:
     # Because it's cloud, give it a bit of a buffer and constrain.
     timeout-minutes: 15
     steps:
-      - name: Set up JDKs.
-        run: |
-          echo "JAVA8_HOME=$JAVA_HOME_8_X64" | tee --append $GITHUB_ENV
-          echo "JAVA11_HOME=$JAVA_HOME_11_X64" | tee --append $GITHUB_ENV
-          echo "JAVA_HOME=$JAVA_HOME_11_X64" | tee --append $GITHUB_ENV
-
-      - name: Set up Android SDK.
-        uses: android-actions/setup-android@v2
-
-      - name: Install Android SDK components
-        run: |
-          # The following are already done by setup-android@v2 action:
-          # sdkmanager --install "cmdline-tools;latest"
-          # sdkmanager --install "tools"
-          # sdkmanager --install "platform-tools"
-          # Install Android API used to build the project.
-          echo sdkmanager --install "platforms;android-32"
-          sdkmanager --install "platforms;android-32"
-
       - name: Checkout ${{ github.ref }} branch in ${{ github.repository }} repository.
         uses: actions/checkout@v3
 
@@ -149,25 +130,6 @@ jobs:
     runs-on: macos-latest
     timeout-minutes: 30
     steps:
-      - name: Set up JDKs.
-        run: |
-          echo "JAVA8_HOME=$JAVA_HOME_8_X64" | tee -a $GITHUB_ENV
-          echo "JAVA11_HOME=$JAVA_HOME_11_X64" | tee -a $GITHUB_ENV
-          echo "JAVA_HOME=$JAVA_HOME_11_X64" | tee -a $GITHUB_ENV
-
-      - name: Set up Android SDK.
-        uses: android-actions/setup-android@v2
-
-      - name: Install Android SDK components
-        run: |
-          # The following are already done by setup-android@v2 action:
-          # sdkmanager --install "cmdline-tools;latest"
-          # sdkmanager --install "tools"
-          # sdkmanager --install "platform-tools"
-          # Install Android API used to build the project.
-          echo sdkmanager --install "platforms;android-32"
-          sdkmanager --install "platforms;android-32"
-
       - name: Checkout ${{ github.ref }} branch in ${{ github.repository }} repository.
         uses: actions/checkout@v3
 
