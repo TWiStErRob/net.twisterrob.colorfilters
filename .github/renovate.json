@@ -2,18 +2,5 @@
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
 	"extends": [
 		"local>TWiStErRob/renovate-config"
-	],
-	"packageRules": [
-		{
-			"description": "Disable updating some dependencies, they have a specific version, and will break something if updated. Allow patches.",
-			"matchPackageNames": [
-				"com.android.tools:desugar_jdk_libs"
-			],
-			"matchPaths": [
-				"gradle/libs.versions.toml"
-			],
-			"matchUpdateTypes": ["major", "minor"],
-			"enabled": false
-		}
 	]
 }
