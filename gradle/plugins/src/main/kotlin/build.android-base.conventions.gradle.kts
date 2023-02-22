@@ -159,15 +159,19 @@ detekt {
 }
 
 val detektReportMergeSarif = rootProject.tasks.named<ReportMergeTask>("detektReportMergeSarif")
-tasks.withType<Detekt> {
+tasks.withType<Detekt>().configureEach {
 	finalizedBy(detektReportMergeSarif)
-	detektReportMergeSarif.configure { input.from(this@withType.sarifReportFile) }
+}
+detektReportMergeSarif.configure {
+	input.from(tasks.withType<Detekt>().map { it.sarifReportFile })
 }
 
 val detektReportMergeXml = rootProject.tasks.named<ReportMergeTask>("detektReportMergeXml")
-tasks.withType<Detekt> {
+tasks.withType<Detekt>().configureEach {
 	finalizedBy(detektReportMergeXml)
-	detektReportMergeXml.configure { input.from(this@withType.xmlReportFile) }
+}
+detektReportMergeXml.configure {
+	input.from(tasks.withType<Detekt>().map { it.xmlReportFile })
 }
 
 // Prevent the following error by allowing only a few parallel executions of these tasks:
