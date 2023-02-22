@@ -34,6 +34,7 @@ agp = "7.4.1"
 # https://github.com/TWiStErRob/net.twisterrob.gradle/releases
 twisterrob = "0.15"
 
+java = "1.8"
 # https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md
 kotlin = "1.8.10"
 # https://github.com/detekt/detekt/releases

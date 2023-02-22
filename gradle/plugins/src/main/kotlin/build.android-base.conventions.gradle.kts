@@ -15,18 +15,16 @@ plugins {
 	id("io.gitlab.arturbosch.detekt")
 }
 
-val javaVersion = JavaVersion.VERSION_1_8
-
 tasks.withType<JavaCompile> {
-	sourceCompatibility = javaVersion.toString()
-	targetCompatibility = javaVersion.toString()
+	sourceCompatibility = libs.versions.java.get()
+	targetCompatibility = libs.versions.java.get()
 	options.compilerArgs = options.compilerArgs + "-Xlint:all"
 	options.compilerArgs = options.compilerArgs + "-Werror"
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 	kotlinOptions {
-		jvmTarget = javaVersion.toString()
+		jvmTarget = libs.versions.java.get()
 		allWarningsAsErrors = true
 	}
 }
@@ -145,7 +143,7 @@ detekt {
 
 	tasks.withType<Detekt>().configureEach {
 		// Target version of the generated JVM bytecode. It is used for type resolution.
-		jvmTarget = javaVersion.toString()
+		jvmTarget = libs.versions.java.get()
 		reports {
 			html.required.set(true) // human
 			xml.required.set(true) // checkstyle
