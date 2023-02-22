@@ -5,7 +5,6 @@ import com.android.build.api.dsl.LibraryExtension
 import com.android.build.gradle.AppExtension
 import com.android.build.gradle.internal.tasks.DexMergingTask
 import io.gitlab.arturbosch.detekt.Detekt
-import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import io.gitlab.arturbosch.detekt.report.ReportMergeTask
 import net.twisterrob.gradle.android.androidComponents
 
@@ -136,7 +135,7 @@ run {
 	}
 }
 
-(project.extensions.getByName<DetektExtension>("detekt")).apply {
+detekt {
 	ignoreFailures = true
 	buildUponDefaultConfig = true
 	allRules = true
