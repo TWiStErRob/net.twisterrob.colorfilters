@@ -7,24 +7,9 @@ import com.android.build.gradle.internal.tasks.DexMergingTask
 import net.twisterrob.gradle.android.androidComponents
 
 plugins {
-	id("kotlin-android")
-	id("kotlin-kapt")
 	id("net.twisterrob.quality")
 	id("net.twisterrob.colorfilters.build.detekt")
-}
-
-tasks.withType<JavaCompile> {
-	sourceCompatibility = libs.versions.java.get()
-	targetCompatibility = libs.versions.java.get()
-	options.compilerArgs = options.compilerArgs + "-Xlint:all"
-	options.compilerArgs = options.compilerArgs + "-Werror"
-}
-
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-	kotlinOptions {
-		jvmTarget = libs.versions.java.get()
-		allWarningsAsErrors = true
-	}
+	id("net.twisterrob.colorfilters.build.kotlin")
 }
 
 @Suppress("UnstableApiUsage")
@@ -102,14 +87,6 @@ configurations.all {
 			useTarget("${target.group}:hamcrest:${target.version}")
 			because("Since 2.2 hamcrest-core and hamcrest-library are deprecated.")
 		}
-	}
-}
-
-// Central Kotlin configuration.
-run {
-	dependencies {
-		add("implementation", platform(libs.kotlin))
-		add("implementation", libs.kotlin.stdlib.jdk8)
 	}
 }
 
