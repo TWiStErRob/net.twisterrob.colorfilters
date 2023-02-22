@@ -1,5 +1,5 @@
 plugins {
-	id("net.twisterrob.colorfilters.feature.conventions")
+	id("net.twisterrob.colorfilters.feature")
 }
 
 dependencies {

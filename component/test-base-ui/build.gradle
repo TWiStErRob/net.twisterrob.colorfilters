@@ -1,7 +1,7 @@
 import static VersionCatalogExt.exclude
 
 plugins {
-	id("net.twisterrob.colorfilters.component.conventions")
+	id("net.twisterrob.colorfilters.component")
 }
 
 android {
