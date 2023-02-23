@@ -1,3 +1,5 @@
+package net.twisterrob.colorfilters.build
+
 plugins {
 	id("kotlin-android")
 	id("kotlin-kapt")

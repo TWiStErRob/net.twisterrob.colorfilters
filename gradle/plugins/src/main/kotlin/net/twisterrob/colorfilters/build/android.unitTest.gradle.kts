@@ -1,3 +1,5 @@
+package net.twisterrob.colorfilters.build
+
 import net.twisterrob.colorfilters.build.dsl.android
 
 android {

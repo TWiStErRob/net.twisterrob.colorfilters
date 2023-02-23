@@ -1,3 +1,5 @@
+package net.twisterrob.colorfilters.build
+
 import net.twisterrob.colorfilters.build.dsl.android
 import net.twisterrob.colorfilters.build.dsl.autoNamespace
 import net.twisterrob.gradle.android.androidComponents

@@ -1,3 +1,5 @@
+package net.twisterrob.colorfilters.build
+
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.report.ReportMergeTask
 

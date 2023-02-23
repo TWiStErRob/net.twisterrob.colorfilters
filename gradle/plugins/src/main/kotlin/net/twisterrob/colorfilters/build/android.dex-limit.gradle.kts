@@ -1,3 +1,5 @@
+package net.twisterrob.colorfilters.build
+
 import com.android.build.gradle.internal.tasks.DexMergingTask
 
 // Prevent the following error by allowing only a few parallel executions of these tasks:
