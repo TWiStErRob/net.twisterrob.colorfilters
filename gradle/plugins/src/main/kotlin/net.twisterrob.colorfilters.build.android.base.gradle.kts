@@ -1,4 +1,3 @@
-import com.android.build.api.dsl.LibraryDefaultConfig
 import com.android.build.api.dsl.LibraryExtension
 import net.twisterrob.colorfilters.build.dsl.android
 import net.twisterrob.colorfilters.build.dsl.autoNamespace
@@ -8,7 +7,9 @@ plugins {
 	id("net.twisterrob.quality")
 	id("net.twisterrob.colorfilters.build.detekt")
 	id("net.twisterrob.colorfilters.build.kotlin")
-	id("net.twisterrob.colorfilters.build.android-dex-limit")
+	id("net.twisterrob.colorfilters.build.android.dex-limit")
+	id("net.twisterrob.colorfilters.build.android.androidTest")
+	id("net.twisterrob.colorfilters.build.android.unitTest")
 }
 
 @Suppress("UnstableApiUsage")
@@ -19,22 +20,6 @@ android {
 	defaultConfig {
 		minSdk = 14
 		compileSdk = 33
-	}
-	defaultConfig {
-		dependencies {
-			add("androidTestRuntimeOnly", libs.junit5.android.runner)
-			//add("androidTestUtil", "androidx.test.services:test-services:...")
-		}
-		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-		testInstrumentationRunnerArguments["runnerBuilder"] = "de.mannodermaus.junit5.AndroidJUnit5Builder"
-		//testInstrumentationRunnerArguments["useTestStorageService"] = "true"
-
-		if (this@android is LibraryExtension) {
-			this@defaultConfig as LibraryDefaultConfig
-			// Enable multidex for all libraries.
-			// This will transfer to androidTest apps in those libraries, but not the app.
-			multiDexEnabled = true
-		}
 	}
 	lint {
 		warningsAsErrors = true
@@ -51,37 +36,9 @@ android {
 			}
 		}
 	}
-	packagingOptions {
-		resources {
-			excludes.add("META-INF/LICENSE.md")
-			excludes.add("META-INF/LICENSE-notice.md")
-		}
-	}
-	testOptions {
-		unitTests.all {
-			it.useJUnitPlatform {
-			}
-			it.testLogging {
-				events("passed", "skipped", "failed")
-			}
-		}
-	}
 	if (this@android is LibraryExtension) {
 		// Disable BuildConfig class generation for features and components, we only need it in :app.
 		buildFeatures.buildConfig = false
-	}
-}
-
-configurations.all {
-	resolutionStrategy.eachDependency {
-		if (requested.group == "org.hamcrest" && requested.name == "hamcrest-library") {
-			useTarget("${target.group}:hamcrest:${target.version}")
-			because("Since 2.2 hamcrest-core and hamcrest-library are deprecated.")
-		}
-		if (requested.group == "org.hamcrest" && requested.name == "hamcrest-core") {
-			useTarget("${target.group}:hamcrest:${target.version}")
-			because("Since 2.2 hamcrest-core and hamcrest-library are deprecated.")
-		}
 	}
 }
 

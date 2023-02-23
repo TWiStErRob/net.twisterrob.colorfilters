@@ -1,6 +1,6 @@
 plugins {
 	id("net.twisterrob.android-app")
-	id("net.twisterrob.colorfilters.build.android-base")
+	id("net.twisterrob.colorfilters.build.android.base")
 }
 
 dependencies {
