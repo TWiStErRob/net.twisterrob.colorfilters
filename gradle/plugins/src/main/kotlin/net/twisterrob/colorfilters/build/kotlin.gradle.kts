@@ -1,6 +1,7 @@
 package net.twisterrob.colorfilters.build
 
 import net.twisterrob.colorfilters.build.dsl.libs
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
 	id("kotlin-android")
@@ -13,9 +14,9 @@ dependencies {
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-	kotlinOptions {
-		jvmTarget = libs.versions.java.get()
-		allWarningsAsErrors = true
+	compilerOptions {
+		jvmTarget.set(libs.versions.java.map(JvmTarget::fromTarget))
+		allWarningsAsErrors.set(true)
 	}
 }
 
