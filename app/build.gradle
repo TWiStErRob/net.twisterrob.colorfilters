@@ -1,6 +1,5 @@
 plugins {
-	id("net.twisterrob.android-app")
-	id("build.android-base.conventions")
+	id("net.twisterrob.colorfilters.app")
 }
 
 dependencies {
@@ -16,7 +15,6 @@ dependencies {
 }
 
 dependencies {
-	androidTestImplementation(projects.component.testBaseUi)
 	androidTestImplementation(projects.feature.lighting.testFixtures)
 	androidTestImplementation(projects.feature.porterduff.testFixtures)
 	androidTestImplementation(projects.feature.matrix.testFixtures)
@@ -38,8 +36,4 @@ android {
 		}
 	}
 	*/
-
-	lint {
-		checkDependencies = true
-	}
 }

@@ -1,6 +1,8 @@
+import net.twisterrob.colorfilters.build.dsl.autoNamespace
+
 plugins {
 	id("net.twisterrob.android-library")
-	id("build.android-base.conventions")
+	id("net.twisterrob.colorfilters.build.android.base")
 }
 
 val owningModule = project(project.path.removeSuffix(":test-fixtures"))
@@ -12,6 +14,8 @@ dependencies {
 	androidTestImplementation(project(":component:test-base-ui"))
 }
 
+@Suppress("UnstableApiUsage")
 android {
-	namespace = "${owningModule.namespace}.fixtures"
+	namespace = "${owningModule.autoNamespace}.fixtures"
+	buildFeatures.buildConfig = false
 }

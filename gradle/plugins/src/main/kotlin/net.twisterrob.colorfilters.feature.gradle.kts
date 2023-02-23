@@ -1,6 +1,6 @@
 plugins {
 	id("net.twisterrob.android-library")
-	id("build.android-base.conventions")
+	id("net.twisterrob.colorfilters.build.android.base")
 }
 
 dependencies {
@@ -10,4 +10,9 @@ dependencies {
 
 	androidTestImplementation(project(":component:test-base-ui"))
 	androidTestImplementation(project("test-fixtures"))
+}
+
+@Suppress("UnstableApiUsage")
+android {
+	buildFeatures.buildConfig = false
 }

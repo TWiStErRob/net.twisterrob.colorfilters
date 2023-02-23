@@ -7,7 +7,14 @@
 projectFilesBackup
 
 # Gradle
-build/
+# rootProject
+/build/
+# App and module collections
+/*/build/
+# Features, Components and Gradle Plugins
+/*/*/build/
+# Contracts
+/*/*/*/build/
 
 # Android
 local.properties
