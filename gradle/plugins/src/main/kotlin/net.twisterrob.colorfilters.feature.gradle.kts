@@ -11,3 +11,8 @@ dependencies {
 	androidTestImplementation(project(":component:test-base-ui"))
 	androidTestImplementation(project("test-fixtures"))
 }
+
+@Suppress("UnstableApiUsage")
+android {
+	buildFeatures.buildConfig = false
+}

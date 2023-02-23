@@ -1,4 +1,3 @@
-import com.android.build.api.dsl.LibraryExtension
 import net.twisterrob.colorfilters.build.dsl.android
 import net.twisterrob.colorfilters.build.dsl.autoNamespace
 import net.twisterrob.gradle.android.androidComponents
@@ -35,10 +34,6 @@ android {
 				disable += "UnusedIds"
 			}
 		}
-	}
-	if (this@android is LibraryExtension) {
-		// Disable BuildConfig class generation for features and components, we only need it in :app.
-		buildFeatures.buildConfig = false
 	}
 }
 

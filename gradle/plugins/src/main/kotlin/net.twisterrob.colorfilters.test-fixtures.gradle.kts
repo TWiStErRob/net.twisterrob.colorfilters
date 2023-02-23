@@ -14,6 +14,8 @@ dependencies {
 	androidTestImplementation(project(":component:test-base-ui"))
 }
 
+@Suppress("UnstableApiUsage")
 android {
 	namespace = "${owningModule.autoNamespace}.fixtures"
+	buildFeatures.buildConfig = false
 }
