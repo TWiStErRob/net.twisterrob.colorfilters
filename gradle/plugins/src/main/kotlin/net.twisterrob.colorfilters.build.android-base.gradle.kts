@@ -1,8 +1,6 @@
-import com.android.build.api.dsl.ApplicationDefaultConfig
 import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.LibraryDefaultConfig
 import com.android.build.api.dsl.LibraryExtension
-import com.android.build.gradle.AppExtension
 import net.twisterrob.gradle.android.androidComponents
 
 plugins {
@@ -19,10 +17,6 @@ plugins {
 	@Suppress("MagicNumber")
 	defaultConfig {
 		minSdk = 14
-		if (this@android is AppExtension) {
-			this@defaultConfig as ApplicationDefaultConfig
-			targetSdk = 32
-		}
 		compileSdk = 33
 	}
 	defaultConfig {
