@@ -1,4 +1,3 @@
-import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.LibraryDefaultConfig
 import com.android.build.api.dsl.LibraryExtension
 import net.twisterrob.gradle.android.androidComponents
@@ -11,7 +10,7 @@ plugins {
 }
 
 @Suppress("UnstableApiUsage")
-(project.extensions["android"] as CommonExtension<*, *, *, *>).apply android@{
+android {
 	namespace = project.namespace
 
 	@Suppress("MagicNumber")
