@@ -1,6 +1,8 @@
+package net.twisterrob.colorfilters.build.dsl
+
 import org.gradle.api.Project
 
-val Project.namespace: String
+val Project.autoNamespace: String
 	get() {
 		val subpackage = project
 			.path

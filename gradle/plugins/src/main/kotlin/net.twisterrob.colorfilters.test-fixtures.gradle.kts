@@ -1,3 +1,5 @@
+import net.twisterrob.colorfilters.build.dsl.autoNamespace
+
 plugins {
 	id("net.twisterrob.android-library")
 	id("net.twisterrob.colorfilters.build.android-base")
@@ -13,5 +15,5 @@ dependencies {
 }
 
 android {
-	namespace = "${owningModule.namespace}.fixtures"
+	namespace = "${owningModule.autoNamespace}.fixtures"
 }

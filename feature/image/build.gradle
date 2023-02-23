@@ -1,4 +1,4 @@
-import static VersionCatalogExt.exclude
+import static net.twisterrob.colorfilters.build.dsl.VersionCatalogExt.exclude
 
 plugins {
 	id("net.twisterrob.colorfilters.component")

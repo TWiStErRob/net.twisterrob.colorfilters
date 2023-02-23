@@ -1,5 +1,7 @@
 import com.android.build.api.dsl.LibraryDefaultConfig
 import com.android.build.api.dsl.LibraryExtension
+import net.twisterrob.colorfilters.build.dsl.android
+import net.twisterrob.colorfilters.build.dsl.autoNamespace
 import net.twisterrob.gradle.android.androidComponents
 
 plugins {
@@ -11,7 +13,7 @@ plugins {
 
 @Suppress("UnstableApiUsage")
 android {
-	namespace = project.namespace
+	namespace = project.autoNamespace
 
 	@Suppress("MagicNumber")
 	defaultConfig {

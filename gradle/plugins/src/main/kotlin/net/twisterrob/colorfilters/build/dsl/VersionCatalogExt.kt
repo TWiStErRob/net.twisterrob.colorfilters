@@ -1,5 +1,7 @@
 @file:JvmName("VersionCatalogExt")
 
+package net.twisterrob.colorfilters.build.dsl
+
 import org.gradle.api.artifacts.MinimalExternalModuleDependency
 import org.gradle.api.artifacts.ModuleDependency
 import org.gradle.api.artifacts.ModuleIdentifier
