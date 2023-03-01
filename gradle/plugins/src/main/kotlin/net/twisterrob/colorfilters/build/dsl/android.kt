@@ -12,7 +12,7 @@ import org.gradle.kotlin.dsl.get
  * @see com.android.build.api.dsl.ApplicationExtension
  * @see com.android.build.api.dsl.LibraryExtension
  */
-val Project.android: CommonExtension<*, *, *, *>
+internal val Project.android: CommonExtension<*, *, *, *>
 	get() = this.extensions["android"] as CommonExtension<*, *, *, *>
 
 /**
@@ -22,6 +22,6 @@ val Project.android: CommonExtension<*, *, *, *>
  * @param block the configuration for common Android things.
  * Using an [Action] to take advantage of `kotlin-dsl`.
  */
-fun Project.android(block: Action<CommonExtension<*, *, *, *>>) {
+internal fun Project.android(block: Action<CommonExtension<*, *, *, *>>) {
 	block.execute(android)
 }
