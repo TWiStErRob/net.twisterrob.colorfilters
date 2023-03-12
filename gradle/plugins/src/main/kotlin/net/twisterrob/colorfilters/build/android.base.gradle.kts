@@ -43,19 +43,3 @@ android {
 		}
 	}
 }
-
-// TODEL https://github.com/TWiStErRob/net.twisterrob.gradle/issues/214
-run {
-	afterEvaluate {
-		val lintTasks = project.tasks
-			.withType<com.android.build.gradle.internal.lint.LintModelWriterTask>()
-		val ex = tasks.named("extractMinificationRules")
-		lintTasks.configureEach { dependsOn(ex) }
-		if (project.path == ":app") {
-			afterEvaluate { // double-jump is required because this gets applied before the build plugin.
-				val min = tasks.named("generateReleaseR8MinificationRules")
-				lintTasks.configureEach { dependsOn(min) }
-			}
-		}
-	}
-}
