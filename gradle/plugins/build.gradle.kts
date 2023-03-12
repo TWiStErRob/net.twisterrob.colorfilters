@@ -21,8 +21,8 @@ gradlePlugin {
 	// Plus with this I get this warning: from Task :plugins:jar
 	// > :jar: A valid plugin descriptor was found for net.twisterrob.settings.properties but the
 	// > implementation class net.twisterrob.gradle.settings.SettingsPlugin was not found in the jar.
-	plugins.register("net.twisterrob.settings") {
-		id = "net.twisterrob.settings"
+	plugins.register("exposedSettings") {
+		id = "net.twisterrob.gradle.plugin.settings"
 		implementationClass = "net.twisterrob.gradle.settings.SettingsPlugin"
 	}
 }

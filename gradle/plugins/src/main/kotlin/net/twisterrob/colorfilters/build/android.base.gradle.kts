@@ -5,7 +5,7 @@ import net.twisterrob.colorfilters.build.dsl.autoNamespace
 import net.twisterrob.gradle.android.androidComponents
 
 plugins {
-	id("net.twisterrob.quality")
+	id("net.twisterrob.gradle.plugin.quality")
 	id("net.twisterrob.colorfilters.build.detekt")
 	id("net.twisterrob.colorfilters.build.kotlin")
 	id("net.twisterrob.colorfilters.build.android.dex-limit")
@@ -39,22 +39,6 @@ android {
 		androidComponents.finalizeDsl {
 			if (buildFeatures.viewBinding == true || project.path == ":app") {
 				disable += "UnusedIds"
-			}
-		}
-	}
-}
-
-// TODEL https://github.com/TWiStErRob/net.twisterrob.gradle/issues/214
-run {
-	afterEvaluate {
-		val lintTasks = project.tasks
-			.withType<com.android.build.gradle.internal.lint.LintModelWriterTask>()
-		val ex = tasks.named("extractMinificationRules")
-		lintTasks.configureEach { dependsOn(ex) }
-		if (project.path == ":app") {
-			afterEvaluate { // double-jump is required because this gets applied before the build plugin.
-				val min = tasks.named("generateReleaseR8MinificationRules")
-				lintTasks.configureEach { dependsOn(min) }
 			}
 		}
 	}
