@@ -5,7 +5,7 @@ import net.twisterrob.colorfilters.build.dsl.autoNamespace
 import net.twisterrob.gradle.android.androidComponents
 
 plugins {
-	id("net.twisterrob.quality")
+	id("net.twisterrob.gradle.plugin.quality")
 	id("net.twisterrob.colorfilters.build.detekt")
 	id("net.twisterrob.colorfilters.build.kotlin")
 	id("net.twisterrob.colorfilters.build.android.dex-limit")

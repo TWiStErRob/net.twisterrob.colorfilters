@@ -46,7 +46,7 @@ pluginManagement {
 
 plugins {
 	id("com.gradle.enterprise") version "3.12.4"
-	id("net.twisterrob.settings")
+	id("net.twisterrob.gradle.plugin.settings")
 }
 
 dependencyResolutionManagement {

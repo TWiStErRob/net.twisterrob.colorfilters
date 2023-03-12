@@ -1,6 +1,6 @@
 plugins {
-	id("net.twisterrob.root")
-	id("net.twisterrob.quality")
+	id("net.twisterrob.gradle.plugin.root")
+	id("net.twisterrob.gradle.plugin.quality")
 	// https://developer.android.com/studio/test/command-line#multi-module-reports-instrumented-tests
 	id("io.gitlab.arturbosch.detekt")
 }
