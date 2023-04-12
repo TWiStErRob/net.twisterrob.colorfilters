@@ -20,7 +20,7 @@ jmh = "1.36"
 hamcrest = "2.2"
 
 # https://github.com/mockito/mockito/releases
-mockito = "5.2.0"
+mockito = "5.3.0"
 mockito-kotlin = "4.1.0"
 
 junit5 = "5.9.2"
@@ -75,7 +75,6 @@ junit5-android = { module = "de.mannodermaus.junit5:android-test-core", version.
 junit5-android-runner = { module = "de.mannodermaus.junit5:android-test-runner", version.ref = "junit5-androidtest" }
 
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
-mockito-inline = { module = "org.mockito:mockito-inline", version.ref = "mockito" }
 mockito-android = { module = "org.mockito:mockito-android", version.ref = "mockito" }
 mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockito-kotlin" }
 
