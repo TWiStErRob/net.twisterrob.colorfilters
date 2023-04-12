@@ -75,7 +75,6 @@ junit5-android = { module = "de.mannodermaus.junit5:android-test-core", version.
 junit5-android-runner = { module = "de.mannodermaus.junit5:android-test-runner", version.ref = "junit5-androidtest" }
 
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
-mockito-inline = { module = "org.mockito:mockito-inline", version.ref = "mockito" }
 mockito-android = { module = "org.mockito:mockito-android", version.ref = "mockito" }
 mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockito-kotlin" }
 
