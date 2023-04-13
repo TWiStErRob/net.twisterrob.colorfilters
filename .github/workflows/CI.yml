@@ -201,6 +201,7 @@ jobs:
           # Exclude names with colon: https://issuetracker.google.com/issues/223643506
           path: |
             ${{ github.workspace }}/**/build/outputs/androidTest-results/connected/
+            ${{ github.workspace }}/**/build/outputs/connected_android_test_additional_output/
             !**/*:*
 
       - name: Upload "Instrumentation Merged Results" artifact.
