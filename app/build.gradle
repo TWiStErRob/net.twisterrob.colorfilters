@@ -24,7 +24,8 @@ dependencies {
 
 android {
 	defaultConfig {
-		applicationId 'net.twisterrob.colorfilters'
+		// Override autoNamespace to maintain the ID on the Google Play Store.
+		applicationId = "net.twisterrob.colorfilters"
 	}
 
 	/* 
