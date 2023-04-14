@@ -58,10 +58,16 @@
 	<issue id="InvalidPackage">
 
 		<!--
-			gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy/1.14.4/20498aaec9b00a5cfdb831e7bf68feafa833ce4b/byte-buddy-1.14.4.jar 
-	        Invalid package reference in library; not included in Android: `java.lang.instrument`. Referenced from `net.bytebuddy.agent.builder.AgentBuilder`.
+			gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy/1.14.4/20498aaec9b00a5cfdb831e7bf68feafa833ce4b/byte-buddy-1.14.4.jar:0 in project ':component:test-base-unit'/debug
+			Invalid package reference in library; not included in Android: `java.lang.instrument`. Referenced from `net.bytebuddy.agent.builder.AgentBuilder`.
 		-->
-		<ignore regexp="^Invalid package reference in library; not included in Android: `java.lang.instrument`\. Referenced from `net\.bytebuddy\.agent\.builder\.AgentBuilder`\.$" />
+		<ignore regexp="^Invalid package reference in library; not included in Android: `java\.lang\.instrument`\. Referenced from `net\.bytebuddy\.agent\.builder\.AgentBuilder`\.$" />
+
+		<!--
+			gradle/caches/modules-2/files-2.1/org.mockito/mockito-core/5.3.0/a8169e15cb4016bd35594134c84f62b773e3391d/mockito-core-5.3.0.jar:0 in project ':component:test-base-ui'/debug
+			Invalid package reference in org.mockito:mockito-core; not included in Android: `java.lang.instrument`. Referenced from `org.mockito.internal.creation.bytebuddy.InlineBytecodeGenerator`.
+		-->
+		<ignore regexp="^Invalid package reference in org\.mockito:mockito-core; not included in Android: `java\.lang\.instrument`\. Referenced from `org\.mockito\.internal\.creation\.bytebuddy\.InlineBytecodeGenerator`\.$" />
 
 	</issue>
 
