@@ -5,7 +5,6 @@ import com.android.build.api.dsl.LibraryExtension
 import net.twisterrob.colorfilters.build.dsl.android
 import net.twisterrob.colorfilters.build.dsl.libs
 
-@Suppress("UnstableApiUsage")
 android {
 	defaultConfig {
 		dependencies {
@@ -24,7 +23,7 @@ android {
 			multiDexEnabled = true
 		}
 	}
-	packagingOptions {
+	packaging {
 		resources {
 			excludes.add("META-INF/LICENSE.md")
 			excludes.add("META-INF/LICENSE-notice.md")

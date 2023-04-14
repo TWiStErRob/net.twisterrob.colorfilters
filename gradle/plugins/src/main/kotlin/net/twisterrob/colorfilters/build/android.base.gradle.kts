@@ -13,7 +13,6 @@ plugins {
 	id("net.twisterrob.colorfilters.build.android.unitTest")
 }
 
-@Suppress("UnstableApiUsage")
 android {
 	namespace = project.autoNamespace
 
@@ -37,6 +36,7 @@ android {
 
 		// TODEL https://issuetracker.google.com/issues/170658134
 		androidComponents.finalizeDsl {
+			@Suppress("UnstableApiUsage")
 			if (buildFeatures.viewBinding == true || project.path == ":app") {
 				disable += "UnusedIds"
 			}
