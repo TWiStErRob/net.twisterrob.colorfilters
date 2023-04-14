@@ -14,4 +14,7 @@ android {
 	lint {
 		checkDependencies = true
 	}
+	buildFeatures {
+		buildConfig = true
+	}
 }
