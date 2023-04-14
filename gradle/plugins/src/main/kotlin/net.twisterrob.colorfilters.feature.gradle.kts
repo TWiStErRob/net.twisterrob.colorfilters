@@ -12,7 +12,7 @@ dependencies {
 	androidTestImplementation(project("test-fixtures"))
 }
 
-@Suppress("UnstableApiUsage")
 android {
+	@Suppress("UnstableApiUsage")
 	buildFeatures.buildConfig = false
 }
