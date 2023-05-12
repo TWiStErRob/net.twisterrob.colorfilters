@@ -130,7 +130,9 @@ doNotNagAbout(
 	"The AbstractArchiveTask.archivePath property has been deprecated. " +
 		"This is scheduled to be removed in Gradle 9.0. " +
 		"Please use the archiveFile property instead. " +
-		"See https://docs.gradle.org/${gradleVersion}/dsl/org.gradle.api.tasks.bundling.AbstractArchiveTask.html#org.gradle.api.tasks.bundling.AbstractArchiveTask:archivePath for more details.",
+		"For more information, please refer to " +
+		"https://docs.gradle.org/${gradleVersion}/dsl/org.gradle.api.tasks.bundling.AbstractArchiveTask.html#org.gradle.api.tasks.bundling.AbstractArchiveTask:archivePath" +
+		" in the Gradle documentation.",
 	"at org.jetbrains.plugins.gradle.tooling.builder.ExternalProjectBuilderImpl\$_getSourceSets_closure"
 )
 
@@ -140,6 +142,188 @@ doNotNagAbout(
 	"The AbstractArchiveTask.archivePath property has been deprecated. " +
 		"This is scheduled to be removed in Gradle 9.0. " +
 		"Please use the archiveFile property instead. " +
-		"See https://docs.gradle.org/${gradleVersion}/dsl/org.gradle.api.tasks.bundling.AbstractArchiveTask.html#org.gradle.api.tasks.bundling.AbstractArchiveTask:archivePath for more details.",
+		"For more information, please refer to " +
+		"https://docs.gradle.org/${gradleVersion}/dsl/org.gradle.api.tasks.bundling.AbstractArchiveTask.html#org.gradle.api.tasks.bundling.AbstractArchiveTask:archivePath" +
+		" in the Gradle documentation.",
 	"at org.jetbrains.plugins.gradle.tooling.util.SourceSetCachedFinder.createArtifactsMap"
 )
+
+// TODEL Gradle 8.2 sync in AS FL 2022.2.1 / IDEA 2023.1 https://youtrack.jetbrains.com/issue/IDEA-320266.
+// AGP fixed 7.4.0-beta02 and 8.0.0-alpha02 https://issuetracker.google.com/issues/241354494
+@Suppress("MaxLineLength")
+if ((System.getProperty("idea.version") ?: "") < "2023.1") {
+	doNotNagAbout(
+		"The org.gradle.api.plugins.JavaPluginConvention type has been deprecated. " +
+			"This is scheduled to be removed in Gradle 9.0. " +
+			"Consult the upgrading guide for further information: " +
+			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#java_convention_deprecation",
+		"at org.jetbrains.kotlin.idea.gradleTooling.KotlinTasksPropertyUtilsKt.getPureKotlinSourceRoots(KotlinTasksPropertyUtils.kt:59)"
+	)
+	doNotNagAbout(
+		"The Project.getConvention() method has been deprecated. " +
+			"This is scheduled to be removed in Gradle 9.0. " +
+			"Consult the upgrading guide for further information: " +
+			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#deprecated_access_to_conventions",
+		"at org.jetbrains.kotlin.idea.gradleTooling.KotlinTasksPropertyUtilsKt.getPureKotlinSourceRoots(KotlinTasksPropertyUtils.kt:59)"
+	)
+	doNotNagAbout(
+		"The org.gradle.api.plugins.Convention type has been deprecated. " +
+			"This is scheduled to be removed in Gradle 9.0. " +
+			"Consult the upgrading guide for further information: " +
+			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#deprecated_access_to_conventions",
+		"at org.jetbrains.kotlin.idea.gradleTooling.KotlinTasksPropertyUtilsKt.getPureKotlinSourceRoots(KotlinTasksPropertyUtils.kt:59)"
+	)
+
+	doNotNagAbout(
+		"The Project.getConvention() method has been deprecated. " +
+			"This is scheduled to be removed in Gradle 9.0. " +
+			"Consult the upgrading guide for further information: " +
+			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#deprecated_access_to_conventions",
+		"at org.jetbrains.plugins.gradle.tooling.builder.ProjectExtensionsDataBuilderImpl.buildAll(ProjectExtensionsDataBuilderImpl.groovy:40)"
+	)
+	doNotNagAbout(
+		"The org.gradle.api.plugins.Convention type has been deprecated. " +
+			"This is scheduled to be removed in Gradle 9.0. " +
+			"Consult the upgrading guide for further information: " +
+			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#deprecated_access_to_conventions",
+		"at org.jetbrains.plugins.gradle.tooling.builder.ProjectExtensionsDataBuilderImpl.buildAll(ProjectExtensionsDataBuilderImpl.groovy:41)"
+	)
+	doNotNagAbout(
+		"The org.gradle.api.plugins.JavaPluginConvention type has been deprecated. " +
+			"This is scheduled to be removed in Gradle 9.0. " +
+			"Consult the upgrading guide for further information: " +
+			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#java_convention_deprecation",
+		// at org.jetbrains.plugins.gradle.tooling.builder.ExternalProjectBuilderImpl.doBuild(ExternalProjectBuilderImpl.groovy:108)
+		// at org.jetbrains.plugins.gradle.tooling.builder.ExternalProjectBuilderImpl.doBuild(ExternalProjectBuilderImpl.groovy:117)
+		// at org.jetbrains.plugins.gradle.tooling.builder.ExternalProjectBuilderImpl.doBuild(ExternalProjectBuilderImpl.groovy:118)
+		"at org.jetbrains.plugins.gradle.tooling.builder.ExternalProjectBuilderImpl.doBuild(ExternalProjectBuilderImpl.groovy:1"
+	)
+	// No method and line number in stack to match all these:
+	//  * getJavaPluginConvention(JavaPluginUtil.java:13)
+	//  * getSourceSetContainer(JavaPluginUtil.java:18)
+	//  * getSourceSetContainer(JavaPluginUtil.java:19)
+	doNotNagAbout(
+		"The org.gradle.api.plugins.JavaPluginConvention type has been deprecated. " +
+			"This is scheduled to be removed in Gradle 9.0. " +
+			"Consult the upgrading guide for further information: " +
+			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#java_convention_deprecation",
+		"at org.jetbrains.plugins.gradle.tooling.util.JavaPluginUtil."
+	)
+	doNotNagAbout(
+		"The Project.getConvention() method has been deprecated. " +
+			"This is scheduled to be removed in Gradle 9.0. " +
+			"Consult the upgrading guide for further information: " +
+			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#deprecated_access_to_conventions",
+		"at org.jetbrains.plugins.gradle.tooling.util.JavaPluginUtil."
+	)
+	doNotNagAbout(
+		"The org.gradle.api.plugins.Convention type has been deprecated. " +
+			"This is scheduled to be removed in Gradle 9.0. " +
+			"Consult the upgrading guide for further information: " +
+			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#deprecated_access_to_conventions",
+		"at org.jetbrains.plugins.gradle.tooling.util.JavaPluginUtil."
+	)
+} else {
+	error("Android Studio version changed, please review hack.")
+}
+
+// TODEL Gradle 8.2 vs AGP https://issuetracker.google.com/issues/279306626
+// Gradle 8.2 M1 added nagging for BuildIdentifier.*, which was not replaced in AGP 8.0.x yet.
+@Suppress("MaxLineLength")
+if (com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION < "8.1.0") {
+	doNotNagAbout( // :lintReportDebug, :lintAnalyzeDebug
+		"The BuildIdentifier.isCurrentBuild() method has been deprecated. " +
+			"This is scheduled to be removed in Gradle 9.0. " +
+			"Use getBuildPath() to get a unique identifier for the build. " +
+			"Consult the upgrading guide for further information: " +
+			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#build_identifier_name_and_current_deprecation",
+		"at com.android.build.gradle.internal.ide.dependencies.ResolvedArtifact.computeModelAddress(ResolvedArtifact.kt:162)"
+		// "at com.android.build.gradle.internal.lint.LintModelWriterTask.doTaskAction(LintModelWriterTask.kt:80)"
+	)
+	doNotNagAbout( // :lintAnalyzeDebug
+		"The BuildIdentifier.isCurrentBuild() method has been deprecated. " +
+			"This is scheduled to be removed in Gradle 9.0. " +
+			"Use getBuildPath() to get a unique identifier for the build. " +
+			"Consult the upgrading guide for further information: " +
+			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#build_identifier_name_and_current_deprecation",
+		"at com.android.build.gradle.internal.ide.dependencies.ArtifactHandler.handleArtifact(ArtifactHandler.kt:85)"
+		// "at com.android.build.gradle.internal.lint.LintModelWriterTask.doTaskAction(LintModelWriterTask.kt:80)"
+	)
+	doNotNagAbout( // :lintAnalyzeDebug
+		"The BuildIdentifier.isCurrentBuild() method has been deprecated. " +
+			"This is scheduled to be removed in Gradle 9.0. " +
+			"Use getBuildPath() to get a unique identifier for the build. " +
+			"Consult the upgrading guide for further information: " +
+			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#build_identifier_name_and_current_deprecation",
+		"at com.android.build.gradle.internal.lint.ProjectKeyKt.asProjectSourceSetKey(ProjectKey.kt:83)"
+	)
+	doNotNagAbout( // :lintAnalyzeDebug
+		"The BuildIdentifier.isCurrentBuild() method has been deprecated. " +
+			"This is scheduled to be removed in Gradle 9.0. " +
+			"Use getBuildPath() to get a unique identifier for the build. " +
+			"Consult the upgrading guide for further information: " +
+			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#build_identifier_name_and_current_deprecation",
+		"at com.android.build.gradle.internal.lint.ProjectKeyKt.asProjectKey(ProjectKey.kt:45)"
+	)
+	doNotNagAbout( // :lintAnalyzeDebug
+		"The BuildIdentifier.isCurrentBuild() method has been deprecated. " +
+			"This is scheduled to be removed in Gradle 9.0. " +
+			"Use getBuildPath() to get a unique identifier for the build. " +
+			"Consult the upgrading guide for further information: " +
+			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#build_identifier_name_and_current_deprecation",
+		"at com.android.build.gradle.internal.lint.AndroidLintTask.writeLintModelFile(AndroidLintTask.kt:300)"
+	)
+	doNotNagAbout( // Android Studio Flamingo Sync https://issuetracker.google.com/issues/279306626#comment4
+		"The BuildIdentifier.getName() method has been deprecated. " +
+			"This is scheduled to be removed in Gradle 9.0. " +
+			"Use getBuildPath() to get a unique identifier for the build. " +
+			"Consult the upgrading guide for further information: " +
+			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#build_identifier_name_and_current_deprecation",
+		"at com.android.build.gradle.internal.ide.dependencies.LibraryServiceImpl\$getProjectInfo\$1.apply(LibraryService.kt:138)"
+	)
+
+	// All the below ones are not mentioned in the issue.
+
+	doNotNagAbout( // :app:checkReleaseAarMetadata
+		"The BuildIdentifier.getName() method has been deprecated. " +
+			"This is scheduled to be removed in Gradle 9.0. " +
+			"Use getBuildPath() to get a unique identifier for the build. " +
+			"Consult the upgrading guide for further information: " +
+			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#build_identifier_name_and_current_deprecation",
+		"at com.android.build.gradle.internal.tasks.CheckAarMetadataTask.doTaskAction(CheckAarMetadataTask.kt:118)"
+	)
+	doNotNagAbout( // :app:mergeDebugResources
+		"The BuildIdentifier.getName() method has been deprecated. " +
+			"This is scheduled to be removed in Gradle 9.0. " +
+			"Use getBuildPath() to get a unique identifier for the build. " +
+			"Consult the upgrading guide for further information: " +
+			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#build_identifier_name_and_current_deprecation",
+		"at com.android.build.gradle.tasks.MergeResources.doTaskAction(MergeResources.kt:320)"
+	)
+	doNotNagAbout( // :app:processDebugMainManifest
+		"The BuildIdentifier.getName() method has been deprecated. " +
+			"This is scheduled to be removed in Gradle 9.0. " +
+			"Use getBuildPath() to get a unique identifier for the build. " +
+			"Consult the upgrading guide for further information: " +
+			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#build_identifier_name_and_current_deprecation",
+		"at com.android.build.gradle.tasks.ProcessApplicationManifest.doTaskAction(ProcessApplicationManifest.kt:164)"
+	)
+	doNotNagAbout( // :app:processDebugAndroidTestManifest
+		"The BuildIdentifier.getName() method has been deprecated. " +
+			"This is scheduled to be removed in Gradle 9.0. " +
+			"Use getBuildPath() to get a unique identifier for the build. " +
+			"Consult the upgrading guide for further information: " +
+			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#build_identifier_name_and_current_deprecation",
+		"at com.android.build.gradle.tasks.ProcessTestManifest.doTaskAction(ProcessTestManifest.kt:127)"
+	)
+	doNotNagAbout( // :app:mergeDebugAssets
+		"The BuildIdentifier.getName() method has been deprecated. " +
+			"This is scheduled to be removed in Gradle 9.0. " +
+			"Use getBuildPath() to get a unique identifier for the build. " +
+			"Consult the upgrading guide for further information: " +
+			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#build_identifier_name_and_current_deprecation",
+		"at com.android.build.gradle.tasks.MergeSourceSetFolders.doTaskAction(MergeSourceSetFolders.kt:123)"
+	)
+} else {
+	error("AGP version changed, please review hack.")
+}
