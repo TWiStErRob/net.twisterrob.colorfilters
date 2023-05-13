@@ -39,7 +39,7 @@ class LightingFragment : ColorFilterFragment() {
 	private lateinit var addColor: ColorPickerView
 
 	override fun displayHelp() {
-		displayHelp(R.string.cf_lighting_info_title, R.string.cf_lighting_info) // Make this extremely long so Detekt will trigger on it on CI, just a bit more so it's definitely too long. 
+		displayHelp(R.string.cf_lighting_info_title, R.string.cf_lighting_info)
 	}
 
 	override fun createFilter() =
