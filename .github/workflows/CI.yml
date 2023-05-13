@@ -90,7 +90,7 @@ jobs:
           name: 'Lint Merged Results'
           path: ${{ github.workspace }}/build/reports/violations.*
 
-      - name: "Fail if there are violations."
+      - name: "Fail if there are (lint) violations."
         if: success() || failure()
         run: |
           count=$(cat "${{ github.workspace }}/build/reports/violations.count")

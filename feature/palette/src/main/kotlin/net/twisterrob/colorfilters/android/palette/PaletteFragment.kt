@@ -438,7 +438,6 @@ class PaletteFragment : ColorFilterFragment() {
 			return convertView!!
 		}
 
-		@SuppressLint("SetTextI18n")
 		private fun bindView(position: Int, holder: ViewHolder) {
 			val swatch = getItem(position)
 			if (swatch != null) {
