@@ -121,6 +121,7 @@ if ((System.getProperty("idea.version") ?: "") < "2022.3") {
 		"at org.jetbrains.plugins.gradle.tooling.builder.ExternalProjectBuilderImpl\$_getSourceSets_closure"
 	)
 } else {
+	val error: (String) -> Unit = (if (isCI) ::error else logger::warn)
 	error("Android Studio version changed, please remove hack.")
 }
 
@@ -224,6 +225,7 @@ if ((System.getProperty("idea.version") ?: "") < "2023.1") {
 		"at org.jetbrains.plugins.gradle.tooling.util.JavaPluginUtil."
 	)
 } else {
+	val error: (String) -> Unit = (if (isCI) ::error else logger::warn)
 	error("Android Studio version changed, please review hack.")
 }
 
@@ -325,5 +327,6 @@ if (com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION < "8.1.0") {
 		"at com.android.build.gradle.tasks.MergeSourceSetFolders.doTaskAction(MergeSourceSetFolders.kt:123)"
 	)
 } else {
+	val error: (String) -> Unit = (if (isCI) ::error else logger::warn)
 	error("AGP version changed, please review hack.")
 }
