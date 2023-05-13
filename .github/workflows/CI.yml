@@ -1,4 +1,4 @@
-name: CI
+name: "CI"
 on:
   push
 concurrency:
@@ -9,34 +9,34 @@ concurrency:
   cancel-in-progress: true
 jobs:
   validate:
-    name: 🦺 Validation
+    name: "🦺 Validation"
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
-      - name: Checkout ${{ github.ref }} branch in ${{ github.repository }} repository.
+      - name: "Checkout ${{ github.ref }} branch in ${{ github.repository }} repository."
         uses: actions/checkout@v3
 
-      - name: Validate Gradle Wrapper JARs.
+      - name: "Validate Gradle Wrapper JARs."
         uses: gradle/wrapper-validation-action@v1
 
   build:
-    name: 🔨 Build & Verify
+    name: "🔨 Build & Verify"
     needs: validate
     runs-on: ubuntu-latest
     # A local build took 20 seconds, CI takes 3 minutes with setup.
     # Because it's cloud, give it a bit of a buffer and constrain.
     timeout-minutes: 15
     steps:
-      - name: Set up JDK 17.
+      - name: "Set up JDK 17."
         uses: actions/setup-java@v3
         with:
           java-version: 17
           distribution: zulu
 
-      - name: Checkout ${{ github.ref }} branch in ${{ github.repository }} repository.
+      - name: "Checkout ${{ github.ref }} branch in ${{ github.repository }} repository."
         uses: actions/checkout@v3
 
-      - name: Build & Verify project.
+      - name: "Build & Verify project."
         id: gradle
         run: >
           ./gradlew
@@ -53,7 +53,7 @@ jobs:
           violationReportHtml
           violationCountFile
 
-      - name: Publish "Gradle" result and Build Scan URL.
+      - name: "Publish 'Gradle' result and Build Scan URL."
         if: (success() || failure()) && steps.gradle != null && steps.gradle.outputs.result-success != null
         uses: actions/github-script@v6
         with:
@@ -76,21 +76,21 @@ jobs:
               target_url: ${{ steps.gradle.outputs.build-scan-url && toJSON(fromJSON(steps.gradle.outputs.build-scan-url)) || 'undefined' }}
             });
 
-      - name: Upload "Lint Results" artifact.
+      - name: "Upload 'Lint Results HTMLs' artifact."
         if: success() || failure()
         uses: actions/upload-artifact@v3
         with:
-          name: Lint Results HTMLs
+          name: 'Lint Results HTMLs'
           path: ${{ github.workspace }}/**/build/reports/lint-results*.html
 
-      - name: Upload "Lint Merged Results" artifact.
+      - name: "Upload 'Lint Merged Results' artifact."
         if: success() || failure()
         uses: actions/upload-artifact@v3
         with:
-          name: Lint Merged Results
+          name: 'Lint Merged Results'
           path: ${{ github.workspace }}/build/reports/violations.*
 
-      - name: Fail if there are violations.
+      - name: "Fail if there are lint violations."
         if: success() || failure()
         run: |
           count=$(cat "${{ github.workspace }}/build/reports/violations.count")
@@ -102,38 +102,38 @@ jobs:
             exit 0
           fi
 
-      - name: Upload "Unit Test Results" artifact.
+      - name: "Upload 'Unit Test Results' artifact."
         if: success() || failure()
         uses: actions/upload-artifact@v3
         with:
-          name: Unit Test Results
+          name: 'Unit Test Results'
           path: ${{ github.workspace }}/**/build/reports/tests/*/
 
-      - name: Publish "Unit Results" check suite.
+      - name: "Publish 'Unit Results' check suite."
         if: success() || failure()
         uses: EnricoMi/publish-unit-test-result-action@v2
         with:
-          check_name: "🔔 Test: Unit Results"
+          check_name: '🔔 Test: Unit Results'
           comment_mode: off
           report_individual_runs: true
           test_changes_limit: 0
           junit_files: ${{ github.workspace }}/**/build/test-results/*/TEST-*.xml
 
-      - name: Upload "Detekt Results" artifact.
+      - name: "Upload 'Detekt Results' artifact."
         if: success() || failure()
         uses: actions/upload-artifact@v3
         with:
-          name: Detekt Results
+          name: 'Detekt Results'
           path: ${{ github.workspace }}/**/build/reports/detekt/detekt.*
 
-      - name: Upload "Detekt Merged Results" artifact.
+      - name: "Upload 'Detekt Merged Results' artifact."
         if: success() || failure()
         uses: actions/upload-artifact@v3
         with:
-          name: Detekt Merged Results
+          name: 'Detekt Merged Results'
           path: ${{ github.workspace }}/build/reports/detekt/merge.*
 
-      - name: Publish "detekt" GitHub Code Scanning analysis.
+      - name: "Publish 'detekt' GitHub Code Scanning analysis."
         uses: github/codeql-action/upload-sarif@v2
         if: success() || failure()
         with:
@@ -141,21 +141,21 @@ jobs:
           sarif_file: ${{ github.workspace }}/build/reports/detekt/merge.sarif
 
   instrumentation:
-    name: 🧪 Instrumentation Tests
+    name: "🧪 Instrumentation Tests"
     needs: validate
     runs-on: macos-latest
     timeout-minutes: 30
     steps:
-      - name: Set up JDK 17.
+      - name: "Set up JDK 17."
         uses: actions/setup-java@v3
         with:
           java-version: 17
           distribution: zulu
  
-      - name: Checkout ${{ github.ref }} branch in ${{ github.repository }} repository.
+      - name: "Checkout ${{ github.ref }} branch in ${{ github.repository }} repository."
         uses: actions/checkout@v3
 
-      - name: Run Instrumentation Tests on emulator.
+      - name: "Run Instrumentation Tests on emulator."
         id: gradle
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -170,7 +170,7 @@ jobs:
             connectedCheck
             mergeAndroidReports
 
-      - name: Publish "Gradle" result and Build Scan URL.
+      - name: "Publish 'Gradle' result and Build Scan URL."
         if: (success() || failure()) && steps.gradle != null && steps.gradle.outputs.result-success != null
         uses: actions/github-script@v6
         with:
@@ -193,32 +193,32 @@ jobs:
               target_url: ${{ steps.gradle.outputs.build-scan-url && toJSON(fromJSON(steps.gradle.outputs.build-scan-url)) || 'undefined' }}
             });
 
-      - name: Upload "Instrumentation Test Results" artifact.
+      - name: "Upload 'Instrumentation Test Results' artifact."
         if: success() || failure()
         uses: actions/upload-artifact@v3
         with:
-          name: Instrumentation Test Results
+          name: 'Instrumentation Test Results'
           # Exclude names with colon: https://issuetracker.google.com/issues/223643506
           path: |
             ${{ github.workspace }}/**/build/outputs/androidTest-results/connected/
             ${{ github.workspace }}/**/build/outputs/connected_android_test_additional_output/
             !**/*:*
 
-      - name: Upload "Instrumentation Merged Results" artifact.
+      - name: "Upload 'Instrumentation Merged Results' artifact."
         if: success() || failure()
         uses: actions/upload-artifact@v3
         with:
-          name: Instrumentation Merged Results
+          name: 'Instrumentation Merged Results'
           # Exclude names with colon: https://issuetracker.google.com/issues/223643506
           path: |
             ${{ github.workspace }}/build/androidTest-results/
             !**/*:*
 
-      - name: Publish "Instrumentation Results" check suite.
+      - name: "Publish 'Instrumentation Results' check suite."
         if: success() || failure()
         uses: EnricoMi/publish-unit-test-result-action/composite@v2
         with:
-          check_name: "🔔 Test: Instrumentation Results"
+          check_name: '🔔 Test: Instrumentation Results'
           comment_mode: off
           report_individual_runs: true
           test_changes_limit: 0
