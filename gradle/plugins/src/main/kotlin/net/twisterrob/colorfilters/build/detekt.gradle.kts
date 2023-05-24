@@ -12,7 +12,7 @@ detekt {
 	ignoreFailures = true
 	buildUponDefaultConfig = true
 	allRules = true
-	config = rootProject.files("config/detekt/detekt.yml")
+	config.setFrom(rootProject.file("config/detekt/detekt.yml"))
 	baseline = rootProject.file("config/detekt/detekt-baseline-${project.name}.xml")
 	basePath = rootProject.projectDir.absolutePath
 
