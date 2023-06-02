@@ -1,5 +1,6 @@
 package net.twisterrob.colorfilters.build
 
+import net.twisterrob.colorfilters.build.dsl.android
 import net.twisterrob.colorfilters.build.dsl.libs
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -25,4 +26,13 @@ tasks.withType<JavaCompile>().configureEach {
 	targetCompatibility = libs.versions.java.get()
 	options.compilerArgs.add("-Xlint:all")
 	options.compilerArgs.add("-Werror")
+}
+
+plugins.withId("com.android.base") {
+	android {
+		compileOptions {
+			sourceCompatibility = libs.versions.java.map(JavaVersion::toVersion).get()
+			targetCompatibility = libs.versions.java.map(JavaVersion::toVersion).get()
+		}
+	}
 }
