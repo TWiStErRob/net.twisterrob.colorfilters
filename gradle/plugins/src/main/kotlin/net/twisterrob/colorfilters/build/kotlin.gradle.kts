@@ -14,18 +14,16 @@ dependencies {
 	add("implementation", (libs.kotlin.stdlib.jdk8))
 }
 
+//<editor-fold desc="Java JVM Source/Target/Release/Toolchain Setup" defaultstate="collapsed">
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
 	compilerOptions {
 		jvmTarget.set(libs.versions.java.map(JvmTarget::fromTarget))
-		allWarningsAsErrors.set(true)
 	}
 }
 
 tasks.withType<JavaCompile>().configureEach {
 	sourceCompatibility = libs.versions.java.get()
 	targetCompatibility = libs.versions.java.get()
-	options.compilerArgs.add("-Xlint:all")
-	options.compilerArgs.add("-Werror")
 }
 
 plugins.withId("com.android.base") {
@@ -36,3 +34,17 @@ plugins.withId("com.android.base") {
 		}
 	}
 }
+//</editor-fold>
+
+//<editor-fold desc="Strict Compilation" defaultstate="collapsed">
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+	compilerOptions {
+		allWarningsAsErrors.set(true)
+	}
+}
+
+tasks.withType<JavaCompile>().configureEach {
+	options.compilerArgs.add("-Xlint:all")
+	options.compilerArgs.add("-Werror")
+}
+//</editor-fold>
