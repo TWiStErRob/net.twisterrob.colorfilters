@@ -188,7 +188,7 @@ jobs:
           #  android-arch: x86_64
     steps:
       - name: "Validate matrix values"
-        if: ${{ matrix.android-api < 26 }}
+        if: matrix.android-api < 26
         run: |
           echo "Android-JUnit 5 uses Java 8, so it's only possible to use from API 26 onwards."
           exit 1
