@@ -39,6 +39,10 @@ plugins.withId("com.android.base") {
 // Desugaring setup so that we can use Java 8/11 features on lower APIs.
 // e.g. to support Mockito 5.x on API 23 and lower.
 plugins.withId("com.android.base") {
+	// Disabled for now, because it's only needed for lower API levels.
+	// And Android-JUnit5 has a 26 lower bound.
+	@Suppress("ConstantConditionIf")
+	if (true) return@withId
 	android {
 		compileOptions {
 			isCoreLibraryDesugaringEnabled = true
