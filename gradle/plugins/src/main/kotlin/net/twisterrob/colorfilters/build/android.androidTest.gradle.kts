@@ -14,7 +14,7 @@ android {
 		//testInstrumentationRunnerArguments["useTestStorageService"] = "true"
 	}
 	(this@android as? LibraryExtension)?.apply {
-		// Enable multidex for all libraries.
+		// Enable multidex for all library modules.
 		// This will transfer to androidTest apps in those libraries, but not the app.
 		defaultConfig.multiDexEnabled = true
 	}
