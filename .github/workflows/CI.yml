@@ -141,7 +141,7 @@ jobs:
           sarif_file: ${{ github.workspace }}/build/reports/detekt/merge.sarif
 
   instrumentation:
-    name: "🧪 Instrumentation Tests for ${{ matrix.reason }} on API ${{ matrix.android-api }}"
+    name: "🧪 Instrumentation Tests on API ${{ matrix.android-api }} for ${{ matrix.reason }}"
     needs: validate
     runs-on: macos-latest
     timeout-minutes: 30
@@ -219,7 +219,7 @@ jobs:
               repo: context.repo.repo,
               sha: context.sha,
               state: ${{ toJSON(fromJSON(steps.gradle.outputs.result-success)) }} === true ? "success" : "failure",
-              context: "CI / Instrumentation Tests / Gradle",
+              context: "CI / Instrumentation Tests API ${{ matrix.android-api }} (${{ matrix.reason }}) / Gradle",
               // Truncate to be sure it fits:
               // > HttpError: Validation Failed: {"resource":"Status","code":"custom",
               // > "field":"description","message":"description is too long (maximum is 140 characters)"}
