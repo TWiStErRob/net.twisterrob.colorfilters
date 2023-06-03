@@ -141,11 +141,58 @@ jobs:
           sarif_file: ${{ github.workspace }}/build/reports/detekt/merge.sarif
 
   instrumentation:
-    name: "🧪 Instrumentation Tests"
+    name: "🧪 Instrumentation Tests on ${{ matrix.android-api }}"
     needs: validate
     runs-on: macos-latest
     timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        # Why that API level is tested?
+        #reason: []
+        # The API level, see https://apilevels.com/
+        #android-api: [14, ..., 33]
+        # The best available emulator image type.
+        # Some are not available: https://issuetracker.google.com/issues/267458959
+        #android-image-type: [default, google_apis]
+        include:
+          # API 15 is the first possible emulator that works well on GitHub Actions' architectures:
+          # > system-images;android-10;default;armeabi-v7a
+          # > system-images;android-10;default;x86
+          # > system-images;android-14;default;armeabi-v7a
+          # > system-images;android-15;default;armeabi-v7a
+          # > system-images;android-15;default;x86
+          #- reason: "minSdkVersion + 1"
+          #  android-api: 15
+          #  android-image-type: default
+          #  android-arch: x86
+          #- reason: "ART runtime"
+          #  android-api: 21
+          #  android-image-type: default
+          #  android-arch: x86_64
+          #- reason: "Runtime permissions"
+          #  android-api: 23
+          #  android-image-type: default
+          #  android-arch: x86_64
+          - reason: "latest 'default'"
+            android-api: 29
+            android-image-type: default
+            android-arch: x86_64
+          #- reason: "targetSdkVersion"
+          #  android-api: 32
+          #  android-image-type: google_apis
+          #  android-arch: x86_64
+          #- reason: "compileSdkVersion"
+          #  android-api: 33
+          #  android-image-type: google_apis
+          #  android-arch: x86_64
     steps:
+      - name: "Validate matrix values"
+        if: matrix.android-api < 26
+        run: |
+          echo "Android-JUnit 5 uses Java 8, so it's only possible to use from API 26 onwards."
+          exit 1
+
       - name: "Set up JDK 17."
         uses: actions/setup-java@v3
         with:
@@ -155,11 +202,13 @@ jobs:
       - name: "Checkout ${{ github.ref }} branch in ${{ github.repository }} repository."
         uses: actions/checkout@v3
 
-      - name: "Run Instrumentation Tests on emulator."
+      - name: "Run Instrumentation Tests on emulator for ${{ matrix.reason }}."
         id: gradle
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 29
+          api-level: ${{ matrix.android-api }}
+          target: ${{ matrix.android-image-type }}
+          arch: ${{ matrix.android-arch }}
           script: >
             ./gradlew
             --no-daemon
@@ -182,7 +231,7 @@ jobs:
               repo: context.repo.repo,
               sha: context.sha,
               state: ${{ toJSON(fromJSON(steps.gradle.outputs.result-success)) }} === true ? "success" : "failure",
-              context: "CI / Instrumentation Tests / Gradle",
+              context: "CI / Instrumentation Tests ${{ matrix.android-api }} / Gradle",
               // Truncate to be sure it fits:
               // > HttpError: Validation Failed: {"resource":"Status","code":"custom",
               // > "field":"description","message":"description is too long (maximum is 140 characters)"}
@@ -193,32 +242,32 @@ jobs:
               target_url: ${{ steps.gradle.outputs.build-scan-url && toJSON(fromJSON(steps.gradle.outputs.build-scan-url)) || 'undefined' }}
             });
 
-      - name: "Upload 'Instrumentation Test Results' artifact."
+      - name: "Upload 'Instrumentation Test Results ${{ matrix.android-api }}' artifact."
         if: success() || failure()
         uses: actions/upload-artifact@v3
         with:
-          name: 'Instrumentation Test Results'
+          name: 'Instrumentation Test Results ${{ matrix.android-api }}'
           # Exclude names with colon: https://issuetracker.google.com/issues/223643506
           path: |
             ${{ github.workspace }}/**/build/outputs/androidTest-results/connected/
             ${{ github.workspace }}/**/build/outputs/connected_android_test_additional_output/
             !**/*:*
 
-      - name: "Upload 'Instrumentation Merged Results' artifact."
+      - name: "Upload 'Instrumentation Merged Results ${{ matrix.android-api }}' artifact."
         if: success() || failure()
         uses: actions/upload-artifact@v3
         with:
-          name: 'Instrumentation Merged Results'
+          name: 'Instrumentation Merged Results ${{ matrix.android-api }}'
           # Exclude names with colon: https://issuetracker.google.com/issues/223643506
           path: |
             ${{ github.workspace }}/build/androidTest-results/
             !**/*:*
 
-      - name: "Publish 'Instrumentation Results' check suite."
+      - name: "Publish 'Instrumentation Results ${{ matrix.android-api }}' check suite."
         if: success() || failure()
         uses: EnricoMi/publish-unit-test-result-action/composite@v2
         with:
-          check_name: '🔔 Test: Instrumentation Results'
+          check_name: '🔔 Test: Instrumentation Results ${{ matrix.android-api }}'
           comment_mode: off
           report_individual_runs: true
           test_changes_limit: 0
