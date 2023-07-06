@@ -1,5 +1,6 @@
 package net.twisterrob.colorfilters.android.porterduff
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.ColorFilter
 import android.graphics.PorterDuff
@@ -175,6 +176,7 @@ class PorterDuffFragment : ColorFilterFragment() {
 		if (savedInstanceState == null) {
 			prefs.run {
 				val color = getInt(PREF_PORTERDUFF_COLOR, DEFAULT_COLOR)
+				@SuppressLint("StringFormatTrivial") // False positive with AGP 8.0.2 v Kotlin 1.9
 				val mode = getString(PREF_PORTERDUFF_MODE, DEFAULT_MODE.name)!!
 				val swatchIndex = getInt(PREF_PORTERDUFF_SWATCH, KEEP_SWATCH)
 				setValues(color, PorterDuff.Mode.valueOf(mode), swatchIndex)
