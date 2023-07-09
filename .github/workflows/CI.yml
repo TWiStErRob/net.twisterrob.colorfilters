@@ -149,27 +149,32 @@ jobs:
         #image: string
         #arch: string
         include:
-          #- reason: "minSdkVersion + 1"
-          #  api: 15
+          #- api: 15
           #  image: default
           #  arch: x86
-          #- reason: "ART runtime"
-          #  api: 21
+          #  reason: "minSdkVersion + 1"
+
+          #- api: 21
           #  image: default
           #  arch: x86_64
-          #- reason: "Runtime permissions"
-          #  api: 23
+          #  reason: "ART runtime"
+
+          #- api: 23
           #  image: default
           #  arch: x86_64
-          - reason: "latest 'default'"
-            api: 29
+          #  reason: "Runtime permissions"
+
+          - api: 29
             image: default
             arch: x86_64
-          #- reason: "targetSdkVersion"
-          #  api: 32
+            reason: "latest 'default'"
+
+          #- api: 32
           #  image: google_apis
           #  arch: x86_64
-          #- reason: "compileSdkVersion"
-          #  api: 33
+          #  reason: "targetSdkVersion"
+
+          #- api: 33
           #  image: google_apis
           #  arch: x86_64
+          #  reason: "compileSdkVersion"
