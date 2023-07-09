@@ -159,10 +159,10 @@ jobs:
           #  arch: x86_64
           #  reason: "ART runtime"
 
-          #- api: 23
-          #  image: default
-          #  arch: x86_64
-          #  reason: "Runtime permissions"
+          - api: 23
+            image: default
+            arch: x86_64
+            reason: "Runtime permissions"
 
           - api: 29
             image: default
