@@ -5,7 +5,7 @@ on:
 
 jobs:
   instrumentation:
-    name: "on ${{ matrix.api }}"
+    name: "${{ matrix.api }}"
     uses: ./.github/workflows/instrumentation.yml
     with:
       android-api: ${{ matrix.api }}
