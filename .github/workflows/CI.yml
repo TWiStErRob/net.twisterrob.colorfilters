@@ -9,15 +9,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   validate:
-    name: "🦺 Validation"
-    runs-on: ubuntu-latest
-    timeout-minutes: 2
-    steps:
-      - name: "Checkout ${{ github.ref }} branch in ${{ github.repository }} repository."
-        uses: actions/checkout@v3
-
-      - name: "Validate Gradle Wrapper JARs."
-        uses: gradle/wrapper-validation-action@v1
+    uses: ./.github/workflows/validate.yml
 
   build:
     name: "🔨 Build & Verify"
