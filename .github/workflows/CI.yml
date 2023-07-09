@@ -10,7 +10,7 @@ concurrency:
 jobs:
   validate:
     name: "🦺 Validation"
-    uses: ./.github/workflows/validate.yml
+    uses: TWiStErRob/github-workflows/.github/workflows/validate.yml@main
 
   build:
     name: "🔨 Build & Verify"
