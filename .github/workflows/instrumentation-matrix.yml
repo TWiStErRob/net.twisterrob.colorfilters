@@ -9,6 +9,7 @@ jobs:
     uses: ./.github/workflows/instrumentation.yml
     with:
       android-api: ${{ matrix.api }}
+      junit5: true
     strategy:
       fail-fast: false
       matrix:
