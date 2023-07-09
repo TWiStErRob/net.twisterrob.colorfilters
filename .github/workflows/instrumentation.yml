@@ -21,10 +21,10 @@ on:
       # > system-images;android-15;default;armeabi-v7a
       # > system-images;android-15;default;x86
       android-image-arch:
-        required: true
+        required: false
         type: string
         description: "Android emulator image architecture. [x86, x86_64]"
-        default: 'x86_64'
+        default: ${{ inputs.android-api >= 21 && 'x86_64' || 'x86' }}
       junit5:
         required: false
         type: boolean
