@@ -134,47 +134,6 @@ jobs:
           sarif_file: ${{ github.workspace }}/build/reports/detekt/merge.sarif
 
   instrumentation:
-    name: "🧪 Instrumentation Tests"
+    name: "🧪 Instrumentation Tests CI"
     needs: validate
     uses: ./.github/workflows/instrumentation.yml
-    with:
-      android-api: ${{ matrix.api }}
-      android-image-type: ${{ matrix.image }}
-      android-image-arch: ${{ matrix.arch }}
-    strategy:
-      fail-fast: false
-      matrix:
-        #reason: string (unused)
-        #api: number
-        #image: string
-        #arch: string
-        include:
-          #- api: 15
-          #  image: default
-          #  arch: x86
-          #  reason: "minSdkVersion + 1"
-
-          #- api: 21
-          #  image: default
-          #  arch: x86_64
-          #  reason: "ART runtime"
-
-          - api: 23
-            image: default
-            arch: x86_64
-            reason: "Runtime permissions"
-
-          - api: 29
-            image: default
-            arch: x86_64
-            reason: "latest 'default'"
-
-          #- api: 32
-          #  image: google_apis
-          #  arch: x86_64
-          #  reason: "targetSdkVersion"
-
-          #- api: 33
-          #  image: google_apis
-          #  arch: x86_64
-          #  reason: "compileSdkVersion"

@@ -1,4 +1,4 @@
-name: "🧪 Instrumentation Tests"
+name: "🧪 Instrumentation Tests wf"
 
 on:
   workflow_call:
