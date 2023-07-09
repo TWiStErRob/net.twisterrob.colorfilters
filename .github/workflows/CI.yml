@@ -134,6 +134,6 @@ jobs:
           sarif_file: ${{ github.workspace }}/build/reports/detekt/merge.sarif
 
   instrumentation:
-    name: "🧪 Instrumentation Tests CI"
+    name: "🧪 Instrumentation Tests"
     needs: validate
     uses: ./.github/workflows/instrumentation-matrix.yml

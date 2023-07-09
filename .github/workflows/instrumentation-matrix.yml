@@ -1,11 +1,11 @@
-name: "🧪 Instrumentation Tests Matrix wf"
+name: "🧪 Instrumentation Test Matrix"
 
 on:
   workflow_call:
 
 jobs:
   instrumentation:
-    name: "🧪 Instrumentation Tests Matrix job"
+    name: "Matrix"
     uses: ./.github/workflows/instrumentation.yml
     with:
       android-api: ${{ matrix.api }}
