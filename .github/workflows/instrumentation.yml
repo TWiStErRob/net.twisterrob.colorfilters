@@ -41,7 +41,7 @@ jobs:
     runs-on: macos-latest
     timeout-minutes: 30
     steps:
-      - name: "Validate inputs"
+      - name: "Validate inputs for JUnit 5."
         if: inputs.junit5 && inputs.android-api < 26
         run: |
           echo "Android-JUnit 5 uses Java 8, so it's only possible to use from API 26 onwards."
@@ -62,7 +62,7 @@ jobs:
         with:
           api-level: ${{ inputs.android-api }}
           target: ${{ inputs.android-image-type }}
-          arch: ${{ inputs.android-arch }}
+          arch: ${{ inputs.android-image-arch }}
           script: >
             ./gradlew
             --no-daemon
