@@ -9,7 +9,6 @@ jobs:
     uses: ./.github/workflows/instrumentation.yml
     with:
       android-api: ${{ matrix.api }}
-      android-image-type: ${{ matrix.image }}
       android-image-arch: ${{ matrix.arch }}
     strategy:
       fail-fast: false

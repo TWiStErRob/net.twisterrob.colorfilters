@@ -9,10 +9,10 @@ on:
         description: "Android API level to run the tests on. See https://apilevels.com/. [14, ..., 34]"
       # Some are not available: https://issuetracker.google.com/issues/267458959
       android-image-type:
-        required: true
+        required: false
         type: string
         description: "Android emulator image type to run the tests on. [default, google_apis]"
-        default: 'default'
+        default: ${{ inputs.android-api >= 32 && 'google_apis' || 'default' }}
       # Nowadays with AndroidX libraries having API 14 as minimum,
       # API 15 is the first possible emulator that works well on GitHub Actions' architectures:
       # > system-images;android-10;default;armeabi-v7a
