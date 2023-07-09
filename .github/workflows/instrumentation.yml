@@ -13,13 +13,6 @@ on:
         type: string
         description: "Android emulator image type to run the tests on. [default, google_apis]"
         default: ${{ inputs.android-api >= 32 && 'google_apis' || 'default' }}
-      # Nowadays with AndroidX libraries having API 14 as minimum,
-      # API 15 is the first possible emulator that works well on GitHub Actions' architectures:
-      # > system-images;android-10;default;armeabi-v7a
-      # > system-images;android-10;default;x86
-      # > system-images;android-14;default;armeabi-v7a
-      # > system-images;android-15;default;armeabi-v7a
-      # > system-images;android-15;default;x86
       android-image-arch:
         required: false
         type: string
@@ -41,6 +34,18 @@ jobs:
     runs-on: macos-latest
     timeout-minutes: 30
     steps:
+      # Nowadays with AndroidX libraries having API 14 as minimum,
+      # API 15 is the first possible emulator that works well on GitHub Actions' architectures:
+      # > system-images;android-10;default;armeabi-v7a
+      # > system-images;android-10;default;x86
+      # > system-images;android-14;default;armeabi-v7a
+      # > system-images;android-15;default;armeabi-v7a
+      # > system-images;android-15;default;x86
+      - name: "Validate inputs for JUnit 5."
+        if: inputs.android-api < 15
+        run: |
+          echo "No emulator image with a compatible architecture exists for ${{ inputs.android-api }}."
+          exit 1
       - name: "Validate inputs for JUnit 5."
         if: inputs.junit5 && inputs.android-api < 26
         run: |
