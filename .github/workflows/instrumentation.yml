@@ -1,0 +1,128 @@
+name: "🧪 Instrumentation Tests"
+
+on:
+  workflow_call:
+    inputs:
+      android-api:
+        required: true
+        type: number
+        description: "Android API level to run the tests on. See https://apilevels.com/. [14, ..., 34]"
+      # Some are not available: https://issuetracker.google.com/issues/267458959
+      android-image-type:
+        required: true
+        type: string
+        description: "Android emulator image type to run the tests on. [default, google_apis]"
+        default: 'default'
+      # Nowadays with AndroidX libraries having API 14 as minimum,
+      # API 15 is the first possible emulator that works well on GitHub Actions' architectures:
+      # > system-images;android-10;default;armeabi-v7a
+      # > system-images;android-10;default;x86
+      # > system-images;android-14;default;armeabi-v7a
+      # > system-images;android-15;default;armeabi-v7a
+      # > system-images;android-15;default;x86
+      android-image-arch:
+        required: true
+        type: string
+        description: "Android emulator image architecture. [x86, x86_64]"
+        default: 'x86_64'
+      junit5:
+        required: false
+        type: boolean
+        description: "Whether the instrumentation is running JUnit 5 or not."
+        default: false
+#    secrets:
+#      token:
+#        required: true
+#        description: "GitHub token with access to the calling repository."
+
+jobs:
+  android:
+    name: "on ${{ inputs.android-api }}"
+    runs-on: macos-latest
+    timeout-minutes: 30
+    steps:
+      - name: "Validate inputs"
+        if: inputs.junit5 && inputs.android-api < 26
+        run: |
+          echo "Android-JUnit 5 uses Java 8, so it's only possible to use from API 26 onwards."
+          exit 1
+
+      - name: "Set up JDK 17."
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: zulu
+
+      - name: "Checkout ${{ github.ref }} branch in ${{ github.repository }} repository."
+        uses: actions/checkout@v3
+
+      - name: "Run Instrumentation Tests on emulator."
+        id: gradle
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ inputs.android-api }}
+          target: ${{ inputs.android-image-type }}
+          arch: ${{ inputs.android-arch }}
+          script: >
+            ./gradlew
+            --no-daemon
+            --no-build-cache
+            --continue
+            --stacktrace
+            --scan
+            connectedCheck
+            mergeAndroidReports
+
+      - name: "Publish 'Gradle' result and Build Scan URL."
+        if: (success() || failure()) && steps.gradle != null && steps.gradle.outputs.result-success != null
+        uses: actions/github-script@v6
+        with:
+          debug: ${{ secrets.ACTIONS_STEP_DEBUG || false }}
+          script: |
+            const description = ${{ toJSON(fromJSON(steps.gradle.outputs.result-text)) }}
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: ${{ toJSON(fromJSON(steps.gradle.outputs.result-success)) }} === true ? "success" : "failure",
+              context: "CI / Instrumentation Tests ${{ inputs.android-api }} / Gradle",
+              // Truncate to be sure it fits:
+              // > HttpError: Validation Failed: {"resource":"Status","code":"custom",
+              // > "field":"description","message":"description is too long (maximum is 140 characters)"}
+              // Max length is 140, give some space for potential Unicode.
+              description: description.length > 130
+                  ? `${description.substring(0, 130)}…`
+                  : description,
+              target_url: ${{ steps.gradle.outputs.build-scan-url && toJSON(fromJSON(steps.gradle.outputs.build-scan-url)) || 'undefined' }}
+            });
+
+      - name: "Upload 'Instrumentation Test Results ${{ inputs.android-api }}' artifact."
+        if: success() || failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: 'Instrumentation Test Results ${{ inputs.android-api }}'
+          # Exclude names with colon: https://issuetracker.google.com/issues/223643506
+          path: |
+            ${{ github.workspace }}/**/build/outputs/androidTest-results/connected/
+            ${{ github.workspace }}/**/build/outputs/connected_android_test_additional_output/
+            !**/*:*
+
+      - name: "Upload 'Instrumentation Merged Results ${{ inputs.android-api }}' artifact."
+        if: success() || failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: 'Instrumentation Merged Results ${{ inputs.android-api }}'
+          # Exclude names with colon: https://issuetracker.google.com/issues/223643506
+          path: |
+            ${{ github.workspace }}/build/androidTest-results/
+            !**/*:*
+
+      - name: "Publish 'Instrumentation Results ${{ inputs.android-api }}' check suite."
+        if: success() || failure()
+        uses: EnricoMi/publish-unit-test-result-action/composite@v2
+        with:
+          check_name: '🔔 Test: Instrumentation Results ${{ inputs.android-api }}'
+          comment_mode: off
+          report_individual_runs: true
+          test_changes_limit: 0
+          junit_files: ${{ github.workspace }}/**/build/outputs/androidTest-results/connected/TEST-*.xml
