@@ -9,6 +9,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   validate:
+    name: "🦺 Validation"
     uses: ./.github/workflows/validate.yml
 
   build:
