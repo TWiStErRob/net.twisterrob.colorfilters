@@ -10,6 +10,7 @@ jobs:
     uses: TWiStErRob/github-workflows/.github/workflows/instrumentation.yml@instrumentation
     with:
       android-api: ${{ matrix.api }}
+      name-check-gradle: 'CI / 🧪 Instrumentation Tests on / {0} / API {0} / Gradle'
       junit5: true
 
     strategy:
