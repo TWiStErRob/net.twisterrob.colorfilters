@@ -25,6 +25,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        # The API level, see https://apilevels.com/.
         api:
           #- 15 # Doesn't work with JUnit 5!
           #- 21 # Doesn't work with JUnit 5!
