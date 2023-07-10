@@ -7,7 +7,7 @@ jobs:
   instrumentation:
     name: "${{ matrix.api }}"
 
-    uses: TWiStErRob/github-workflows/.github/workflows/instrumentation.yml@main
+    uses: TWiStErRob/github-workflows/.github/workflows/instrumentation.yml@instrumentation
     with:
       android-api: ${{ matrix.api }}
       junit5: true
