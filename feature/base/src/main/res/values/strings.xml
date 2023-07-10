@@ -8,7 +8,7 @@
 	<string name="cf_info_ok">Thanks</string>
 	<string name="cf_info_copy_toast">Copied to clipboard</string>
 	<string name="cf_info_copy_toast_arg">%s copied to clipboard</string>
-	<string name="cf_info_code">Here\'s the current code:</string>
+	<string name="cf_info_code">Here’s the current code:</string>
 
 	<string name="cf_share_title">Share</string>
 	<string name="cf_share_picker_title">Share Color Filter</string>
