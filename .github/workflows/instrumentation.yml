@@ -1,15 +1,17 @@
 name: "🧪 Instrumentation Test Matrix"
 
 on:
-  workflow_call:
+  workflow_call
 
 jobs:
   instrumentation:
     name: "${{ matrix.api }}"
+
     uses: TWiStErRob/github-workflows/.github/workflows/instrumentation.yml@main
     with:
       android-api: ${{ matrix.api }}
       junit5: true
+
     strategy:
       fail-fast: false
       matrix:

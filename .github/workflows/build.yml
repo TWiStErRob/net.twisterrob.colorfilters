@@ -1,7 +1,7 @@
 name: "🔨 Build & Verify"
 
 on:
-  workflow_call:
+  workflow_call
 
 jobs:
   runs-on: ubuntu-latest
