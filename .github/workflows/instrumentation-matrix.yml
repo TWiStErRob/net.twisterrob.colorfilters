@@ -14,9 +14,10 @@ jobs:
       fail-fast: false
       matrix:
         api:
-          #- 15
-          #- 21
-          - 23
+          #- 15 # Doesn't work with JUnit 5!
+          #- 21 # Doesn't work with JUnit 5!
+          #- 23 # Doesn't work with JUnit 5!
+          - 26
           - 29
           #- 32
           #- 33
