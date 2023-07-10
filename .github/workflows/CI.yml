@@ -136,4 +136,4 @@ jobs:
   instrumentation:
     name: "🧪 Instrumentation Tests"
     needs: validate
-    uses: ./.github/workflows/instrumentation-matrix.yml
+    uses: ./.github/workflows/instrumentation.yml
