@@ -14,14 +14,14 @@
 		\n\nYou can specify the maximum number of color swatches extracted from which the above six named ones are selected.
 		Good values for <tt>maximumColorCount</tt> depend on the source image type.
 		For landscapes, a good values are in the range 12&#8211;16.
-		For images which are largely made up of people\'s faces then this value should be increased to 24&#8211;32.
+		For images which are largely made up of people’s faces then this value should be increased to 24&#8211;32.
 		The default <tt>maximumColorCount</tt> is 16.
 		The number of returned swatches may be less than <tt>maximumColorCount</tt>, but at least one is always returned.
 		Not all of the above named ones are guaranteed to be found.
 		\n\nA swatch consists of a main background color and two text colors.
 		The text colors are guaranteed to have sufficient contrast when drawn over the background color.
 		\n\nYou can also specify the size of the image from which the palette is generated. The default is 192px.
-		If the bitmap\'s largest dimension is greater than <tt>resizeBitmapSize</tt>, then the bitmap will be resized so that it\'s largest dimension matches the value.
+		If the bitmap’s largest dimension is greater than <tt>resizeBitmapSize</tt>, then the bitmap will be resized so that it’s largest dimension matches the value.
 		If the bitmap is smaller or equal, the original is used as-is.
 		\n<tt>resizeBitmapSize</tt> has a large effect on the processing time. The larger the resized image is, the greater time it will take to generate the palette.
 		The smaller the image is, the more detail is lost in the resulting image and thus less precision for color selection.
