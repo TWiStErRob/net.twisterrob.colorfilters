@@ -12,7 +12,7 @@ jobs:
 
   validate:
     name: "🦺 Validation"
-    uses: TWiStErRob/github-workflows/.github/workflows/validate.yml@v1
+    uses: TWiStErRob/github-workflows/.github/workflows/validate.yml@94551cb55ce85120d5209e256d232d83ff22768e # v1
 
   build:
     name: "🔨 Build & Verify"
