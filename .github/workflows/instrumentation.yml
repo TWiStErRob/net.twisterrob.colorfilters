@@ -1,0 +1,36 @@
+name: "🧪 Instrumentation Test Matrix"
+
+on:
+  workflow_call
+
+jobs:
+
+  instrumentation:
+    name: "${{ matrix.api }}"
+
+    uses: TWiStErRob/github-workflows/.github/workflows/instrumentation.yml@v1
+    with:
+      android-api: ${{ matrix.api }}
+      script: >
+        ./gradlew
+        --no-daemon
+        --no-build-cache
+        --continue
+        --stacktrace
+        --scan
+        connectedCheck
+        mergeAndroidReports
+      junit5: true
+
+    strategy:
+      fail-fast: false
+      matrix:
+        # The API level, see https://apilevels.com/.
+        api:
+          #- 15 # Doesn't work with JUnit 5!
+          #- 21 # Doesn't work with JUnit 5!
+          #- 23 # Doesn't work with JUnit 5!
+          #- 26
+          - 29
+          #- 32
+          #- 33

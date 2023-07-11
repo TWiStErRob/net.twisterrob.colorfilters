@@ -1,4 +1,3 @@
-import groovy.json.JsonOutput.toJson
 import net.twisterrob.gradle.doNotNagAbout
 import net.twisterrob.gradle.settings.enableFeaturePreviewQuietly
 import net.twisterrob.colorfilters.build.dsl.isCI
@@ -72,9 +71,14 @@ gradleEnterprise {
 			fun setOutput(name: String, value: Any?) {
 				// Using `appendText` to make sure out outputs are not cleared.
 				// Using `\n` to make sure further outputs are correct.
-				// Using `toJson()` to ensure that any special characters (such as newlines) are escaped.
-				File(System.getenv("GITHUB_OUTPUT") ?: error("Missing env: GITHUB_OUTPUT"))
-					.appendText("${name}=${toJson(value)}\n")
+				// Using `delimiter` to ensure that any special characters (such as newlines) are escaped.
+				val delimiter = java.util.UUID.randomUUID().toString()
+				providers
+					.environmentVariable("GITHUB_OUTPUT")
+					.map(::File)
+					// TODEL https://github.com/gradle/gradle/issues/25716
+					.orNull.let { it ?: error("GITHUB_OUTPUT environment variable is not set.") }
+					.appendText("${name}<<${delimiter}\n${value}\n${delimiter}\n")
 			}
 
 			buildScanPublished {
