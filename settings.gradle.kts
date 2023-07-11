@@ -76,7 +76,8 @@ gradleEnterprise {
 				providers
 					.environmentVariable("GITHUB_OUTPUT")
 					.map(::File)
-					.get()
+					// TODEL https://github.com/gradle/gradle/issues/25716
+					.orNull.let { it ?: error("GITHUB_OUTPUT environment variable is not set.") }
 					.appendText("${name}<<${delimiter}\n${value}\n${delimiter}\n")
 			}
 
