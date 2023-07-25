@@ -7,10 +7,10 @@ plugins {
 
 // Register root tasks before evaluating subprojects.
 tasks.register<io.gitlab.arturbosch.detekt.report.ReportMergeTask>("detektReportMergeSarif") {
-	output.set(rootProject.buildDir.resolve("reports/detekt/merge.sarif"))
+	output.set(rootProject.layout.buildDirectory.file("reports/detekt/merge.sarif"))
 }
 tasks.register<io.gitlab.arturbosch.detekt.report.ReportMergeTask>("detektReportMergeXml") {
-	output.set(rootProject.buildDir.resolve("reports/detekt/merge.xml"))
+	output.set(rootProject.layout.buildDirectory.file("reports/detekt/merge.xml"))
 }
 
 // TODEL https://issuetracker.google.com/issues/222730176
@@ -21,7 +21,7 @@ subprojects.forEach { evaluationDependsOn(it.path) } // evaluationDependsOnSubpr
 apply(plugin = "android-reporting")
 
 tasks.register<Delete>("clean") {
-	delete(rootProject.buildDir)
+	delete(rootProject.layout.buildDirectory)
 }
 
 tasks.register("check") {
