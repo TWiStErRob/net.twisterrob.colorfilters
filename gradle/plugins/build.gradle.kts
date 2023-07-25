@@ -19,11 +19,11 @@ dependencies {
 gradlePlugin {
 	// REPORT Why do I need to do this? It's already in the classpath.
 	// Plus with this I get this warning: from Task :plugins:jar
-	// > :jar: A valid plugin descriptor was found for net.twisterrob.settings.properties but the
-	// > implementation class net.twisterrob.gradle.settings.SettingsPlugin was not found in the jar.
-	plugins.register("exposedSettings") {
-		id = "net.twisterrob.gradle.plugin.settings"
-		implementationClass = "net.twisterrob.gradle.settings.SettingsPlugin"
+	// > :jar: A valid plugin descriptor was found for net.twisterrob.nagging.properties but the
+	// > implementation class net.twisterrob.gradle.nagging.NaggingPlugin was not found in the jar.
+	plugins.register("exposedNagging") {
+		id = "net.twisterrob.gradle.plugin.nagging"
+		implementationClass = "net.twisterrob.gradle.nagging.NaggingPlugin"
 	}
 }
 
