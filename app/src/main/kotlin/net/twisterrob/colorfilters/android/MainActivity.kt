@@ -155,6 +155,7 @@ class MainActivity : AppCompatActivity()
 
 	@SuppressLint("LogConditional")
 	private fun onMenuItemSelected(item: MenuItem): Boolean {
+		@Suppress("OptionalWhenBraces")
 		when (item.itemId) {
 			android.R.id.home -> {
 				startActivity(Intent(applicationContext, AboutActivity::class.java))

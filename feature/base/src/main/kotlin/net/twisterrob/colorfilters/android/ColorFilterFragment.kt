@@ -61,7 +61,7 @@ abstract class ColorFilterFragment : Fragment() {
 			}
 
 			override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-				@Suppress("LiftReturnOrAssignment")
+				@Suppress("LiftReturnOrAssignment", "OptionalWhenBraces")
 				when (menuItem.itemId) {
 					R.id.action_info -> {
 						displayHelp()
