@@ -51,7 +51,8 @@ abstract class BitmapDrawer(
 	fun draw() {
 		doStart()
 		if (async) {
-			asyncHandler!!.post(::doDraw)
+			requireNotNull(asyncHandler) { "Async drawing without asyncHandler" }
+			asyncHandler.post(::doDraw)
 		} else {
 			doDraw()
 			doFinish()
@@ -70,7 +71,8 @@ abstract class BitmapDrawer(
 
 	protected fun reportProgress() {
 		if (async) {
-			uiHandler!!.post { callback?.drawProgress() }
+			requireNotNull(uiHandler) { "Async drawing without uiHandler" }
+			uiHandler.post { callback?.drawProgress() }
 		} else {
 			callback?.drawProgress()
 		}

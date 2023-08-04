@@ -56,17 +56,21 @@ class MainActivity : AppCompatActivity()
 		get() = images.current
 
 	override val keyboard: KeyboardHandler
-		get() {
-			if (kbd == null) {
-				kbd = KeyboardHandlerFactory()
-					.create(prefs.findKeyboardMode(), window, findViewById(R.id.keyboard))
-			} 
-			return kbd!!
-		}
+		get() = kbd
+			?.let { return it }
+			?: createKeyboardHandler().also { kbd = it }
+	
+	private val actionBar: ActionBar
+		get() = requireNotNull(supportActionBar) { "Missing supportActionBar" }
+
+	private fun createKeyboardHandler(): KeyboardHandler =
+		KeyboardHandlerFactory()
+			.create(prefs.findKeyboardMode(), window, findViewById(R.id.keyboard))
 
 	private fun SharedPreferences.findKeyboardMode(): KeyboardMode =
 		if (this.getBoolean(getString(R.string.cf_pref_keyboard), false)) {
-			this@MainActivity.currentFragment!!.preferredKeyboardMode
+			requireNotNull(this@MainActivity.currentFragment) { "Missing current fragment." }
+				.preferredKeyboardMode
 		} else {
 			NATIVE
 		}
@@ -87,7 +91,7 @@ class MainActivity : AppCompatActivity()
 
 		images = supportFragmentManager.findFragmentById(R.id.images) as ImageFragment
 
-		supportActionBar!!.apply {
+		actionBar.apply {
 			setDisplayShowTitleEnabled(false)
 			setHomeButtonEnabled(true)
 			setDisplayHomeAsUpEnabled(true)
@@ -142,7 +146,7 @@ class MainActivity : AppCompatActivity()
 		super.onResume()
 		val position = prefs.getInt(PREF_COLORFILTER_SELECTED, COLORFILTER_DEFAULT)
 		@Suppress("DEPRECATION") // will replace when AndroidX or removed
-		supportActionBar!!.setSelectedNavigationItem(position)
+		actionBar.setSelectedNavigationItem(position)
 	}
 
 	override fun onPause() {

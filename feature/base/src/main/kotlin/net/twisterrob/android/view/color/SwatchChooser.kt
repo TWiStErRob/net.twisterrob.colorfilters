@@ -38,7 +38,7 @@ class SwatchChooser(swatches: Collection<Swatch>) : Drawable(), View.OnTouchList
 	}
 
 	override fun draw(canvas: Canvas) {
-		canvas.drawBitmap(image!!, 0f, 0f, null)
+		canvas.drawBitmap(requireNotNull(image) { "Missing image!" }, 0f, 0f, null)
 	}
 
 	override fun onBoundsChange(bounds: Rect) {
@@ -150,9 +150,10 @@ class SwatchChooser(swatches: Collection<Swatch>) : Drawable(), View.OnTouchList
 				val x = (event.x - v.paddingLeft).toInt()
 				val y = (event.y - v.paddingTop).toInt()
 				onSwatchChangeListener?.apply {
-					swatchSelected(at(x, y)!!)
-					v.performClick()
+					val swatch = at(x, y)
+					swatch?.let { swatchSelected(it) }
 				}
+				v.performClick()
 				return true
 			}
 		}

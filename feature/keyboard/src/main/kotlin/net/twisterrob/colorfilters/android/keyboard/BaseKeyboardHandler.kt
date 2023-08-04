@@ -3,7 +3,6 @@
 package net.twisterrob.colorfilters.android.keyboard
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.inputmethodservice.KeyboardView
 import android.os.Build
@@ -166,7 +165,8 @@ abstract class BaseKeyboardHandler(
 			val start = editor.selectionStart
 			val end = editor.selectionEnd
 			if (start < end) {
-				editable!!.delete(start, end)
+				requireNotNull(editable) { "Selection can't exist without text" }
+					.delete(start, end)
 			}
 
 			when (primaryCode) {

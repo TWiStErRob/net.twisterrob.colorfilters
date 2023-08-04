@@ -2,6 +2,7 @@ package net.twisterrob.colorfilters.build
 
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.report.ReportMergeTask
+import net.twisterrob.colorfilters.build.dsl.isCI
 import net.twisterrob.colorfilters.build.dsl.libs
 
 plugins {
@@ -9,7 +10,7 @@ plugins {
 }
 
 detekt {
-	ignoreFailures = true
+	ignoreFailures = isCI
 	buildUponDefaultConfig = true
 	allRules = true
 	config.setFrom(rootProject.file("config/detekt/detekt.yml"))

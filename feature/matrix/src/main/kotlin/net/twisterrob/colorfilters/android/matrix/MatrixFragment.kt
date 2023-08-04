@@ -88,7 +88,7 @@ class MatrixFragment : ColorFilterFragment() {
 		val combine: Boolean
 		if (savedInstanceState != null) {
 			dirty = savedInstanceState.getBoolean(SAVE_EDITOR_DIRTY)
-			order.map = savedInstanceState.getIntArray(SAVE_ORDER_MAP)!!
+			savedInstanceState.getIntArray(SAVE_ORDER_MAP)?.let { order.map = it}
 			combine = !dirty
 		} else {
 			restoreFromPreferences(prefs)

@@ -211,7 +211,9 @@ class PaletteFragment : ColorFilterFragment() {
 						Toast.makeText(context, copiedAlert, Toast.LENGTH_SHORT).show()
 					}
 					.setNeutralButton("Copy all named swatches") { _, _ ->
-						val palette = swatchAdapter.palette!!
+						val palette = requireNotNull(swatchAdapter.palette) {
+							"User clicked on swatch list, there must be a palette already."
+						}
 						copyToClipboard(
 							context, "Color Resources", TextUtils.concat(
 								res("vibrant", palette.vibrantSwatch),
@@ -320,9 +322,7 @@ class PaletteFragment : ColorFilterFragment() {
 
 	override fun onSaveInstanceState(outState: Bundle) {
 		super.onSaveInstanceState(outState)
-		outState.apply {
-			putInt(PREF_PALETTE_DISPLAY, swatchDisplay.selectedItemPosition)
-		}
+		outState.putInt(PREF_PALETTE_DISPLAY, swatchDisplay.selectedItemPosition)
 	}
 
 	override fun onViewStateRestored(savedInstanceState: Bundle?) {
@@ -331,7 +331,9 @@ class PaletteFragment : ColorFilterFragment() {
 			val prefs = prefs
 			val numColors = prefs.getInt(PREF_PALETTE_NUM_COLORS, DEFAULT_NUM_COLORS)
 			val resizeDimen = prefs.getInt(PREF_PALETTE_RESIZE_DIMEN, DEFAULT_RESIZE_DIMEN)
-			val displayString = prefs.getString(PREF_PALETTE_DISPLAY, PaletteAdapter.Display.DEFAULT.name)!!
+			val displayString = requireNotNull(prefs.getString(PREF_PALETTE_DISPLAY, PaletteAdapter.Display.DEFAULT.name)) {
+				"Default value for ${PREF_PALETTE_DISPLAY} was null!"
+			}
 			val display = runCatching { PaletteAdapter.Display.valueOf(displayString) }
 				.getOrDefault(PaletteAdapter.Display.DEFAULT) // Fall back in case of migration issues.
 			setValues(numColors, resizeDimen, display)
@@ -429,13 +431,14 @@ class PaletteFragment : ColorFilterFragment() {
 			if (convertView == null) {
 				val inflater = LayoutInflater.from(parent.context)
 				convertView = inflater.inflate(R.layout.inc_palette_swatch, parent, false)
+					?: error("Could not inflate R.layout.inc_palette_swatch")
 				holder = ViewHolder(convertView)
 				convertView.tag = holder
 			} else {
 				holder = convertView.tag as ViewHolder
 			}
 			bindView(position, holder)
-			return convertView!!
+			return convertView
 		}
 
 		@SuppressLint("SetTextI18n")
@@ -443,11 +446,15 @@ class PaletteFragment : ColorFilterFragment() {
 			val swatch = getItem(position)
 			if (swatch != null) {
 				val hsl = swatch.hsl
-				val type = getType(swatch)
-				@Suppress("MagicNumber")
+				val currentPalette = requireNotNull(palette) {
+					"Palette should be set when there are swatches!"
+				}
+				val type = getType(swatch, currentPalette)
 				holder.colorText.text = "%s\n%.0f°, %.0f%%, %.0f%%%s".formatRoot(
 					swatch.rgb.toRGBHexString("#"),
-					hsl[0], hsl[1] * 100, hsl[2] * 100,
+					hsl[0],
+					hsl[1] * @Suppress("MagicNumber") 100,
+					hsl[2] * @Suppress("MagicNumber") 100,
 					if (type != null) "\n" + type else ""
 				)
 				holder.titleText.setBackgroundColor(swatch.rgb)
@@ -470,15 +477,16 @@ class PaletteFragment : ColorFilterFragment() {
 			}
 		}
 
-		private fun getType(swatch: Swatch) = when (swatch) {
-			palette!!.vibrantSwatch -> "Vibrant"
-			palette!!.mutedSwatch -> "Muted"
-			palette!!.lightVibrantSwatch -> "Light Vibrant"
-			palette!!.darkVibrantSwatch -> "Dark Vibrant"
-			palette!!.lightMutedSwatch -> "Light Muted"
-			palette!!.darkMutedSwatch -> "Dark Muted"
-			else -> null
-		}
+		private fun getType(swatch: Swatch, currentPalette: Palette): String? =
+			when (swatch) {
+				currentPalette.vibrantSwatch -> "Vibrant"
+				currentPalette.mutedSwatch -> "Muted"
+				currentPalette.lightVibrantSwatch -> "Light Vibrant"
+				currentPalette.darkVibrantSwatch -> "Dark Vibrant"
+				currentPalette.lightMutedSwatch -> "Light Muted"
+				currentPalette.darkMutedSwatch -> "Dark Muted"
+				else -> null
+			}
 
 		fun update(palette: Palette, display: Display) {
 			//Log.d("Adapter", display + ": " + palette);
