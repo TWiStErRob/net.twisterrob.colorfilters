@@ -17,7 +17,7 @@ import android.view.Window
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import androidx.core.content.getSystemService
+import net.twisterrob.android.core.requireSystemService
 import net.twisterrob.colorfilters.android.keyboard.KeyCodes.KEY_BACKSPACE
 import net.twisterrob.colorfilters.android.keyboard.KeyCodes.KEY_CLEAR
 import net.twisterrob.colorfilters.android.keyboard.KeyCodes.KEY_DONE
@@ -63,7 +63,7 @@ abstract class BaseKeyboardHandler(
 	}
 
 	override fun showCustomKeyboard(v: View) {
-		val imm: InputMethodManager = context.getSystemService()!! 
+		val imm: InputMethodManager = context.requireSystemService() 
 		imm.hideSoftInputFromWindow(v.windowToken, 0)
 		keyboardView.isEnabled = true
 		keyboardView.visibility = View.VISIBLE
