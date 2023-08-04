@@ -1,6 +1,5 @@
 package net.twisterrob.colorfilters.android.porterduff
 
-import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.ColorFilter
 import android.graphics.PorterDuff
@@ -69,7 +68,10 @@ class PorterDuffFragment : ColorFilterFragment() {
 
 	@ColorInt
 	private var currentColor: Int = 0
-	private val currentMode: PorterDuff.Mode get() = MODES.getValue(modes.checked!!.id)
+	private val currentMode: PorterDuff.Mode get() {
+		val checkedMode = requireNotNull(modes.checked) { "DEFAULT_MODE was not set yet?" }
+		return MODES.getValue(checkedMode.id)
+	}
 	private val modes = CheckableButtonManager()
 	private var pendingUpdate = false
 
@@ -176,8 +178,9 @@ class PorterDuffFragment : ColorFilterFragment() {
 		if (savedInstanceState == null) {
 			prefs.run {
 				val color = getInt(PREF_PORTERDUFF_COLOR, DEFAULT_COLOR)
-				@SuppressLint("StringFormatTrivial") // False positive with AGP 8.0.2 v Kotlin 1.9
-				val mode = getString(PREF_PORTERDUFF_MODE, DEFAULT_MODE.name)!!
+				val mode = requireNotNull(getString(PREF_PORTERDUFF_MODE, DEFAULT_MODE.name)) {
+					"Default value for ${PREF_PORTERDUFF_MODE} was null!"
+				}
 				val swatchIndex = getInt(PREF_PORTERDUFF_SWATCH, KEEP_SWATCH)
 				setValues(color, PorterDuff.Mode.valueOf(mode), swatchIndex)
 			}

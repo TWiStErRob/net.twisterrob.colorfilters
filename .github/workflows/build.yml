@@ -33,6 +33,8 @@ jobs:
           assemble
           lint
           detekt
+          detektMain
+          detektTest
           test
           check
           violationReportHtml

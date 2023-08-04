@@ -78,7 +78,7 @@ class ImageFragment : Fragment() {
 			}
 
 			override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-				@Suppress("LiftReturnOrAssignment")
+				@Suppress("LiftReturnOrAssignment", "OptionalWhenBraces")
 				when (menuItem.itemId) {
 					R.id.action_image -> {
 						startLoadImage(false)
@@ -219,7 +219,7 @@ class ImageFragment : Fragment() {
 	@Deprecated("Deprecated in Fragment 1.3.0-alpha04 TODO group: ActivityResultContract")
 	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 		when (requestCode) {
-			REQUEST_CODE_GET_PICTURE -> {
+			REQUEST_CODE_GET_PICTURE ->
 				if (resultCode == Activity.RESULT_OK && data != null) {
 					data.data?.let { dataUri ->
 						load(dataUri)
@@ -233,7 +233,6 @@ class ImageFragment : Fragment() {
 						}
 					}
 				}
-			}
 		}
 		@Suppress("DEPRECATION") // TODO group: ActivityResultContract
 		super.onActivityResult(requestCode, resultCode, data)

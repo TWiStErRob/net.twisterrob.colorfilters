@@ -17,6 +17,7 @@ include(":feature:palette", ":feature:palette:test-fixtures")
 include(":feature:resfont", ":feature:resfont:test-fixtures")
 
 include(":feature:base")
+include(":component:core")
 include(":component:test-base-ui")
 include(":component:test-base-unit")
 

@@ -3,6 +3,7 @@ plugins {
 }
 
 dependencies {
+	implementation(projects.component.core)
 	implementation(projects.feature.keyboard.contract)
 
 	api(libs.androidx.annotation)

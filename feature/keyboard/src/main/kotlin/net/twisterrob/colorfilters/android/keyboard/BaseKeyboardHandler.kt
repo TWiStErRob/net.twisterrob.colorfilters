@@ -3,7 +3,6 @@
 package net.twisterrob.colorfilters.android.keyboard
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.inputmethodservice.KeyboardView
 import android.os.Build
@@ -17,7 +16,7 @@ import android.view.Window
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import androidx.core.content.getSystemService
+import net.twisterrob.android.core.requireSystemService
 import net.twisterrob.colorfilters.android.keyboard.KeyCodes.KEY_BACKSPACE
 import net.twisterrob.colorfilters.android.keyboard.KeyCodes.KEY_CLEAR
 import net.twisterrob.colorfilters.android.keyboard.KeyCodes.KEY_DONE
@@ -63,7 +62,7 @@ abstract class BaseKeyboardHandler(
 	}
 
 	override fun showCustomKeyboard(v: View) {
-		val imm: InputMethodManager = context.getSystemService()!! 
+		val imm: InputMethodManager = context.requireSystemService() 
 		imm.hideSoftInputFromWindow(v.windowToken, 0)
 		keyboardView.isEnabled = true
 		keyboardView.visibility = View.VISIBLE
@@ -166,7 +165,8 @@ abstract class BaseKeyboardHandler(
 			val start = editor.selectionStart
 			val end = editor.selectionEnd
 			if (start < end) {
-				editable!!.delete(start, end)
+				requireNotNull(editable) { "Selection can't exist without text" }
+					.delete(start, end)
 			}
 
 			when (primaryCode) {

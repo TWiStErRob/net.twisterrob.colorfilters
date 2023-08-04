@@ -42,7 +42,6 @@ class CheckableButtonManager : CompoundButton.OnCheckedChangeListener {
 	}
 
 	private fun disable(newlyCheckedButton: CompoundButton) {
-		@Suppress("ConstantConditionIf")
 		if (safeMode) {
 			buttons.filterNot { it == newlyCheckedButton }.forEach { it.isChecked = false }
 		} else {

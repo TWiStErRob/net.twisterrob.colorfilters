@@ -23,11 +23,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.getSystemService
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.preference.PreferenceManager
+import net.twisterrob.android.core.requireSystemService
 import net.twisterrob.colorfilters.android.base.R
 import net.twisterrob.colorfilters.android.keyboard.KeyboardHandler
 import net.twisterrob.colorfilters.android.keyboard.KeyboardMode
@@ -61,7 +61,7 @@ abstract class ColorFilterFragment : Fragment() {
 			}
 
 			override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-				@Suppress("LiftReturnOrAssignment")
+				@Suppress("LiftReturnOrAssignment", "OptionalWhenBraces")
 				when (menuItem.itemId) {
 					R.id.action_info -> {
 						displayHelp()
@@ -169,7 +169,7 @@ abstract class ColorFilterFragment : Fragment() {
 	companion object {
 
 		fun copyToClipboard(context: Context, title: CharSequence, content: CharSequence) {
-			val clipboard: ClipboardManager = context.getSystemService()!!
+			val clipboard: ClipboardManager = context.requireSystemService()
 			clipboard.setPrimaryClip(ClipData.newPlainText(title, content))
 		}
 	}

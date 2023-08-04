@@ -32,13 +32,15 @@ class AboutFragment : ListFragment() {
 		inflater: LayoutInflater,
 		container: ViewGroup?,
 		savedInstanceState: Bundle?
-	): View =
-		super.onCreateView(inflater, container, savedInstanceState)!!.apply {
-			val original = findViewById<View>(android.R.id.list)
-			val parent = original.parent as ViewGroup
-			val list = inflater.inflate(R.layout.about_fragment_list, parent, false)
-			parent.replace(original, list)
-		}
+	): View {
+		val root = super.onCreateView(inflater, container, savedInstanceState)
+			?: error("ListFragment.onCreateView() returned null.")
+		val original = root.findViewById<View>(android.R.id.list)
+		val parent = original.parent as ViewGroup
+		val list = inflater.inflate(R.layout.about_fragment_list, parent, false)
+		parent.replace(original, list)
+		return root
+	}
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
@@ -100,6 +102,7 @@ class AboutFragment : ListFragment() {
 			isSelected = true
 			visibility = if (resources.getBoolean(R.bool.in_test)) View.VISIBLE else View.GONE
 		}
+		@Suppress("UnnecessaryApply") // Keep it consistent.
 		binding.aboutIcon.apply {
 			setImageResource(context.applicationInfo.icon)
 		}
