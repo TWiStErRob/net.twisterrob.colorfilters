@@ -108,7 +108,7 @@ class BitmapKeeper : Fragment() {
 		): Boolean = false
 
 		override fun onResourceReady(
-			resource: Drawable, model: Any?, target: Target<Drawable>, dataSource: DataSource, isFirstResource: Boolean
+			resource: Drawable, model: Any, target: Target<Drawable>, dataSource: DataSource, isFirstResource: Boolean
 		): Boolean = false.also {
 			ui.post(notifyLoadComplete) // async to give Glide time to set a drawable just after returning
 		}
