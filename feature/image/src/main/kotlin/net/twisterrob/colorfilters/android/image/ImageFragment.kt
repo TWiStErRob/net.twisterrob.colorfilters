@@ -152,7 +152,7 @@ class ImageFragment : Fragment() {
 	}
 
 	private fun startLoadImage(skipRationale: Boolean) {
-		if (!checkPermission(
+		if (VERSION.SDK_INT <= VERSION_CODES.P && !checkPermission(
 				Manifest.permission.READ_EXTERNAL_STORAGE,
 				REQUEST_CODE_PERMISSION_PICTURE,
 				if (skipRationale) null else fun() {
