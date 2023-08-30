@@ -203,6 +203,7 @@ class ImageFragment : Fragment() {
 		// Filesystem
 		val galleryIntent = Intent(Intent.ACTION_GET_CONTENT).apply {
 			type = "image/*"
+			addCategory(Intent.CATEGORY_OPENABLE)
 		}
 
 		// Chooser of filesystem options
