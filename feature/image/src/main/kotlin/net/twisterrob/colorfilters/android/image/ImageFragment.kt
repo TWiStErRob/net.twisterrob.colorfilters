@@ -92,7 +92,7 @@ class ImageFragment : Fragment() {
 
 		original = view.findViewById(R.id.original)
 		original.setOnClickListener { startLoadImage(false) }
-		original.setOnLongClickListener { loadDefaults();true }
+		original.setOnLongClickListener { loadDefaults(); true }
 
 		preview = view.findViewById(R.id.preview)
 		preview.setOnClickListener { listener.reset() }
