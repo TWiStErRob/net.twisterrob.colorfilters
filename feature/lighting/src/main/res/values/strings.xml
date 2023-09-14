@@ -9,5 +9,7 @@
         \n\nThe alpha components of the <tt>mul</tt> and <tt>add</tt> arguments are ignored.
     </string>
 	<string name="cf_lighting_rgb_hint">RRGGBB hex color</string>
+	<string name="cf_lighting_info_mul_cd">Multiplicative color</string>
+	<string name="cf_lighting_info_add_cd">Additive color</string>
 
 </resources>

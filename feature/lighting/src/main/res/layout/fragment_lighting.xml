@@ -79,6 +79,7 @@
 		android:layout_marginTop="@dimen/margin"
 		android:layout_below="@id/mulRGBLabel"
 		android:layout_toLeftOf="@id/middle"
+		android:contentDescription="@string/cf_lighting_info_mul_cd"
 		tools:ignore="MissingRegistered"
 		/>
 
@@ -141,6 +142,7 @@
 		android:layout_marginTop="@dimen/margin"
 		android:layout_below="@id/addRGBLabel"
 		android:layout_toRightOf="@id/middle"
+		android:contentDescription="@string/cf_lighting_info_add_cd"
 		tools:ignore="MissingRegistered"
 		/>
 
