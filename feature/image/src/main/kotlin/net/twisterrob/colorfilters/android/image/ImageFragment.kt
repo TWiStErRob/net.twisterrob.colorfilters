@@ -18,6 +18,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.view.MenuProvider
@@ -27,7 +28,6 @@ import androidx.preference.PreferenceManager
 import kotlin.math.max
 
 private const val PREF_IMAGE_URL = "Image.url"
-private const val REQUEST_CODE_PERMISSION_PICTURE = 1236
 
 class ImageFragment : Fragment() {
 
@@ -47,6 +47,19 @@ class ImageFragment : Fragment() {
 			// No op.
 		}
 	}
+
+	private val storagePermission = registerForActivityResult(RequestPermission()) { granted ->
+		if (granted) {
+			startLoadImage(false)
+		} else {
+			AlertDialog.Builder(requireContext())
+				.setMessage("You may continue, but it is possible the picked image will not load.")
+				.setPositiveButton(android.R.string.ok) { _, _ -> startLoadImage() }
+				.setNegativeButton(android.R.string.cancel) { _, _ -> }
+				.show()
+		}
+	}
+
 	private val getExternal = registerForActivityResult(ImageChooserContract()) { result ->
 		when (result) {
 			is ImageChooserContract.ImageResult.ExternalUri -> load(result.uri)
@@ -128,10 +141,9 @@ class ImageFragment : Fragment() {
 		}.apply()
 	}
 
-	@Suppress("SameParameterValue")
 	private fun checkPermission(
+		@Suppress("SameParameterValue")
 		permission: String,
-		requestCode: Int,
 		rationale: (() -> Unit)? = null
 	): Boolean {
 		@Suppress("LiftReturnOrAssignment")
@@ -141,8 +153,7 @@ class ImageFragment : Fragment() {
 			if (rationale != null && shouldShowRequestPermissionRationale(permission)) {
 				rationale()
 			} else {
-				@Suppress("DEPRECATION") // TODO group: ActivityResultContract
-				requestPermissions(arrayOf(permission), requestCode)
+				storagePermission.launch(permission)
 			}
 			return false
 		} else {
@@ -153,7 +164,6 @@ class ImageFragment : Fragment() {
 	private fun startLoadImage(skipRationale: Boolean) {
 		if (VERSION.SDK_INT <= VERSION_CODES.P && !checkPermission(
 				Manifest.permission.READ_EXTERNAL_STORAGE,
-				REQUEST_CODE_PERMISSION_PICTURE,
 				if (skipRationale) null else fun() {
 					AlertDialog.Builder(requireContext())
 						.setMessage("External applications may return a reference to a file on the device's storage.")
@@ -166,25 +176,6 @@ class ImageFragment : Fragment() {
 			return
 		}
 		startLoadImage()
-	}
-
-	@Deprecated("Deprecated in Fragment 1.3.0-alpha04 TODO group: ActivityResultContract")
-	override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-		when (requestCode) {
-			REQUEST_CODE_PERMISSION_PICTURE ->
-				if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-					AlertDialog.Builder(requireContext())
-						.setMessage("You may continue, but it is possible the picked image will not load.")
-						.setPositiveButton(android.R.string.ok) { _, _ -> startLoadImage() }
-						.setNegativeButton(android.R.string.cancel) { _, _ -> }
-						.show()
-				} else {
-					startLoadImage(false)
-				}
-			else ->
-				@Suppress("DEPRECATION") // TODO group: ActivityResultContract
-				super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-		}
 	}
 
 	private fun startLoadImage() {
