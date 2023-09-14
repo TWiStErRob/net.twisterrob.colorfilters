@@ -1,14 +1,9 @@
 package net.twisterrob.colorfilters.android.image
 
 import android.Manifest
-import android.annotation.TargetApi
-import android.app.Activity
-import android.content.ComponentName
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.content.pm.ResolveInfo
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.ColorFilter
@@ -16,8 +11,6 @@ import android.net.Uri
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
-import android.os.Parcelable
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -25,6 +18,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.view.MenuProvider
@@ -34,8 +28,6 @@ import androidx.preference.PreferenceManager
 import kotlin.math.max
 
 private const val PREF_IMAGE_URL = "Image.url"
-private const val REQUEST_CODE_GET_PICTURE = 1235
-private const val REQUEST_CODE_PERMISSION_PICTURE = 1236
 
 class ImageFragment : Fragment() {
 
@@ -53,6 +45,26 @@ class ImageFragment : Fragment() {
 	private val noListener = object : BitmapKeeper.Listener {
 		override fun loadComplete() {
 			// No op.
+		}
+	}
+
+	private val storagePermission = registerForActivityResult(RequestPermission()) { granted ->
+		if (granted) {
+			startLoadImage(false)
+		} else {
+			AlertDialog.Builder(requireContext())
+				.setMessage("You may continue, but it is possible the picked image will not load.")
+				.setPositiveButton(android.R.string.ok) { _, _ -> startLoadImage() }
+				.setNegativeButton(android.R.string.cancel) { _, _ -> }
+				.show()
+		}
+	}
+
+	private val getExternal = registerForActivityResult(ImageChooserContract()) { result ->
+		when (result) {
+			is ImageChooserContract.ImageResult.ExternalUri -> load(result.uri)
+			is ImageChooserContract.ImageResult.InMemory -> load(result.bitmap)
+			ImageChooserContract.ImageResult.Invalid -> Unit
 		}
 	}
 
@@ -93,7 +105,7 @@ class ImageFragment : Fragment() {
 
 		original = view.findViewById(R.id.original)
 		original.setOnClickListener { startLoadImage(false) }
-		original.setOnLongClickListener { loadDefaults();true }
+		original.setOnLongClickListener { loadDefaults(); true }
 
 		preview = view.findViewById(R.id.preview)
 		preview.setOnClickListener { listener.reset() }
@@ -129,10 +141,9 @@ class ImageFragment : Fragment() {
 		}.apply()
 	}
 
-	@Suppress("SameParameterValue")
 	private fun checkPermission(
+		@Suppress("SameParameterValue")
 		permission: String,
-		requestCode: Int,
 		rationale: (() -> Unit)? = null
 	): Boolean {
 		@Suppress("LiftReturnOrAssignment")
@@ -142,8 +153,7 @@ class ImageFragment : Fragment() {
 			if (rationale != null && shouldShowRequestPermissionRationale(permission)) {
 				rationale()
 			} else {
-				@Suppress("DEPRECATION") // TODO group: ActivityResultContract
-				requestPermissions(arrayOf(permission), requestCode)
+				storagePermission.launch(permission)
 			}
 			return false
 		} else {
@@ -154,7 +164,6 @@ class ImageFragment : Fragment() {
 	private fun startLoadImage(skipRationale: Boolean) {
 		if (VERSION.SDK_INT <= VERSION_CODES.P && !checkPermission(
 				Manifest.permission.READ_EXTERNAL_STORAGE,
-				REQUEST_CODE_PERMISSION_PICTURE,
 				if (skipRationale) null else fun() {
 					AlertDialog.Builder(requireContext())
 						.setMessage("External applications may return a reference to a file on the device's storage.")
@@ -169,74 +178,8 @@ class ImageFragment : Fragment() {
 		startLoadImage()
 	}
 
-	@Deprecated("Deprecated in Fragment 1.3.0-alpha04 TODO group: ActivityResultContract")
-	override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-		when (requestCode) {
-			REQUEST_CODE_PERMISSION_PICTURE ->
-				if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-					AlertDialog.Builder(requireContext())
-						.setMessage("You may continue, but it is possible the picked image will not load.")
-						.setPositiveButton(android.R.string.ok) { _, _ -> startLoadImage() }
-						.setNegativeButton(android.R.string.cancel) { _, _ -> }
-						.show()
-				} else {
-					startLoadImage(false)
-				}
-			else ->
-				@Suppress("DEPRECATION") // TODO group: ActivityResultContract
-				super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-		}
-	}
-
 	private fun startLoadImage() {
-		// Camera
-		val captureIntentTemplate = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-		val camIntents = requireContext().packageManager!!
-			.queryIntentActivitiesCompat(captureIntentTemplate, 0)
-			.map { res ->
-				Intent(captureIntentTemplate).apply {
-					component = ComponentName(res.activityInfo.packageName, res.activityInfo.name)
-					`package` = res.activityInfo.packageName
-				}
-			}
-
-		// Filesystem
-		val galleryIntent = Intent(Intent.ACTION_GET_CONTENT).apply {
-			type = "image/*"
-			addCategory(Intent.CATEGORY_OPENABLE)
-		}
-
-		// Chooser of filesystem options
-		val chooserIntent = Intent.createChooser(galleryIntent, getText(R.string.cf_image_action)).apply {
-			// Add the camera options
-			putExtra(Intent.EXTRA_INITIAL_INTENTS, camIntents.toTypedArray<Parcelable>())
-		}
-
-		@Suppress("DEPRECATION") // TODO group: ActivityResultContract
-		startActivityForResult(chooserIntent, REQUEST_CODE_GET_PICTURE)
-	}
-
-	@Suppress("NestedBlockDepth") // Outer when is readable; TODO group: ActivityResultContract
-	@Deprecated("Deprecated in Fragment 1.3.0-alpha04 TODO group: ActivityResultContract")
-	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-		when (requestCode) {
-			REQUEST_CODE_GET_PICTURE ->
-				if (resultCode == Activity.RESULT_OK && data != null) {
-					data.data?.let { dataUri ->
-						load(dataUri)
-						return
-					}
-					data.extras?.let { extras ->
-						val extraData = extras.getBitmap("data")
-						if (extraData != null) {
-							load(extraData)
-							return
-						}
-					}
-				}
-		}
-		@Suppress("DEPRECATION") // TODO group: ActivityResultContract
-		super.onActivityResult(requestCode, resultCode, data)
+		getExternal.launch(Unit)
 	}
 
 	private fun loadDefaults() {
@@ -297,24 +240,3 @@ class ImageFragment : Fragment() {
 		return image
 	}
 }
-
-@Throws(PackageManager.NameNotFoundException::class)
-private fun PackageManager.queryIntentActivitiesCompat(
-	intent: Intent,
-	flags: Long
-): List<ResolveInfo> =
-	if (VERSION_CODES.TIRAMISU <= VERSION.SDK_INT) {
-		queryIntentActivities(intent, PackageManager.ResolveInfoFlags.of(flags))
-	} else {
-		@Suppress("DEPRECATION")
-		queryIntentActivities(intent, flags.toInt())
-	}
-
-@TargetApi(VERSION_CODES.TIRAMISU)
-private fun Bundle.getBitmap(key: String): Bitmap? =
-	if (VERSION_CODES.TIRAMISU <= VERSION.SDK_INT) {
-		getParcelable(key, Bitmap::class.java)
-	} else {
-		@Suppress("DEPRECATION")
-		get(key) as? Bitmap
-	}

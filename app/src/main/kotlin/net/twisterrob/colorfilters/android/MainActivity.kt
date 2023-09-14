@@ -1,7 +1,7 @@
 package net.twisterrob.colorfilters.android
 
 import android.annotation.SuppressLint
-import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Bitmap
@@ -16,6 +16,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.webkit.MimeTypeMap
 import android.widget.ArrayAdapter
+import androidx.activity.result.contract.ActivityResultContract
 import androidx.annotation.IntRange
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
@@ -49,6 +50,25 @@ class MainActivity : AppCompatActivity()
 	private var kbd: KeyboardHandler? = null
 	private lateinit var imageToggleItem: MenuItem
 
+	private val openPreferences =
+		registerForActivityResult(object : ActivityResultContract<Unit, Unit>() {
+			override fun createIntent(context: Context, input: Unit): Intent =
+				Intent(context, PreferencesActivity::class.java)
+
+			// No actual result, just want a notification of return from preferences.
+			override fun parseResult(resultCode: Int, intent: Intent?): Unit = Unit
+		}) {
+			kbd = null
+			val fragment = currentFragment
+			if (fragment != null) {
+				// Force recreating the fragment to pick up the new keyboard (in case it changed in settings).
+				// Using .commit won't work because onResume is called after onActivityResult,
+				// and at this state we're "after onSaveInstanceState".
+				supportFragmentManager.beginTransaction().detach(fragment).commitAllowingStateLoss()
+				supportFragmentManager.beginTransaction().attach(fragment).commitAllowingStateLoss()
+			}
+		}
+
 	private val currentFragment: ColorFilterFragment?
 		get() = supportFragmentManager.findFragmentById(R.id.container) as ColorFilterFragment?
 
@@ -59,7 +79,7 @@ class MainActivity : AppCompatActivity()
 		get() = kbd
 			?.let { return it }
 			?: createKeyboardHandler().also { kbd = it }
-	
+
 	private val actionBar: ActionBar
 		get() = requireNotNull(supportActionBar) { "Missing supportActionBar" }
 
@@ -167,12 +187,7 @@ class MainActivity : AppCompatActivity()
 			}
 
 			R.id.action_settings -> {
-				// no actual result, just want a notification of return from preferences
-				@Suppress("DEPRECATION") // TODO group: ActivityResultContract
-				startActivityForResult(
-					Intent(applicationContext, PreferencesActivity::class.java),
-					Activity.RESULT_FIRST_USER
-				)
+				openPreferences.launch(Unit)
 				return true
 			}
 
@@ -225,24 +240,6 @@ class MainActivity : AppCompatActivity()
 				}
 			}
 			.commitAllowingStateLoss()
-	}
-
-	@Deprecated("Deprecated in Fragment 1.3.0-alpha04 TODO group: ActivityResultContract")
-	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-		if (requestCode == Activity.RESULT_FIRST_USER) {
-			kbd = null
-			val fragment = currentFragment
-			if (fragment != null) {
-				// Force recreating the fragment to pick up the new keyboard (in case it changed in settings).
-				// Using .commit won't work because onResume is called after onActivityResult,
-				// and at this state we're "after onSaveInstanceState".
-				supportFragmentManager.beginTransaction().detach(fragment).commitAllowingStateLoss()
-				supportFragmentManager.beginTransaction().attach(fragment).commitAllowingStateLoss()
-			}
-			return
-		}
-		@Suppress("DEPRECATION") // TODO group: ActivityResultContract
-		super.onActivityResult(requestCode, resultCode, data)
 	}
 
 	override fun reset() {
