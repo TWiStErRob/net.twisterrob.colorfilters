@@ -1,7 +1,7 @@
 package net.twisterrob.colorfilters.android
 
 import android.annotation.SuppressLint
-import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Bitmap
@@ -16,7 +16,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.webkit.MimeTypeMap
 import android.widget.ArrayAdapter
-import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
+import androidx.activity.result.contract.ActivityResultContract
 import androidx.annotation.IntRange
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
@@ -49,9 +49,15 @@ class MainActivity : AppCompatActivity()
 	private lateinit var images: ImageFragment
 	private var kbd: KeyboardHandler? = null
 	private lateinit var imageToggleItem: MenuItem
-	
-	private val openPreferences = registerForActivityResult(StartActivityForResult()) { result ->
-		if (result.resultCode == Activity.RESULT_OK) {
+
+	private val openPreferences =
+		registerForActivityResult(object : ActivityResultContract<Unit, Unit>() {
+			override fun createIntent(context: Context, input: Unit): Intent =
+				Intent(context, PreferencesActivity::class.java)
+
+			// Always want to process results, even on cancellation.
+			override fun parseResult(resultCode: Int, intent: Intent?): Unit = Unit
+		}) {
 			kbd = null
 			val fragment = currentFragment
 			if (fragment != null) {
@@ -62,7 +68,6 @@ class MainActivity : AppCompatActivity()
 				supportFragmentManager.beginTransaction().attach(fragment).commitAllowingStateLoss()
 			}
 		}
-	}
 
 	private val currentFragment: ColorFilterFragment?
 		get() = supportFragmentManager.findFragmentById(R.id.container) as ColorFilterFragment?
@@ -183,7 +188,7 @@ class MainActivity : AppCompatActivity()
 
 			R.id.action_settings -> {
 				// No actual result, just want a notification of return from preferences.
-				openPreferences.launch(Intent(applicationContext, PreferencesActivity::class.java))
+				openPreferences.launch(Unit)
 				return true
 			}
 
