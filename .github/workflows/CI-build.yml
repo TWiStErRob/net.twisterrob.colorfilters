@@ -7,8 +7,6 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    # A local build took 20 seconds, CI takes 3 minutes with setup.
-    # Because it's cloud, give it a bit of a buffer and constrain.
     timeout-minutes: 15
 
     steps:
