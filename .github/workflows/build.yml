@@ -49,7 +49,6 @@ jobs:
           PARAM_GRADLE_RESULT_TEXT: ${{ steps.gradle.outputs.result-text }}
           PARAM_CHECK_NAME_GRADLE: ${{ format(inputs.name-check-gradle, inputs.android-api, inputs.android-image-type, inputs.android-image-arch) }}
         with:
-          debug: ${{ secrets.ACTIONS_STEP_DEBUG || false }}
           script: |
             const buildScanUrl = process.env.PARAM_BUILD_SCAN_URL || undefined; // Empty string is falsy.
             const success = process.env.PARAM_GRADLE_RESULT_SUCCESS === "true";
