@@ -9,7 +9,7 @@ dependencies {
 
 android {
 	defaultConfig {
-		targetSdk = 33
+		targetSdk = 34
 	}
 	lint {
 		checkDependencies = true
