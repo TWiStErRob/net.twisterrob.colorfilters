@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-	<string name="cf_reset_cd">reset color</string>
-
 	<string name="cf_info_title">Color Filter Info</string>
 	<string name="cf_info_copy">Copy Code</string>
 	<string name="cf_info_ok">Thanks</string>

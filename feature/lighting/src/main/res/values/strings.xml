@@ -10,6 +10,8 @@
     </string>
 	<string name="cf_lighting_rgb_hint">RRGGBB hex color</string>
 	<string name="cf_lighting_info_mul_cd">Multiplicative color</string>
+	<string name="cf_lighting_info_mul_reset_cd">reset mul color</string>
 	<string name="cf_lighting_info_add_cd">Additive color</string>
+	<string name="cf_lighting_info_add_reset_cd">reset add color</string>
 
 </resources>

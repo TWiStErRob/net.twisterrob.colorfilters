@@ -67,7 +67,7 @@
 		android:layout_alignRight="@id/mulLabel"
 		android:layout_below="@id/mulLabel"
 		android:clickable="true"
-		android:contentDescription="@string/cf_reset_cd"
+		android:contentDescription="@string/cf_lighting_info_mul_reset_cd"
 		android:focusable="true"
 		tools:background="@android:color/black"
 		/>
@@ -130,7 +130,7 @@
 		android:layout_alignRight="@id/addLabel"
 		android:layout_below="@id/addLabel"
 		android:clickable="true"
-		android:contentDescription="@string/cf_reset_cd"
+		android:contentDescription="@string/cf_lighting_info_add_reset_cd"
 		android:focusable="true"
 		tools:background="@android:color/black"
 		/>
