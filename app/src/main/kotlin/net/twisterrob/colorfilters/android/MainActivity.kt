@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity()
 			override fun createIntent(context: Context, input: Unit): Intent =
 				Intent(context, PreferencesActivity::class.java)
 
-			// Always want to process results, even on cancellation.
+			// No actual result, just want a notification of return from preferences.
 			override fun parseResult(resultCode: Int, intent: Intent?): Unit = Unit
 		}) {
 			kbd = null
@@ -187,7 +187,6 @@ class MainActivity : AppCompatActivity()
 			}
 
 			R.id.action_settings -> {
-				// No actual result, just want a notification of return from preferences.
 				openPreferences.launch(Unit)
 				return true
 			}
