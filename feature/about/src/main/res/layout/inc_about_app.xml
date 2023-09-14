@@ -55,8 +55,9 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_horizontal"
-			android:layout_marginTop="@dimen/activity_margin"
+			android:padding="@dimen/activity_margin"
 			android:text="@string/cf_about_feedback"
+			android:minHeight="@dimen/touch_target"
 			android:gravity="center"
 			/>
 

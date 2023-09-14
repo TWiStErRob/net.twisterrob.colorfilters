@@ -36,6 +36,7 @@
 		android:layout_height="wrap_content"
 		android:layout_toLeftOf="@id/middle"
 		android:layout_toRightOf="@id/mulLabel"
+		android:minHeight="@dimen/touch_target"
 		android:autofillHints="color"
 		android:gravity="center"
 		android:hint="@string/cf_lighting_rgb_hint"
@@ -67,7 +68,7 @@
 		android:layout_alignRight="@id/mulLabel"
 		android:layout_below="@id/mulLabel"
 		android:clickable="true"
-		android:contentDescription="@string/cf_reset_cd"
+		android:contentDescription="@string/cf_lighting_mul_reset_cd"
 		android:focusable="true"
 		tools:background="@android:color/black"
 		/>
@@ -79,6 +80,7 @@
 		android:layout_marginTop="@dimen/margin"
 		android:layout_below="@id/mulRGBLabel"
 		android:layout_toLeftOf="@id/middle"
+		android:contentDescription="@string/cf_lighting_mul_cd"
 		tools:ignore="MissingRegistered"
 		/>
 
@@ -98,6 +100,7 @@
 		android:layout_height="wrap_content"
 		android:layout_alignParentRight="true"
 		android:layout_toRightOf="@id/addLabel"
+		android:minHeight="@dimen/touch_target"
 		android:autofillHints="color"
 		android:gravity="center"
 		android:hint="@string/cf_lighting_rgb_hint"
@@ -129,7 +132,7 @@
 		android:layout_alignRight="@id/addLabel"
 		android:layout_below="@id/addLabel"
 		android:clickable="true"
-		android:contentDescription="@string/cf_reset_cd"
+		android:contentDescription="@string/cf_lighting_add_reset_cd"
 		android:focusable="true"
 		tools:background="@android:color/black"
 		/>
@@ -141,6 +144,7 @@
 		android:layout_marginTop="@dimen/margin"
 		android:layout_below="@id/addRGBLabel"
 		android:layout_toRightOf="@id/middle"
+		android:contentDescription="@string/cf_lighting_add_cd"
 		tools:ignore="MissingRegistered"
 		/>
 

@@ -58,7 +58,7 @@
 			android:layout_alignRight="@id/colorEditor"
 			android:layout_below="@id/colorRGBLabel"
 			android:clickable="true"
-			android:contentDescription="@string/cf_reset_cd"
+			android:contentDescription="@string/cf_porterduff_reset_cd"
 			android:focusable="true"
 			tools:background="@android:color/black"
 			/>
