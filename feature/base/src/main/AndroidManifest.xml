@@ -3,7 +3,7 @@
 	>
 
 	<application
-		android:theme="@style/Theme.AppCompat.Light"
+		android:theme="@style/Theme.App"
 		/>
 
 </manifest>
