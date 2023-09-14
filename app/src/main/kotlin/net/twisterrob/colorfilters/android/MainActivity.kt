@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity()
 		get() = kbd
 			?.let { return it }
 			?: createKeyboardHandler().also { kbd = it }
-	
+
 	private val actionBar: ActionBar
 		get() = requireNotNull(supportActionBar) { "Missing supportActionBar" }
 
