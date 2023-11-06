@@ -23,8 +23,8 @@ hamcrest = "2.2"
 mockito = "5.7.0"
 mockito-kotlin = "5.1.0"
 
-junit5 = "5.10.0"
-junit5-platform = "1.10.0"
+junit5 = "5.10.1"
+junit5-platform = "1.10.1"
 junit5-androidtest = "1.4.0"
 
 # TODEL https://issuetracker.google.com/issues/222730176 in root gradle when fixed.
