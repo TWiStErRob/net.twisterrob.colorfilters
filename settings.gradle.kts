@@ -221,28 +221,3 @@ if ((System.getProperty("idea.version") ?: "") < "2023.2") {
 	val error: (String) -> Unit = (if (isCI) ::error else logger::warn)
 	error("Android Studio version changed, please review hack.")
 }
-
-// TODEL Gradle 8.2 vs AGP https://issuetracker.google.com/issues/279306626 fixed in 8.2.0-alpha13.
-// Gradle 8.2 M1 added nagging for BuildIdentifier.*, which is not replaced in AGP 8.1.x.
-@Suppress("MaxLineLength")
-if (com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION < "8.2.0") {
-	doNotNagAbout( // :lintReportDebug, :lintAnalyzeDebug
-		"The BuildIdentifier.isCurrentBuild() method has been deprecated. " +
-			"This is scheduled to be removed in Gradle 9.0. " +
-			"Use getBuildPath() to get a unique identifier for the build. " +
-			"Consult the upgrading guide for further information: " +
-			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#build_identifier_name_and_current_deprecation",
-		"at com.android.build.gradle.internal.ide.dependencies.BuildMappingUtils.getBuildId(BuildMapping.kt:40)"
-	)
-	doNotNagAbout( // Android Studio Giraffe Sync https://issuetracker.google.com/issues/279306626#comment4
-		"The BuildIdentifier.getName() method has been deprecated. " +
-			"This is scheduled to be removed in Gradle 9.0. " +
-			"Use getBuildPath() to get a unique identifier for the build. " +
-			"Consult the upgrading guide for further information: " +
-			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#build_identifier_name_and_current_deprecation",
-		"at com.android.build.gradle.internal.ide.dependencies.BuildMappingUtils.getIdString(BuildMapping.kt:48)"
-	)
-} else {
-	val error: (String) -> Unit = (if (isCI) ::error else logger::warn)
-	error("AGP version changed, please review hack.")
-}
