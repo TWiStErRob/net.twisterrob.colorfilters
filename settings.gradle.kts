@@ -147,14 +147,14 @@ if ((System.getProperty("idea.version") ?: "") < "2023.2") {
 			"This is scheduled to be removed in Gradle 9.0. " +
 			"Consult the upgrading guide for further information: " +
 			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#deprecated_access_to_conventions",
-		"at org.jetbrains.plugins.gradle.tooling.builder.ProjectExtensionsDataBuilderImpl.buildAll(ProjectExtensionsDataBuilderImpl.groovy:40)"
+		"at org.jetbrains.plugins.gradle.tooling.builder.ProjectExtensionsDataBuilderImpl.buildAll(ProjectExtensionsDataBuilderImpl.groovy:"
 	)
 	doNotNagAbout(
 		"The org.gradle.api.plugins.Convention type has been deprecated. " +
 			"This is scheduled to be removed in Gradle 9.0. " +
 			"Consult the upgrading guide for further information: " +
 			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#deprecated_access_to_conventions",
-		"at org.jetbrains.plugins.gradle.tooling.builder.ProjectExtensionsDataBuilderImpl.buildAll(ProjectExtensionsDataBuilderImpl.groovy:41)"
+		"at org.jetbrains.plugins.gradle.tooling.builder.ProjectExtensionsDataBuilderImpl.buildAll(ProjectExtensionsDataBuilderImpl.groovy:"
 	)
 	doNotNagAbout(
 		"The org.gradle.api.plugins.JavaPluginConvention type has been deprecated. " +
