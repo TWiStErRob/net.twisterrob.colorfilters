@@ -11,7 +11,10 @@
 	</issue>
 	<issue id="RtlHardcoded" severity="ignore" />
 	<issue id="GradleDependency" severity="ignore">
-		<!-- Keep the build stable -->
+		<!-- Keep the build stable, Renovate is taking care of keeping things up to date. -->
+	</issue>
+	<issue id="NewerVersionAvailable" severity="ignore">
+		<!-- Keep the build stable, Renovate is taking care of keeping things up to date. -->
 	</issue>
 	<issue id="SyntheticAccessor" severity="ignore">
 		<!-- Don't want to deal with it yet -->
