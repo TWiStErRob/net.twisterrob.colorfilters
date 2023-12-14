@@ -2,7 +2,7 @@
 # https://github.com/bumptech/glide/releases
 glide = "4.16.0"
 
-androidx-annotation = "1.7.0"
+androidx-annotation = "1.7.1"
 androidx-core = "1.12.0"
 androidx-appcompat = "1.6.1"
 androidx-fragment = "1.6.2"
