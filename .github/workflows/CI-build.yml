@@ -129,7 +129,7 @@ jobs:
           path: ${{ github.workspace }}/build/reports/detekt/merge.*
   
       - name: "Publish 'detekt' GitHub Code Scanning analysis."
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v3
         if: success() || failure()
         with:
           checkout_path: ${{ github.workspace }}
