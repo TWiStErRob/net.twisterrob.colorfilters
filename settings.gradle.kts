@@ -46,7 +46,7 @@ pluginManagement {
 }
 
 plugins {
-	id("com.gradle.enterprise") version "3.16"
+	id("com.gradle.enterprise") version "3.16.1"
 	id("net.twisterrob.gradle.plugin.nagging")
 }
 
