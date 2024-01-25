@@ -207,7 +207,7 @@ jobs:
           PACKAGE="system-images;android-${{ steps.emulator.outputs.api-level }};${{ steps.emulator.outputs.target }};${{ steps.emulator.outputs.arch }}"
           DEVICE="${{ steps.emulator.outputs.profile }}-${{ steps.emulator.outputs.sdcard }}"
           echo -e "cache-paths<<EOF\n${CACHE_PATHS}\nEOF" >> $GITHUB_OUTPUT
-          echo "cache-key=android-emulator-${DEVICE}-${PACKAGE}-${{ hashFiles('setup-script.sh') }}-v0" >> $GITHUB_OUTPUT
+          echo "cache-key=android-emulator-${DEVICE}-${PACKAGE}-${{ hashFiles('setup-script.sh') }}-v1" >> $GITHUB_OUTPUT
 
       - name: "Load AVD cache"
         if: inputs.cache
