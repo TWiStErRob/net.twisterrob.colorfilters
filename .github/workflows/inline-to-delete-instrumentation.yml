@@ -1,0 +1,390 @@
+name: "🧪 Instrumentation Test"
+
+on:
+  workflow_call:
+    inputs:
+
+      script:
+        required: true
+        type: string
+        description: |
+          Lines of script to execute while the emulator is running.
+          Usually this is a `gradlew connectedCheck` command in some form.
+          Multiple lines are allowed, but due to reactivecircus/android-emulator-runner's behavior
+          each line will be executed separately, so no backslashes at end of lines.
+          Note: in yaml, you can still use > to write multiple lines that end up as a single-line string.
+
+      setup-script:
+        required: false
+        type: string
+        description: |
+          Initial setup, gets cached in the emulator snapshot.
+          Multiple lines are allowed, but due to reactivecircus/android-emulator-runner's behavior
+          each line will be executed separately, so no backslashes at end of lines.
+          Note: in yaml, you can still use > to write multiple lines that end up as a single-line string.
+
+      android-api:
+        required: true
+        type: number
+        description: |
+          Android SDK API level to run the tests on.
+          See https://apilevels.com/.
+          Potential values:
+           - 10
+           - 14
+           - ...
+           - 34 (2023)
+
+      android-image-type:
+        required: false
+        type: string
+        default: auto
+        description: |
+          Android emulator image type to run the tests on.
+          Run `sdkmanager --list | grep "system-images;android-"` to see what's available.
+          Some types for certain API levels are not available: https://issuetracker.google.com/issues/267458959
+          Potential values:
+           - auto (special value, will pick the simplest image type available)
+           - default
+           - google_apis
+           - google_apis_playstore
+           - google-tv
+           - android-desktop
+           - android-tv
+
+      android-image-arch:
+        required: false
+        type: string
+        default: auto
+        description: |
+          Android emulator image architecture.
+          Run `sdkmanager --list | grep "system-images;android-"` to see what's available.
+          
+          Nowadays with AndroidX libraries having API 14 as minimum,
+          API 15 is the first possible emulator that works well on GitHub Actions' architectures:
+          > system-images;android-10;default;armeabi-v7a
+          > system-images;android-10;default;x86
+          > system-images;android-14;default;armeabi-v7a
+          > system-images;android-15;default;armeabi-v7a
+          > system-images;android-15;default;x86 <-- this one!
+
+          Potential values:
+           - auto (special value, will pick the fastest architecture available)
+           - armeabi-v7a
+           - arm64-v8a
+           - x86
+           - x86_64
+
+      cache:
+        required: false
+        type: boolean
+        default: true
+        description: |
+          Whether to cache the emulator image (true) or always regenerate it from scratch (false).
+
+      timeout-minutes:
+        required: false
+        type: number
+        default: 30
+        description: |
+          Number of minutes to wait for the `inputs.script` to finish running on the emulator.
+          Might be slightly less because installing, configuring and starting up the emulator might take minutes. 
+
+      java-version:
+        required: false
+        type: number
+        default: 17
+        description: |
+          See actions/setup-java's java-version.
+          Will use temurin distribution as it's preinstalled on GitHub Actions hosted runners.
+
+      junit5:
+        required: false
+        type: boolean
+        default: false
+        description: |
+          Whether the instrumentation is running JUnit 5 or not.
+          Android-JUnit 5 uses Java 8, so it's only possible to use from API 26 onwards.
+          This makes no behavioral change yet to any of the steps (yet).
+
+      name-artifact-fine-grained:
+        required: false
+        type: string
+        default: 'Instrumentation Test Results {0}'
+        description: |
+          Format string for the name of the artifact to be uploaded to GitHub.
+           - Use {0} to represent the actual `android-api`.
+           - Use {1} to represent the actual `android-image-type`, after resolving auto.
+           - Use {2} to represent the actual `android-image-arch`, after resolving auto.
+
+      name-artifact-merged:
+        required: false
+        type: string
+        default: 'Instrumentation Merged Results {0}'
+        description: |
+          Format string for the name of the artifact to be uploaded to GitHub.
+           - Use {0} to represent the actual `android-api`.
+           - Use {1} to represent the actual `android-image-type`, after resolving auto.
+           - Use {2} to represent the actual `android-image-arch`, after resolving auto.
+
+      name-check-results:
+        required: false
+        type: string
+        default: '🔔 Test: Instrumentation Results {0}'
+        description: |
+          Format string for the name of the check suite created in the workflow run.
+           - Use {0} to represent the actual `android-api`.
+           - Use {1} to represent the actual `android-image-type`, after resolving auto.
+           - Use {2} to represent the actual `android-image-arch`, after resolving auto.
+
+      name-check-gradle:
+        required: false
+        type: string
+        default: 'CI / Instrumentation Tests on / {0} / API {0} / Gradle'
+        description: |
+          Format string for the name of the check suite created in the workflow run.
+           - Use {0} to represent the actual `android-api`.
+           - Use {1} to represent the actual `android-image-type`, after resolving auto.
+           - Use {2} to represent the actual `android-image-arch`, after resolving auto.
+
+
+jobs:
+
+  android:
+    name: "API ${{ inputs.android-api }}"
+    runs-on: ubuntu-latest
+
+    permissions:
+      # actions/checkout
+      contents: read
+      # EnricoMi/publish-unit-test-result-action -> https://github.com/EnricoMi/publish-unit-test-result-action#permissions
+      checks: write
+      # actions/github-script calling github.createCommitStatus()
+      statuses: write
+
+    steps:
+
+      - name: "Set up Java ${{ inputs.java-version }}."
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ inputs.java-version }}
+          distribution: temurin
+
+      - name: "Checkout ${{ github.ref }} branch in ${{ github.repository }} repository."
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: "Calculate emulator properties"
+        id: emulator
+        env:
+          SETUP_SCRIPT: ${{ inputs.setup-script }}
+        run: |
+          echo "api-level=${{ inputs.android-api }}" >> $GITHUB_OUTPUT
+          # TODEL Some are not available: https://issuetracker.google.com/issues/267458959
+          echo "target=${{ inputs.android-api >= 32 && 'google_apis' || 'default' }}" >> $GITHUB_OUTPUT
+          echo "arch=${{ inputs.android-api >= 21 && 'x86_64' || 'x86' }}" >> $GITHUB_OUTPUT
+          echo "profile=pixel" >> $GITHUB_OUTPUT
+          # Ensure that /storage/sdcard exists, without this the stock DocumentsUI will be non-functional.
+          echo "sdcard=100M" >> $GITHUB_OUTPUT
+          # See https://developer.android.com/studio/run/emulator-commandline#common
+          echo "options=-no-window -gpu swiftshader_indirect -noaudio -no-boot-anim" >> $GITHUB_OUTPUT
+          # Need to exist before substituting hashFiles in the next step.
+          echo "${SETUP_SCRIPT}" > setup-script.sh
+          chmod +x setup-script.sh
+
+      - name: "Calculate cache properties"
+        if: inputs.cache
+        id: cache-helper
+        # needs: emulator
+        env:
+          CACHE_PATHS: |
+            ~/.android/avd/test.ini
+            ~/.android/avd/test.avd/
+            ~/.android/adbkey
+            ~/.android/adbkey.pub
+        run: |
+          PACKAGE="system-images;android-${{ steps.emulator.outputs.api-level }};${{ steps.emulator.outputs.target }};${{ steps.emulator.outputs.arch }}"
+          DEVICE="${{ steps.emulator.outputs.profile }}-${{ steps.emulator.outputs.sdcard }}"
+          echo -e "cache-paths<<EOF\n${CACHE_PATHS}\nEOF" >> $GITHUB_OUTPUT
+          echo "cache-key=android-emulator-${DEVICE}-${PACKAGE}-${{ hashFiles('setup-script.sh') }}-v0" >> $GITHUB_OUTPUT
+
+      - name: "Load AVD cache"
+        if: inputs.cache
+        id: avd-cache-restore
+        # needs: cache-helper
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ steps.cache-helper.outputs.cache-paths }}
+          key: ${{ steps.cache-helper.outputs.cache-key }}
+
+      - name: "Create AVD and generate snapshot for caching"
+        # needs: avd-cache-restore, emulator
+        # Emulators for API 32, 33, 34 are 1.4, 1.2 and 1.7 GB respectively.
+        if: inputs.cache && steps.avd-cache-restore.outputs.cache-hit != 'true'
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          force-avd-creation: true # There was a cache miss, be strict now.
+          emulator-boot-timeout: 1200 # 20 minutes, take a hit once for cache.
+
+          api-level: ${{ steps.emulator.outputs.api-level }}
+          target: ${{ steps.emulator.outputs.target }}
+          arch: ${{ steps.emulator.outputs.arch }}
+          profile: ${{ steps.emulator.outputs.profile }}
+          sdcard-path-or-size: ${{ steps.emulator.outputs.sdcard }}
+          emulator-options: ${{ steps.emulator.outputs.options }} -no-snapshot-load
+          script: |
+            adb devices -l
+            ./setup-script.sh
+
+      - name: "Save AVD cache"
+        id: avd-cache-save
+        # needs: avd-cache-restore, cache-helper
+        if: inputs.cache && steps.avd-cache-restore.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ steps.cache-helper.outputs.cache-paths }}
+          key: ${{ steps.avd-cache-restore.outputs.cache-primary-key }}
+
+      - name: "Run Instrumentation Tests on emulator."
+        id: gradle
+        # needs: emulator
+        timeout-minutes: ${{ inputs.timeout-minutes }}
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          force-avd-creation: false # Reuse pre-created emulator.
+          emulator-boot-timeout: 1200 # 20 minutes
+
+          api-level: ${{ steps.emulator.outputs.api-level }}
+          target: ${{ steps.emulator.outputs.target }}
+          arch: ${{ steps.emulator.outputs.arch }}
+          profile: ${{ steps.emulator.outputs.profile }}
+          sdcard-path-or-size: ${{ steps.emulator.outputs.sdcard }}
+          emulator-options: ${{ steps.emulator.outputs.options }} -no-snapshot-save
+          script: |
+            adb devices -l
+            ${{ inputs.script }}
+
+      - name: "Publish 'Gradle' result and Build Scan URL."
+        if: (success() || failure()) && steps.gradle != null && steps.gradle.outputs.result-success != null
+        uses: actions/github-script@v7
+        env:
+          PARAM_BUILD_SCAN_URL: ${{ steps.gradle.outputs.build-scan-url }}
+          PARAM_GRADLE_RESULT_SUCCESS: ${{ steps.gradle.outputs.result-success }}
+          PARAM_GRADLE_RESULT_TEXT: ${{ steps.gradle.outputs.result-text }}
+          PARAM_CHECK_NAME_GRADLE: ${{ format(inputs.name-check-gradle, steps.emulator.outputs.api-level, steps.emulator.outputs.target, steps.emulator.outputs.arch) }}
+        with:
+          debug: ${{ secrets.ACTIONS_STEP_DEBUG || false }}
+          script: |
+            const buildScanUrl = process.env.PARAM_BUILD_SCAN_URL || undefined; // Empty string is falsy.
+            const success = process.env.PARAM_GRADLE_RESULT_SUCCESS === "true";
+            const description = process.env.PARAM_GRADLE_RESULT_TEXT;
+            const statusName = process.env.PARAM_CHECK_NAME_GRADLE;
+            if (!buildScanUrl) {
+                // > Publishing build scan...
+                // > Publishing build scan failed due to network error 'java.net.SocketException: Unexpected end of file from server' (2 retries remaining)...
+                // > Publishing build scan failed due to network error 'java.net.SocketException: Unexpected end of file from server' (1 retry remaining)...
+                // >
+                // >   A network error occurred.
+                // >
+                // >   If you require assistance with this problem, please report it via https://gradle.com/help/plugin and include the following information via copy/paste.
+                // >
+                // > ----------
+                // > Gradle version: 8.2.1
+                // > Plugin version: 3.13.4
+                // > Request URL: https://status.gradle.com
+                // > Request ID: 1eef0fbd-9780-4d90-8705-d1582251572f
+                // > Exception: java.net.SocketException: Unexpected end of file from server
+                // > ----------
+                core.warning(`No build scan URL found, ${statusName} will have no link.`);
+            }
+            await github.rest.repos.createCommitStatus({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                sha: context.sha,
+                state: success ? "success" : "failure",
+                // Remove Emojis from status name, as they are not supported by GitHub HERE.
+                // > HttpError: Validation Failed: {"resource":"Status","code":"custom",
+                // > "field":"context","message":"context doesn't accept 4-byte Unicode"}
+                // Ensure that no "space space" is left behind.
+                context: statusName.replace(/ \p{Emoji_Presentation}+ /gu, ' '),
+                // Truncate to be sure it fits:
+                // > HttpError: Validation Failed: {"resource":"Status","code":"custom",
+                // > "field":"description","message":"description is too long (maximum is 140 characters)"}
+                // Max length is 140, give some space for potential Unicode.
+                description: description.length > 130
+                    ? `${description.substring(0, 130)}…`
+                    : description,
+                target_url: buildScanUrl,
+            });
+
+      - name: "Upload '${{ format(inputs.name-artifact-fine-grained, steps.emulator.outputs.api-level, steps.emulator.outputs.target, steps.emulator.outputs.arch) }}' artifact."
+        if: success() || failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: '${{ format(inputs.name-artifact-fine-grained, steps.emulator.outputs.api-level, steps.emulator.outputs.target, steps.emulator.outputs.arch) }}'
+          if-no-files-found: error
+          path: |
+            # AGP UTP additional output
+            ${{ github.workspace }}/**/build/outputs/connected_android_test_additional_output/
+            
+            # AGP 7.x and 8.x results in all formats.
+            ${{ github.workspace }}/**/build/outputs/androidTest-results/connected/
+            
+            # AGP 7.4 and 8.0 HTML
+            ${{ github.workspace }}/**/build/reports/androidTests/connected/
+            
+            # AGP 7.4 and 8.0 XML
+            ${{ github.workspace }}/**/build/outputs/androidTest-results/connected/TEST-*.xml
+            
+            # AGP 7.4 and 8.0 binary results
+            ${{ github.workspace }}/**/build/outputs/androidTest-results/connected/test-result.pb
+            
+            # AGP 7.4 and 8.0 details
+            ${{ github.workspace }}/**/build/outputs/androidTest-results/connected/*/
+            
+            # AGP 4.1 XML, *AndroidTest is variant component name, e.g. debugAndroidTest
+            ${{ github.workspace }}/**/build/outputs/androidTest-results/connected/flavors/*AndroidTest/
+            
+            # AGP 4.1 HTML, *AndroidTest is variant component name, e.g. debugAndroidTest
+            ${{ github.workspace }}/**/build/reports/androidTests/connected/flavors/*AndroidTest/
+            
+            # Exclude names with colon: https://issuetracker.google.com/issues/223643506
+            !**/*:*
+
+      - name: "Upload '${{ format(inputs.name-artifact-merged, steps.emulator.outputs.api-level, steps.emulator.outputs.target, steps.emulator.outputs.arch) }}' artifact."
+        if: success() || failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: '${{ format(inputs.name-artifact-merged, steps.emulator.outputs.api-level, steps.emulator.outputs.target, steps.emulator.outputs.arch) }}'
+          if-no-files-found: error
+          path: |
+            ${{ github.workspace }}/build/androidTest-results/
+            
+            # Exclude names with colon: https://issuetracker.google.com/issues/223643506
+            !**/*:*
+
+      - name: "Publish '${{ format(inputs.name-check-results, steps.emulator.outputs.api-level, steps.emulator.outputs.target, steps.emulator.outputs.arch) }}' check suite."
+        if: success() || failure()
+        uses: EnricoMi/publish-unit-test-result-action/composite@v2
+        with:
+          check_name: '${{ format(inputs.name-check-results, steps.emulator.outputs.api-level, steps.emulator.outputs.target, steps.emulator.outputs.arch) }}'
+          # Do not comment on PRs, only create a check on the commit.
+          comment_mode: off
+          # If a test is executed multiple times, report all errors separately.
+          report_individual_runs: true
+          # Prevent passing CI with "Warning: Could not find any JUnit XML files for .../TEST-*.xml"
+          action_fail_on_inconclusive: true
+          # Include all possible locations for different AGP versions.
+          junit_files: |
+            # AGP 8.1
+            # /*/ is variant name, e.g. /debug/
+            # TEST-*.xml contains the emulator name and version and module, e.g. TEST-test(AVD) - 5.0.2-_about-.xml
+            ${{ github.workspace }}/**/build/outputs/androidTest-results/connected/*/TEST-*.xml
+            
+            # AGP 7.4 and 8.0
+            ${{ github.workspace }}/**/build/outputs/androidTest-results/connected/TEST-*.xml
+            
+            # AGP 4.1
+            # *AndroidTest is variant component name, e.g. debugAndroidTest
+            ${{ github.workspace }}/**/build/outputs/androidTest-results/connected/flavors/*AndroidTest/TEST-*.xml
