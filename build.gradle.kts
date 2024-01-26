@@ -1,7 +1,6 @@
 plugins {
 	id("net.twisterrob.gradle.plugin.root")
 	id("net.twisterrob.gradle.plugin.quality")
-	// https://developer.android.com/studio/test/command-line#multi-module-reports-instrumented-tests
 	id("io.gitlab.arturbosch.detekt")
 }
 
@@ -18,6 +17,7 @@ tasks.register<io.gitlab.arturbosch.detekt.report.ReportMergeTask>("detektReport
 // com.android.build.gradle.internal.plugins.ReportingPlugin reads the subprojects in afterEvaluate,
 // so this will run at the right time for it to observe evaluated children.
 subprojects.forEach { evaluationDependsOn(it.path) } // evaluationDependsOnSubprojects()
+// https://developer.android.com/studio/test/command-line#multi-module-reports-instrumented-tests
 apply(plugin = "android-reporting")
 
 tasks.register<Delete>("clean") {
