@@ -119,7 +119,7 @@ val gradleVersion: String = GradleVersion.current().version
 // TODEL Gradle 8.2 sync in AS FL 2022.2.1 / AS GI 2022.3.1 / IDEA 2023.1, fixed in 2023.2.
 // https://youtrack.jetbrains.com/issue/IDEA-320266
 @Suppress("MaxLineLength")
-if ((System.getProperty("idea.version") ?: "") < "2023.2") {
+if ((System.getProperty("idea.version") ?: "") < "2023.3") {
 	doNotNagAbout(
 		"The org.gradle.api.plugins.JavaPluginConvention type has been deprecated. " +
 			"This is scheduled to be removed in Gradle 9.0. " +
