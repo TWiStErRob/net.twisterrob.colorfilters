@@ -74,4 +74,17 @@
 
 	</issue>
 
+	<issue id="GradleDependency" severity="ignore">
+		<!-- Project is using Renovate. -->
+		<!-- Example: A newer version of com.android.tools:common than 31.2.2 is available: 31.3.0 -->
+	</issue>
+	<issue id="NewerVersionAvailable" severity="ignore">
+		<!-- Project is using Renovate. -->
+		<!-- Example: A newer version of com.google.dagger:dagger than 2.50 is available: 2.51 -->
+	</issue>
+	<issue id="AndroidGradlePluginVersion" severity="ignore">
+		<!-- Project is using Renovate. -->
+		<!-- Example: A newer version of com.android.tools.build:gradle than 8.2.2 is available: 8.3.0 -->
+	</issue>
+
 </lint>
