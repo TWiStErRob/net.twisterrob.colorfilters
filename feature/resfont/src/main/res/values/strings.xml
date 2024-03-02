@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources
+	xmlns:tools="http://schemas.android.com/tools"
+	tools:ignore="DuplicateStrings"
+	>
 	<!-- Supported HTML: StringBlock.get -->
 	<!-- lint:TypographyQuotes ignoring because these are code snippets. -->
+	<!-- lint:DuplicateStrings AGP 8.3 false positive: https://issuetracker.google.com/issues/327744439 -->
 
 	<string name="cf_resfont_info_title" tools:ignore="TypographyQuotes"><![CDATA[<font color="…">]]></string>
 	<string name="cf_resfont_info">See my blog post:
