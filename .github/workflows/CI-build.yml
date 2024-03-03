@@ -102,6 +102,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: 'Unit Test Results'
+          if-no-files-found: error
           path: ${{ github.workspace }}/**/build/reports/tests/*/
   
       - name: "Publish 'Unit Results' check suite."
@@ -119,6 +120,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: 'Detekt Results'
+          if-no-files-found: error
           path: ${{ github.workspace }}/**/build/reports/detekt/detekt.*
   
       - name: "Upload 'Detekt Merged Results' artifact."
