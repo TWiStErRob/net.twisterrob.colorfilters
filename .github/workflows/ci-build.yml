@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     
-    defaults: 
+    defaults:
       run:
         shell: bash
 
@@ -20,10 +20,10 @@ jobs:
         with:
           java-version: 17
           distribution: temurin
-  
+
       - name: "Checkout ${{ github.ref }} branch in ${{ github.repository }} repository."
         uses: actions/checkout@v4
-  
+
       - name: "Build & Verify project."
         id: gradle
         run: >
@@ -42,7 +42,7 @@ jobs:
           check
           violationReportHtml
           violationCountFile
-  
+
       - name: "Publish 'Gradle' result and Build Scan URL."
         if: ${{ (success() || failure()) && steps.gradle != null && steps.gradle.outputs.result-success != null }}
         uses: actions/github-script@v7
@@ -75,7 +75,7 @@ jobs:
                     : description,
                 target_url: buildScanUrl,
             });
-    
+
       - name: "Upload 'Lint Results HTMLs' artifact."
         if: ${{ success() || failure() }}
         uses: actions/upload-artifact@v4
@@ -83,7 +83,7 @@ jobs:
           name: 'Lint Results HTMLs'
           if-no-files-found: error
           path: ${{ github.workspace }}/**/build/reports/lint-results*.html
-  
+
       - name: "Upload 'Lint Merged Results' artifact."
         if: ${{ success() || failure() }}
         uses: actions/upload-artifact@v4
@@ -91,7 +91,7 @@ jobs:
           name: 'Lint Merged Results'
           if-no-files-found: error
           path: ${{ github.workspace }}/build/reports/violations.*
-  
+
       - name: "Fail if there are lint violations."
         if: ${{ success() || failure() }}
         run: |
@@ -103,7 +103,7 @@ jobs:
             echo "No violations found."
             exit 0
           fi
-  
+
       - name: "Upload 'Unit Test Results' artifact."
         if: ${{ success() || failure() }}
         uses: actions/upload-artifact@v4
@@ -111,7 +111,7 @@ jobs:
           name: 'Unit Test Results'
           if-no-files-found: error
           path: ${{ github.workspace }}/**/build/reports/tests/*/
-  
+
       - name: "Publish 'Unit Results' check suite."
         if: ${{ success() || failure() }}
         uses: EnricoMi/publish-unit-test-result-action@v2
@@ -122,7 +122,7 @@ jobs:
           test_changes_limit: 0
           action_fail_on_inconclusive: true
           junit_files: ${{ github.workspace }}/**/build/test-results/*/TEST-*.xml
-  
+
       - name: "Upload 'Detekt Results' artifact."
         if: ${{ success() || failure() }}
         uses: actions/upload-artifact@v4
@@ -130,7 +130,7 @@ jobs:
           name: 'Detekt Results'
           if-no-files-found: error
           path: ${{ github.workspace }}/**/build/reports/detekt/detekt.*
-  
+
       - name: "Upload 'Detekt Merged Results' artifact."
         if: ${{ success() || failure() }}
         uses: actions/upload-artifact@v4
@@ -138,7 +138,7 @@ jobs:
           name: 'Detekt Merged Results'
           if-no-files-found: error
           path: ${{ github.workspace }}/build/reports/detekt/merge.*
-  
+
       - name: "Publish 'detekt' GitHub Code Scanning analysis."
         uses: github/codeql-action/upload-sarif@v3
         if: ${{ success() || failure() }}
