@@ -6,8 +6,13 @@ on:
 jobs:
 
   build:
+    name: "build"
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    
+    defaults: 
+      run:
+        shell: bash
 
     steps:
       - name: "Set up JDK 17."
@@ -76,6 +81,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: 'Lint Results HTMLs'
+          if-no-files-found: error
           path: ${{ github.workspace }}/**/build/reports/lint-results*.html
   
       - name: "Upload 'Lint Merged Results' artifact."
@@ -83,6 +89,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: 'Lint Merged Results'
+          if-no-files-found: error
           path: ${{ github.workspace }}/build/reports/violations.*
   
       - name: "Fail if there are lint violations."
@@ -113,6 +120,7 @@ jobs:
           comment_mode: off
           report_individual_runs: true
           test_changes_limit: 0
+          action_fail_on_inconclusive: true
           junit_files: ${{ github.workspace }}/**/build/test-results/*/TEST-*.xml
   
       - name: "Upload 'Detekt Results' artifact."
@@ -128,6 +136,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: 'Detekt Merged Results'
+          if-no-files-found: error
           path: ${{ github.workspace }}/build/reports/detekt/merge.*
   
       - name: "Publish 'detekt' GitHub Code Scanning analysis."
