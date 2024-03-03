@@ -9,7 +9,11 @@ jobs:
     name: "build"
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    
+
+    permissions:
+      # actions/checkout
+      contents: read
+
     defaults:
       run:
         shell: bash
@@ -94,8 +98,10 @@ jobs:
 
       - name: "Fail if there are lint violations."
         if: ${{ success() || failure() }}
+        env:
+          VIOLATIONS_COUNT_FILE: ${{ github.workspace }}/build/reports/violations.count
         run: |
-          count=$(cat "${{ github.workspace }}/build/reports/violations.count")
+          count=$(cat "${VIOLATIONS_COUNT_FILE}")
           if [[ "$count" != "0" ]]; then
             echo "There were $count violations"
             exit 1
