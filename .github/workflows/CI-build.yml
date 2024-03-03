@@ -39,7 +39,7 @@ jobs:
           violationCountFile
   
       - name: "Publish 'Gradle' result and Build Scan URL."
-        if: (success() || failure()) && steps.gradle != null && steps.gradle.outputs.result-success != null
+        if: ${{ (success() || failure()) && steps.gradle != null && steps.gradle.outputs.result-success != null }}
         uses: actions/github-script@v7
         env:
           PARAM_BUILD_SCAN_URL: ${{ steps.gradle.outputs.build-scan-url }}
@@ -72,21 +72,21 @@ jobs:
             });
     
       - name: "Upload 'Lint Results HTMLs' artifact."
-        if: success() || failure()
+        if: ${{ success() || failure() }}
         uses: actions/upload-artifact@v4
         with:
           name: 'Lint Results HTMLs'
           path: ${{ github.workspace }}/**/build/reports/lint-results*.html
   
       - name: "Upload 'Lint Merged Results' artifact."
-        if: success() || failure()
+        if: ${{ success() || failure() }}
         uses: actions/upload-artifact@v4
         with:
           name: 'Lint Merged Results'
           path: ${{ github.workspace }}/build/reports/violations.*
   
       - name: "Fail if there are lint violations."
-        if: success() || failure()
+        if: ${{ success() || failure() }}
         run: |
           count=$(cat "${{ github.workspace }}/build/reports/violations.count")
           if [[ "$count" != "0" ]]; then
@@ -98,14 +98,14 @@ jobs:
           fi
   
       - name: "Upload 'Unit Test Results' artifact."
-        if: success() || failure()
+        if: ${{ success() || failure() }}
         uses: actions/upload-artifact@v4
         with:
           name: 'Unit Test Results'
           path: ${{ github.workspace }}/**/build/reports/tests/*/
   
       - name: "Publish 'Unit Results' check suite."
-        if: success() || failure()
+        if: ${{ success() || failure() }}
         uses: EnricoMi/publish-unit-test-result-action@v2
         with:
           check_name: '🔔 Test: Unit Results'
@@ -115,14 +115,14 @@ jobs:
           junit_files: ${{ github.workspace }}/**/build/test-results/*/TEST-*.xml
   
       - name: "Upload 'Detekt Results' artifact."
-        if: success() || failure()
+        if: ${{ success() || failure() }}
         uses: actions/upload-artifact@v4
         with:
           name: 'Detekt Results'
           path: ${{ github.workspace }}/**/build/reports/detekt/detekt.*
   
       - name: "Upload 'Detekt Merged Results' artifact."
-        if: success() || failure()
+        if: ${{ success() || failure() }}
         uses: actions/upload-artifact@v4
         with:
           name: 'Detekt Merged Results'
@@ -130,7 +130,7 @@ jobs:
   
       - name: "Publish 'detekt' GitHub Code Scanning analysis."
         uses: github/codeql-action/upload-sarif@v3
-        if: success() || failure()
+        if: ${{ success() || failure() }}
         with:
           checkout_path: ${{ github.workspace }}
           sarif_file: ${{ github.workspace }}/build/reports/detekt/merge.sarif
