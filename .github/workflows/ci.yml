@@ -8,6 +8,13 @@ concurrency:
   group: ${{ github.ref == 'refs/heads/main' && format('ci-main-{0}', github.sha) || format('ci-{0}', github.ref) }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+  checks: write
+  statuses: write
+  security-events: write
+  actions: read
+
 jobs:
 
   validate:
