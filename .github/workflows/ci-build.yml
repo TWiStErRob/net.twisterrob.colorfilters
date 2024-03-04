@@ -19,6 +19,8 @@ jobs:
       statuses: write
       # github/codeql-action/upload-sarif
       security-events: write
+      # github/codeql-action/upload-sarif in private repositories / internal organizations.
+      actions: read
 
     defaults:
       run:
