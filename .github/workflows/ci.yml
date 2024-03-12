@@ -8,18 +8,25 @@ concurrency:
   group: ${{ github.ref == 'refs/heads/main' && format('ci-main-{0}', github.sha) || format('ci-{0}', github.ref) }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+  checks: write
+  statuses: write
+  security-events: write
+  actions: read
+
 jobs:
 
   validate:
     name: "🦺 Validation"
-    uses: TWiStErRob/github-workflows/.github/workflows/validate.yml@19333c04e57739ec6074b09c6ca09c225c94dc09 # v1
+    uses: TWiStErRob/github-workflows/.github/workflows/validate.yml@94f2ec4f96e146200f801fe7e09310c79cb2d2b3 # v2
 
   build:
     name: "🔨 Build & Verify"
     needs: validate
-    uses: ./.github/workflows/CI-build.yml
+    uses: ./.github/workflows/ci-build.yml
 
   instrumentation:
     name: "🧪 Instrumentation Tests on" # / API ${{ matrix.api }} will be appended by used workflow.
     needs: validate
-    uses: ./.github/workflows/CI-instrumentation.yml
+    uses: ./.github/workflows/ci-instrumentation.yml
