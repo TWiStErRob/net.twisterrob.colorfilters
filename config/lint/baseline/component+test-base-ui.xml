@@ -1,15 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <issues format="6" by="lint 7.1.2" type="baseline" client="gradle" dependencies="false" name="AGP (7.1.2)" variant="all" version="7.1.2">
 
-    <issue
-        id="FragmentGradleConfiguration"
-        message="Replace with debugImplementation."
-        errorLine1=" //noinspection FragmentGradleConfiguration registered correctly in :feature:base with debugImplementation."
-        errorLine2=" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="build.gradle"
-            line="24"
-            column="2"/>
-    </issue>
-
 </issues>

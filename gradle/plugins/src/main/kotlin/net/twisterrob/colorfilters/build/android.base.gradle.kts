@@ -15,6 +15,11 @@ plugins {
 
 android {
 	namespace = project.autoNamespace
+	afterEvaluate {
+		check(namespace?.contains("_") == false) {
+			"Android namespace must not contain underscores: ${project.path} -> ${namespace}"
+		}
+	}
 
 	@Suppress("MagicNumber")
 	defaultConfig {
