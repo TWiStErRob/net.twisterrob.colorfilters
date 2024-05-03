@@ -25,11 +25,6 @@ dependencies {
 		exclude(it, libs.junit4)
 	}
 
-	// REPORT false positive: //noinspection FragmentGradleConfiguration
-	// REPORT false positive: <issue id="FragmentGradleConfiguration"><ignore path="**/component/test-base-ui/buid.gradle" />
-	// Only baseline worked. 😌
-	// This line is present so that FragmentScenario is reachable in UI test code.
-	//noinspection FragmentGradleConfiguration registered correctly in :feature:base with debugImplementation.
 	api(libs.androidx.test.fragment)
 
 	api(libs.hamcrest)
