@@ -11,7 +11,6 @@ import android.view.View.DragShadowBuilder
 import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
 
 internal class OrderComponent(
 	view: View,
@@ -188,7 +187,7 @@ internal class OrderComponent(
 
 		companion object {
 			private fun View.setBackground(@DrawableRes resId: Int) {
-				ViewCompat.setBackground(this, ContextCompat.getDrawable(this.context, resId))
+				this.background = ContextCompat.getDrawable(this.context, resId)
 			}
 		}
 	}
