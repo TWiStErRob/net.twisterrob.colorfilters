@@ -33,10 +33,10 @@ tasks.register("check") {
 
 val gradleVersion: String = GradleVersion.current().version
 
-// TODEL KGP 1.9.23 build on Gradle 8.8-rc-1 https://youtrack.jetbrains.com/issue/KT-67838
+// TODEL KGP 1.9.23 build on Gradle 8.8-rc-1 https://youtrack.jetbrains.com/issue/KT-67838 target fix 2.0.20.
 val kgpVersion = libs.kotlin.gradle.get().version
 @Suppress("MaxLineLength")
-if (kgpVersion == "1.9.23") {
+if (kgpVersion == "1.9.24") {
 	doNotNagAbout(
 		"The Configuration.fileCollection(Spec) method has been deprecated. " +
 			"This is scheduled to be removed in Gradle 9.0. " +
