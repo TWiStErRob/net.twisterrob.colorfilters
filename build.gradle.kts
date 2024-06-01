@@ -42,7 +42,7 @@ if (kgpVersion == "1.9.24") {
 			"This is scheduled to be removed in Gradle 9.0. " +
 			"Use Configuration.getIncoming().artifactView(Action) with a componentFilter instead. " +
 			"Consult the upgrading guide for further information: " +
-			"https://docs.gradle.org/8.8-rc-1/userguide/upgrading_version_8.html#deprecate_filtered_configuration_file_and_filecollection_methods",
+			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#deprecate_filtered_configuration_file_and_filecollection_methods",
 		"at org.jetbrains.kotlin.gradle.internal.Kapt3GradleSubplugin\$createKaptKotlinTask\$2.invoke(Kapt3KotlinGradleSubplugin.kt:422)"
 	)
 } else {
