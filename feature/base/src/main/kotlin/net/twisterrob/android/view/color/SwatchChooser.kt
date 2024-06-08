@@ -1,11 +1,13 @@
 package net.twisterrob.android.view.color
 
+import android.annotation.TargetApi
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.ColorFilter
 import android.graphics.PixelFormat
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.view.MotionEvent
 import android.view.View
 import net.twisterrob.android.view.color.swatches.PixelAbsoluteSwatch
@@ -142,6 +144,9 @@ class SwatchChooser(swatches: Collection<Swatch>) : Drawable(), View.OnTouchList
 		// Color filters are not supported, will always render custom draw.
 	}
 
+	// https://stackoverflow.com/a/78595315/253468
+	@Suppress("OVERRIDE_DEPRECATION") // Still used in API <29.
+	@TargetApi(Build.VERSION_CODES.Q) // This is a lie, but ObsoleteSdkInt will flag this method when minSdk goes above.
 	override fun getOpacity() = PixelFormat.UNKNOWN
 
 	override fun onTouch(v: View, event: MotionEvent): Boolean {
