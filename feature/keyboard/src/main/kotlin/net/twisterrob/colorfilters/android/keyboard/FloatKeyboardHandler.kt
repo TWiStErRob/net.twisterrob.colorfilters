@@ -23,7 +23,7 @@ open class FloatKeyboardHandler(
 
 		override fun onKey(editor: EditText, primaryCode: Int, keyCodes: IntArray): Boolean {
 			when (primaryCode) {
-				KEY_DECIMAL -> super.onKey('.'.toInt(), keyCodes)
+				KEY_DECIMAL -> super.onKey('.'.code, keyCodes)
 				KEY_CHANGE_SIGN -> editor.editableText?.negate()
 				else -> return false
 			}
