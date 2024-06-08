@@ -11,11 +11,10 @@ import android.view.View.DragShadowBuilder
 import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
 
 internal class OrderComponent(
 	view: View,
-	listener: Component.RefreshListener
+	listener: Component.RefreshListener,
 ) : Component(view, listener) {
 
 	companion object {
@@ -144,7 +143,7 @@ internal class OrderComponent(
 	private class OrderDragLocalState(val view: View)
 
 	private class ItemDragListener(
-		private val listener: ChangeListener
+		private val listener: ChangeListener,
 	) : View.OnDragListener {
 
 		interface ChangeListener {
@@ -161,18 +160,18 @@ internal class OrderComponent(
 			when (event.action) {
 				DragEvent.ACTION_DRAG_STARTED -> {
 					dragged.post { dragged.visibility = View.INVISIBLE }
-					setBackground(dropTarget, R.drawable.matrix_order_drop)
+					dropTarget.setBackground(R.drawable.matrix_order_drop)
 				}
 
 				DragEvent.ACTION_DRAG_ENTERED ->
-					setBackground(dropTarget, R.drawable.matrix_order_drop_active)
+					dropTarget.setBackground(R.drawable.matrix_order_drop_active)
 
 				DragEvent.ACTION_DRAG_EXITED ->
-					setBackground(dropTarget, R.drawable.matrix_order_drop)
+					dropTarget.setBackground(R.drawable.matrix_order_drop)
 
 				DragEvent.ACTION_DRAG_ENDED -> {
 					dragged.post { dragged.visibility = View.VISIBLE }
-					setBackground(dropTarget, R.drawable.matrix_order_component)
+					dropTarget.setBackground(R.drawable.matrix_order_component)
 				}
 
 				DragEvent.ACTION_DROP -> {
@@ -186,9 +185,10 @@ internal class OrderComponent(
 			return true
 		}
 
-		private fun setBackground(dropTarget: View, @DrawableRes resId: Int) {
-			val drawable = ContextCompat.getDrawable(dropTarget.context, resId)
-			ViewCompat.setBackground(dropTarget, drawable)
+		companion object {
+			private fun View.setBackground(@DrawableRes resId: Int) {
+				this.background = ContextCompat.getDrawable(this.context, resId)
+			}
 		}
 	}
 

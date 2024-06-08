@@ -71,17 +71,13 @@ abstract class BaseKeyboardHandler(
 
 	override fun registerEditText(editText: EditText) {
 		// alternative to this is editText.setOnTouchListener(new OnTouchWrapper());
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-			editText.inputType = InputType.TYPE_NULL
-		} else {
-			try {
-				val setShowSoftInputOnFocus =
-					editText::class.java.getMethod("setShowSoftInputOnFocus", Boolean::class.java)
-				setShowSoftInputOnFocus(editText, false)
-			} catch (@Suppress("TooGenericExceptionCaught") ex: Exception) {
-				// It's a hack, anything can go wrong.
-				Log.w("HACK", "Could not turn off input focus for EditText: $editText", ex)
-			}
+		try {
+			val setShowSoftInputOnFocus =
+				editText::class.java.getMethod("setShowSoftInputOnFocus", Boolean::class.java)
+			setShowSoftInputOnFocus(editText, false)
+		} catch (@Suppress("TooGenericExceptionCaught") ex: Exception) {
+			// It's a hack, anything can go wrong.
+			Log.w("HACK", "Could not turn off input focus for EditText: $editText", ex)
 		}
 		editText.isFocusable = true
 		editText.isFocusableInTouchMode = true

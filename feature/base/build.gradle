@@ -7,7 +7,7 @@ dependencies {
 	implementation(projects.feature.keyboard.contract)
 
 	api(libs.androidx.annotation)
-	api(libs.androidx.appcompat)
+	api(libs.androidx.appcompat.ktx)
 	api(libs.androidx.core.ktx)
 	api(libs.androidx.drawerlayout)
 	api(libs.androidx.fragment.ktx)
