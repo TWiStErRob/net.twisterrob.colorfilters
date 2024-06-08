@@ -43,6 +43,7 @@
 		android:inputType="textNoSuggestions"
 		android:maxLength="6"
 		android:singleLine="true"
+		tools:ignore="LabelFor"
 		tools:text="FFFFFF"
 		/>
 
@@ -107,6 +108,7 @@
 		android:inputType="textNoSuggestions"
 		android:maxLength="6"
 		android:singleLine="true"
+		tools:ignore="LabelFor"
 		tools:text="FFFFFF"
 		/>
 
