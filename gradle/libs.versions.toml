@@ -2,10 +2,10 @@
 # https://github.com/bumptech/glide/releases
 glide = "4.16.0"
 
-androidx-annotation = "1.7.1"
-androidx-core = "1.12.0"
-androidx-appcompat = "1.6.1"
-androidx-fragment = "1.6.2"
+androidx-annotation = "1.8.0"
+androidx-core = "1.13.1"
+androidx-appcompat = "1.7.0"
+androidx-fragment = "1.7.1"
 androidx-drawerlayout = "1.2.0"
 androidx-palette = "1.0.0"
 androidx-preference = "1.2.1"
