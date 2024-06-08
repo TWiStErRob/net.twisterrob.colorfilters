@@ -1,11 +1,7 @@
-@file:Suppress("DEPRECATION")
-
 package net.twisterrob.colorfilters.android.keyboard
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.inputmethodservice.KeyboardView
-import android.os.Build
 import android.text.Editable
 import android.text.InputType
 import android.util.Log
@@ -30,7 +26,8 @@ import net.twisterrob.colorfilters.android.keyboard.KeyboardHandler.CustomKeyboa
 // http://forum.xda-developers.com/showthread.php?t=2497237
 abstract class BaseKeyboardHandler(
 	protected val window: Window,
-	protected val keyboardView: KeyboardView
+	@Suppress("DEPRECATION")
+	protected val keyboardView: android.inputmethodservice.KeyboardView,
 ) : KeyboardHandler {
 
 	private val context: Context = keyboardView.context.applicationContext
@@ -46,6 +43,7 @@ abstract class BaseKeyboardHandler(
 	init {
 		hideCustomKeyboard()
 		window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+		@Suppress("DEPRECATION")
 		keyboardView.isPreviewEnabled = false
 		hapticFeedback = true
 	}
@@ -92,7 +90,7 @@ abstract class BaseKeyboardHandler(
 	}
 
 	override fun handleBack(): Boolean {
-		if (keyboardView.handleBack()) {
+		if (@Suppress("DEPRECATION") keyboardView.handleBack()) {
 			return true
 		}
 		if (keyboardView.visibility == View.VISIBLE) {
@@ -137,7 +135,9 @@ abstract class BaseKeyboardHandler(
 		}
 	}
 
-	protected abstract inner class BaseOnKeyboardActionListener : KeyboardView.OnKeyboardActionListener {
+	@Suppress("OVERRIDE_DEPRECATION") // KeyboardView is deprecated, but the listener methods need to be used.
+	protected abstract inner class BaseOnKeyboardActionListener 
+		: @Suppress("DEPRECATION") android.inputmethodservice.KeyboardView.OnKeyboardActionListener {
 
 		private fun findView(): View? {
 			return window.currentFocus

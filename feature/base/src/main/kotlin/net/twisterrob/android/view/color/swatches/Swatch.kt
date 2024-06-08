@@ -1,9 +1,11 @@
 package net.twisterrob.android.view.color.swatches
 
+import android.annotation.TargetApi
 import android.graphics.Canvas
 import android.graphics.ColorFilter
 import android.graphics.PixelFormat
 import android.graphics.drawable.Drawable
+import android.os.Build
 import androidx.annotation.ColorInt
 import androidx.annotation.IntRange
 
@@ -35,6 +37,9 @@ abstract class Swatch : Drawable() {
 		// Default implementation, color filters are not supported, will mostly render custom draw.
 	}
 
+	// See https://stackoverflow.com/a/78595315/253468
+	@Suppress("OVERRIDE_DEPRECATION") // Still used in API <29.
+	@TargetApi(Build.VERSION_CODES.Q) // This is a lie, but ObsoleteSdkInt will flag this method when minSdk goes above.
 	override fun getOpacity(): Int = PixelFormat.UNKNOWN
 
 	open fun triggersColorChange(trackedArea: AreaCode): Boolean = true
