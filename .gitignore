@@ -1,5 +1,4 @@
 # IDEA
-.gradle/
 .idea/
 *.ipr
 *.iws
@@ -7,6 +6,8 @@
 projectFilesBackup
 
 # Gradle
+.gradle/
+.kotlin/
 # rootProject
 /build/
 # App and module collections
