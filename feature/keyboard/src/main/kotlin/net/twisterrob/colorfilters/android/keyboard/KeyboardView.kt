@@ -1,9 +1,6 @@
-@file:Suppress("DEPRECATION")
-
 package net.twisterrob.colorfilters.android.keyboard
 
 import android.content.Context
-import android.inputmethodservice.Keyboard
 import android.util.AttributeSet
 
 /**
@@ -17,17 +14,21 @@ import android.util.AttributeSet
  * ```
  * Defaults for backgrounds can't be set in code, because the fields have no accessors.
  */
-class KeyboardView : android.inputmethodservice.KeyboardView {
+@Suppress("OVERRIDE_DEPRECATION") // KeyboardView is deprecated, but the overridden methods need to be used.
+class KeyboardView : @Suppress("DEPRECATION") android.inputmethodservice.KeyboardView {
 
+	@Suppress("DEPRECATION")
 	constructor(context: Context, attrs: AttributeSet) :
 		super(context, attrs)
 
+	@Suppress("DEPRECATION")
 	constructor(context: Context, attrs: AttributeSet, defStyle: Int) :
 		super(context, attrs, defStyle)
 
 	/**
-	 * [Key.gap][Keyboard.Key.gap] is handled differently in [Key&#39;s constructor][Keyboard.Key.constructor]:
-	 * `gap` is before (to the left of) the key; whereas in [Keyboard.resize]:
+	 * [Key.gap][android.inputmethodservice.Keyboard.Key.gap] is handled differently
+	 * in [Key&#39;s constructor][android.inputmethodservice.Keyboard.Key.constructor]:
+	 * `gap` is before (to the left of) the key; whereas in [android.inputmethodservice.Keyboard.resize]:
 	 * `gap` is after (to the right of) the key.
 	 * `resize` is called from [onSizeChanged][android.inputmethodservice.KeyboardView.onSizeChanged].
 	 *
@@ -46,12 +47,14 @@ class KeyboardView : android.inputmethodservice.KeyboardView {
 	@Suppress("KDocUnresolvedReference")
 	private var keyboardChanged = false
 
-	override fun setKeyboard(keyboard: Keyboard) {
+	override fun setKeyboard(keyboard: @Suppress("DEPRECATION") android.inputmethodservice.Keyboard) {
+		@Suppress("DEPRECATION")
 		super.setKeyboard(keyboard)
 		keyboardChanged = true // force a resize call for this Keyboard
 	}
 
 	override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+		@Suppress("DEPRECATION")
 		super.onSizeChanged(w, h, oldw, oldh)
 		keyboardChanged = false // it was called, thank you.
 	}

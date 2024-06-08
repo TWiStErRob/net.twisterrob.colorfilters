@@ -1,9 +1,5 @@
-@file:Suppress("DEPRECATION")
-
 package net.twisterrob.colorfilters.android.keyboard
 
-import android.inputmethodservice.Keyboard
-import android.inputmethodservice.KeyboardView
 import android.text.Editable
 import android.view.Window
 import android.widget.EditText
@@ -11,11 +7,15 @@ import net.twisterrob.colorfilters.android.keyboard.KeyCodes.KEY_CHANGE_SIGN
 import net.twisterrob.colorfilters.android.keyboard.KeyCodes.KEY_DECIMAL
 
 open class FloatKeyboardHandler(
-	window: Window, keyboardView: KeyboardView
+	window: Window,
+	@Suppress("DEPRECATION")
+	keyboardView: android.inputmethodservice.KeyboardView,
 ) : BaseKeyboardHandler(window, keyboardView) {
 
 	init {
-		keyboardView.keyboard = Keyboard(keyboardView.context, R.xml.keyboard_float)
+		@Suppress("DEPRECATION")
+		keyboardView.keyboard = android.inputmethodservice.Keyboard(keyboardView.context, R.xml.keyboard_float)
+		@Suppress("DEPRECATION")
 		keyboardView.setOnKeyboardActionListener(FloatKeyboardActionListener())
 	}
 
