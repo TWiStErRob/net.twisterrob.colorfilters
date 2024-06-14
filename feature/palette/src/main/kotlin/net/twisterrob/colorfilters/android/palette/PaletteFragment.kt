@@ -111,7 +111,7 @@ class PaletteFragment : ColorFilterFragment() {
 			numSwatches.text = palette.swatches.size.asString()
 			swatchAdapter.update(palette, currentSort)
 		} else {
-			numSwatches.text = "?"
+			numSwatches.text = getString(R.string.cf_palette_unknown_size)
 			swatchAdapter.notifyDataSetInvalidated()
 		}
 	}
