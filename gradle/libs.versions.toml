@@ -11,7 +11,7 @@ androidx-palette = "1.0.0"
 androidx-preference = "1.2.1"
 androidx-multidex = "2.0.1"
 androidx-multidex-instrumentation = "2.0.0"
-androidx-test-rules = "1.6.0"
+androidx-test-rules = "1.6.1"
 androidx-test-runner = "1.6.1"
 androidx-test-espresso = "3.6.1"
 
