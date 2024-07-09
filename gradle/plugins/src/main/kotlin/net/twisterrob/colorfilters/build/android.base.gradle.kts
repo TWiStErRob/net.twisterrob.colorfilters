@@ -2,6 +2,7 @@ package net.twisterrob.colorfilters.build
 
 import net.twisterrob.colorfilters.build.dsl.android
 import net.twisterrob.colorfilters.build.dsl.autoNamespace
+import net.twisterrob.colorfilters.build.dsl.libs
 import net.twisterrob.gradle.android.androidComponents
 
 plugins {
@@ -23,8 +24,8 @@ android {
 
 	@Suppress("MagicNumber")
 	defaultConfig {
-		minSdk = 21
-		compileSdk = 34
+		minSdk = libs.versions.android.minSdk.map(String::toInt).get()
+		compileSdk = libs.versions.android.compileSdk.map(String::toInt).get()
 	}
 	lint {
 		// Be strict with any lint problems.
