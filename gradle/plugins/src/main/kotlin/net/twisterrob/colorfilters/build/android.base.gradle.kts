@@ -23,7 +23,7 @@ android {
 
 	@Suppress("MagicNumber")
 	defaultConfig {
-		minSdk = 19
+		minSdk = 21
 		compileSdk = 34
 	}
 	lint {
