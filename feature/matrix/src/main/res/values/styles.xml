@@ -20,9 +20,9 @@
 	</style>
 
 	<style name="slider_label" parent="slider_label_Base">
-		<!-- TODO make it smaller by lifting it? so it doesn't push sliders around-->
-		<!-- Since Lollipop lineSpacingExtra doesn't apply to single-line TextViews, so check v21 override -->
-		<item name="android:lineSpacingExtra">4sp</item>
+		<!-- TODO make it smaller by lifting it? so it doesn't push sliders around. -->
+		<!-- Note: Since Lollipop lineSpacingExtra doesn't apply to single-line TextViews, so override it. -->
+		<item name="android:paddingBottom">4sp</item>
 	</style>
 
 	<style name="slider_value">
