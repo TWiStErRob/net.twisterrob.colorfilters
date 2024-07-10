@@ -1,4 +1,8 @@
 [versions]
+android-compileSdk = "34"
+android-minSdk = "21"
+android-targetSdk = "34"
+
 # https://github.com/bumptech/glide/releases
 glide = "4.16.0"
 
