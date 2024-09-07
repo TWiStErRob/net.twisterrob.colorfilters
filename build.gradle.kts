@@ -1,6 +1,3 @@
-import net.twisterrob.colorfilters.build.dsl.isCI
-import net.twisterrob.gradle.doNotNagAbout
-
 plugins {
 	id("net.twisterrob.gradle.plugin.root")
 	id("net.twisterrob.gradle.plugin.quality")
@@ -29,23 +26,4 @@ tasks.register<Delete>("clean") {
 
 tasks.register("check") {
 	dependsOn(gradle.includedBuilds.map { it.task(":check") })
-}
-
-val gradleVersion: String = GradleVersion.current().version
-
-// TODEL KGP 1.9.23 build on Gradle 8.8-rc-1 https://youtrack.jetbrains.com/issue/KT-67838 target fix 2.0.20.
-val kgpVersion = libs.kotlin.gradle.get().version
-@Suppress("MaxLineLength")
-if (kgpVersion == "2.0.0") {
-	doNotNagAbout(
-		"The Configuration.fileCollection(Spec) method has been deprecated. " +
-			"This is scheduled to be removed in Gradle 9.0. " +
-			"Use Configuration.getIncoming().artifactView(Action) with a componentFilter instead. " +
-			"Consult the upgrading guide for further information: " +
-			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#deprecate_filtered_configuration_file_and_filecollection_methods",
-		"at org.jetbrains.kotlin.gradle.internal.Kapt3GradleSubplugin\$createKaptKotlinTask\$2.invoke(Kapt3KotlinGradleSubplugin.kt:405)"
-	)
-} else {
-	val error: (String) -> Unit = (if (isCI) ::error else logger::warn)
-	error("KGP version (${kgpVersion}) changed, please review hack.")
 }
