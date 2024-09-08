@@ -42,7 +42,7 @@ java = "11"
 # https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md
 kotlin = "2.0.20"
 # https://github.com/detekt/detekt/releases
-kotlin-detekt = "1.23.6"
+kotlin-detekt = "1.23.7"
 
 [libraries]
 kotlin = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin" }
