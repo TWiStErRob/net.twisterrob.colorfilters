@@ -24,7 +24,7 @@ jmh = "1.37"
 hamcrest = "3.0"
 
 # https://github.com/mockito/mockito/releases
-mockito = "5.14.0"
+mockito = "5.14.1"
 mockito-kotlin = "5.4.0"
 
 junit5 = "5.11.1"
