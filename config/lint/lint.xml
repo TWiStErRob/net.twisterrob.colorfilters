@@ -27,9 +27,6 @@
 		<!-- Not used, but can't do anything about it :) -->
 		<ignore regexp="R\.bool\.in_prod" />
 		<ignore regexp="R\.bool\.in_test" />
-		<!-- REPORT "The resource `R.font.` appears to be unused"
-		     only comes up with checkDependencies = true -->
-		<ignore regexp="R\.font\." />
 
 		<!-- These are all used by :app's KeyboardView. -->
 		<ignore path="**/res/drawable/keyboard_key.xml" />
