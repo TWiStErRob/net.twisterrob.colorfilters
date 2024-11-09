@@ -129,7 +129,7 @@ class AboutFragment : ListFragment() {
 private val Context.versionName: String
 	get() = try {
 		packageManager.packageInfoCompat(packageName, 0).versionName
-	} catch (@Suppress("SwallowedException") e: PackageManager.NameNotFoundException) {
+	} catch (ignore: PackageManager.NameNotFoundException) {
 		// Should not happen, even if it does, "error" is a valid version name in that case.
 		"error"
 	}
