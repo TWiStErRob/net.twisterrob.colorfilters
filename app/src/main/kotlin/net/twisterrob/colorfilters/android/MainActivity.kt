@@ -155,7 +155,7 @@ class MainActivity : AppCompatActivity()
 					}
 				}
 				return@OnNavigationListener true
-			} catch (@Suppress("TooGenericExceptionCaught", "SwallowedException") ex: RuntimeException) {
+			} catch (@Suppress("TooGenericExceptionCaught") ignore: RuntimeException) {
 				// TODO don't know what can go wrong here, but if it happens don't do anything.
 				return@OnNavigationListener false
 			}

@@ -11,10 +11,7 @@ dependencies {
 	api(libs.androidx.core.ktx)
 	api(libs.androidx.drawerlayout)
 	api(libs.androidx.fragment.ktx)
-	debugImplementation(libs.androidx.test.fragment) {
-		// TODEL https://issuetracker.google.com/issues/128612536
-		exclude group: "androidx.test", module: "core"
-	}
+	debugImplementation(libs.androidx.test.fragment.manifest)
 	api(libs.androidx.preference.ktx)
 
 	testImplementation(libs.jmh)

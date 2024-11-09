@@ -1,5 +1,5 @@
 [versions]
-android-compileSdk = "34"
+android-compileSdk = "35"
 android-minSdk = "21"
 android-targetSdk = "34"
 
@@ -32,7 +32,7 @@ junit5-platform = "1.11.3"
 junit5-androidtest = "1.6.0"
 
 # TODEL https://issuetracker.google.com/issues/222730176 in root gradle when fixed.
-# TODEL https://issuetracker.google.com/issues/170658134 in lint.xml/build.gradle when fixed.
+# TODEL https://issuetracker.google.com/issues/378076280 in lint.xml/build.gradle when fixed.
 agp = "8.7.2"
 
 # https://github.com/TWiStErRob/net.twisterrob.gradle/releases
@@ -60,6 +60,7 @@ androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx
 androidx-appcompat-ktx = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
 androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "androidx-fragment" }
 androidx-test-fragment = { module = "androidx.fragment:fragment-testing", version.ref = "androidx-fragment" }
+androidx-test-fragment-manifest = { module = "androidx.fragment:fragment-testing-manifest", version.ref = "androidx-fragment" }
 androidx-drawerlayout = { module = "androidx.drawerlayout:drawerlayout", version.ref = "androidx-drawerlayout" }
 androidx-preference-ktx = { module = "androidx.preference:preference-ktx", version.ref = "androidx-preference" }
 androidx-palette = { module = "androidx.palette:palette", version.ref = "androidx-palette" }

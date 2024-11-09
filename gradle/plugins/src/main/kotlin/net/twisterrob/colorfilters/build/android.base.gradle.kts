@@ -22,7 +22,6 @@ android {
 		}
 	}
 
-	@Suppress("MagicNumber")
 	defaultConfig {
 		minSdk = libs.versions.android.minSdk.map(String::toInt).get()
 		compileSdk = libs.versions.android.compileSdk.map(String::toInt).get()
@@ -40,7 +39,7 @@ android {
 		val cleanPath = project.path.substring(1).replace(':', '+')
 		baseline = rootProject.file("config/lint/baseline/${cleanPath}.xml")
 
-		// TODEL https://issuetracker.google.com/issues/170658134
+		// TODEL https://issuetracker.google.com/issues/378076280
 		androidComponents.finalizeDsl {
 			@Suppress("UnstableApiUsage")
 			if (buildFeatures.viewBinding == true || project.path == ":app") {

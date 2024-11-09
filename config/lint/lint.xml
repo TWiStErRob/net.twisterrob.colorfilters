@@ -27,9 +27,6 @@
 		<!-- Not used, but can't do anything about it :) -->
 		<ignore regexp="R\.bool\.in_prod" />
 		<ignore regexp="R\.bool\.in_test" />
-		<!-- REPORT "The resource `R.font.` appears to be unused"
-		     only comes up with checkDependencies = true -->
-		<ignore regexp="R\.font\." />
 
 		<!-- These are all used by :app's KeyboardView. -->
 		<ignore path="**/res/drawable/keyboard_key.xml" />
@@ -59,10 +56,6 @@
 		<!-- REPORT "Duplicate string value G:, used in cf_matrix_G and cf_matrix_G"
 		     duplicate check doesn't take HTML contents into account -->
 		<ignore regexp="used in `(cf_matrix_.*)` and `\1`" />
-
-		<!-- Ignore resources from exploded AARs in Gradle caches, don't care about duplications in abc_* -->
-		<!-- TODEL https://issuetracker.google.com/issues/113673427 -->
-		<ignore path="**/caches/transforms-*/files-*/*" />
 	</issue>
 
 	<issue id="InvalidPackage">
