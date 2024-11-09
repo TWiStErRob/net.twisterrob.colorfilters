@@ -22,7 +22,6 @@ android {
 		}
 	}
 
-	@Suppress("MagicNumber")
 	defaultConfig {
 		minSdk = libs.versions.android.minSdk.map(String::toInt).get()
 		compileSdk = libs.versions.android.compileSdk.map(String::toInt).get()
