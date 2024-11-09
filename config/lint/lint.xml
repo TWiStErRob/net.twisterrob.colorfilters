@@ -59,10 +59,6 @@
 		<!-- REPORT "Duplicate string value G:, used in cf_matrix_G and cf_matrix_G"
 		     duplicate check doesn't take HTML contents into account -->
 		<ignore regexp="used in `(cf_matrix_.*)` and `\1`" />
-
-		<!-- Ignore resources from exploded AARs in Gradle caches, don't care about duplications in abc_* -->
-		<!-- TODEL https://issuetracker.google.com/issues/113673427 -->
-		<ignore path="**/caches/transforms-*/files-*/*" />
 	</issue>
 
 	<issue id="InvalidPackage">
