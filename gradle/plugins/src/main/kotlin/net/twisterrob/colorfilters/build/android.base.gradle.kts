@@ -3,6 +3,7 @@ package net.twisterrob.colorfilters.build
 import net.twisterrob.colorfilters.build.dsl.android
 import net.twisterrob.colorfilters.build.dsl.autoNamespace
 import net.twisterrob.colorfilters.build.dsl.libs
+import net.twisterrob.gradle.android.androidComponents
 
 plugins {
 	id("net.twisterrob.gradle.plugin.quality")
@@ -38,5 +39,13 @@ android {
 
 		val cleanPath = project.path.substring(1).replace(':', '+')
 		baseline = rootProject.file("config/lint/baseline/${cleanPath}.xml")
+
+		// TODEL https://issuetracker.google.com/issues/170658134
+		androidComponents.finalizeDsl {
+			@Suppress("UnstableApiUsage")
+			if (buildFeatures.viewBinding == true || project.path == ":app") {
+				disable += "UnusedIds"
+			}
+		}
 	}
 }
