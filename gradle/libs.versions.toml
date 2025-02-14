@@ -33,7 +33,7 @@ junit5-androidtest = "1.6.0"
 
 # TODEL https://issuetracker.google.com/issues/222730176 in root gradle when fixed.
 # TODEL https://issuetracker.google.com/issues/378076280 in lint.xml/build.gradle when fixed.
-agp = "8.8.0"
+agp = "8.8.1"
 
 # https://github.com/TWiStErRob/net.twisterrob.gradle/releases
 twisterrob = "0.17"
