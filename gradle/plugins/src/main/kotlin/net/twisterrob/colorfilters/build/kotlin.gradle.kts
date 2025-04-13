@@ -50,13 +50,6 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
 
 tasks.withType<JavaCompile>().configureEach {
 	options.compilerArgs.add("-Xlint:all")
-	// TODEL https://issuetracker.google.com/issues/359561906
-	// > > Task :feature:base:compileDebugJavaWithJavac FAILED
-	// > /modules/java.base/java/lang/Math.class:
-	// > /modules/java.base/java/lang/StrictMath.class:
-	// > warning: Cannot find annotation method 'value()' in type 'FlaggedApi':
-	// > class file for android.annotation.FlaggedApi not found
-	options.compilerArgs.add("-Xlint:-classfile")
 	options.compilerArgs.add("-Werror")
 }
 //</editor-fold>
