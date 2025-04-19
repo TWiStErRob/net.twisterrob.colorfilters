@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
@@ -17,6 +16,7 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.net.toUri
 import androidx.core.view.children
 import androidx.fragment.app.ListFragment
 import net.twisterrob.colorfilters.android.about.databinding.DialogAboutLicenceBinding
@@ -65,7 +65,7 @@ class AboutFragment : ListFragment() {
 		val context = binding.root.context
 		binding.aboutFeedback.setOnClickListener {
 			val intent = Intent(Intent.ACTION_VIEW).apply {
-				data = Uri.parse("mailto:" + BuildConfig.EMAIL)
+				data = "mailto:${BuildConfig.EMAIL}".toUri()
 				putExtra(Intent.EXTRA_EMAIL, arrayOf(BuildConfig.EMAIL))
 				val subject = getString(
 					R.string.cf_about_feedback_subject,

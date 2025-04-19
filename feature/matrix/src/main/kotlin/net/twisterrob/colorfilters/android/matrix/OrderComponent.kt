@@ -11,6 +11,8 @@ import android.view.View.DragShadowBuilder
 import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 
 internal class OrderComponent(
 	view: View,
@@ -159,7 +161,7 @@ internal class OrderComponent(
 
 			when (event.action) {
 				DragEvent.ACTION_DRAG_STARTED -> {
-					dragged.post { dragged.visibility = View.INVISIBLE }
+					dragged.post { dragged.isInvisible = true }
 					dropTarget.setBackground(R.drawable.matrix_order_drop)
 				}
 
@@ -170,7 +172,7 @@ internal class OrderComponent(
 					dropTarget.setBackground(R.drawable.matrix_order_drop)
 
 				DragEvent.ACTION_DRAG_ENDED -> {
-					dragged.post { dragged.visibility = View.VISIBLE }
+					dragged.post { dragged.isVisible = true }
 					dropTarget.setBackground(R.drawable.matrix_order_component)
 				}
 

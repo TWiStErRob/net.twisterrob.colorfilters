@@ -24,6 +24,8 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.edit
+import androidx.core.view.isVisible
 import androidx.palette.graphics.Palette
 import androidx.palette.graphics.Palette.Swatch
 import net.twisterrob.android.view.listeners.OnSeekBarChangeAdapter
@@ -264,13 +266,13 @@ class PaletteFragment : ColorFilterFragment() {
 		keyboard.customKeyboardListener = object : KeyboardHandler.CustomKeyboardListener {
 			override fun customKeyboardShown() {
 				if (isPortrait) {
-					swatchList.visibility = View.GONE
+					swatchList.isVisible = false
 				}
 			}
 
 			override fun customKeyboardHidden() {
 				if (isPortrait) {
-					swatchList.visibility = View.VISIBLE
+					swatchList.isVisible = true
 				}
 			}
 		}
@@ -344,11 +346,11 @@ class PaletteFragment : ColorFilterFragment() {
 
 	override fun onStop() {
 		super.onStop()
-		prefs.edit().apply {
+		prefs.edit {
 			putInt(PREF_PALETTE_NUM_COLORS, currentNumColors)
 			putInt(PREF_PALETTE_RESIZE_DIMEN, currentResizeDimen)
 			putString(PREF_PALETTE_DISPLAY, currentSort.name)
-		}.apply()
+		}
 	}
 
 	override fun onDestroyView() {
@@ -382,7 +384,7 @@ class PaletteFragment : ColorFilterFragment() {
 		}
 
 	private val currentSort: PaletteAdapter.Display
-		get() = PaletteAdapter.Display.values()[swatchDisplay.selectedItemId.toInt()]
+		get() = PaletteAdapter.Display.entries[swatchDisplay.selectedItemId.toInt()]
 
 	companion object {
 

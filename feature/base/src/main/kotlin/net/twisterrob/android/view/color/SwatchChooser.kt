@@ -1,5 +1,6 @@
 package net.twisterrob.android.view.color
 
+import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -10,6 +11,8 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.view.MotionEvent
 import android.view.View
+import androidx.core.graphics.applyCanvas
+import androidx.core.graphics.createBitmap
 import net.twisterrob.android.view.color.swatches.PixelAbsoluteSwatch
 import net.twisterrob.android.view.color.swatches.Swatch
 import kotlin.math.ceil
@@ -82,28 +85,29 @@ class SwatchChooser(swatches: Collection<Swatch>) : Drawable(), View.OnTouchList
 		}
 	}
 
-	private fun build(w: Int, h: Int): Bitmap {
-		val image = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
-		val canvas = Canvas(image)
-		val swatchBounds = Rect()
-		for (i in swatches.indices) {
-			val beforeDraw = canvas.save()
-			try {
-				val location = locations[i] ?: continue
-				swatchBounds.set(location) // copy location
-				canvas.translate(swatchBounds.left.toFloat(), swatchBounds.top.toFloat()) // offset canvas
-				swatchBounds.offsetTo(0, 0) // unoffset rect
+	private fun build(w: Int, h: Int): Bitmap =
+		createBitmap(w, h).applyCanvas {
+			val swatchBounds = Rect()
+			for (i in swatches.indices) {
+				val beforeDraw = this.save()
+				try {
+					val location = locations[i] ?: continue
+					swatchBounds.set(location) // copy location
+					this.translate(
+						swatchBounds.left.toFloat(),
+						swatchBounds.top.toFloat()
+					) // offset canvas
+					swatchBounds.offsetTo(0, 0) // unoffset rect
 
-				val sw = swatches[i]
-				(sw as? PixelAbsoluteSwatch)?.forceSync()
-				sw.bounds = swatchBounds
-				sw.draw(canvas)
-			} finally {
-				canvas.restoreToCount(beforeDraw)
+					val sw = swatches[i]
+					(sw as? PixelAbsoluteSwatch)?.forceSync()
+					sw.bounds = swatchBounds
+					sw.draw(this)
+				} finally {
+					this.restoreToCount(beforeDraw)
+				}
 			}
 		}
-		return image
-	}
 
 	fun at(x: Int, y: Int): Swatch? {
 		for (i in locations.indices) {
@@ -146,6 +150,7 @@ class SwatchChooser(swatches: Collection<Swatch>) : Drawable(), View.OnTouchList
 
 	// https://stackoverflow.com/a/78595315/253468
 	@Suppress("OVERRIDE_DEPRECATION") // Still used in API <29.
+	@SuppressLint("UseRequiresApi")
 	@TargetApi(Build.VERSION_CODES.Q) // This is a lie, but ObsoleteSdkInt will flag this method when minSdk goes above.
 	override fun getOpacity() = PixelFormat.UNKNOWN
 

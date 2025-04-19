@@ -20,6 +20,7 @@ import androidx.activity.result.contract.ActivityResultContract
 import androidx.annotation.IntRange
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.transaction
@@ -172,7 +173,7 @@ class MainActivity : AppCompatActivity()
 	override fun onPause() {
 		val position = getPosition(currentFragment)
 		if (0 <= position) {
-			prefs.edit().putInt(PREF_COLORFILTER_SELECTED, position).apply()
+			prefs.edit { putInt(PREF_COLORFILTER_SELECTED, position) }
 		}
 		super.onPause()
 	}
@@ -217,7 +218,7 @@ class MainActivity : AppCompatActivity()
 
 			R.id.action_image_toggle -> {
 				imageToggleItem.isChecked = !imageToggleItem.isChecked
-				prefs.edit().putBoolean(PREF_COLORFILTER_PREVIEW, imageToggleItem.isChecked).apply()
+				prefs.edit { putBoolean(PREF_COLORFILTER_PREVIEW, imageToggleItem.isChecked) }
 				updateImagesVisibility()
 				return true
 			}
