@@ -116,24 +116,46 @@ develocity {
 
 val gradleVersion: String = GradleVersion.current().version
 
-// TODEL Gradle 8.8 sync in IDEA 2024.1.4 https://youtrack.jetbrains.com/issue/IDEA-353787.
-@Suppress("MaxLineLength", "StringLiteralDuplication")
-if ((System.getProperty("idea.version") ?: "") < "2024.2") {
-	doNotNagAbout(
-		"The CopyProcessingSpec.getFileMode() method has been deprecated. " +
-				"This is scheduled to be removed in Gradle 9.0. " +
-				"Please use the getFilePermissions() method instead. " +
-				"Consult the upgrading guide for further information: " +
-				"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#unix_file_permissions_deprecated",
-	)
-	doNotNagAbout(
-		"The CopyProcessingSpec.getDirMode() method has been deprecated. " +
-				"This is scheduled to be removed in Gradle 9.0. " +
-				"Please use the getDirPermissions() method instead. " +
-				"Consult the upgrading guide for further information: " +
-				"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#unix_file_permissions_deprecated",
-	)
-} else {
-	val error: (String) -> Unit = (if (isCI) ::error else logger::warn)
-	error("Android Studio version changed, please review hack.")
-}
+// TODEL Gradle 8.13 vs AGP 8.0-8.9 https://issuetracker.google.com/issues/370546370
+@Suppress("detekt.MaxLineLength")
+doNotNagAbout(
+	"Declaring an 'is-' property with a Boolean type has been deprecated. " +
+			"Starting with Gradle 9.0, this property will be ignored by Gradle. " +
+			"The combination of method name and return type is not consistent with Java Bean property rules and will become unsupported in future versions of Groovy. " +
+			"Add a method named 'getCrunchPngs' with the same behavior and mark the old one with @Deprecated, " +
+			"or change the type of 'com.android.build.gradle.internal.dsl.BuildType\$AgpDecorated.isCrunchPngs' (and the setter) to 'boolean'. " +
+			"Consult the upgrading guide for further information: " +
+			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#groovy_boolean_properties"
+)
+@Suppress("detekt.MaxLineLength")
+doNotNagAbout(
+	"Declaring an 'is-' property with a Boolean type has been deprecated. " +
+			"Starting with Gradle 9.0, this property will be ignored by Gradle. " +
+			"The combination of method name and return type is not consistent with Java Bean property rules and will become unsupported in future versions of Groovy. " +
+			"Add a method named 'getUseProguard' with the same behavior and mark the old one with @Deprecated, " +
+			"or change the type of 'com.android.build.gradle.internal.dsl.BuildType.isUseProguard' (and the setter) to 'boolean'. " +
+			"Consult the upgrading guide for further information: " +
+			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#groovy_boolean_properties"
+)
+@Suppress("detekt.MaxLineLength")
+doNotNagAbout(
+	"Declaring an 'is-' property with a Boolean type has been deprecated. " +
+			"Starting with Gradle 9.0, this property will be ignored by Gradle. " +
+			"The combination of method name and return type is not consistent with Java Bean property rules and will become unsupported in future versions of Groovy. " +
+			"Add a method named 'getWearAppUnbundled' with the same behavior and mark the old one with @Deprecated, " +
+			"or change the type of 'com.android.build.api.variant.impl.ApplicationVariantImpl.isWearAppUnbundled' (and the setter) to 'boolean'. " +
+			"Consult the upgrading guide for further information: " +
+			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#groovy_boolean_properties"
+)
+
+// TODEL Gradle 8.14 vs AGP 8.9 https://issuetracker.google.com/issues/408334529
+@Suppress("detekt.MaxLineLength")
+doNotNagAbout(
+	"Retrieving attribute with a null key. " +
+			"This behavior has been deprecated. " +
+			"This will fail with an error in Gradle 10.0. " +
+			"Don't request attributes from attribute containers using null keys. " +
+			"Consult the upgrading guide for further information: " +
+			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#null-attribute-lookup",
+	"at com.android.build.gradle.internal.ide.dependencies.ArtifactUtils.isAndroidProjectDependency(ArtifactUtils.kt:539)",
+)
