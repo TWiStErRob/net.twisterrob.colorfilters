@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.edit
+import androidx.core.view.isVisible
 import net.twisterrob.colorfilters.android.ColorFilterFragment
 import net.twisterrob.colorfilters.android.keyboard.KeyboardHandler
 import net.twisterrob.colorfilters.android.keyboard.KeyboardMode
@@ -69,16 +71,16 @@ class MatrixFragment : ColorFilterFragment() {
 		keyboard.customKeyboardListener = object : KeyboardHandler.CustomKeyboardListener {
 			override fun customKeyboardShown() {
 				if (isPortrait) {
-					controlsGroup.visibility = View.GONE
+					controlsGroup.isVisible = false
 				}
-				orderGroup.visibility = View.GONE
+				orderGroup.isVisible = false
 			}
 
 			override fun customKeyboardHidden() {
 				if (isPortrait) {
-					controlsGroup.visibility = View.VISIBLE
+					controlsGroup.isVisible = true
 				}
-				orderGroup.visibility = View.VISIBLE
+				orderGroup.isVisible = true
 			}
 		}
 	}
@@ -127,9 +129,9 @@ class MatrixFragment : ColorFilterFragment() {
 	}
 
 	private fun saveToPreferences(prefs: SharedPreferences) {
-		val editor = prefs.edit()
-		components.forEach { it.saveToPreferences(editor) }
-		editor.apply()
+		prefs.edit {
+			components.forEach { it.saveToPreferences(this) }
+		}
 	}
 
 	private fun restoreFromPreferences(prefs: SharedPreferences) {

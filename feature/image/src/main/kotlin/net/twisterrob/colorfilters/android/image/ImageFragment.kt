@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.Canvas
 import android.graphics.ColorFilter
 import android.net.Uri
 import android.os.Build.VERSION
@@ -21,6 +20,10 @@ import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.core.content.edit
+import androidx.core.graphics.applyCanvas
+import androidx.core.graphics.createBitmap
+import androidx.core.net.toUri
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
@@ -116,7 +119,7 @@ class ImageFragment : Fragment() {
 		if (savedInstanceState == null) {
 			val imageUrl: String? = prefs.getString(PREF_IMAGE_URL, null)
 			if (imageUrl != null) {
-				load(Uri.parse(imageUrl))
+				load(imageUrl.toUri())
 				return
 			}
 		} else {
@@ -132,13 +135,13 @@ class ImageFragment : Fragment() {
 	override fun onStop() {
 		super.onStop()
 		val uri = BitmapKeeper.getUri(parentFragmentManager)
-		prefs.edit().apply {
+		prefs.edit {
 			if (uri != null) {
 				putString(PREF_IMAGE_URL, uri.toString())
 			} else {
 				remove(PREF_IMAGE_URL)
 			}
-		}.apply()
+		}
 	}
 
 	private fun checkPermission(
@@ -229,14 +232,13 @@ class ImageFragment : Fragment() {
 			h = oh + ph
 		}
 
-		val image = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
-		val canvas = Canvas(image)
-		od.draw(canvas)
-		canvas.translate(
-			(if (portrait) ow else 0).toFloat(),
-			(if (portrait) 0 else oh).toFloat()
-		)
-		pd.draw(canvas)
-		return image
+		return createBitmap(w, h).applyCanvas {
+			od.draw(this)
+			this.translate(
+				(if (portrait) ow else 0).toFloat(),
+				(if (portrait) 0 else oh).toFloat()
+			)
+			pd.draw(this)
+		}
 	}
 }

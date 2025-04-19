@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.ColorInt
+import androidx.core.content.edit
 import androidx.core.graphics.toColorInt
+import androidx.core.view.isVisible
 import net.twisterrob.android.view.color.ColorPickerView
 import net.twisterrob.android.view.color.ColorPickerView.Companion.KEEP_SWATCH
 import net.twisterrob.android.view.listeners.TextWatcherAdapter
@@ -70,15 +72,15 @@ class LightingFragment : ColorFilterFragment() {
 		keyboard.customKeyboardListener = object : KeyboardHandler.CustomKeyboardListener {
 			override fun customKeyboardShown() {
 				if (isPortrait) {
-					mulColor.visibility = View.GONE
-					addColor.visibility = View.GONE
+					mulColor.isVisible = false
+					addColor.isVisible = false
 				}
 			}
 
 			override fun customKeyboardHidden() {
 				if (isPortrait) {
-					mulColor.visibility = View.VISIBLE
-					addColor.visibility = View.VISIBLE
+					mulColor.isVisible = true
+					addColor.isVisible = true
 				}
 			}
 		}
@@ -108,12 +110,12 @@ class LightingFragment : ColorFilterFragment() {
 
 	override fun onStop() {
 		super.onStop()
-		prefs.edit().apply {
+		prefs.edit {
 			putInt(PREF_LIGHTING_MUL, mulColor.color)
 			putInt(PREF_LIGHTING_MUL_SWATCH, mulColor.swatchIndex)
 			putInt(PREF_LIGHTING_ADD, addColor.color)
 			putInt(PREF_LIGHTING_ADD_SWATCH, addColor.swatchIndex)
-		}.apply()
+		}
 	}
 
 	override fun onDestroyView() {
