@@ -384,7 +384,7 @@ class PaletteFragment : ColorFilterFragment() {
 		}
 
 	private val currentSort: PaletteAdapter.Display
-		get() = PaletteAdapter.Display.values()[swatchDisplay.selectedItemId.toInt()]
+		get() = PaletteAdapter.Display.entries[swatchDisplay.selectedItemId.toInt()]
 
 	companion object {
 
