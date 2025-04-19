@@ -1,7 +1,6 @@
 package net.twisterrob.colorfilters.android.image
 
 import android.graphics.Bitmap
-import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
@@ -9,6 +8,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.widget.ImageView
+import androidx.core.graphics.applyCanvas
+import androidx.core.graphics.createBitmap
+import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
@@ -116,10 +118,6 @@ class BitmapKeeper : Fragment() {
 }
 
 internal fun Drawable.asBitmap(): Bitmap? = when (this) {
-	is BitmapDrawable -> this.bitmap
 	is GifDrawable -> this.firstFrame
-	else -> Bitmap.createBitmap(this.intrinsicWidth, this.intrinsicHeight, Bitmap.Config.ARGB_8888).apply {
-		val canvas = Canvas(this)
-		draw(canvas)
-	}
+	else -> this.toBitmap()
 }

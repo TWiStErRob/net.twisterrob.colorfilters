@@ -14,8 +14,10 @@ import android.widget.RadioButton
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.annotation.ColorInt
+import androidx.core.content.edit
 import androidx.core.graphics.alpha
 import androidx.core.graphics.toColorInt
+import androidx.core.view.isVisible
 import net.twisterrob.android.view.CheckableButtonManager
 import net.twisterrob.android.view.color.ColorPickerView
 import net.twisterrob.android.view.color.ColorPickerView.Companion.KEEP_SWATCH
@@ -123,11 +125,11 @@ class PorterDuffFragment : ColorFilterFragment() {
 		val modesContainer = view.findViewById<View>(R.id.modes)
 		keyboard.customKeyboardListener = object : KeyboardHandler.CustomKeyboardListener {
 			override fun customKeyboardShown() {
-				modesContainer.visibility = View.GONE
+				modesContainer.isVisible = false
 			}
 
 			override fun customKeyboardHidden() {
-				modesContainer.visibility = View.VISIBLE
+				modesContainer.isVisible = true
 			}
 		}
 
@@ -191,11 +193,11 @@ class PorterDuffFragment : ColorFilterFragment() {
 
 	override fun onStop() {
 		super.onStop()
-		prefs.edit().apply {
+		prefs.edit {
 			putInt(PREF_PORTERDUFF_COLOR, currentColor)
 			putString(PREF_PORTERDUFF_MODE, currentMode.name)
 			putInt(PREF_PORTERDUFF_SWATCH, colorView.swatchIndex)
-		}.apply()
+		}
 	}
 
 	override fun onDestroyView() {
@@ -219,10 +221,9 @@ class PorterDuffFragment : ColorFilterFragment() {
 			?: View.NO_ID
 
 	override fun generateCode(): String {
-		return "new PorterDuffColorFilter(" +
-			"${currentColor.toARGBHexString("0x")}," +
-			" PorterDuff.Mode.${currentMode.name}" +
-			");"
+		val color = currentColor.toARGBHexString("0x")
+		val mode = "PorterDuff.Mode.${currentMode.name}"
+		return "new PorterDuffColorFilter(${color}, ${mode});"
 	}
 
 	private enum class UpdateOrigin {
