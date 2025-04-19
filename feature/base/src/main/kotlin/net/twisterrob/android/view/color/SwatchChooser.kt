@@ -1,5 +1,6 @@
 package net.twisterrob.android.view.color
 
+import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -146,6 +147,7 @@ class SwatchChooser(swatches: Collection<Swatch>) : Drawable(), View.OnTouchList
 
 	// https://stackoverflow.com/a/78595315/253468
 	@Suppress("OVERRIDE_DEPRECATION") // Still used in API <29.
+	@SuppressLint("UseRequiresApi")
 	@TargetApi(Build.VERSION_CODES.Q) // This is a lie, but ObsoleteSdkInt will flag this method when minSdk goes above.
 	override fun getOpacity() = PixelFormat.UNKNOWN
 
