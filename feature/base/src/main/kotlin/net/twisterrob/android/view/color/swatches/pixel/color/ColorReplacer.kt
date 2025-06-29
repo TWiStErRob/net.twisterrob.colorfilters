@@ -6,9 +6,9 @@ import net.twisterrob.android.view.color.swatches.pixel.drawer.BitmapDrawerFacto
 
 class ColorReplacer(
 	private val pixelColor: PixelColor,
-	@ColorInt
+	@param:ColorInt @get:ColorInt
 	private val findColor: Int,
-	@ColorInt
+	@param:ColorInt @get:ColorInt
 	private val replaceColor: Int
 ) : PixelColor by pixelColor {
 
