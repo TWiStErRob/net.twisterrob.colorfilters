@@ -73,7 +73,8 @@ androidx-test-runner = { module = "androidx.test:runner", version.ref = "android
 androidx-test-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "androidx-test-espresso" }
 
 junit4 = { module = "junit:junit", version.ref = "junit4" }
-junit5-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit5" }
+junit5 = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit5" }
+junit5-launcher = { module = "org.junit.platform:junit-platform-launcher" }
 junit5-android = { module = "de.mannodermaus.junit5:android-test-core", version.ref = "junit5-androidtest" }
 junit5-android-runner = { module = "de.mannodermaus.junit5:android-test-runner", version.ref = "junit5-androidtest" }
 
