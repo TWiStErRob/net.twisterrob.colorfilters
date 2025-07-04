@@ -28,7 +28,6 @@ mockito = "5.18.0"
 mockito-kotlin = "5.4.0"
 
 junit5 = "5.13.3"
-junit5-platform = "1.13.3"
 junit5-androidtest = "1.8.0"
 
 # TODEL https://issuetracker.google.com/issues/222730176 in root gradle when fixed.
@@ -74,10 +73,7 @@ androidx-test-runner = { module = "androidx.test:runner", version.ref = "android
 androidx-test-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "androidx-test-espresso" }
 
 junit4 = { module = "junit:junit", version.ref = "junit4" }
-junit5 = { module = "org.junit:junit-bom", version.ref = "junit5" }
-junit5-jupiterEngine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit5" }
-junit5-jupiterApi = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit5" }
-junit5-platformLauncher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junit5-platform" }
+junit5-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit5" }
 junit5-android = { module = "de.mannodermaus.junit5:android-test-core", version.ref = "junit5-androidtest" }
 junit5-android-runner = { module = "de.mannodermaus.junit5:android-test-runner", version.ref = "junit5-androidtest" }
 
