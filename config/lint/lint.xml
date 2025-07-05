@@ -13,8 +13,8 @@
 		<!-- Don't want to deal with it yet -->
 	</issue>
 	<issue id="MemberExtensionConflict">
-		<!-- TODEL https://issuetracker.google.com/issues/427761232 -->
-<!--		<ignore regexp="`.*?` is defined both as a member in class `kotlin\.collections\..*?` and an extension in package `kotlin\.collections`\." />-->
+		<!-- TODEL AGP 8.12 https://issuetracker.google.com/issues/427761232 -->
+		<ignore regexp="`.*?` is defined both as a member in class `kotlin\.collections\..*?` and an extension in package `kotlin\.collections`\." />
 	</issue>
 
 	<issue id="UnusedResources">

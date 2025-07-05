@@ -1,5 +1,6 @@
 package net.twisterrob.colorfilters.android
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import androidx.annotation.ColorInt
 import androidx.core.graphics.alpha
@@ -11,6 +12,7 @@ import androidx.core.graphics.red
 inline fun @receiver:ColorInt Int.replaceAlphaFrom(@ColorInt color: Int) =
 	this.replaceAlpha(color.alpha)
 
+@SuppressLint("MemberExtensionConflict") // TODEL https://issuetracker.google.com/issues/429730003
 @Suppress("NOTHING_TO_INLINE")
 inline fun @receiver:ColorInt Int.replaceAlpha(alpha: Int) =
 	Color.argb(alpha, red, green, blue)
