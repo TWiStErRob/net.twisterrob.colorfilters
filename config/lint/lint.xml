@@ -5,22 +5,16 @@
 			<!-- used attribute for higher APIs only -->
 		</ignore>
 	</issue>
-	<issue id="LintBaseline" severity="ignore">
-		<!-- "# errors were filtered out because it is listed in the baseline file"
-		     Hide these messages, baseline files only contain issues that are not suppressable otherwise. -->
-	</issue>
 	<issue id="RtlHardcoded" severity="ignore" />
-	<issue id="GradleDependency" severity="ignore">
-		<!-- Keep the build stable, Renovate is taking care of keeping things up to date. -->
-	</issue>
-	<issue id="NewerVersionAvailable" severity="ignore">
-		<!-- Keep the build stable, Renovate is taking care of keeping things up to date. -->
-	</issue>
 	<issue id="SyntheticAccessor" severity="ignore">
 		<!-- Don't want to deal with it yet -->
 	</issue>
 	<issue id="ImplicitSamInstance" severity="ignore">
 		<!-- Don't want to deal with it yet -->
+	</issue>
+	<issue id="MemberExtensionConflict">
+		<!-- TODEL https://issuetracker.google.com/issues/427761232 -->
+<!--		<ignore regexp="`.*?` is defined both as a member in class `kotlin\.collections\..*?` and an extension in package `kotlin\.collections`\." />-->
 	</issue>
 
 	<issue id="UnusedResources">
@@ -74,6 +68,10 @@
 
 	</issue>
 
+	<issue id="OldTargetApi" severity="ignore">
+		<!-- Project is using Renovate. -->
+		<!-- Example: Not targeting the latest versions of Android; compatibility modes apply. -->
+	</issue>
 	<issue id="GradleDependency" severity="ignore">
 		<!-- Project is using Renovate. -->
 		<!-- Example: A newer version of com.android.tools:common than 31.2.2 is available: 31.3.0 -->
