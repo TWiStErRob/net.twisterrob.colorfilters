@@ -1,4 +1,3 @@
-import jdk.tools.jlink.resources.plugins
 import net.twisterrob.colorfilters.build.dsl.isCI
 import net.twisterrob.gradle.doNotNagAbout
 import net.twisterrob.gradle.settings.enableFeaturePreviewQuietly
