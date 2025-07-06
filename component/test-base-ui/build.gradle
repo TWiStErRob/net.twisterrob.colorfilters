@@ -6,6 +6,9 @@ plugins {
 
 android {
 	namespace = "net.twisterrob.colorfilters.android.test.ui"
+	lint {
+		disable("InvalidPackage")
+	}
 }
 
 dependencies {
