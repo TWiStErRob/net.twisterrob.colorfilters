@@ -57,7 +57,7 @@ jobs:
 
       - name: "Publish 'Gradle' result and Build Scan URL."
         if: ${{ (success() || failure()) && steps.gradle != null && steps.gradle.outputs.result-success != null }}
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         env:
           PARAM_BUILD_SCAN_URL: ${{ steps.gradle.outputs.build-scan-url }}
           PARAM_GRADLE_RESULT_SUCCESS: ${{ steps.gradle.outputs.result-success }}
