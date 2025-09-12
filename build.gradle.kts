@@ -6,10 +6,10 @@ plugins {
 
 // Register root tasks before evaluating subprojects.
 tasks.register<io.gitlab.arturbosch.detekt.report.ReportMergeTask>("detektReportMergeSarif") {
-	output.set(rootProject.layout.buildDirectory.file("reports/detekt/merge.sarif"))
+	output = rootProject.layout.buildDirectory.file("reports/detekt/merge.sarif")
 }
 tasks.register<io.gitlab.arturbosch.detekt.report.ReportMergeTask>("detektReportMergeXml") {
-	output.set(rootProject.layout.buildDirectory.file("reports/detekt/merge.xml"))
+	output = rootProject.layout.buildDirectory.file("reports/detekt/merge.xml")
 }
 
 // TODEL https://issuetracker.google.com/issues/222730176

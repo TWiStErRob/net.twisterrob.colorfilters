@@ -10,14 +10,14 @@ plugins {
 }
 
 dependencies {
-	add("implementation", (platform(libs.kotlin)))
-	add("implementation", (libs.kotlin.stdlib.jdk8))
+	add("implementation", platform(libs.kotlin))
+	add("implementation", libs.kotlin.stdlib.jdk8)
 }
 
 //<editor-fold desc="Java JVM Source/Target/Release/Toolchain Setup" defaultstate="collapsed">
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+kotlin {
 	compilerOptions {
-		jvmTarget.set(libs.versions.java.map(JvmTarget::fromTarget))
+		jvmTarget = libs.versions.java.map(JvmTarget::fromTarget)
 	}
 }
 
@@ -37,9 +37,9 @@ plugins.withId("com.android.base") {
 //</editor-fold>
 
 //<editor-fold desc="Strict Compilation" defaultstate="collapsed">
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+kotlin {
 	compilerOptions {
-		allWarningsAsErrors.set(true)
+		allWarningsAsErrors = true
 
 		// Workaround for https://youtrack.jetbrains.com/issue/KT-68400
 		// > Task :...:kaptGenerateStubsDebugUnitTestKotlin FAILED
