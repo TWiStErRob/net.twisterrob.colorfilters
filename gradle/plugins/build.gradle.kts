@@ -16,9 +16,9 @@ dependencies {
 	implementation(files(libs::class.java.superclass.protectionDomain.codeSource.location))
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+kotlin {
 	compilerOptions {
-		allWarningsAsErrors.set(true)
+		allWarningsAsErrors = true
 	}
 }
 
@@ -27,7 +27,7 @@ tasks.named("pluginDescriptors").configure {
 }
 
 tasks.withType<ValidatePlugins>().configureEach {
-	ignoreFailures.set(false)
-	failOnWarning.set(true)
-	enableStricterValidation.set(true)
+	ignoreFailures = false
+	failOnWarning = true
+	enableStricterValidation = true
 }
