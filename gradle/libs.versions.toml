@@ -4,7 +4,7 @@ android-minSdk = "21"
 android-targetSdk = "34"
 
 # https://github.com/bumptech/glide/releases
-glide = "5.0.4"
+glide = "5.0.5"
 
 androidx-annotation = "1.9.1"
 androidx-core = "1.16.0"
