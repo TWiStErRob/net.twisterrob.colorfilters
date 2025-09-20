@@ -29,7 +29,7 @@ class CheckableButtonManager : CompoundButton.OnCheckedChangeListener {
 		if (isChecked) {
 			disable(newlyCheckedButton)
 			checked = newlyCheckedButton
-			fireCheckedChange()
+			fireCheckedChange(newlyCheckedButton)
 		}
 	}
 
@@ -37,7 +37,7 @@ class CheckableButtonManager : CompoundButton.OnCheckedChangeListener {
 		this.listener = listener
 	}
 
-	private fun fireCheckedChange() {
+	private fun fireCheckedChange(checked: CompoundButton) {
 		listener?.onCheckedChanged(checked, true)
 	}
 
