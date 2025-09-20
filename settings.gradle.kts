@@ -46,13 +46,14 @@ pluginManagement {
 }
 
 plugins {
+	id("net.twisterrob.colorfilters.settings")
 	id("com.gradle.develocity") version "4.2"
-	id("net.twisterrob.gradle.plugin.nagging")
+	id("net.twisterrob.gradle.plugin.nagging") version "0.18"
 }
 
 @Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
-	repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+	repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
 	repositories {
 		google {
 			content {
@@ -116,14 +117,45 @@ develocity {
 
 val gradleVersion: String = GradleVersion.current().version
 
-// TODEL Gradle 8.14 vs AGP 8.9 https://issuetracker.google.com/issues/408334529
+// TODEL Gradle 9.1 vs detekt 1.23.8 https://github.com/detekt/detekt/issues/8452
 @Suppress("detekt.MaxLineLength")
 doNotNagAbout(
-	"Retrieving attribute with a null key. " +
-			"This behavior has been deprecated. " +
-			"This will fail with an error in Gradle 10. " +
-			"Don't request attributes from attribute containers using null keys. " +
+	"The ReportingExtension.file(String) method has been deprecated. " +
+			"This is scheduled to be removed in Gradle 10. " +
+			"Please use the getBaseDirectory().file(String) or getBaseDirectory().dir(String) method instead. " +
 			"Consult the upgrading guide for further information: " +
-			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_8.html#null-attribute-lookup",
-	"at com.android.build.gradle.internal.ide.dependencies.ArtifactUtils.isAndroidProjectDependency(ArtifactUtils.kt:539)",
+			"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_9.html#reporting_extension_file",
+	"at io.gitlab.arturbosch.detekt.DetektPlugin.apply(DetektPlugin.kt:28)",
 )
+
+// TODEL Gradle 9.1 vs AGP 8.13 https://issuetracker.google.com/issues/444260628
+@Suppress("detekt.MaxLineLength")
+doNotNagAbout(
+	Regex(
+		"Declaring dependencies using multi-string notation has been deprecated. ".escape() +
+				"This will fail with an error in Gradle 10. ".escape() +
+				"Please use single-string notation instead: ".escape() +
+				"\"${"com.android.tools.build:aapt2:".escape()}\\d+\\.\\d+\\.\\d+(-(alpha|beta|rc)\\d+)?-\\d+:(windows|linux|osx)${"\". ".escape()}" +
+				"Consult the upgrading guide for further information: ".escape() +
+				"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_9.html#dependency_multi_string_notation".escape() +
+				".*",
+	),
+	//"at com.android.build.gradle.internal.res.Aapt2FromMaven\$Companion.create(Aapt2FromMaven.kt:139)",
+)
+
+// TODEL Gradle 9.1 vs AGP 8.13 https://issuetracker.google.com/issues/444260628
+@Suppress("detekt.MaxLineLength")
+doNotNagAbout(
+	Regex(
+		"Declaring dependencies using multi-string notation has been deprecated. ".escape() +
+				"This will fail with an error in Gradle 10. ".escape() +
+				"Please use single-string notation instead: ".escape() +
+				"\"${"com.android.tools.lint:lint-gradle:".escape()}\\d+\\.\\d+\\.\\d+(-(alpha|beta|rc)\\d+)?${"\". ".escape()}" +
+				"Consult the upgrading guide for further information: ".escape() +
+				"https://docs.gradle.org/${gradleVersion}/userguide/upgrading_version_9.html#dependency_multi_string_notation".escape() +
+				".*",
+	),
+	//"at com.android.build.gradle.internal.lint.LintFromMaven\$Companion.from(AndroidLintInputs.kt:2850)",
+)
+
+private fun String.escape(): String = Regex.escape(this)
