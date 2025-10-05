@@ -5,6 +5,7 @@ import net.twisterrob.gradle.settings.enableFeaturePreviewQuietly
 rootProject.name = "ColorFilters"
 
 enableFeaturePreviewQuietly("TYPESAFE_PROJECT_ACCESSORS", "Type-safe project accessors")
+enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
 
 include(":app")
 
@@ -71,14 +72,13 @@ develocity {
 		termsOfUseUrl = "https://gradle.com/help/legal-terms-of-use"
 		termsOfUseAgree = "yes"
 		if (isCI) {
+			val githubOutput = providers.environmentVariable("GITHUB_OUTPUT").map(::File) // CC
 			fun setOutput(name: String, value: Any?) {
 				// Using `appendText` to make sure out outputs are not cleared.
 				// Using `\n` to make sure further outputs are correct.
 				// Using `delimiter` to ensure that any special characters (such as newlines) are escaped.
 				val delimiter = java.util.UUID.randomUUID().toString()
-				providers
-					.environmentVariable("GITHUB_OUTPUT")
-					.map(::File)
+				githubOutput
 					// TODEL https://github.com/gradle/gradle/issues/25716
 					.orNull.let { it ?: error("GITHUB_OUTPUT environment variable is not set.") }
 					.appendText("${name}<<${delimiter}\n${value}\n${delimiter}\n")
@@ -87,30 +87,23 @@ develocity {
 			buildScanPublished {
 				setOutput("build-scan-url", buildScanUri.toASCIIString())
 			}
-			gradle.addBuildListener(object : BuildAdapter() {
-				@Deprecated("Won't work with configuration caching.")
-				override fun buildFinished(result: BuildResult) {
-					setOutput("result-success", result.failure == null)
-					setOutput("result-text", resultText(result))
+			val rootDir = rootDir // CC
+			buildFinished {
+				setOutput("result-success", failures.isEmpty())
+				val resultText: String = when {
+					failures.isEmpty() ->
+						"Build Successful"
+					failures.size == 1 && failures.single() is org.gradle.internal.exceptions.LocationAwareException ->
+						// Shorten the trivial part of the file name,
+						// as there's a length limitation in GitHub Actions for message (140 chars).
+						// > Build Failed: Build file '.../build.gradle.kts' line: 20
+						// > A problem occurred configuring project ':feature:about'.
+						"Build Failed: ${failures.single().message?.replace(rootDir.absolutePath, "...")?.replace("\n", " ")}"
+					else ->
+						"Build Failed with ${failures.size} failures"
 				}
-
-				private fun resultText(result: BuildResult): String =
-					"${result.action} ${resultText(result.failure)}"
-
-				private fun resultText(ex: Throwable?): String =
-					when (ex) {
-						null ->
-							"Successful"
-						is org.gradle.internal.exceptions.LocationAwareException ->
-							// Shorten the trivial part of the file name,
-							// as there's a length limitation in GitHub Actions for message (140 chars).
-							// > Build Failed: Build file '.../build.gradle.kts' line: 20
-							// > A problem occurred configuring project ':feature:about'.
-							"Failed: ${ex.message?.replace(rootDir.absolutePath, "")}"
-						else ->
-							"Failed with ${ex}"
-					}
-			})
+				setOutput("result-text", resultText)
+			}
 		}
 	}
 }

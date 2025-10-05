@@ -15,6 +15,7 @@ jobs:
         ./gradlew
         --no-daemon
         --no-build-cache
+        --no-configuration-cache
         --continue
         --stacktrace
         --scan
