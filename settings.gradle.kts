@@ -5,6 +5,7 @@ import net.twisterrob.gradle.settings.enableFeaturePreviewQuietly
 rootProject.name = "ColorFilters"
 
 enableFeaturePreviewQuietly("TYPESAFE_PROJECT_ACCESSORS", "Type-safe project accessors")
+enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
 
 include(":app")
 
