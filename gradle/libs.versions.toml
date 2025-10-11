@@ -28,7 +28,7 @@ mockito = "5.20.0"
 mockito-kotlin = "6.1.0"
 
 junit5 = "5.13.4"
-junit5-androidtest = "1.8.0"
+junit5-androidtest = "1.9.0"
 
 # TODEL https://issuetracker.google.com/issues/222730176 in root gradle when fixed.
 # TODEL https://issuetracker.google.com/issues/378076280 in lint.xml/build.gradle when fixed.
