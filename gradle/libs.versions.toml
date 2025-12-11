@@ -32,7 +32,7 @@ junit5-androidtest = "1.9.0"
 
 # TODEL https://issuetracker.google.com/issues/222730176 in root gradle when fixed.
 # TODEL https://issuetracker.google.com/issues/378076280 in lint.xml/build.gradle when fixed.
-agp = "8.13.1"
+agp = "8.13.2"
 
 # https://github.com/TWiStErRob/net.twisterrob.gradle/releases
 twisterrob = "0.18"
