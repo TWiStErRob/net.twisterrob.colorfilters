@@ -49,7 +49,7 @@ pluginManagement {
 plugins {
 	id("net.twisterrob.colorfilters.settings")
 	id("com.gradle.develocity") version "4.3.2"
-	id("net.twisterrob.gradle.plugin.nagging") version "0.18"
+	id("net.twisterrob.gradle.plugin.nagging") version "0.19"
 }
 
 @Suppress("UnstableApiUsage")
