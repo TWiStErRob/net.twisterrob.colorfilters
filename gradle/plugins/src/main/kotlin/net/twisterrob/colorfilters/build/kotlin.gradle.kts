@@ -27,7 +27,7 @@ tasks.withType<JavaCompile>().configureEach {
 
 plugins.withId("com.android.base") {
 	android {
-		compileOptions {
+		compileOptions.apply {
 			sourceCompatibility = libs.versions.java.map(JavaVersion::toVersion).get()
 			targetCompatibility = libs.versions.java.map(JavaVersion::toVersion).get()
 		}

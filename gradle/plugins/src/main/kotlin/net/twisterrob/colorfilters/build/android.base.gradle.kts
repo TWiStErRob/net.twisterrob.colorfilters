@@ -22,11 +22,11 @@ android {
 		}
 	}
 
-	defaultConfig {
+	defaultConfig.apply {
 		minSdk = libs.versions.android.minSdk.map(String::toInt).get()
 		compileSdk = libs.versions.android.compileSdk.map(String::toInt).get()
 	}
-	lint {
+	lint.apply {
 		// Be strict with any lint problems.
 		warningsAsErrors = true
 		// Lint is run on CI, so no need to run lintVitalRelease on assemble.
