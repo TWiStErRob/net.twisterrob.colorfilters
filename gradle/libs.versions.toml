@@ -41,13 +41,13 @@ java = "11"
 # https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md
 kotlin = "2.3.10"
 # https://github.com/detekt/detekt/releases
-kotlin-detekt = "1.23.8"
+kotlin-detekt = "2.0.0-alpha.2"
 
 [libraries]
 kotlin = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin" }
 kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
-kotlin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "kotlin-detekt" }
+kotlin-detekt = { module = "dev.detekt:detekt-gradle-plugin", version.ref = "kotlin-detekt" }
 android-gradle = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 twisterrob-quality = { module = "net.twisterrob.gradle:twister-quality", version.ref = "twisterrob" }
 twisterrob-android = { module = "net.twisterrob.gradle:twister-convention-plugins", version.ref = "twisterrob" }
