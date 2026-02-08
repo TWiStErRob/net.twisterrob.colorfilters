@@ -1,11 +1,12 @@
 package net.twisterrob.colorfilters.build
 
 import net.twisterrob.colorfilters.build.dsl.android
+import net.twisterrob.colorfilters.build.dsl.kotlin
 import net.twisterrob.colorfilters.build.dsl.libs
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-	id("kotlin-android")
+	//id("org.jetbrains.kotlin.android")
 }
 
 dependencies {
