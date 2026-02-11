@@ -32,7 +32,7 @@ junit5-androidtest = "1.9.0"
 
 # TODEL https://issuetracker.google.com/issues/222730176 in root gradle when fixed.
 # TODEL https://issuetracker.google.com/issues/378076280 in lint.xml/build.gradle when fixed.
-agp = "8.13.2"
+agp = "9.0.0"
 
 # https://github.com/TWiStErRob/net.twisterrob.gradle/releases
 twisterrob = "0.19"
@@ -46,6 +46,7 @@ kotlin-detekt = "1.23.8"
 [libraries]
 kotlin = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin" }
 kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlin-kapt = { module = "com.android.legacy-kapt:com.android.legacy-kapt.gradle.plugin", version.ref = "agp" }
 kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
 kotlin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "kotlin-detekt" }
 android-gradle = { module = "com.android.tools.build:gradle", version.ref = "agp" }

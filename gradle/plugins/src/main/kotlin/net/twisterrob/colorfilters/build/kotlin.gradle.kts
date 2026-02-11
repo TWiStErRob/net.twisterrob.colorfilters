@@ -1,12 +1,12 @@
 package net.twisterrob.colorfilters.build
 
 import net.twisterrob.colorfilters.build.dsl.android
+import net.twisterrob.colorfilters.build.dsl.kotlin
 import net.twisterrob.colorfilters.build.dsl.libs
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-	id("kotlin-android")
-	id("kotlin-kapt")
+	//id("org.jetbrains.kotlin.android")
 }
 
 dependencies {
@@ -28,7 +28,7 @@ tasks.withType<JavaCompile>().configureEach {
 
 plugins.withId("com.android.base") {
 	android {
-		compileOptions {
+		compileOptions.apply {
 			sourceCompatibility = libs.versions.java.map(JavaVersion::toVersion).get()
 			targetCompatibility = libs.versions.java.map(JavaVersion::toVersion).get()
 		}
@@ -49,10 +49,10 @@ kotlin {
 
 		// Kotlin 2.2 started warning about this:
 		// > w: ... This annotation is currently applied to the value parameter only,
-		// > but in the future it will also be applied to field.	
+		// > but in the future it will also be applied to field.
 		// > - To opt in to applying to both value parameter and field,
-		// >   add '-Xannotation-default-target=param-property' to your compiler arguments.	
-		// > - To keep applying to the value parameter only, use the '@param:' annotation target.	
+		// >   add '-Xannotation-default-target=param-property' to your compiler arguments.
+		// > - To keep applying to the value parameter only, use the '@param:' annotation target.
 		// > See https://youtrack.jetbrains.com/issue/KT-73255 for more details.
 		freeCompilerArgs.add("-Xannotation-default-target=param-property")
 	}

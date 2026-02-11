@@ -4,7 +4,7 @@ import com.android.build.api.dsl.LibraryExtension
 import net.twisterrob.colorfilters.build.dsl.android
 
 android {
-	defaultConfig {
+	defaultConfig.apply {
 		dependencies {
 			//add("androidTestUtil", "androidx.test.services:test-services:...")
 		}
@@ -18,7 +18,7 @@ android {
 		// This will transfer to androidTest apps in those libraries, but not the app.
 		defaultConfig.multiDexEnabled = true
 	}
-	packaging {
+	packaging.apply {
 		resources {
 			excludes.add("META-INF/LICENSE.md")
 			excludes.add("META-INF/LICENSE-notice.md")

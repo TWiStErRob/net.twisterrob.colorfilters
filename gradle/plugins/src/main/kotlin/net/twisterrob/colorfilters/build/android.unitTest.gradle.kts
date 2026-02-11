@@ -3,7 +3,7 @@ package net.twisterrob.colorfilters.build
 import net.twisterrob.colorfilters.build.dsl.android
 
 android {
-	testOptions {
+	testOptions.apply {
 		unitTests.all {
 			it.useJUnitPlatform {
 			}
