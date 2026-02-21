@@ -6,7 +6,7 @@ import net.twisterrob.colorfilters.build.dsl.libs
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-	//id("org.jetbrains.kotlin.android")
+	id("org.jetbrains.kotlin.android")
 }
 
 dependencies {
