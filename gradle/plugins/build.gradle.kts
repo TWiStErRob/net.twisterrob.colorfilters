@@ -7,7 +7,6 @@ dependencies {
 	compileOnly(gradleApi())
 	implementation(libs.kotlin.gradle)
 	implementation(libs.kotlin.detekt)
-	implementation(libs.kotlin.kapt)
 
 	configurations.all { resolutionStrategy.cacheChangingModulesFor(0, TimeUnit.SECONDS) /* -SNAPSHOT */ }
 	implementation(libs.android.gradle)
