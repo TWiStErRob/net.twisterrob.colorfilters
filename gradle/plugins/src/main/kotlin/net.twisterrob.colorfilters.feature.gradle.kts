@@ -1,3 +1,5 @@
+import net.twisterrob.colorfilters.build.dsl.android
+
 plugins {
 	id("net.twisterrob.gradle.plugin.android-library")
 	id("net.twisterrob.colorfilters.build.android.base")
