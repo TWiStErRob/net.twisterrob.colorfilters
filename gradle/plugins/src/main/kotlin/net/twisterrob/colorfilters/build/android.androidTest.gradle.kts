@@ -10,7 +10,7 @@ android {
 		}
 		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 		testInstrumentationRunnerArguments["runnerBuilder"] =
-			"de.mannodermaus.junit5.AndroidJUnit5Builder"
+			"de.mannodermaus.junit5.AndroidJUnitFrameworkBuilder"
 		//testInstrumentationRunnerArguments["useTestStorageService"] = "true"
 	}
 	(this@android as? LibraryExtension)?.apply {

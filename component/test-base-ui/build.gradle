@@ -37,8 +37,8 @@ dependencies {
 	api(libs.mockito.kotlin)
 
 	api(libs.junit5)
-	api(libs.junit5.android)
-	runtimeOnly(libs.junit5.android.runner) {
+	api(libs.jupiter.android)
+	runtimeOnly(libs.jupiter.android.runner) {
 		// Exclude JUnit 4, because all tests are using Jupiter.
 		exclude(it, libs.junit4)
 	}
