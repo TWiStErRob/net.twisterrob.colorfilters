@@ -10,8 +10,8 @@ android {
 }
 
 dependencies {
-	api(libs.junit5)
-	runtimeOnly(libs.junit5.launcher)
+	api(libs.jupiter)
+	runtimeOnly(libs.jupiter.launcher)
 
 	api(libs.hamcrest)
 

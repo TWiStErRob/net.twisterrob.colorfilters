@@ -28,7 +28,8 @@ mockito = "5.21.0"
 mockito-kotlin = "6.2.3"
 
 junit5 = "5.14.3"
-junit5-androidtest = "2.0.1"
+jupiter = "6.0.3"
+jupiter-androidtest = "2.0.1"
 
 # TODEL https://issuetracker.google.com/issues/222730176 in root gradle when fixed.
 # TODEL https://issuetracker.google.com/issues/378076280 in lint.xml/build.gradle when fixed.
@@ -73,10 +74,13 @@ androidx-test-runner = { module = "androidx.test:runner", version.ref = "android
 androidx-test-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "androidx-test-espresso" }
 
 junit4 = { module = "junit:junit", version.ref = "junit4" }
+#noinspection SimilarGradleDependency
 junit5 = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit5" }
-junit5-launcher = { module = "org.junit.platform:junit-platform-launcher" }
-junit5-android = { module = "de.mannodermaus.junit5:android-test-core", version.ref = "junit5-androidtest" }
-junit5-android-runner = { module = "de.mannodermaus.junit5:android-test-runner", version.ref = "junit5-androidtest" }
+#noinspection SimilarGradleDependency
+jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "jupiter" }
+jupiter-launcher = { module = "org.junit.platform:junit-platform-launcher" }
+jupiter-android = { module = "de.mannodermaus.junit5:android-test-core", version.ref = "jupiter-androidtest" }
+jupiter-android-runner = { module = "de.mannodermaus.junit5:android-test-runner", version.ref = "jupiter-androidtest" }
 
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
 mockito-android = { module = "org.mockito:mockito-android", version.ref = "mockito" }
