@@ -40,7 +40,7 @@ twisterrob = "0.19"
 
 java = "21"
 # https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md
-kotlin = "2.3.10"
+kotlin = "2.3.20"
 # https://github.com/detekt/detekt/releases
 kotlin-detekt = "1.23.8"
 
