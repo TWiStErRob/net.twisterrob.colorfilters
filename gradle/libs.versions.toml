@@ -27,7 +27,7 @@ hamcrest = "3.0"
 mockito = "5.23.0"
 mockito-kotlin = "6.3.0"
 
-junit5 = "5.14.3"
+junit5 = "5.14.4"
 jupiter = "6.0.3"
 jupiter-androidtest = "2.0.1"
 
