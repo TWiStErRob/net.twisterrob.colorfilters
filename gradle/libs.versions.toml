@@ -6,8 +6,8 @@ android-targetSdk = "34"
 # https://github.com/bumptech/glide/releases
 glide = "5.0.7"
 
-androidx-annotation = "1.9.1"
-androidx-core = "1.17.0"
+androidx-annotation = "1.10.0"
+androidx-core = "1.18.0"
 androidx-appcompat = "1.7.1"
 androidx-fragment = "1.8.9"
 androidx-drawerlayout = "1.2.0"
