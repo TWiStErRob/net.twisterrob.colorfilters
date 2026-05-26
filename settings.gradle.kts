@@ -48,7 +48,7 @@ pluginManagement {
 
 plugins {
 	id("net.twisterrob.colorfilters.settings")
-	id("com.gradle.develocity") version "4.4.1"
+	id("com.gradle.develocity") version "4.4.2"
 	id("net.twisterrob.gradle.plugin.nagging") version "0.19"
 }
 
