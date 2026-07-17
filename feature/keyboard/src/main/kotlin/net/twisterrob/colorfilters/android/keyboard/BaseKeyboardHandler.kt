@@ -167,14 +167,22 @@ abstract class BaseKeyboardHandler(
 			}
 
 			when (primaryCode) {
-				KEY_CLEAR -> editable?.clear()
+				KEY_CLEAR -> {
+					editable?.clear()
+				}
 				KEY_BACKSPACE ->
 					if (editable != null && 0 < start) {
 						editable.delete(start - 1, start)
 					}
-				KEY_DONE -> hideCustomKeyboard()
-				KEY_MOVE_START -> editor.setSelection(0)
-				KEY_MOVE_END -> editor.setSelection(editor.length())
+				KEY_DONE -> {
+					hideCustomKeyboard()
+				}
+				KEY_MOVE_START -> {
+					editor.setSelection(0)
+				}
+				KEY_MOVE_END -> {
+					editor.setSelection(editor.length())
+				}
 				KEY_MOVE_LEFT ->
 					if (start > 0) {
 						editor.setSelection(start - 1)

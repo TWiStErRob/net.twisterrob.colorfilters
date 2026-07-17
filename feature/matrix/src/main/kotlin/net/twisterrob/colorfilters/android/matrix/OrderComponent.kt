@@ -165,11 +165,13 @@ internal class OrderComponent(
 					dropTarget.setBackground(R.drawable.matrix_order_drop)
 				}
 
-				DragEvent.ACTION_DRAG_ENTERED ->
+				DragEvent.ACTION_DRAG_ENTERED -> {
 					dropTarget.setBackground(R.drawable.matrix_order_drop_active)
+				}
 
-				DragEvent.ACTION_DRAG_EXITED ->
+				DragEvent.ACTION_DRAG_EXITED -> {
 					dropTarget.setBackground(R.drawable.matrix_order_drop)
+				}
 
 				DragEvent.ACTION_DRAG_ENDED -> {
 					dragged.post { dragged.isVisible = true }
