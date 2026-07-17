@@ -36,6 +36,10 @@ potential-bugs:
     # Positional arguments remain readable in short, strongly typed Android and graphics calls.
     active: false
 
+  PropertyUsedBeforeDeclaration:
+    # Android declarations are grouped by lifecycle and domain rather than first-use order.
+    active: false
+
 complexity:
 
   NamedArguments:
