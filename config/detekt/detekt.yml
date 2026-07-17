@@ -3,6 +3,13 @@ config:
   warningsAsErrors: true
 
 
+comments:
+
+  UndocumentedPublicClass:
+    # Disabled as this is not a public library.
+    active: false
+
+
 complexity:
 
   TooManyFunctions:
