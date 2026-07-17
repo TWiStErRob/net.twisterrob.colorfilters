@@ -69,6 +69,10 @@ style:
   MaxLineLength:
     excludeCommentStatements: true
 
+  MultilineRawStringIndentation:
+    # Indentation uses tabs, so one indentation unit is one character.
+    indentSize: 1
+
   ReturnCount:
     max: 3
     excludedFunctions:
