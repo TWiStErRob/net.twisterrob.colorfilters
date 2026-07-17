@@ -85,7 +85,7 @@ class PaletteFragment : ColorFilterFragment() {
 		super.updateFilter()
 	}
 
-	private fun updateFilterWithoutRegeneratingPalette() {
+	private fun updateSelectedSwatch() {
 		super.updateFilter()
 	}
 
@@ -179,7 +179,7 @@ class PaletteFragment : ColorFilterFragment() {
 		swatchList = view.findViewById(android.R.id.list)
 		swatchList.onItemClickListener = OnItemClickListener { _, _, position, _ ->
 			swatchList.setItemChecked(position, true)
-			updateFilterWithoutRegeneratingPalette()
+			updateSelectedSwatch()
 		}
 		swatchList.onItemLongClickListener = object : OnItemLongClickListener {
 			override fun onItemLongClick(parent: AdapterView<*>, view: View, position: Int, id: Long): Boolean {
