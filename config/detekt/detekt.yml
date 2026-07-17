@@ -33,6 +33,10 @@ complexity:
 
 style: 
 
+  NoTabs:
+    # I'm a tab guy, I don't pay for space in advance.
+    active: false
+
   MaxLineLength:
     excludeCommentStatements: true
 
