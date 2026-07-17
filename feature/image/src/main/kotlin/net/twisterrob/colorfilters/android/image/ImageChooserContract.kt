@@ -1,6 +1,5 @@
 package net.twisterrob.colorfilters.android.image
 
-import android.annotation.TargetApi
 import android.app.Activity
 import android.content.ComponentName
 import android.content.Context
