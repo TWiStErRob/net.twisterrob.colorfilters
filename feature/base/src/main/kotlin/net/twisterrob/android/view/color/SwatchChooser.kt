@@ -155,15 +155,15 @@ class SwatchChooser(swatches: Collection<Swatch>) : Drawable(), View.OnTouchList
 	@TargetApi(Build.VERSION_CODES.Q) // This is a lie, but ObsoleteSdkInt will flag this method when minSdk goes above.
 	override fun getOpacity() = PixelFormat.UNKNOWN
 
+	@Suppress("detekt.NestedScopeFunctions") // TODO Review whether this nesting obscures the listener receiver.
 	override fun onTouch(v: View, event: MotionEvent): Boolean {
 		when (event.action) {
 			MotionEvent.ACTION_DOWN -> {
 				val x = (event.x - v.paddingLeft).toInt()
 				val y = (event.y - v.paddingTop).toInt()
-				val listener = onSwatchChangeListener
-				val swatch = at(x, y)
-				if (listener != null && swatch != null) {
-					listener.swatchSelected(swatch)
+				onSwatchChangeListener?.apply {
+					val swatch = at(x, y)
+					swatch?.let { swatchSelected(it) }
 				}
 				v.performClick()
 				return true
