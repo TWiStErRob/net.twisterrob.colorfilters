@@ -44,14 +44,14 @@ class FastMathTest {
 		val results = runClass(TestBenchmark::class)
 			.toList()
 			.map { it.aggregatedResult.primaryResult }
-		
+
 		fun pickScore(name: String): Double =
 			results.single { it.label == name }.score
 
 		val fastScore = pickScore("fast")
 		val javaScore = pickScore("java")
 		val kotlinScore = pickScore("kotlin")
-		
+
 		assertThat(fastScore, lessThan(javaScore))
 		assertThat(fastScore, lessThan(kotlinScore))
 	}

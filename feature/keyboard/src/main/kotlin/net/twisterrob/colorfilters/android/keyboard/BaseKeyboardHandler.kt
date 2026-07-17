@@ -61,7 +61,7 @@ abstract class BaseKeyboardHandler(
 	}
 
 	override fun showCustomKeyboard(v: View) {
-		val imm: InputMethodManager = context.requireSystemService() 
+		val imm: InputMethodManager = context.requireSystemService()
 		imm.hideSoftInputFromWindow(v.windowToken, 0)
 		keyboardView.isEnabled = true
 		keyboardView.isVisible = true
@@ -137,7 +137,7 @@ abstract class BaseKeyboardHandler(
 	}
 
 	@Suppress("OVERRIDE_DEPRECATION") // KeyboardView is deprecated, but the listener methods need to be used.
-	protected abstract inner class BaseOnKeyboardActionListener 
+	protected abstract inner class BaseOnKeyboardActionListener
 		: @Suppress("DEPRECATION") android.inputmethodservice.KeyboardView.OnKeyboardActionListener {
 
 		private fun findView(): View? {
