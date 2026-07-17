@@ -104,9 +104,9 @@ abstract class ColorFilterFragment : Fragment() {
 	protected abstract fun displayHelp()
 
 	protected fun displayHelp(@StringRes titleResourceId: Int, @StringRes descriptionResourceId: Int) {
-		fun getInfoMessage(@StringRes descriptionResourceId: Int): CharSequence =
+		fun getInfoMessage(@StringRes descriptionId: Int): CharSequence =
 			SpannableStringBuilder().apply {
-				append(getText(descriptionResourceId))
+				append(getText(descriptionId))
 				append("\n\n") //NON-NLS
 				append(getText(R.string.cf_info_code))
 				append("\n") //NON-NLS

@@ -429,19 +429,19 @@ class PaletteFragment : ColorFilterFragment() {
 		}
 
 		override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-			@Suppress("NAME_SHADOWING") var convertView = convertView
+			var view = convertView
 			val holder: ViewHolder
-			if (convertView == null) {
+			if (view == null) {
 				val inflater = LayoutInflater.from(parent.context)
-				convertView = inflater.inflate(R.layout.inc_palette_swatch, parent, false)
+				view = inflater.inflate(R.layout.inc_palette_swatch, parent, false)
 					?: error("Could not inflate R.layout.inc_palette_swatch")
-				holder = ViewHolder(convertView)
-				convertView.tag = holder
+				holder = ViewHolder(view)
+				view.tag = holder
 			} else {
-				holder = convertView.tag as ViewHolder
+				holder = view.tag as ViewHolder
 			}
 			bindView(position, holder)
-			return convertView
+			return view
 		}
 
 		@SuppressLint("SetTextI18n")
