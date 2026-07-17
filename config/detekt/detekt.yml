@@ -18,6 +18,13 @@ comments:
     active: false
 
 
+potential-bugs:
+
+  LateinitUsage:
+    # Android framework instances initialize these fields during their lifecycle.
+    ignoreOnClassesPattern: '.*(Activity|Fragment|View)$'
+
+
 complexity:
 
   TooManyFunctions:
