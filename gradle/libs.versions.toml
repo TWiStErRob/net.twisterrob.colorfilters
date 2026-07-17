@@ -33,7 +33,7 @@ jupiter-androidtest = "2.0.1"
 
 # TODEL https://issuetracker.google.com/issues/222730176 in root gradle when fixed.
 # TODEL https://issuetracker.google.com/issues/378076280 in lint.xml/build.gradle when fixed.
-agp = "8.13.2"
+agp = "9.3.0"
 
 # https://github.com/TWiStErRob/net.twisterrob.gradle/releases
 twisterrob = "0.19"
