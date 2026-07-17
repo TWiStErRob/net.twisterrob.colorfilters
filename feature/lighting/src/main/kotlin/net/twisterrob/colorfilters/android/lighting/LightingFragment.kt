@@ -118,7 +118,7 @@ class LightingFragment : ColorFilterFragment() {
 		}
 	}
 
-	@Suppress("detekt.MissingSuperCall") // super.onDestroyView() is called after unregistering view-bound listeners.
+	@Suppress("detekt.MissingSuperCall") // https://github.com/detekt/detekt/issues/9528
 	override fun onDestroyView() {
 		keyboard.unregisterEditText(requireView().findViewById(R.id.mulEditor))
 		keyboard.unregisterEditText(requireView().findViewById(R.id.addEditor))
