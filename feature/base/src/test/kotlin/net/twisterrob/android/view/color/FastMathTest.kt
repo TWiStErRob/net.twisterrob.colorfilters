@@ -29,8 +29,8 @@ class FastMathTest {
 	fun atan2MatchesBuiltin() {
 		(0..360).forEach { angle ->
 			val r = 1
-			val x = r * (cos(angle.toFloat()))
-			val y = r * (sin(angle.toFloat()))
+			val x = r * cos(angle.toFloat())
+			val y = r * sin(angle.toFloat())
 			val expected = atan2(y, x)
 
 			val result = FastMath.Atan2Faster.atan2(y, x)

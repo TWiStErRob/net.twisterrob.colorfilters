@@ -22,8 +22,8 @@ class StepBitmapDrawer(
 		val iterationStep = 1 // must be relative prime to iterations (e.g.: 5,3)
 		for (stepY in 0 until iterations) {
 			for (stepX in 0 until iterations) {
-				val offsetX = (stepX * iterationStep) % iterations
-				val offsetY = (stepY * iterationStep) % iterations
+				val offsetX = stepX * iterationStep % iterations
+				val offsetY = stepY * iterationStep % iterations
 				// for (y in offsetY until h step iterations)?
 				var y = offsetY
 				while (y < h) {
