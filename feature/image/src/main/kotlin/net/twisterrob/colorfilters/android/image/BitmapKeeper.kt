@@ -81,10 +81,10 @@ class BitmapKeeper : Fragment() {
 
 		private fun getOrCreate(fragmentManager: FragmentManager): BitmapKeeper =
 			getCurrent(fragmentManager)
-				?: BitmapKeeper().also {
+				?: BitmapKeeper().also { keeper ->
 					fragmentManager
 						.beginTransaction()
-						.add(it, FRAGMENT_TAG)
+						.add(keeper, FRAGMENT_TAG)
 						.commitAllowingStateLoss()
 				}
 

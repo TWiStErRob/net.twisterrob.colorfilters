@@ -284,18 +284,18 @@ class MainActivity : AppCompatActivity()
 	}
 
 	override fun imageChanged() {
-		currentFragment?.let {
-			if (it.isResumed) {
-				it.imageChanged()
+		currentFragment?.let { fragment ->
+			if (fragment.isResumed) {
+				fragment.imageChanged()
 			}
 		}
 	}
 
 	override fun renderCurrentView(title: CharSequence, description: CharSequence): Uri {
 		val file = App.getShareableCachePath(this, "temp.jpg")
-		file.outputStream().use {
+		file.outputStream().use { output ->
 			val shareContent = images.renderPreview()
-			val saved = shareContent.compress(CompressFormat.JPEG, MAX_QUALITY, it)
+			val saved = shareContent.compress(CompressFormat.JPEG, MAX_QUALITY, output)
 			check(saved) {
 				error("Couldn't save generated shared content to ${file.absolutePath}")
 			}
