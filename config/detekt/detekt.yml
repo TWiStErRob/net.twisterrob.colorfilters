@@ -40,6 +40,13 @@ potential-bugs:
     # Android declarations are grouped by lifecycle and domain rather than first-use order.
     active: false
 
+naming:
+
+  BooleanPropertyNaming:
+    # Boolean roles are also clear from adjectives, participles, and domain phrases without a forced prefix.
+    active: false
+
+
 complexity:
 
   NamedArguments:
