@@ -57,10 +57,11 @@ internal class MatrixComponent(
 	}
 
 	private fun getIDAtIndex(index: Int): Int =
-		if (0 <= index && index < editors.size)
+		if (0 <= index && index < editors.size) {
 			editors[index].id
-		else
+		} else {
 			View.NO_ID
+		}
 
 	override fun unWire() {
 		for (et in editors) {

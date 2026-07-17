@@ -165,15 +165,20 @@ class ImageFragment : Fragment() {
 	}
 
 	private fun startLoadImage(skipRationale: Boolean) {
+		val rationale = if (skipRationale) {
+			null
+		} else {
+			fun() {
+				AlertDialog.Builder(requireContext())
+					.setMessage("External applications may return a reference to a file on the device's storage.")
+					.setPositiveButton(android.R.string.ok) { _, _ -> startLoadImage(true) }
+					.setNegativeButton(android.R.string.cancel) { _, _ -> }
+					.show()
+			}
+		}
 		if (VERSION.SDK_INT <= VERSION_CODES.P && !checkPermission(
 				Manifest.permission.READ_EXTERNAL_STORAGE,
-				if (skipRationale) null else fun() {
-					AlertDialog.Builder(requireContext())
-						.setMessage("External applications may return a reference to a file on the device's storage.")
-						.setPositiveButton(android.R.string.ok) { _, _ -> startLoadImage(true) }
-						.setNegativeButton(android.R.string.cancel) { _, _ -> }
-						.show()
-				}
+				rationale
 			)
 		) {
 			return

@@ -234,15 +234,16 @@ class PaletteFragment : ColorFilterFragment() {
 			}
 
 			private fun res(name: String, swatch: Swatch?) =
-				if (swatch == null)
+				if (swatch == null) {
 					"<!-- ${name} not available -->\n"
-				else
+				} else {
 					"""
 					<!-- ${name} -->
 					<color name="${name}">${swatch.rgb.toRGBHexString("#")}</color>
 					<color name="${name}_title">${swatch.titleTextColor.toRGBHexString("#")}</color>
 					<color name="${name}_body">${swatch.bodyTextColor.toRGBHexString("#")}</color>
 					""".trimIndent()
+				}
 		}
 		swatchList.adapter = swatchAdapter
 
