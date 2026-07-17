@@ -16,11 +16,22 @@ val connectedCheck = tasks.register("connectedCheck") {
 	group = LifecycleBasePlugin.VERIFICATION_GROUP
 	description = "Runs connected device checks in all Android subprojects."
 }
+val mergeAndroidReports = tasks.register<Sync>("mergeAndroidReports") {
+	group = LifecycleBasePlugin.VERIFICATION_GROUP
+	description = "Generates the aggregated Android test report for CI."
+	into(rootProject.layout.buildDirectory.dir("androidTest-results"))
+}
 subprojects {
 	val androidProject = this
 	plugins.withId("com.android.base") {
 		connectedCheck.configure {
 			dependsOn(androidProject.tasks.named("connectedCheck"))
+		}
+	}
+	plugins.withId("com.android.application") {
+		mergeAndroidReports.configure {
+			dependsOn(androidProject.tasks.named("createAggregatedTestReport"))
+			from(androidProject.layout.buildDirectory.dir("reports/tests/aggregated-test-report"))
 		}
 	}
 }
