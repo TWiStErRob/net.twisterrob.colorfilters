@@ -32,6 +32,9 @@ potential-bugs:
     # Android framework instances initialize these fields during their lifecycle.
     ignoreOnClassesPattern: '.*(Activity|Fragment|View)$'
 
+  UnnamedParameterUse:
+    # Positional arguments remain readable in short, strongly typed Android and graphics calls.
+    active: false
 
 complexity:
 
