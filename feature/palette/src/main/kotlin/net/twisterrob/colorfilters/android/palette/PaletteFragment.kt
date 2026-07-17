@@ -377,15 +377,15 @@ class PaletteFragment : ColorFilterFragment() {
 
 	override fun generateCode(): String =
 		buildString {
-			append("Palette palette = Palette\n")
-			append("\t\t.from(bitmap)\n")
+			appendLine("Palette palette = Palette")
+			appendLine("""		.from(bitmap)""")
 			if (currentNumColors != DEFAULT_NUM_COLORS) {
-				append("\t\t.maximumColorCount(").append(currentNumColors).append(")\n")
+				append("""		.maximumColorCount(""").append(currentNumColors).appendLine(")")
 			}
 			if (currentResizeDimen != DEFAULT_RESIZE_DIMEN) {
-				append("\t\t.resizeBitmapSize(").append(currentResizeDimen).append(")\n")
+				append("""		.resizeBitmapSize(""").append(currentResizeDimen).appendLine(")")
 			}
-			append("\t\t.generate()\n")
+			appendLine("""		.generate()""")
 			append(";")
 		}
 
