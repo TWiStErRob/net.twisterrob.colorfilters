@@ -53,10 +53,6 @@ complexity:
     # Positional arguments remain readable in short, strongly typed Android and graphics calls.
     active: false
 
-  LabeledExpression:
-    # Kotlin labels make intentional non-local control flow explicit.
-    active: false
-
   TooManyFunctions:
     active: false
 

@@ -85,6 +85,10 @@ class PaletteFragment : ColorFilterFragment() {
 		super.updateFilter()
 	}
 
+	private fun updateFilterWithoutRegeneratingPalette() {
+		super.updateFilter()
+	}
+
 	override fun imageChanged() {
 		val bitmap = currentBitmap
 		lastImage = bitmap
@@ -175,7 +179,7 @@ class PaletteFragment : ColorFilterFragment() {
 		swatchList = view.findViewById(android.R.id.list)
 		swatchList.onItemClickListener = OnItemClickListener { _, _, position, _ ->
 			swatchList.setItemChecked(position, true)
-			super@PaletteFragment.updateFilter()
+			updateFilterWithoutRegeneratingPalette()
 		}
 		swatchList.onItemLongClickListener = object : OnItemLongClickListener {
 			override fun onItemLongClick(parent: AdapterView<*>, view: View, position: Int, id: Long): Boolean {

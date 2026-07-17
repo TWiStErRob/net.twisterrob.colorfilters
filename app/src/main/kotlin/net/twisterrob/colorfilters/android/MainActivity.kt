@@ -155,10 +155,10 @@ class MainActivity : AppCompatActivity()
 						replace(R.id.container, fragment)
 					}
 				}
-				return@OnNavigationListener true
+				true
 			} catch (@Suppress("TooGenericExceptionCaught") ignore: RuntimeException) {
 				// TODO don't know what can go wrong here, but if it happens don't do anything.
-				return@OnNavigationListener false
+				false
 			}
 		})
 	}
