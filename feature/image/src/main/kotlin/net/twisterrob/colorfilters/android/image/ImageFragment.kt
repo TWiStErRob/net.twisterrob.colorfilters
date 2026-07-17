@@ -176,10 +176,9 @@ class ImageFragment : Fragment() {
 					.show()
 			}
 		}
-		if (VERSION.SDK_INT <= VERSION_CODES.P && !checkPermission(
-				Manifest.permission.READ_EXTERNAL_STORAGE,
-				rationale
-			)
+		if (
+			VERSION.SDK_INT <= VERSION_CODES.P
+			&& !checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE, rationale)
 		) {
 			return
 		}
