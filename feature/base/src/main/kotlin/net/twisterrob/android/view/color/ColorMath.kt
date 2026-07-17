@@ -37,10 +37,10 @@ fun ofMap(value: Float, inputMin: Float, inputMax: Float, outputMin: Float, outp
  * Same as [Color.HSVToColor], but without the weird interface and much faster.
  * Values are not clamped, anything out of range may explode!
  *
- * @param hue        `[0, 1]`
+ * @param hue `[0, 1]`
  * @param saturation `[0, 1]`
  * @param brightness `[0, 1]`
- * @param alpha      `[0, 1]`
+ * @param alpha `[0, 1]`
  * @return ARGB color
  */
 @Suppress("MagicNumber")
