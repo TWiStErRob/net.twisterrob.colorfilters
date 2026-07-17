@@ -184,14 +184,16 @@ abstract class BaseKeyboardHandler(
 				KEY_MOVE_END -> {
 					editor.setSelection(editor.length())
 				}
-				KEY_MOVE_LEFT ->
+				KEY_MOVE_LEFT -> {
 					if (start > 0) {
 						editor.setSelection(start - 1)
 					}
-				KEY_MOVE_RIGHT ->
+				}
+				KEY_MOVE_RIGHT -> {
 					if (start < editor.length()) {
 						editor.setSelection(start + 1)
 					}
+				}
 
 				else -> {
 					if (!this.onKey(editor, primaryCode, keyCodes)) {
