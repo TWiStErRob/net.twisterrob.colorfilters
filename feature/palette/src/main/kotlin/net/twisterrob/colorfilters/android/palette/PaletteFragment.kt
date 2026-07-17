@@ -431,6 +431,7 @@ class PaletteFragment : ColorFilterFragment() {
 
 		override fun getItemId(position: Int): Long {
 			val item = getItem(position)
+			@Suppress("detekt.UnnecessaryLet")
 			return item?.let { it.rgb.toLong() } ?: 0
 		}
 
