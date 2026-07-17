@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity()
 				Intent(context, PreferencesActivity::class.java)
 
 			// No actual result, just want a notification of return from preferences.
-			override fun parseResult(resultCode: Int, intent: Intent?): Unit = Unit
+			override fun parseResult(resultCode: Int, intent: Intent?) = Unit
 		}) {
 			kbd = null
 			val fragment = currentFragment
