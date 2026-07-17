@@ -51,6 +51,7 @@ complexity:
 
   NamedArguments:
     # Positional arguments remain readable in short, strongly typed Android and graphics calls.
+    # TODO Review and enable incrementally; named arguments look useful at ambiguous call sites.
     active: false
 
   TooManyFunctions:
