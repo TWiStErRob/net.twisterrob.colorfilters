@@ -110,7 +110,7 @@ class MainActivity : AppCompatActivity()
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_color_filter)
 
-		images = supportFragmentManager.findFragmentById(R.id.images) as ImageFragment
+		images = requireNotNull(supportFragmentManager.findFragmentById(R.id.images)) as ImageFragment
 
 		actionBar.apply {
 			setDisplayShowTitleEnabled(false)
