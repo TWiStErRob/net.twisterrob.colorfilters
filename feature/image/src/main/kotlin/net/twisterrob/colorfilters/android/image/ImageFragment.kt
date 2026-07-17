@@ -93,7 +93,7 @@ class ImageFragment : Fragment() {
 			}
 
 			override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-				@Suppress("LiftReturnOrAssignment", "OptionalWhenBraces")
+				@Suppress("LiftReturnOrAssignment", "OptionalWhenBraces", "detekt.UseIfInsteadOfWhen")
 				when (menuItem.itemId) {
 					R.id.action_image -> {
 						startLoadImage(false)

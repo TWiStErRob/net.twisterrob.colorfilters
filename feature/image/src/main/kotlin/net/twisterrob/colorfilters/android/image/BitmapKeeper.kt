@@ -112,6 +112,7 @@ class BitmapKeeper : Fragment() {
 	}
 }
 
+@Suppress("detekt.UseIfInsteadOfWhen")
 internal fun Drawable.asBitmap(): Bitmap? = when (this) {
 	is GifDrawable -> this.firstFrame
 	else -> this.toBitmap()

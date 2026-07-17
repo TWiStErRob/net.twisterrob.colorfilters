@@ -67,10 +67,6 @@ style:
     # I'm a tab guy, I don't pay for space in advance.
     active: false
 
-  UseIfInsteadOfWhen:
-    # Choose if or when based on readability rather than the number of branches.
-    active: false
-
   MaxLineLength:
     excludeCommentStatements: true
 

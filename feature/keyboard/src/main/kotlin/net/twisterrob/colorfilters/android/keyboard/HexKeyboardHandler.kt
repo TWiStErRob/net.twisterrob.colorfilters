@@ -20,6 +20,7 @@ class HexKeyboardHandler(
 	@Suppress("detekt.UnnecessaryInnerClass") // The inner superclass requires this handler as its outer receiver.
 	private inner class MyOnKeyboardActionListener : BaseKeyboardHandler.BaseOnKeyboardActionListener() {
 
+		@Suppress("detekt.UseIfInsteadOfWhen")
 		override fun onKey(editor: EditText, primaryCode: Int, keyCodes: IntArray): Boolean {
 			when (primaryCode) {
 				KEY_NEGATE -> super.onText(editor.editableText?.negate())
