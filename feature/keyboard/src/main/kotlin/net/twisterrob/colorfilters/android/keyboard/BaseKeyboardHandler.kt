@@ -148,7 +148,7 @@ abstract class BaseKeyboardHandler(
 			return findView() as? EditText
 		}
 
-		@Suppress("ComplexMethod") // Curious if this can be improved, but not now.
+		@Suppress("detekt.CyclomaticComplexMethod") // Curious if this can be improved, but not now.
 		override fun onKey(primaryCode: Int, keyCodes: IntArray) {
 			val editor = findEdit()
 			if (editor == null) {
