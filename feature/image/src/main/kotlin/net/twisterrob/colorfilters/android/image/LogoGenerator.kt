@@ -35,8 +35,8 @@ private val sizes = mapOf(
 
 object LogoGenerator {
 
-	@Suppress("detekt.MissingUseCall") // ZipOutputStream.use closes its wrapped file stream.
 	fun write(file: File) {
+		@Suppress("detekt.MissingUseCall") // ZipOutputStream.use closes its wrapped file stream.
 		ZipOutputStream(file.outputStream()).use { zip ->
 			sizes.forEach { (res, size) ->
 				val name = if (res != null) "drawable-${res}/ic_launcher.png" else "Hi-res Icon (512x512).png"
