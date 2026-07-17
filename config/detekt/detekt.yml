@@ -57,6 +57,11 @@ style:
     # I'm a tab guy, I don't pay for space in advance.
     active: false
 
+  StringShouldBeRawString:
+    # Escaped strings can be clearer when whitespace and delimiters are significant.
+    active: false
+
+
   MaxLineLength:
     excludeCommentStatements: true
 
