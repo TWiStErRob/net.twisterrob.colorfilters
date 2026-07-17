@@ -426,7 +426,7 @@ class PaletteFragment : ColorFilterFragment() {
 
 		override fun getItemId(position: Int): Long {
 			val item = getItem(position)
-			return item?.rgb?.toLong() ?: 0
+			return item?.run { rgb.toLong() } ?: 0
 		}
 
 		override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -463,10 +463,10 @@ class PaletteFragment : ColorFilterFragment() {
 				)
 				holder.titleText.setBackgroundColor(swatch.rgb)
 				holder.titleText.setTextColor(swatch.titleTextColor)
-				holder.titleText.text = "Title: " + swatch.titleTextColor.toRGBHexString("#")
+				holder.titleText.text = "Title: ${swatch.titleTextColor.toRGBHexString("#")}"
 				holder.bodyText.setBackgroundColor(swatch.rgb)
 				holder.bodyText.setTextColor(swatch.bodyTextColor)
-				holder.bodyText.text = "Body: " + swatch.bodyTextColor.toRGBHexString("#")
+				holder.bodyText.text = "Body: ${swatch.bodyTextColor.toRGBHexString("#")}"
 				holder.population.text = swatch.population.asString()
 			} else {
 				holder.colorText.setText(R.string.cf_palette_missing)
