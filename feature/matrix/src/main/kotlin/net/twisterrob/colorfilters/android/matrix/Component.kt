@@ -9,6 +9,7 @@ import android.widget.SeekBar
 import android.widget.TextView
 
 // TODO refactor to subfragments and/or custom View/ViewGroups
+@Suppress("detekt.FunctionNameMinLength")
 internal abstract class Component(
 	protected val view: View,
 	private val listener: RefreshListener

@@ -109,6 +109,7 @@ class SwatchChooser(swatches: Collection<Swatch>) : Drawable(), View.OnTouchList
 			}
 		}
 
+	@Suppress("detekt.FunctionNameMinLength")
 	fun at(x: Int, y: Int): Swatch? {
 		for (i in locations.indices) {
 			val rect = locations[i]
