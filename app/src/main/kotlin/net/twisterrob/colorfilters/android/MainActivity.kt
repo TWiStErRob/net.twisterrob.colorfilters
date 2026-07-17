@@ -205,7 +205,7 @@ class MainActivity : AppCompatActivity()
 				val title = getText(BaseR.string.cf_share_picker_title)
 				startActivity(Intent.createChooser(intent, title))
 
-				images.load(ZipFile(logoZip).let { zip ->
+				images.load(ZipFile(logoZip).use { zip ->
 					val biggest = zip
 						.entries()
 						.asSequence()
