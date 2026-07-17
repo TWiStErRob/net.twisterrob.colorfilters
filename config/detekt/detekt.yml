@@ -84,6 +84,10 @@ style:
     # Indentation uses tabs, so one indentation unit is one character.
     indentSize: 1
 
+  UnnecessaryFullyQualifiedName:
+    # Qualified names disambiguate Android resources and occasional platform or extension references locally.
+    active: false
+
   ReturnCount:
     max: 3
     excludedFunctions:
