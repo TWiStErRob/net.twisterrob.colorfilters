@@ -82,6 +82,10 @@
 		<!-- Project is using Renovate. -->
 		<!-- Example: Not targeting the latest versions of Android; compatibility modes apply. -->
 	</issue>
+	<issue id="ObsoleteSdkInt">
+		<!-- Keep the API-23 resource override explicit even though minSdk is now 23. -->
+		<ignore path="**/res/values-v23" />
+	</issue>
 	<issue id="GradleDependency" severity="ignore">
 		<!-- Project is using Renovate. -->
 		<!-- Example: A newer version of com.android.tools:common than 31.2.2 is available: 31.3.0 -->
