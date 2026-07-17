@@ -25,6 +25,7 @@ import net.twisterrob.colorfilters.android.keyboard.KeyboardHandler.CustomKeyboa
 
 // http://www.fampennings.nl/maarten/android/09keyboard/index.htm
 // http://forum.xda-developers.com/showthread.php?t=2497237
+@Suppress("detekt.AbstractClassCanBeConcreteClass")
 abstract class BaseKeyboardHandler(
 	protected val window: Window,
 	@Suppress("DEPRECATION")
