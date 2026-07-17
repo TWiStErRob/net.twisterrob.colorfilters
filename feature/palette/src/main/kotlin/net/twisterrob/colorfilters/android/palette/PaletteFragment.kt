@@ -180,7 +180,7 @@ class PaletteFragment : ColorFilterFragment() {
 		swatchList.onItemLongClickListener = object : OnItemLongClickListener {
 			override fun onItemLongClick(parent: AdapterView<*>, view: View, position: Int, id: Long): Boolean {
 				val context = parent.context
-				val swatch = parent.adapter.getItem(position) as Swatch?
+				val swatch = parent.adapter.getItem(position) as? Swatch
 				if (swatch == null) {
 					Toast.makeText(context, "No swatch", Toast.LENGTH_SHORT).show()
 					return true

@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity()
 		}
 
 	private val currentFragment: ColorFilterFragment?
-		get() = supportFragmentManager.findFragmentById(R.id.container) as ColorFilterFragment?
+		get() = supportFragmentManager.findFragmentById(R.id.container) as? ColorFilterFragment
 
 	override val currentBitmap: Bitmap?
 		get() = images.current
