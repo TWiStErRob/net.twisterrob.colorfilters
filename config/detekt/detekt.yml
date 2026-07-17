@@ -5,6 +5,10 @@ config:
 
 comments:
 
+  DocumentationOverPrivateFunction:
+    # Private functions can still need documentation; visibility does not make intent self-explanatory.
+    active: false
+
   UndocumentedPublicClass:
     # Disabled as this is not a public library.
     active: false
