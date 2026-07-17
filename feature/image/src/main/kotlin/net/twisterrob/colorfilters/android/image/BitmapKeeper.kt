@@ -86,8 +86,9 @@ class BitmapKeeper : Fragment() {
 						.commitAllowingStateLoss()
 				}
 
+		@Suppress("detekt.CastToNullableType")
 		private fun getCurrent(fragmentManager: FragmentManager): BitmapKeeper? =
-			fragmentManager.findFragmentByTag(FRAGMENT_TAG) as? BitmapKeeper
+			fragmentManager.findFragmentByTag(FRAGMENT_TAG) as BitmapKeeper?
 
 		fun getUri(fragmentManager: FragmentManager): Uri? =
 			getOrCreate(fragmentManager).uri
