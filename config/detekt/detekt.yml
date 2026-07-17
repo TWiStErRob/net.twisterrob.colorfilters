@@ -67,10 +67,6 @@ style:
     # Android declarations are grouped by lifecycle and domain rather than visibility or declaration kind.
     active: false
 
-  ExpressionBodySyntax:
-    # Block and expression bodies are chosen for readability at each call site.
-    active: false
-
   NoTabs:
     # I'm a tab guy, I don't pay for space in advance.
     active: false
@@ -82,7 +78,6 @@ style:
   UseIfInsteadOfWhen:
     # Choose if or when based on readability rather than the number of branches.
     active: false
-
 
   MaxLineLength:
     excludeCommentStatements: true

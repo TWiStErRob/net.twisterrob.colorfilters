@@ -10,9 +10,7 @@ class EmptySwatch : Swatch() {
 	override var currentColor: Int = Color.TRANSPARENT
 
 	@ColorInt
-	override fun findColor(area: AreaCode, x: Float, y: Float): Int {
-		return currentColor
-	}
+	override fun findColor(area: AreaCode, x: Float, y: Float): Int = currentColor
 
 	override fun draw(canvas: Canvas) {
 		canvas.drawColor(currentColor)
