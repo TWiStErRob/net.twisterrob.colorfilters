@@ -170,10 +170,11 @@ abstract class BaseKeyboardHandler(
 				KEY_CLEAR -> {
 					editable?.clear()
 				}
-				KEY_BACKSPACE ->
+				KEY_BACKSPACE -> {
 					if (editable != null && 0 < start) {
 						editable.delete(start - 1, start)
 					}
+				}
 				KEY_DONE -> {
 					hideCustomKeyboard()
 				}
