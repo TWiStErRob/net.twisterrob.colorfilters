@@ -155,7 +155,12 @@ open class ColorPickerView : AppCompatImageView {
 		private val longTapStart = PointF()
 
 		// Shortcuts and many different events, so it's ought to be complex.
-		@Suppress("ReturnCount", "LongMethod", "detekt.CyclomaticComplexMethod")
+		@Suppress(
+			"ReturnCount",
+			"LongMethod",
+			"detekt.CyclomaticComplexMethod",
+			"detekt.CognitiveComplexMethod",
+		)
 		override fun onTouch(v: View, event: MotionEvent): Boolean {
 			if (drawable is SwatchChooser) {
 				return (drawable as SwatchChooser).onTouch(v, event)
