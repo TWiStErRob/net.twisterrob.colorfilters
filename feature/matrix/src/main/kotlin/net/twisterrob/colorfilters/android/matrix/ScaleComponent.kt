@@ -83,10 +83,14 @@ internal class ScaleComponent(
 		@Suppress("ComplexCondition")
 		if (rScale != NO_SCALE || gScale != NO_SCALE || bScale != NO_SCALE || aScale != NO_SCALE) {
 			sb.append("\ntemp.setScale(")
-				.append(getDisplay(rScale)).append(", ")
-				.append(getDisplay(gScale)).append(", ")
-				.append(getDisplay(bScale)).append(", ")
-				.append(getDisplay(aScale)).append(");")
+				.append(getDisplay(rScale))
+				.append(", ")
+				.append(getDisplay(gScale))
+				.append(", ")
+				.append(getDisplay(bScale))
+				.append(", ")
+				.append(getDisplay(aScale))
+				.append(");")
 			sb.append("\nmatrix.postConcat(temp);")
 			return true
 		}
