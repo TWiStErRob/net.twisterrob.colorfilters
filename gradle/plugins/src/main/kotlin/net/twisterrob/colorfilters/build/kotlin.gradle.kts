@@ -1,9 +1,9 @@
 package net.twisterrob.colorfilters.build
 
 import net.twisterrob.colorfilters.build.dsl.android
+import net.twisterrob.colorfilters.build.dsl.kotlin
 import net.twisterrob.colorfilters.build.dsl.libs
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 
 plugins {
 	id("com.android.legacy-kapt")
@@ -15,7 +15,7 @@ dependencies {
 }
 
 //<editor-fold desc="Java JVM Source/Target/Release/Toolchain Setup" defaultstate="collapsed">
-extensions.configure<KotlinAndroidProjectExtension> {
+kotlin {
 	compilerOptions {
 		jvmTarget = libs.versions.java.map(JvmTarget::fromTarget)
 	}
@@ -37,7 +37,7 @@ plugins.withId("com.android.base") {
 //</editor-fold>
 
 //<editor-fold desc="Strict Compilation" defaultstate="collapsed">
-extensions.configure<KotlinAndroidProjectExtension> {
+kotlin {
 	compilerOptions {
 		allWarningsAsErrors = true
 
