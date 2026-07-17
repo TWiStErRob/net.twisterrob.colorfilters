@@ -64,17 +64,17 @@ class BitmapKeeper : Fragment() {
 			return false
 		}
 
-		fun clear(fragmentManager: FragmentManager) = getOrCreate(fragmentManager).run {
+		fun clear(fragmentManager: FragmentManager): Unit = getOrCreate(fragmentManager).run {
 			this.bitmap = null
 			this.uri = null
 		}
 
-		fun save(fragmentManager: FragmentManager, bitmap: Bitmap) = getOrCreate(fragmentManager).run {
+		fun save(fragmentManager: FragmentManager, bitmap: Bitmap): Unit = getOrCreate(fragmentManager).run {
 			this.uri = null
 			this.bitmap = bitmap
 		}
 
-		fun save(fragmentManager: FragmentManager, uri: Uri) = getOrCreate(fragmentManager).run {
+		fun save(fragmentManager: FragmentManager, uri: Uri): Unit = getOrCreate(fragmentManager).run {
 			this.bitmap = null
 			this.uri = uri
 		}

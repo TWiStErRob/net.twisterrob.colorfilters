@@ -106,9 +106,9 @@ internal class ScaleComponent(
 	private fun getValue(scaleBar: SeekBar): Float =
 		get(scaleBar, SCALE_MAX - SCALE_MIN, SCALE_MIN)
 
-	private fun setValue(component: Int, value: Float) =
+	private fun setValue(component: Int, value: Float): Unit =
 		set(scaleRGBA[component], SCALE_MAX - SCALE_MIN, SCALE_MIN, value)
 
-	private fun setValue(scaleBar: SeekBar, value: Float) =
+	private fun setValue(scaleBar: SeekBar, value: Float): Unit =
 		set(scaleBar, SCALE_MAX - SCALE_MIN, SCALE_MIN, value)
 }
