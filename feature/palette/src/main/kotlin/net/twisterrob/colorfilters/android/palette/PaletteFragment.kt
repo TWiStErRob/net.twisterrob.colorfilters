@@ -238,10 +238,10 @@ class PaletteFragment : ColorFilterFragment() {
 					"<!-- ${name} not available -->\n"
 				} else {
 					"""
-					<!-- ${name} -->
-					<color name="${name}">${swatch.rgb.toRGBHexString("#")}</color>
-					<color name="${name}_title">${swatch.titleTextColor.toRGBHexString("#")}</color>
-					<color name="${name}_body">${swatch.bodyTextColor.toRGBHexString("#")}</color>
+						<!-- ${name} -->
+						<color name="${name}">${swatch.rgb.toRGBHexString("#")}</color>
+						<color name="${name}_title">${swatch.titleTextColor.toRGBHexString("#")}</color>
+						<color name="${name}_body">${swatch.bodyTextColor.toRGBHexString("#")}</color>
 					""".trimIndent()
 				}
 		}
