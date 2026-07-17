@@ -42,26 +42,24 @@ class BitmapKeeper : Fragment() {
 	companion object {
 
 		fun into(fragmentManager: FragmentManager, imageView: ImageView, listener: Listener): Boolean {
-			getCurrent(fragmentManager)?.let { fragment ->
-				fragment.bitmap?.let { bitmap ->
-					imageView.setImageBitmap(bitmap)
-					listener.loadComplete()
-					return true
-				}
-				fragment.uri?.let { uri ->
-					Glide
-						.with(imageView.context)
-						.load(uri)
-						.apply(
-							RequestOptions()
-								.dontTransform()
-						)
-						.listener(GlideRequestListener(listener))
-						.into(imageView)
-					return true
-				}
+			val fragment = getCurrent(fragmentManager) ?: return false
+			val bitmap = fragment.bitmap
+			if (bitmap != null) {
+				imageView.setImageBitmap(bitmap)
+				listener.loadComplete()
+				return true
 			}
-			return false
+			val uri = fragment.uri ?: return false
+			Glide
+				.with(imageView.context)
+				.load(uri)
+				.apply(
+					RequestOptions()
+						.dontTransform()
+				)
+				.listener(GlideRequestListener(listener))
+				.into(imageView)
+			return true
 		}
 
 		fun clear(fragmentManager: FragmentManager): Unit = getOrCreate(fragmentManager).run {

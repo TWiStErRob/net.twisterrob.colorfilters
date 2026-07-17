@@ -160,9 +160,10 @@ class SwatchChooser(swatches: Collection<Swatch>) : Drawable(), View.OnTouchList
 			MotionEvent.ACTION_DOWN -> {
 				val x = (event.x - v.paddingLeft).toInt()
 				val y = (event.y - v.paddingTop).toInt()
-				onSwatchChangeListener?.apply {
-					val swatch = at(x, y)
-					swatch?.let { swatchSelected(it) }
+				val listener = onSwatchChangeListener
+				val swatch = at(x, y)
+				if (listener != null && swatch != null) {
+					listener.swatchSelected(swatch)
 				}
 				v.performClick()
 				return true

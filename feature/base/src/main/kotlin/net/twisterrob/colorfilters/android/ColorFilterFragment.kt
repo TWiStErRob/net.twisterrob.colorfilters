@@ -86,12 +86,12 @@ abstract class ColorFilterFragment : Fragment() {
 
 	private fun share() {
 		val image = listener.renderCurrentView(getString(R.string.cf_share_subject), generateCode())
+		val sharedText: CharSequence = SpannableStringBuilder().apply {
+			append(getText(R.string.cf_share_text))
+			append("\n\n")
+			append(generateFormattedCode())
+		}
 		val intent = Intent(Intent.ACTION_SEND).apply {
-			val sharedText: CharSequence = SpannableStringBuilder().apply {
-				append(getText(R.string.cf_share_text))
-				append("\n\n")
-				append(generateFormattedCode())
-			}
 			type = "image/jpeg" //NON-NLS
 			putExtra(Intent.EXTRA_SUBJECT, getString(R.string.cf_share_subject))
 			putExtra(Intent.EXTRA_TEXT, sharedText)
