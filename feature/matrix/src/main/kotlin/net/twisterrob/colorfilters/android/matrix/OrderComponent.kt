@@ -142,7 +142,7 @@ internal class OrderComponent(
 		}
 	}
 
-	private class OrderDragLocalState(val view: View)
+	private data class OrderDragLocalState(val view: View)
 
 	private class ItemDragListener(
 		private val listener: ChangeListener,

@@ -9,7 +9,7 @@ import org.junit.jupiter.api.TestFactory
 
 class ColorUtilsKtTest {
 
-	class ReplaceAlphaFrom(
+	data class ReplaceAlphaFrom(
 		val useCase: String,
 		@ColorInt val receiver: Int,
 		@ColorInt val param: Int,
