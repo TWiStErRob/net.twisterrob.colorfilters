@@ -1,12 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><!-- Supported HTML: StringBlock.get -->
+<resources>
 
-	<string name="cf_matrix_info_title">ColorMatrixColorFilter(matrix)</string>
-	<string name="cf_matrix_info">This is a color filter that transforms colors through a 4x5 color <tt>matrix</tt>.
-        \n\nThe <tt>matrix</tt> is copied into the filter, so changes made to it after the filter is constructed will not be reflected in the filter.
-    </string>
-
-	<!-- API 23+ supports HTML text colors directly; values-v23 retains the same explicit variant. -->
+	<!-- Before 23 there's no need to hack around: http://www.twisterrob.net/blog/2016/09/android-xml-colors.html
+	     see base in default resource folder. -->
 	<string name="cf_matrix_R"><font fgcolor="#FFFF0000">R</font>:</string>
 	<string name="cf_matrix_G"><font fgcolor="#FF00FF00">G</font>:</string>
 	<string name="cf_matrix_B"><font fgcolor="#FF0000FF">B</font>:</string>
