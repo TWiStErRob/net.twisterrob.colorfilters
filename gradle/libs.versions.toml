@@ -50,7 +50,6 @@ kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.
 kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
 kotlin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "kotlin-detekt" }
 android-gradle = { module = "com.android.tools.build:gradle", version.ref = "agp" }
-android-legacy-kapt = { module = "com.android.legacy-kapt:com.android.legacy-kapt.gradle.plugin", version.ref = "agp" }
 twisterrob-quality = { module = "net.twisterrob.gradle:twister-quality", version.ref = "twisterrob" }
 twisterrob-android = { module = "net.twisterrob.gradle:twister-convention-plugins", version.ref = "twisterrob" }
 
@@ -94,3 +93,4 @@ jmh-processor = { module = "org.openjdk.jmh:jmh-generator-annprocess", version.r
 [bundles]
 
 [plugins]
+android-legacy-kapt = { id = "com.android.legacy-kapt", version.ref = "agp" }

@@ -10,7 +10,6 @@ dependencies {
 
 	configurations.all { resolutionStrategy.cacheChangingModulesFor(0, TimeUnit.SECONDS) /* -SNAPSHOT */ }
 	implementation(libs.android.gradle)
-	implementation(libs.android.legacy.kapt)
 	implementation(libs.twisterrob.quality)
 	implementation(libs.twisterrob.android)
 	// TODEL https://github.com/gradle/gradle/issues/15383
