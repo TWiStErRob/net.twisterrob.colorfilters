@@ -130,7 +130,7 @@ class ResourceFontFragment : ColorFilterFragment() {
 		row.removeViews(resolvedAt, removeCount)
 		params.span += removeCount // two rendered + two divider
 		@SuppressLint("SetTextI18n")
-		resolved.text = "${ex.javaClass.simpleName}\n${ex.message}"
+		resolved.text = "${ex.javaClass.simpleName}\n${ex.message ?: ex}"
 	}
 
 	private fun getColor(text: CharSequence): String? {
