@@ -17,6 +17,7 @@ class HexKeyboardHandler(
 		keyboardView.setOnKeyboardActionListener(MyOnKeyboardActionListener())
 	}
 
+	@Suppress("detekt.UnnecessaryInnerClass") // The inner superclass requires this handler as its outer receiver.
 	private inner class MyOnKeyboardActionListener : BaseKeyboardHandler.BaseOnKeyboardActionListener() {
 
 		override fun onKey(editor: EditText, primaryCode: Int, keyCodes: IntArray): Boolean {

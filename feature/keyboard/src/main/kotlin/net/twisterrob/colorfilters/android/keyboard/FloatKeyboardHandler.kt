@@ -19,6 +19,7 @@ open class FloatKeyboardHandler(
 		keyboardView.setOnKeyboardActionListener(FloatKeyboardActionListener())
 	}
 
+	@Suppress("detekt.UnnecessaryInnerClass") // The inner superclass requires this handler as its outer receiver.
 	protected open inner class FloatKeyboardActionListener : BaseOnKeyboardActionListener() {
 
 		override fun onKey(editor: EditText, primaryCode: Int, keyCodes: IntArray): Boolean {
