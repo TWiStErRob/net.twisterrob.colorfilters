@@ -9,6 +9,10 @@ comments:
     # Disabled as this is not a public library.
     active: false
 
+  UndocumentedPublicFunction:
+    # Disabled as this is not a public library.
+    active: false
+
 
 complexity:
 
