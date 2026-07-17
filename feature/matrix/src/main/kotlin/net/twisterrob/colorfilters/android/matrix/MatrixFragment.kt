@@ -117,6 +117,7 @@ class MatrixFragment : ColorFilterFragment() {
 		saveToPreferences(prefs)
 	}
 
+	@Suppress("detekt.MissingSuperCall") // super.onDestroyView() is called after unwiring view-bound components.
 	override fun onDestroyView() {
 		editor.unWire()
 		super.onDestroyView()
