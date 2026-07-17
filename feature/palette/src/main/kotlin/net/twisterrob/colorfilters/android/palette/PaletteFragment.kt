@@ -431,7 +431,7 @@ class PaletteFragment : ColorFilterFragment() {
 
 		override fun getItemId(position: Int): Long {
 			val item = getItem(position)
-			return item?.run { rgb.toLong() } ?: 0
+			return item?.let { it.rgb.toLong() } ?: 0
 		}
 
 		override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
