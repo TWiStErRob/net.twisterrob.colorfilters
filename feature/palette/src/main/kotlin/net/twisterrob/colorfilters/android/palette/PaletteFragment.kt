@@ -462,10 +462,10 @@ class PaletteFragment : ColorFilterFragment() {
 				)
 				holder.titleText.setBackgroundColor(swatch.rgb)
 				holder.titleText.setTextColor(swatch.titleTextColor)
-				holder.titleText.text = "Title: %s".format(swatch.titleTextColor.toRGBHexString("#"))
+				holder.titleText.text = "Title: " + swatch.titleTextColor.toRGBHexString("#")
 				holder.bodyText.setBackgroundColor(swatch.rgb)
 				holder.bodyText.setTextColor(swatch.bodyTextColor)
-				holder.bodyText.text = "Body: %s".format(swatch.bodyTextColor.toRGBHexString("#"))
+				holder.bodyText.text = "Body: " + swatch.bodyTextColor.toRGBHexString("#")
 				holder.population.text = swatch.population.asString()
 			} else {
 				holder.colorText.setText(R.string.cf_palette_missing)
