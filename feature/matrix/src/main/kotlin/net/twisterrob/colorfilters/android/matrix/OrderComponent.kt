@@ -139,7 +139,8 @@ internal class OrderComponent(
 		}
 	}
 
-	private data class OrderDragLocalState(val view: View)
+	@Suppress("detekt.UseDataClass")
+	private class OrderDragLocalState(val view: View)
 
 	private class ItemDragListener(
 		private val listener: ChangeListener,

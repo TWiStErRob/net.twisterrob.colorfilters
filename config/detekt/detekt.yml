@@ -79,6 +79,10 @@ style:
     # Qualified names disambiguate Android resources and occasional platform or extension references locally.
     active: false
 
+  UseDataClass:
+    # Test-case holders do not need value semantics merely because they only contain fixture data.
+    excludes: [ '**/test/**', '**/androidTest/**' ]
+
   ReturnCount:
     max: 3
     excludedFunctions:

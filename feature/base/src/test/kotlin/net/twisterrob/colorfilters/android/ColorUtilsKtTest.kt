@@ -9,7 +9,7 @@ import org.junit.jupiter.api.TestFactory
 
 class ColorUtilsKtTest {
 
-	data class ToString(
+	class ToString(
 		val useCase: String,
 		@ColorInt val receiver: Int,
 		val expected: String,
