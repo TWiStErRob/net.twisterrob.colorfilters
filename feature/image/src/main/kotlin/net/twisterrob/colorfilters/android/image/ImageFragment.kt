@@ -93,7 +93,7 @@ class ImageFragment : Fragment() {
 			}
 
 			override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-				@Suppress("LiftReturnOrAssignment", "OptionalWhenBraces", "detekt.UseIfInsteadOfWhen")
+				@Suppress("detekt.UseIfInsteadOfWhen")
 				when (menuItem.itemId) {
 					R.id.action_image -> {
 						startLoadImage(false)
@@ -149,7 +149,6 @@ class ImageFragment : Fragment() {
 		permission: String,
 		rationale: (() -> Unit)? = null
 	): Boolean {
-		@Suppress("LiftReturnOrAssignment")
 		if (VERSION_CODES.M <= VERSION.SDK_INT
 			&& ContextCompat.checkSelfPermission(requireContext(), permission) != PackageManager.PERMISSION_GRANTED
 		) {

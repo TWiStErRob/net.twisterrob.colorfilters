@@ -22,7 +22,7 @@ import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 import kotlin.math.sqrt
 
-@Suppress("MagicNumber")
+@Suppress("detekt.MagicNumber")
 private val sizes = mapOf(
 	"ldpi" to 36,
 	"mdpi" to 48,
@@ -50,7 +50,7 @@ object LogoGenerator {
 	private fun Bitmap.toByteArray(format: CompressFormat): ByteArray {
 		val memory = ByteArrayOutputStream()
 		// no .use {} necessary because it's a memory stream
-		this.compress(format, @Suppress("MagicNumber") 100, memory)
+		this.compress(format, @Suppress("detekt.MagicNumber") 100, memory)
 		return memory.toByteArray()
 	}
 
@@ -72,12 +72,12 @@ object LogoGenerator {
 		private var cy: Int = 0
 
 		override fun initializeInvariants(@IntRange(from = 0) w: Int, @IntRange(from = 0) h: Int) {
-			this.w = w / 2 / @Suppress("MagicNumber") 6
+			this.w = w / 2 / @Suppress("detekt.MagicNumber") 6
 			this.cx = w / 2
 			this.cy = w / 2
 		}
 
-		@Suppress("MagicNumber")
+		@Suppress("detekt.MagicNumber")
 		@ColorInt
 		override fun getPixelColorAt(@IntRange(from = 0/*, to = w*/) x: Int, @IntRange(from = 0/*, to = h*/) y: Int): Int {
 			val angle = FastMath.Atan2Faster.atan2((y - cy).toFloat(), (x - cx).toFloat()) + PI // [0, 2pi]
@@ -96,7 +96,7 @@ object LogoGenerator {
 		 * Twisted desaturation with off-ratios.
 		 * CONSIDER desaturating by setting sat before the color is calculated
 		 */
-		@Suppress("MagicNumber")
+		@Suppress("detekt.MagicNumber")
 		@ColorInt
 		private fun desaturate(@ColorInt color: Int): Int {
 			val r = (0.4 * color.red + 0.4 * color.green + 0.2 * color.blue).toInt()

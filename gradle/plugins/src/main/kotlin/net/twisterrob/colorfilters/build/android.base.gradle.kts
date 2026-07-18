@@ -41,7 +41,6 @@ android {
 
 		// TODEL https://issuetracker.google.com/issues/378076280
 		androidComponents.finalizeDsl {
-			@Suppress("UnstableApiUsage")
 			if (buildFeatures.viewBinding == true || project.path == ":app") {
 				disable += "UnusedIds"
 			}

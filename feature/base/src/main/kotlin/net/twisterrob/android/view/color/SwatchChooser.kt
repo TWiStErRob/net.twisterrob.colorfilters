@@ -52,7 +52,7 @@ class SwatchChooser(swatches: Collection<Swatch>) : Drawable(), View.OnTouchList
 		image = null
 	}
 
-	@Suppress("NestedBlockDepth") // Needs a rethink.
+	@Suppress("detekt.NestedBlockDepth") // Needs a rethink.
 	private fun layout() {
 		val bounds = bounds
 		val w = bounds.width()

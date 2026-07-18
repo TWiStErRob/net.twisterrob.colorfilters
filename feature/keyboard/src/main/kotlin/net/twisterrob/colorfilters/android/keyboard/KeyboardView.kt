@@ -16,7 +16,7 @@ import android.util.AttributeSet
  */
 @Suppress("OVERRIDE_DEPRECATION") // KeyboardView is deprecated, but the overridden methods need to be used.
 class KeyboardView :
-	@Suppress("DEPRECATION", "UnnecessaryFullyQualifiedName")
+	@Suppress("DEPRECATION", "detekt.UnnecessaryFullyQualifiedName")
 	android.inputmethodservice.KeyboardView {
 
 	@Suppress("DEPRECATION")
@@ -50,7 +50,7 @@ class KeyboardView :
 	private var keyboardChanged = false
 
 	override fun setKeyboard(
-		@Suppress("DEPRECATION", "UnnecessaryFullyQualifiedName")
+		@Suppress("DEPRECATION", "detekt.UnnecessaryFullyQualifiedName")
 		keyboard: android.inputmethodservice.Keyboard,
 	) {
 		@Suppress("DEPRECATION")

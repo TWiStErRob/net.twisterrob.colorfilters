@@ -159,7 +159,7 @@ class MainActivity : AppCompatActivity()
 					}
 				}
 				true
-			} catch (@Suppress("TooGenericExceptionCaught") ignore: RuntimeException) {
+			} catch (@Suppress("detekt.TooGenericExceptionCaught") ignore: RuntimeException) {
 				// TODO don't know what can go wrong here, but if it happens don't do anything.
 				false
 			}
@@ -183,7 +183,6 @@ class MainActivity : AppCompatActivity()
 
 	@SuppressLint("LogConditional")
 	private fun onMenuItemSelected(item: MenuItem): Boolean {
-		@Suppress("OptionalWhenBraces")
 		when (item.itemId) {
 			android.R.id.home -> {
 				startActivity(Intent(applicationContext, AboutActivity::class.java))
@@ -259,7 +258,7 @@ class MainActivity : AppCompatActivity()
 		super.onBackPressed()
 	}
 
-	@Suppress("MagicNumber")
+	@Suppress("detekt.MagicNumber")
 	private fun createFragment(position: Int): ColorFilterFragment =
 		when (position) {
 			0 -> LightingFragment()
@@ -270,7 +269,7 @@ class MainActivity : AppCompatActivity()
 			else -> error("Unknown position $position")
 		}
 
-	@Suppress("MagicNumber")
+	@Suppress("detekt.MagicNumber")
 	private fun getPosition(fragment: Fragment?): Int =
 		when (fragment) {
 			is LightingFragment -> 0

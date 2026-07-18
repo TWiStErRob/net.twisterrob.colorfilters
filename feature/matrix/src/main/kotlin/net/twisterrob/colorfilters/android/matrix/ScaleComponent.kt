@@ -80,7 +80,7 @@ internal class ScaleComponent(
 		val gScale = getValue(COMP_G)
 		val bScale = getValue(COMP_B)
 		val aScale = getValue(COMP_A)
-		@Suppress("ComplexCondition")
+		@Suppress("detekt.ComplexCondition")
 		if (rScale != NO_SCALE || gScale != NO_SCALE || bScale != NO_SCALE || aScale != NO_SCALE) {
 			@Suppress("detekt.CascadingCallWrapping")
 			sb.append("\ntemp.setScale(")

@@ -84,7 +84,7 @@ class ResourceFontFragment : ColorFilterFragment() {
 			resultBlack.text = resultText
 			resultWhite.text = resultText
 			resolved.text = getColor(resultText)
-		} catch (@Suppress("TooGenericExceptionCaught") ex: Exception) {
+		} catch (@Suppress("detekt.TooGenericExceptionCaught") ex: Exception) {
 			// Anything can happen, make sure we don't crash,
 			// but rather handle it nicely by showing the error to the user (developer).
 			setError(row, ex)
@@ -113,7 +113,7 @@ class ResourceFontFragment : ColorFilterFragment() {
 			resultBlack.text = resultText
 			resultWhite.text = resultText
 			resolved.text = getColor(resultText)
-		} catch (@Suppress("TooGenericExceptionCaught") ex: Exception) {
+		} catch (@Suppress("detekt.TooGenericExceptionCaught") ex: Exception) {
 			// Anything can happen, make sure we don't crash,
 			// but rather handle it nicely by showing the error to the user (developer).
 			setError(row, ex)

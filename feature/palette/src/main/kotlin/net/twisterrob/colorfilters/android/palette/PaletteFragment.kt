@@ -76,7 +76,7 @@ class PaletteFragment : ColorFilterFragment() {
 			return null
 		}
 		val selectedColor = swatchList.adapter.getItemId(pos).toInt()
-		val color = selectedColor.replaceAlpha(@Suppress("MagicNumber") 0x60)
+		val color = selectedColor.replaceAlpha(@Suppress("detekt.MagicNumber") 0x60)
 		return PorterDuffColorFilter(color, PorterDuff.Mode.SRC_OVER)
 	}
 
@@ -148,7 +148,7 @@ class PaletteFragment : ColorFilterFragment() {
 					val numColors = s.toString().fromString()
 					updateNumColors(numColors, UpdateOrigin.Editor)
 					numColorEditor.error = null
-				} catch (@Suppress("TooGenericExceptionCaught") ex: RuntimeException) {
+				} catch (@Suppress("detekt.TooGenericExceptionCaught") ex: RuntimeException) {
 					//Log.w(TAG, "Cannot parse color: " + s, ex);
 					numColorEditor.error = ex.message + " " + s
 				}
@@ -169,7 +169,7 @@ class PaletteFragment : ColorFilterFragment() {
 					val resizeDimen = s.toString().fromString()
 					updateResizeDimen(resizeDimen, UpdateOrigin.Editor)
 					resizeDimenEditor.error = null
-				} catch (@Suppress("TooGenericExceptionCaught") ex: RuntimeException) {
+				} catch (@Suppress("detekt.TooGenericExceptionCaught") ex: RuntimeException) {
 					//Log.w(TAG, "Cannot parse color: ${s}", ex)
 					resizeDimenEditor.error = ex.message + " " + s
 				}
@@ -464,8 +464,8 @@ class PaletteFragment : ColorFilterFragment() {
 				holder.colorText.text = "%s\n%.0f°, %.0f%%, %.0f%%%s".formatRoot(
 					swatch.rgb.toRGBHexString("#"),
 					hsl[0],
-					hsl[1] * @Suppress("MagicNumber") 100,
-					hsl[2] * @Suppress("MagicNumber") 100,
+					hsl[1] * @Suppress("detekt.MagicNumber") 100,
+					hsl[2] * @Suppress("detekt.MagicNumber") 100,
 					if (type != null) "\n" + type else ""
 				)
 				holder.titleText.setBackgroundColor(swatch.rgb)
@@ -507,7 +507,7 @@ class PaletteFragment : ColorFilterFragment() {
 			this.notifyDataSetChanged()
 		}
 
-		@Suppress("EnumEntryName", "EnumNaming")
+		@Suppress("EnumEntryName", "detekt.EnumNaming")
 		enum class Display(
 			val title: String
 		) {

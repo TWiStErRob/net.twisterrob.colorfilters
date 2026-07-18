@@ -32,7 +32,7 @@ internal class MatrixComponent(
 						try {
 							dispatchRefresh(false)
 							et.error = null
-						} catch (@Suppress("TooGenericExceptionCaught") ex: RuntimeException) {
+						} catch (@Suppress("detekt.TooGenericExceptionCaught") ex: RuntimeException) {
 							// No idea what could go wrong, but catch it. 😲
 							et.error = ex.message
 						}
@@ -107,7 +107,7 @@ internal class MatrixComponent(
 	override fun appendTo(sb: StringBuilder): Boolean {
 		sb.append("\nnew ColorMatrix(new float[] {")
 		for (i in editors.indices) {
-			if (i % @Suppress("MagicNumber") 5 == 0) { // 4 rows x 5 columns color matrix.
+			if (i % @Suppress("detekt.MagicNumber") 5 == 0) { // 4 rows x 5 columns color matrix.
 				sb.append("\n    ")
 			}
 			sb.append(getCode(editors[i]))
@@ -144,7 +144,7 @@ internal class MatrixComponent(
 		private fun getCode(edit: EditText): String =
 			try {
 				getDisplay(getValue(edit)) + "f"
-			} catch (@Suppress("TooGenericExceptionCaught") ex: RuntimeException) {
+			} catch (@Suppress("detekt.TooGenericExceptionCaught") ex: RuntimeException) {
 				// Don't crash, fall back to showing error message.
 				"0 /* " + edit.text + ": " + ex.message + " */"
 			}

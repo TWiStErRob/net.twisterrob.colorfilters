@@ -61,7 +61,6 @@ abstract class ColorFilterFragment : Fragment() {
 			}
 
 			override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-				@Suppress("LiftReturnOrAssignment", "OptionalWhenBraces")
 				when (menuItem.itemId) {
 					R.id.action_info -> {
 						displayHelp()
@@ -143,7 +142,7 @@ abstract class ColorFilterFragment : Fragment() {
 	protected abstract fun generateCode(): CharSequence
 
 	private fun generateFormattedCode(): CharSequence =
-		@Suppress("MagicNumber")
+		@Suppress("detekt.MagicNumber")
 		SpannableString(generateCode()).apply {
 			setSpan(TypefaceSpan("monospace"), 0, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
 			setSpan(RelativeSizeSpan(0.6f), 0, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)

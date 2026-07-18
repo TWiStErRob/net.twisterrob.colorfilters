@@ -58,12 +58,11 @@ class ColorFilterFragmentHost(
 
 		const val EXTRA_FRAGMENT = "fragment"
 
-		@Suppress("MaxLineLength") // There's no nice way to format this, so just accept long lines.
 		fun <T : ColorFilterFragment> rule(clazz: KClass<T>):
-				@Suppress("DEPRECATION", "UnnecessaryFullyQualifiedName")
+				@Suppress("DEPRECATION", "detekt.UnnecessaryFullyQualifiedName")
 				androidx.test.rule.ActivityTestRule<ColorFilterFragmentHost> =
 			object :
-				@Suppress("DEPRECATION", "UnnecessaryFullyQualifiedName")
+				@Suppress("DEPRECATION", "detekt.UnnecessaryFullyQualifiedName")
 				androidx.test.rule.ActivityTestRule<ColorFilterFragmentHost>(
 					ColorFilterFragmentHost::class.java
 				) {

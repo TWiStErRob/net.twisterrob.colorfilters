@@ -75,7 +75,7 @@ abstract class BaseKeyboardHandler(
 			val setShowSoftInputOnFocus =
 				editText::class.java.getMethod("setShowSoftInputOnFocus", Boolean::class.java)
 			setShowSoftInputOnFocus(editText, false)
-		} catch (@Suppress("TooGenericExceptionCaught") ex: Exception) {
+		} catch (@Suppress("detekt.TooGenericExceptionCaught") ex: Exception) {
 			// It's a hack, anything can go wrong.
 			Log.w("HACK", "Could not turn off input focus for EditText: $editText", ex)
 		}
@@ -221,7 +221,6 @@ abstract class BaseKeyboardHandler(
 
 		override fun onText(text: CharSequence?) {
 			val editor = findEdit()
-			@Suppress("FoldInitializerAndIfToElvis")
 			if (editor == null) {
 				//? hideCustomKeyboard()
 				return
