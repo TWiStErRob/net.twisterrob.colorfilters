@@ -1,5 +1,6 @@
 plugins {
 	id("net.twisterrob.colorfilters.component")
+	alias(libs.plugins.android.legacy.kapt)
 }
 
 dependencies {
