@@ -150,9 +150,7 @@ class ImageFragment : Fragment() {
 		rationale: (() -> Unit)? = null
 	): Boolean {
 		@Suppress("LiftReturnOrAssignment")
-		if (VERSION_CODES.M <= VERSION.SDK_INT
-			&& ContextCompat.checkSelfPermission(requireContext(), permission) != PackageManager.PERMISSION_GRANTED
-		) {
+		if (ContextCompat.checkSelfPermission(requireContext(), permission) != PackageManager.PERMISSION_GRANTED) {
 			if (rationale != null && shouldShowRequestPermissionRationale(permission)) {
 				rationale()
 			} else {
