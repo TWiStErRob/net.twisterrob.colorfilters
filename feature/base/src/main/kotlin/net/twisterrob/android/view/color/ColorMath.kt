@@ -6,6 +6,7 @@ import android.graphics.Color
 import androidx.annotation.ColorInt
 import androidx.annotation.FloatRange
 
+@Suppress("detekt.UnnecessaryFullyQualifiedName")
 const val PI: Float = kotlin.math.PI.toFloat()
 
 fun ofMap(value: Int, inputMin: Int, inputMax: Int, outputMin: Int, outputMax: Int): Float =
@@ -43,7 +44,10 @@ fun ofMap(value: Float, inputMin: Float, inputMax: Float, outputMin: Float, outp
  * @param alpha      `[0, 1]`
  * @return ARGB color
  */
-@Suppress("MagicNumber")
+@Suppress(
+	"detekt.MagicNumber",
+	"detekt.OutdatedDocumentation", // TODEL https://github.com/detekt/detekt/issues/9527
+)
 @ColorInt
 fun fromHsb(
 	@FloatRange(from = 0.0, to = 1.0) hue: Float,

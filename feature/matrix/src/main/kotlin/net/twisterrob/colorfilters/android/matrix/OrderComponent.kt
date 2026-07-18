@@ -99,10 +99,9 @@ internal class OrderComponent(
 		// no touchy
 	}
 
-	override fun appendTo(sb: StringBuilder): Boolean {
+	override fun appendTo(sb: StringBuilder): Boolean =
 		// no visual representation, the order of other components will reflect this
-		return false
-	}
+		false
 
 	/**
 	 * @param components must match the order in [comps].
@@ -128,9 +127,8 @@ internal class OrderComponent(
 	@SuppressLint("ClickableViewAccessibility")
 	private class DragStartListener : View.OnTouchListener {
 
-		override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
-			return motionEvent.action == MotionEvent.ACTION_DOWN && startDragAndDrop(view)
-		}
+		override fun onTouch(view: View, motionEvent: MotionEvent): Boolean =
+			motionEvent.action == MotionEvent.ACTION_DOWN && startDragAndDrop(view)
 
 		private fun startDragAndDrop(view: View): Boolean {
 			return if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
@@ -142,6 +140,7 @@ internal class OrderComponent(
 		}
 	}
 
+	@Suppress("detekt.UseDataClass")
 	private class OrderDragLocalState(val view: View)
 
 	private class ItemDragListener(
@@ -165,11 +164,13 @@ internal class OrderComponent(
 					dropTarget.setBackground(R.drawable.matrix_order_drop)
 				}
 
-				DragEvent.ACTION_DRAG_ENTERED ->
+				DragEvent.ACTION_DRAG_ENTERED -> {
 					dropTarget.setBackground(R.drawable.matrix_order_drop_active)
+				}
 
-				DragEvent.ACTION_DRAG_EXITED ->
+				DragEvent.ACTION_DRAG_EXITED -> {
 					dropTarget.setBackground(R.drawable.matrix_order_drop)
+				}
 
 				DragEvent.ACTION_DRAG_ENDED -> {
 					dragged.post { dragged.isVisible = true }

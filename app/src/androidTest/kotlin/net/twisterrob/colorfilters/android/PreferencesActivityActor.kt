@@ -20,6 +20,7 @@ import net.twisterrob.colorfilters.android.app.R
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.Matchers.equalTo
+import net.twisterrob.colorfilters.android.about.R as AboutR
 
 class PreferencesActivityActor {
 
@@ -51,7 +52,7 @@ class PreferencesActivityActor {
 	}
 
 	fun openAbout(): AboutActivityActor {
-		onView(withText(net.twisterrob.colorfilters.android.about.R.string.cf_about_title))
+		onView(withText(AboutR.string.cf_about_title))
 			.perform(click())
 		return AboutActivityActor()
 	}

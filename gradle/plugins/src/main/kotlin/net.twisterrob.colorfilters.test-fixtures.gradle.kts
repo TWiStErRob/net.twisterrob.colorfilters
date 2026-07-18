@@ -16,6 +16,5 @@ dependencies {
 
 android {
 	namespace = "${owningModule.autoNamespace}.fixtures"
-	@Suppress("UnstableApiUsage")
 	buildFeatures.buildConfig = false
 }

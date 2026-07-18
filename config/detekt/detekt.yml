@@ -3,7 +3,57 @@ config:
   warningsAsErrors: true
 
 
+comments:
+
+  DocumentationOverPrivateFunction:
+    # Private functions can still need documentation; visibility does not make intent self-explanatory.
+    active: false
+
+  DocumentationOverPrivateProperty:
+    # Private properties can still need documentation; visibility does not make intent self-explanatory.
+    active: false
+
+  UndocumentedPublicClass:
+    # Disabled as this is not a public library.
+    active: false
+
+  UndocumentedPublicFunction:
+    # Disabled as this is not a public library.
+    active: false
+
+  UndocumentedPublicProperty:
+    # Disabled as this is not a public library.
+    active: false
+
+
+potential-bugs:
+
+  LateinitUsage:
+    # Android framework instances initialize these fields during their lifecycle.
+    ignoreOnClassesPattern: '.*(Activity|Fragment|View)$'
+
+  UnnamedParameterUse:
+    # Positional arguments remain readable in short, strongly typed Android and graphics calls.
+    active: false
+
+  PropertyUsedBeforeDeclaration:
+    # Android declarations are grouped by lifecycle and domain rather than first-use order.
+    active: false
+
+naming:
+
+  BooleanPropertyNaming:
+    # Boolean roles are also clear from adjectives, participles, and domain phrases without a forced prefix.
+    # TODO Review and enable incrementally
+    active: false
+
+
 complexity:
+
+  NamedArguments:
+    # Positional arguments remain readable in short, strongly typed Android and graphics calls.
+    # TODO Review and enable incrementally
+    active: false
 
   TooManyFunctions:
     active: false
@@ -11,8 +61,32 @@ complexity:
 
 style: 
 
+  ClassOrdering:
+    # Android declarations are grouped by lifecycle and domain rather than visibility or declaration kind.
+    active: false
+
+  NoTabs:
+    # I'm a tab guy, I don't pay for space in advance.
+    active: false
+
   MaxLineLength:
     excludeCommentStatements: true
+
+  MultilineRawStringIndentation:
+    # Indentation uses tabs, so one indentation unit is one character.
+    indentSize: 1
+
+  UnnecessaryFullyQualifiedName:
+    # Qualified names disambiguate Android resources and occasional platform references locally.
+    # TODEL when https://github.com/detekt/detekt/pull/9301 lands in alpha-06.
+    active: false
+    #ignoredFullyQualifiedNames:
+    #  - 'android.R'
+    #  - 'androidx.appcompat.R'
+
+  UseDataClass:
+    # Test-case holders do not need value semantics merely because they only contain fixture data.
+    excludes: [ '**/test/**', '**/androidTest/**' ]
 
   ReturnCount:
     max: 3

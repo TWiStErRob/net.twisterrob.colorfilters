@@ -58,9 +58,14 @@ class ColorFilterFragmentHost(
 
 		const val EXTRA_FRAGMENT = "fragment"
 
-		@Suppress("MaxLineLength") // There's no nice way to format this, so just accept long lines.
-		fun <T : ColorFilterFragment> rule(clazz: KClass<T>): @Suppress("DEPRECATION") androidx.test.rule.ActivityTestRule<ColorFilterFragmentHost> =
-			object : @Suppress("DEPRECATION") androidx.test.rule.ActivityTestRule<ColorFilterFragmentHost>(ColorFilterFragmentHost::class.java) {
+		fun <T : ColorFilterFragment> rule(clazz: KClass<T>):
+				@Suppress("DEPRECATION", "detekt.UnnecessaryFullyQualifiedName")
+				androidx.test.rule.ActivityTestRule<ColorFilterFragmentHost> =
+			object :
+				@Suppress("DEPRECATION", "detekt.UnnecessaryFullyQualifiedName")
+				androidx.test.rule.ActivityTestRule<ColorFilterFragmentHost>(
+					ColorFilterFragmentHost::class.java
+				) {
 				/**
 				 * Magical reference to the intent launching the activity in order to launch activity in test package.
 				 */

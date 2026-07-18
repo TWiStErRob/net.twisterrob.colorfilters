@@ -57,7 +57,9 @@ class MainActivity : AppCompatActivity()
 				Intent(context, PreferencesActivity::class.java)
 
 			// No actual result, just want a notification of return from preferences.
-			override fun parseResult(resultCode: Int, intent: Intent?): Unit = Unit
+			override fun parseResult(resultCode: Int, intent: Intent?) {
+				// No result to parse.
+			}
 		}) {
 			kbd = null
 			val fragment = currentFragment
@@ -71,6 +73,7 @@ class MainActivity : AppCompatActivity()
 		}
 
 	private val currentFragment: ColorFilterFragment?
+		@Suppress("detekt.CastToNullableType")
 		get() = supportFragmentManager.findFragmentById(R.id.container) as ColorFilterFragment?
 
 	override val currentBitmap: Bitmap?
@@ -110,7 +113,7 @@ class MainActivity : AppCompatActivity()
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_color_filter)
 
-		images = supportFragmentManager.findFragmentById(R.id.images) as ImageFragment
+		images = requireNotNull(supportFragmentManager.findFragmentById(R.id.images)) as ImageFragment
 
 		actionBar.apply {
 			setDisplayShowTitleEnabled(false)
@@ -155,10 +158,10 @@ class MainActivity : AppCompatActivity()
 						replace(R.id.container, fragment)
 					}
 				}
-				return@OnNavigationListener true
-			} catch (@Suppress("TooGenericExceptionCaught") ignore: RuntimeException) {
+				true
+			} catch (@Suppress("detekt.TooGenericExceptionCaught") ignore: RuntimeException) {
 				// TODO don't know what can go wrong here, but if it happens don't do anything.
-				return@OnNavigationListener false
+				false
 			}
 		})
 	}
@@ -180,7 +183,6 @@ class MainActivity : AppCompatActivity()
 
 	@SuppressLint("LogConditional")
 	private fun onMenuItemSelected(item: MenuItem): Boolean {
-		@Suppress("OptionalWhenBraces")
 		when (item.itemId) {
 			android.R.id.home -> {
 				startActivity(Intent(applicationContext, AboutActivity::class.java))
@@ -205,7 +207,7 @@ class MainActivity : AppCompatActivity()
 				val title = getText(BaseR.string.cf_share_picker_title)
 				startActivity(Intent.createChooser(intent, title))
 
-				images.load(ZipFile(logoZip).let { zip ->
+				images.load(ZipFile(logoZip).use { zip ->
 					val biggest = zip
 						.entries()
 						.asSequence()
@@ -256,7 +258,7 @@ class MainActivity : AppCompatActivity()
 		super.onBackPressed()
 	}
 
-	@Suppress("MagicNumber")
+	@Suppress("detekt.MagicNumber")
 	private fun createFragment(position: Int): ColorFilterFragment =
 		when (position) {
 			0 -> LightingFragment()
@@ -267,7 +269,7 @@ class MainActivity : AppCompatActivity()
 			else -> error("Unknown position $position")
 		}
 
-	@Suppress("MagicNumber")
+	@Suppress("detekt.MagicNumber")
 	private fun getPosition(fragment: Fragment?): Int =
 		when (fragment) {
 			is LightingFragment -> 0
@@ -284,18 +286,18 @@ class MainActivity : AppCompatActivity()
 	}
 
 	override fun imageChanged() {
-		currentFragment?.let {
-			if (it.isResumed) {
-				it.imageChanged()
+		currentFragment?.let { fragment ->
+			if (fragment.isResumed) {
+				fragment.imageChanged()
 			}
 		}
 	}
 
 	override fun renderCurrentView(title: CharSequence, description: CharSequence): Uri {
 		val file = App.getShareableCachePath(this, "temp.jpg")
-		file.outputStream().use {
+		file.outputStream().use { output ->
 			val shareContent = images.renderPreview()
-			val saved = shareContent.compress(CompressFormat.JPEG, MAX_QUALITY, it)
+			val saved = shareContent.compress(CompressFormat.JPEG, MAX_QUALITY, output)
 			check(saved) {
 				error("Couldn't save generated shared content to ${file.absolutePath}")
 			}

@@ -52,7 +52,7 @@ class SwatchChooser(swatches: Collection<Swatch>) : Drawable(), View.OnTouchList
 		image = null
 	}
 
-	@Suppress("NestedBlockDepth") // Needs a rethink.
+	@Suppress("detekt.NestedBlockDepth") // Needs a rethink.
 	private fun layout() {
 		val bounds = bounds
 		val w = bounds.width()
@@ -109,6 +109,7 @@ class SwatchChooser(swatches: Collection<Swatch>) : Drawable(), View.OnTouchList
 			}
 		}
 
+	@Suppress("detekt.FunctionNameMinLength")
 	fun at(x: Int, y: Int): Swatch? {
 		for (i in locations.indices) {
 			val rect = locations[i]
@@ -154,6 +155,7 @@ class SwatchChooser(swatches: Collection<Swatch>) : Drawable(), View.OnTouchList
 	@TargetApi(Build.VERSION_CODES.Q) // This is a lie, but ObsoleteSdkInt will flag this method when minSdk goes above.
 	override fun getOpacity() = PixelFormat.UNKNOWN
 
+	@Suppress("detekt.NestedScopeFunctions") // TODO Review whether this nesting obscures the listener receiver.
 	override fun onTouch(v: View, event: MotionEvent): Boolean {
 		when (event.action) {
 			MotionEvent.ACTION_DOWN -> {

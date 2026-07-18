@@ -25,6 +25,7 @@ import net.twisterrob.colorfilters.android.keyboard.KeyboardHandler.CustomKeyboa
 
 // http://www.fampennings.nl/maarten/android/09keyboard/index.htm
 // http://forum.xda-developers.com/showthread.php?t=2497237
+@Suppress("detekt.AbstractClassCanBeConcreteClass")
 abstract class BaseKeyboardHandler(
 	protected val window: Window,
 	@Suppress("DEPRECATION")
@@ -61,7 +62,7 @@ abstract class BaseKeyboardHandler(
 	}
 
 	override fun showCustomKeyboard(v: View) {
-		val imm: InputMethodManager = context.requireSystemService() 
+		val imm: InputMethodManager = context.requireSystemService()
 		imm.hideSoftInputFromWindow(v.windowToken, 0)
 		keyboardView.isEnabled = true
 		keyboardView.isVisible = true
@@ -74,7 +75,7 @@ abstract class BaseKeyboardHandler(
 			val setShowSoftInputOnFocus =
 				editText::class.java.getMethod("setShowSoftInputOnFocus", Boolean::class.java)
 			setShowSoftInputOnFocus(editText, false)
-		} catch (@Suppress("TooGenericExceptionCaught") ex: Exception) {
+		} catch (@Suppress("detekt.TooGenericExceptionCaught") ex: Exception) {
 			// It's a hack, anything can go wrong.
 			Log.w("HACK", "Could not turn off input focus for EditText: $editText", ex)
 		}
@@ -137,18 +138,16 @@ abstract class BaseKeyboardHandler(
 	}
 
 	@Suppress("OVERRIDE_DEPRECATION") // KeyboardView is deprecated, but the listener methods need to be used.
-	protected abstract inner class BaseOnKeyboardActionListener 
+	protected abstract inner class BaseOnKeyboardActionListener
 		: @Suppress("DEPRECATION") android.inputmethodservice.KeyboardView.OnKeyboardActionListener {
 
-		private fun findView(): View? {
-			return window.currentFocus
-		}
+		private fun findView(): View? =
+			window.currentFocus
 
-		private fun findEdit(): EditText? {
-			return findView() as? EditText
-		}
+		private fun findEdit(): EditText? =
+			findView() as? EditText
 
-		@Suppress("ComplexMethod") // Curious if this can be improved, but not now.
+		@Suppress("detekt.CyclomaticComplexMethod") // Curious if this can be improved, but not now.
 		override fun onKey(primaryCode: Int, keyCodes: IntArray) {
 			val editor = findEdit()
 			if (editor == null) {
@@ -167,22 +166,33 @@ abstract class BaseKeyboardHandler(
 			}
 
 			when (primaryCode) {
-				KEY_CLEAR -> editable?.clear()
-				KEY_BACKSPACE ->
+				KEY_CLEAR -> {
+					editable?.clear()
+				}
+				KEY_BACKSPACE -> {
 					if (editable != null && 0 < start) {
 						editable.delete(start - 1, start)
 					}
-				KEY_DONE -> hideCustomKeyboard()
-				KEY_MOVE_START -> editor.setSelection(0)
-				KEY_MOVE_END -> editor.setSelection(editor.length())
-				KEY_MOVE_LEFT ->
+				}
+				KEY_DONE -> {
+					hideCustomKeyboard()
+				}
+				KEY_MOVE_START -> {
+					editor.setSelection(0)
+				}
+				KEY_MOVE_END -> {
+					editor.setSelection(editor.length())
+				}
+				KEY_MOVE_LEFT -> {
 					if (start > 0) {
 						editor.setSelection(start - 1)
 					}
-				KEY_MOVE_RIGHT ->
+				}
+				KEY_MOVE_RIGHT -> {
 					if (start < editor.length()) {
 						editor.setSelection(start + 1)
 					}
+				}
 
 				else -> {
 					if (!this.onKey(editor, primaryCode, keyCodes)) {
@@ -211,7 +221,6 @@ abstract class BaseKeyboardHandler(
 
 		override fun onText(text: CharSequence?) {
 			val editor = findEdit()
-			@Suppress("FoldInitializerAndIfToElvis")
 			if (editor == null) {
 				//? hideCustomKeyboard()
 				return

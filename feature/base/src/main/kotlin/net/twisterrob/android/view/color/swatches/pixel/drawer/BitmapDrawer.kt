@@ -94,14 +94,14 @@ abstract class BitmapDrawer(
 
 	private class BitmapDrawerThread : HandlerThread(BitmapDrawerThread::class.java.simpleName) {
 
-		internal val mHandler: Handler?
+		val mHandler: Handler?
 
 		init {
 			start()
 			mHandler = super.getLooper()?.let { Handler(it) }
 		}
 
-		internal fun stopThread() {
+		fun stopThread() {
 			super.getLooper().quit()
 		}
 	}
