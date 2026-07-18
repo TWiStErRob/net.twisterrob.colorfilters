@@ -117,7 +117,7 @@ class MatrixFragment : ColorFilterFragment() {
 		saveToPreferences(prefs)
 	}
 
-	@Suppress("detekt.MissingSuperCall") // https://github.com/detekt/detekt/issues/9528
+	@Suppress("detekt.MissingSuperCall") // TODEL https://github.com/detekt/detekt/issues/9528
 	override fun onDestroyView() {
 		editor.unWire()
 		super.onDestroyView()

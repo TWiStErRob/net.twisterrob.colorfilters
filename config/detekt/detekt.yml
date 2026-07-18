@@ -44,6 +44,7 @@ naming:
 
   BooleanPropertyNaming:
     # Boolean roles are also clear from adjectives, participles, and domain phrases without a forced prefix.
+    # TODO Review and enable incrementally
     active: false
 
 
@@ -51,7 +52,7 @@ complexity:
 
   NamedArguments:
     # Positional arguments remain readable in short, strongly typed Android and graphics calls.
-    # TODO Review and enable incrementally; named arguments look useful at ambiguous call sites.
+    # TODO Review and enable incrementally
     active: false
 
   TooManyFunctions:
@@ -76,8 +77,12 @@ style:
     indentSize: 1
 
   UnnecessaryFullyQualifiedName:
-    # Qualified names disambiguate Android resources and occasional platform or extension references locally.
+    # Qualified names disambiguate Android resources and occasional platform references locally.
+    # TODEL when https://github.com/detekt/detekt/pull/9301 lands in alpha-06.
     active: false
+    #ignoredFullyQualifiedNames:
+    #  - 'android.R'
+    #  - 'androidx.appcompat.R'
 
   UseDataClass:
     # Test-case holders do not need value semantics merely because they only contain fixture data.

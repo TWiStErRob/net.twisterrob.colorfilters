@@ -141,9 +141,11 @@ abstract class BaseKeyboardHandler(
 	protected abstract inner class BaseOnKeyboardActionListener
 		: @Suppress("DEPRECATION") android.inputmethodservice.KeyboardView.OnKeyboardActionListener {
 
-		private fun findView(): View? = window.currentFocus
+		private fun findView(): View? =
+			window.currentFocus
 
-		private fun findEdit(): EditText? = findView() as? EditText
+		private fun findEdit(): EditText? =
+			findView() as? EditText
 
 		@Suppress("detekt.CyclomaticComplexMethod") // Curious if this can be improved, but not now.
 		override fun onKey(primaryCode: Int, keyCodes: IntArray) {

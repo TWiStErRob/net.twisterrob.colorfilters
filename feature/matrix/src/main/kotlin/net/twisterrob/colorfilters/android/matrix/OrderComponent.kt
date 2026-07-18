@@ -99,8 +99,9 @@ internal class OrderComponent(
 		// no touchy
 	}
 
-	// no visual representation, the order of other components will reflect this
-	override fun appendTo(sb: StringBuilder): Boolean = false
+	override fun appendTo(sb: StringBuilder): Boolean =
+		// no visual representation, the order of other components will reflect this
+		false
 
 	/**
 	 * @param components must match the order in [comps].

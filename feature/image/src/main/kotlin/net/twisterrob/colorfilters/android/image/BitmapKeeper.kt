@@ -95,9 +95,9 @@ class BitmapKeeper : Fragment() {
 						.commitAllowingStateLoss()
 				}
 
-		@Suppress("detekt.CastToNullableType")
 		private fun getCurrent(fragmentManager: FragmentManager): BitmapKeeper? =
-			fragmentManager.findFragmentByTag(FRAGMENT_TAG) as BitmapKeeper?
+			@Suppress("detekt.CastToNullableType")
+			(fragmentManager.findFragmentByTag(FRAGMENT_TAG) as BitmapKeeper?)
 
 		fun getUri(fragmentManager: FragmentManager): Uri? =
 			getOrCreate(fragmentManager).uri
@@ -122,8 +122,9 @@ class BitmapKeeper : Fragment() {
 	}
 }
 
-@Suppress("detekt.UseIfInsteadOfWhen")
-internal fun Drawable.asBitmap(): Bitmap? = when (this) {
-	is GifDrawable -> this.firstFrame
-	else -> this.toBitmap()
-}
+internal fun Drawable.asBitmap(): Bitmap? =
+	@Suppress("detekt.UseIfInsteadOfWhen")
+	when (this) {
+		is GifDrawable -> this.firstFrame
+		else -> this.toBitmap()
+	}

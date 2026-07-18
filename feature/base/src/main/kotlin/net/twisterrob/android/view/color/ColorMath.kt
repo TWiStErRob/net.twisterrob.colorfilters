@@ -6,6 +6,7 @@ import android.graphics.Color
 import androidx.annotation.ColorInt
 import androidx.annotation.FloatRange
 
+@Suppress("detekt.UnnecessaryFullyQualifiedName")
 const val PI: Float = kotlin.math.PI.toFloat()
 
 fun ofMap(value: Int, inputMin: Int, inputMax: Int, outputMin: Int, outputMax: Int): Float =

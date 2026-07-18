@@ -72,8 +72,8 @@ class MainActivity : AppCompatActivity()
 			}
 		}
 
-	@Suppress("detekt.CastToNullableType")
 	private val currentFragment: ColorFilterFragment?
+		@Suppress("detekt.CastToNullableType")
 		get() = supportFragmentManager.findFragmentById(R.id.container) as ColorFilterFragment?
 
 	override val currentBitmap: Bitmap?

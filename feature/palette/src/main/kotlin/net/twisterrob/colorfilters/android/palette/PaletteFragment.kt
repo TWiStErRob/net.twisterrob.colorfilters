@@ -359,7 +359,7 @@ class PaletteFragment : ColorFilterFragment() {
 		}
 	}
 
-	@Suppress("detekt.MissingSuperCall") // https://github.com/detekt/detekt/issues/9528
+	@Suppress("detekt.MissingSuperCall") // TODEL https://github.com/detekt/detekt/issues/9528
 	override fun onDestroyView() {
 		keyboard.unregisterEditText(numColorEditor)
 		keyboard.unregisterEditText(resizeDimenEditor)
@@ -377,16 +377,17 @@ class PaletteFragment : ColorFilterFragment() {
 	}
 
 	override fun generateCode(): String =
+		@Suppress("detekt.StringShouldBeRawString")
 		buildString {
-			appendLine("Palette palette = Palette")
-			appendLine("""		.from(bitmap)""")
+			append("Palette palette = Palette\n")
+			append("\t\t.from(bitmap)\n")
 			if (currentNumColors != DEFAULT_NUM_COLORS) {
-				append("""		.maximumColorCount(""").append(currentNumColors).appendLine(")")
+				append("\t\t.maximumColorCount(").append(currentNumColors).append(")\n")
 			}
 			if (currentResizeDimen != DEFAULT_RESIZE_DIMEN) {
-				append("""		.resizeBitmapSize(""").append(currentResizeDimen).appendLine(")")
+				append("\t\t.resizeBitmapSize(").append(currentResizeDimen).append(")\n")
 			}
-			appendLine("""		.generate()""")
+			append("\t\t.generate()\n")
 			append(";")
 		}
 

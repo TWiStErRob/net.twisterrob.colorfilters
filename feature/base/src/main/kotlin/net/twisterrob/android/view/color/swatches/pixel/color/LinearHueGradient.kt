@@ -17,5 +17,6 @@ class LinearHueGradient : PixelColor {
 	override fun getPixelColorAt(
 		@IntRange(from = 0/*, to = w*/) x: Int,
 		@IntRange(from = 0/*, to = h*/) y: Int,
-	): Int = fromHsb(x.toFloat() / w.toFloat(), 1.0f, 1.0f, 1.0f)
+	): Int =
+		fromHsb(x.toFloat() / w.toFloat(), 1.0f, 1.0f, 1.0f)
 }
