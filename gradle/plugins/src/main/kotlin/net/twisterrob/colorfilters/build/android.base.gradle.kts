@@ -1,5 +1,6 @@
 package net.twisterrob.colorfilters.build
 
+import com.android.build.api.dsl.CommonExtension
 import net.twisterrob.colorfilters.build.dsl.android
 import net.twisterrob.colorfilters.build.dsl.autoNamespace
 import net.twisterrob.colorfilters.build.dsl.libs
@@ -22,11 +23,11 @@ android {
 		}
 	}
 
-	defaultConfig {
+	defaultConfig.apply {
 		minSdk = libs.versions.android.minSdk.map(String::toInt).get()
 		compileSdk = libs.versions.android.compileSdk.map(String::toInt).get()
 	}
-	lint {
+	lint.apply {
 		// Be strict with any lint problems.
 		warningsAsErrors = true
 		// Lint is run on CI, so no need to run lintVitalRelease on assemble.
@@ -40,10 +41,11 @@ android {
 		baseline = rootProject.file("config/lint/baseline/${cleanPath}.xml")
 
 		// TODEL https://issuetracker.google.com/issues/378076280
-		androidComponents.finalizeDsl {
+		androidComponents.finalizeDsl { dsl ->
+			val android = dsl as CommonExtension
 			@Suppress("UnstableApiUsage")
-			if (buildFeatures.viewBinding == true || project.path == ":app") {
-				disable += "UnusedIds"
+			if (android.buildFeatures.viewBinding == true || project.path == ":app") {
+				android.lint.disable += "UnusedIds"
 			}
 		}
 	}
