@@ -44,10 +44,7 @@ fun ofMap(value: Float, inputMin: Float, inputMax: Float, outputMin: Float, outp
  * @param alpha      `[0, 1]`
  * @return ARGB color
  */
-@Suppress(
-	"detekt.MagicNumber",
-	"detekt.OutdatedDocumentation", // TODEL https://github.com/detekt/detekt/issues/9527
-)
+@Suppress("detekt.MagicNumber")
 @ColorInt
 fun fromHsb(
 	@FloatRange(from = 0.0, to = 1.0) hue: Float,

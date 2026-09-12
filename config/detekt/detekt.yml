@@ -78,11 +78,9 @@ style:
 
   UnnecessaryFullyQualifiedName:
     # Qualified names disambiguate Android resources and occasional platform references locally.
-    # TODEL when https://github.com/detekt/detekt/pull/9301 lands in alpha-06.
-    active: false
-    #ignoredFullyQualifiedNames:
-    #  - 'android.R'
-    #  - 'androidx.appcompat.R'
+    ignoredFullyQualifiedNames:
+      - 'android.R'
+      - 'androidx.appcompat.R'
 
   UseDataClass:
     # Test-case holders do not need value semantics merely because they only contain fixture data.
