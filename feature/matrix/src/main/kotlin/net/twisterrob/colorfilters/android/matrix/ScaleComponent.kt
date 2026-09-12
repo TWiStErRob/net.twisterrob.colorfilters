@@ -80,8 +80,9 @@ internal class ScaleComponent(
 		val gScale = getValue(COMP_G)
 		val bScale = getValue(COMP_B)
 		val aScale = getValue(COMP_A)
-		@Suppress("ComplexCondition")
+		@Suppress("detekt.ComplexCondition")
 		if (rScale != NO_SCALE || gScale != NO_SCALE || bScale != NO_SCALE || aScale != NO_SCALE) {
+			@Suppress("detekt.CascadingCallWrapping")
 			sb.append("\ntemp.setScale(")
 				.append(getDisplay(rScale)).append(", ")
 				.append(getDisplay(gScale)).append(", ")
@@ -102,9 +103,11 @@ internal class ScaleComponent(
 	private fun getValue(scaleBar: SeekBar): Float =
 		get(scaleBar, SCALE_MAX - SCALE_MIN, SCALE_MIN)
 
-	private fun setValue(component: Int, value: Float) =
+	private fun setValue(component: Int, value: Float) {
 		set(scaleRGBA[component], SCALE_MAX - SCALE_MIN, SCALE_MIN, value)
+	}
 
-	private fun setValue(scaleBar: SeekBar, value: Float) =
+	private fun setValue(scaleBar: SeekBar, value: Float) {
 		set(scaleBar, SCALE_MAX - SCALE_MIN, SCALE_MIN, value)
+	}
 }

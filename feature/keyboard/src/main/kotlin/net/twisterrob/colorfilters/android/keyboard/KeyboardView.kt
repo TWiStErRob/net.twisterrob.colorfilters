@@ -15,7 +15,9 @@ import android.util.AttributeSet
  * Defaults for backgrounds can't be set in code, because the fields have no accessors.
  */
 @Suppress("OVERRIDE_DEPRECATION") // KeyboardView is deprecated, but the overridden methods need to be used.
-class KeyboardView : @Suppress("DEPRECATION") android.inputmethodservice.KeyboardView {
+class KeyboardView :
+	@Suppress("DEPRECATION", "detekt.UnnecessaryFullyQualifiedName")
+	android.inputmethodservice.KeyboardView {
 
 	@Suppress("DEPRECATION")
 	constructor(context: Context, attrs: AttributeSet) :
@@ -47,7 +49,10 @@ class KeyboardView : @Suppress("DEPRECATION") android.inputmethodservice.Keyboar
 	@Suppress("KDocUnresolvedReference")
 	private var keyboardChanged = false
 
-	override fun setKeyboard(keyboard: @Suppress("DEPRECATION") android.inputmethodservice.Keyboard) {
+	override fun setKeyboard(
+		@Suppress("DEPRECATION", "detekt.UnnecessaryFullyQualifiedName")
+		keyboard: android.inputmethodservice.Keyboard,
+	) {
 		@Suppress("DEPRECATION")
 		super.setKeyboard(keyboard)
 		keyboardChanged = true // force a resize call for this Keyboard

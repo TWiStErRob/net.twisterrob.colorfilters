@@ -13,6 +13,5 @@ dependencies {
 }
 
 android {
-	@Suppress("UnstableApiUsage")
 	buildFeatures.buildConfig = false
 }

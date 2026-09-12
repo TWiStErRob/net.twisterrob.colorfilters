@@ -61,7 +61,6 @@ abstract class ColorFilterFragment : Fragment() {
 			}
 
 			override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-				@Suppress("LiftReturnOrAssignment", "OptionalWhenBraces")
 				when (menuItem.itemId) {
 					R.id.action_info -> {
 						displayHelp()
@@ -84,6 +83,7 @@ abstract class ColorFilterFragment : Fragment() {
 		listener.fragmentOnResume()
 	}
 
+	@Suppress("detekt.NestedScopeFunctions") // TODO Review whether moving sharedText outside Intent.apply is clearer.
 	private fun share() {
 		val image = listener.renderCurrentView(getString(R.string.cf_share_subject), generateCode())
 		val intent = Intent(Intent.ACTION_SEND).apply {
@@ -104,9 +104,9 @@ abstract class ColorFilterFragment : Fragment() {
 	protected abstract fun displayHelp()
 
 	protected fun displayHelp(@StringRes titleResourceId: Int, @StringRes descriptionResourceId: Int) {
-		fun getInfoMessage(@StringRes descriptionResourceId: Int): CharSequence =
+		fun getInfoMessage(@StringRes descriptionId: Int): CharSequence =
 			SpannableStringBuilder().apply {
-				append(getText(descriptionResourceId))
+				append(getText(descriptionId))
 				append("\n\n") //NON-NLS
 				append(getText(R.string.cf_info_code))
 				append("\n") //NON-NLS
@@ -142,7 +142,7 @@ abstract class ColorFilterFragment : Fragment() {
 	protected abstract fun generateCode(): CharSequence
 
 	private fun generateFormattedCode(): CharSequence =
-		@Suppress("MagicNumber")
+		@Suppress("detekt.MagicNumber")
 		SpannableString(generateCode()).apply {
 			setSpan(TypefaceSpan("monospace"), 0, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
 			setSpan(RelativeSizeSpan(0.6f), 0, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)

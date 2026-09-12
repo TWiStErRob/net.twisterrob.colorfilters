@@ -57,7 +57,7 @@ private val MODES = mapOf(
 )
 
 @ColorInt
-private val DEFAULT_COLOR: Int = @Suppress("MagicNumber") Color.argb(0xff, 0x00, 0x00, 0x00)
+private val DEFAULT_COLOR: Int = @Suppress("detekt.MagicNumber") Color.argb(0xff, 0x00, 0x00, 0x00)
 private val DEFAULT_MODE = PorterDuff.Mode.OVERLAY
 
 class PorterDuffFragment : ColorFilterFragment() {
@@ -108,7 +108,7 @@ class PorterDuffFragment : ColorFilterFragment() {
 					val color = "#${s}".toColorInt()
 					updateColor(color, UpdateOrigin.Editor)
 					editor.error = null
-				} catch (@Suppress("TooGenericExceptionCaught") ex: RuntimeException) {
+				} catch (@Suppress("detekt.TooGenericExceptionCaught") ex: RuntimeException) {
 					//Log.w(TAG, "Cannot parse color: " + s, ex);
 					editor.error = ex.message + " " + s
 				}
@@ -200,6 +200,7 @@ class PorterDuffFragment : ColorFilterFragment() {
 		}
 	}
 
+	@Suppress("detekt.MissingSuperCall") // TODEL https://github.com/detekt/detekt/issues/9528
 	override fun onDestroyView() {
 		keyboard.unregisterEditText(editor)
 		super.onDestroyView()

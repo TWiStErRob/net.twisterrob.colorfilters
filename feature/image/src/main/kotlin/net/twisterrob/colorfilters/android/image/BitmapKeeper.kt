@@ -1,15 +1,12 @@
 package net.twisterrob.colorfilters.android.image
 
 import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.widget.ImageView
-import androidx.core.graphics.applyCanvas
-import androidx.core.graphics.createBitmap
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -44,6 +41,7 @@ class BitmapKeeper : Fragment() {
 
 	companion object {
 
+		@Suppress("detekt.NestedScopeFunctions") // TODO Review whether explicit branching is clearer here.
 		fun into(fragmentManager: FragmentManager, imageView: ImageView, listener: Listener): Boolean {
 			getCurrent(fragmentManager)?.let { fragment ->
 				fragment.bitmap?.let { bitmap ->
@@ -67,32 +65,39 @@ class BitmapKeeper : Fragment() {
 			return false
 		}
 
-		fun clear(fragmentManager: FragmentManager) = getOrCreate(fragmentManager).run {
-			this.bitmap = null
-			this.uri = null
+		fun clear(fragmentManager: FragmentManager) {
+			getOrCreate(fragmentManager).run {
+				this.bitmap = null
+				this.uri = null
+			}
 		}
 
-		fun save(fragmentManager: FragmentManager, bitmap: Bitmap) = getOrCreate(fragmentManager).run {
-			this.uri = null
-			this.bitmap = bitmap
+		fun save(fragmentManager: FragmentManager, bitmap: Bitmap) {
+			getOrCreate(fragmentManager).run {
+				this.uri = null
+				this.bitmap = bitmap
+			}
 		}
 
-		fun save(fragmentManager: FragmentManager, uri: Uri) = getOrCreate(fragmentManager).run {
-			this.bitmap = null
-			this.uri = uri
+		fun save(fragmentManager: FragmentManager, uri: Uri) {
+			getOrCreate(fragmentManager).run {
+				this.bitmap = null
+				this.uri = uri
+			}
 		}
 
 		private fun getOrCreate(fragmentManager: FragmentManager): BitmapKeeper =
 			getCurrent(fragmentManager)
-				?: BitmapKeeper().also {
+				?: BitmapKeeper().also { keeper ->
 					fragmentManager
 						.beginTransaction()
-						.add(it, FRAGMENT_TAG)
+						.add(keeper, FRAGMENT_TAG)
 						.commitAllowingStateLoss()
 				}
 
 		private fun getCurrent(fragmentManager: FragmentManager): BitmapKeeper? =
-			fragmentManager.findFragmentByTag(FRAGMENT_TAG) as BitmapKeeper?
+			@Suppress("detekt.CastToNullableType")
+			(fragmentManager.findFragmentByTag(FRAGMENT_TAG) as BitmapKeeper?)
 
 		fun getUri(fragmentManager: FragmentManager): Uri? =
 			getOrCreate(fragmentManager).uri
@@ -117,7 +122,9 @@ class BitmapKeeper : Fragment() {
 	}
 }
 
-internal fun Drawable.asBitmap(): Bitmap? = when (this) {
-	is GifDrawable -> this.firstFrame
-	else -> this.toBitmap()
-}
+internal fun Drawable.asBitmap(): Bitmap? =
+	@Suppress("detekt.UseIfInsteadOfWhen")
+	when (this) {
+		is GifDrawable -> this.firstFrame
+		else -> this.toBitmap()
+	}

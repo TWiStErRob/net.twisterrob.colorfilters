@@ -155,7 +155,12 @@ open class ColorPickerView : AppCompatImageView {
 		private val longTapStart = PointF()
 
 		// Shortcuts and many different events, so it's ought to be complex.
-		@Suppress("ReturnCount", "LongMethod", "ComplexMethod")
+		@Suppress(
+			"detekt.ReturnCount",
+			"detekt.LongMethod",
+			"detekt.CyclomaticComplexMethod",
+			"detekt.CognitiveComplexMethod",
+		)
 		override fun onTouch(v: View, event: MotionEvent): Boolean {
 			if (drawable is SwatchChooser) {
 				return (drawable as SwatchChooser).onTouch(v, event)
@@ -224,7 +229,7 @@ open class ColorPickerView : AppCompatImageView {
 			return unhandled(event)
 		}
 
-		@Suppress("FunctionOnlyReturningConstant") // Consistent with [handled].
+		@Suppress("detekt.FunctionOnlyReturningConstant") // Consistent with [handled].
 		private fun unhandled(@Suppress("UNUSED_PARAMETER") event: MotionEvent) = false
 
 		private fun handled(event: MotionEvent) = true.also {
@@ -280,7 +285,7 @@ open class ColorPickerView : AppCompatImageView {
 				this@ColorPickerView.swatch = swatch
 			}
 		}
-		chooser.setTileMargin(resources.dpToPx(@Suppress("MagicNumber") 4f))
+		chooser.setTileMargin(resources.dpToPx(@Suppress("detekt.MagicNumber") 4f))
 		setImageDrawable(chooser)
 	}
 

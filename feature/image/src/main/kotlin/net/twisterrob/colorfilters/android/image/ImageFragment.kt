@@ -93,7 +93,7 @@ class ImageFragment : Fragment() {
 			}
 
 			override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-				@Suppress("LiftReturnOrAssignment", "OptionalWhenBraces")
+				@Suppress("detekt.UseIfInsteadOfWhen")
 				when (menuItem.itemId) {
 					R.id.action_image -> {
 						startLoadImage(false)
@@ -149,7 +149,6 @@ class ImageFragment : Fragment() {
 		permission: String,
 		rationale: (() -> Unit)? = null
 	): Boolean {
-		@Suppress("LiftReturnOrAssignment")
 		if (ContextCompat.checkSelfPermission(requireContext(), permission) != PackageManager.PERMISSION_GRANTED) {
 			if (rationale != null && shouldShowRequestPermissionRationale(permission)) {
 				rationale()
@@ -163,16 +162,20 @@ class ImageFragment : Fragment() {
 	}
 
 	private fun startLoadImage(skipRationale: Boolean) {
-		if (VERSION.SDK_INT <= VERSION_CODES.P && !checkPermission(
-				Manifest.permission.READ_EXTERNAL_STORAGE,
-				if (skipRationale) null else fun() {
-					AlertDialog.Builder(requireContext())
-						.setMessage("External applications may return a reference to a file on the device's storage.")
-						.setPositiveButton(android.R.string.ok) { _, _ -> startLoadImage(true) }
-						.setNegativeButton(android.R.string.cancel) { _, _ -> }
-						.show()
-				}
-			)
+		val rationale = if (skipRationale) {
+			null
+		} else {
+			fun() {
+				AlertDialog.Builder(requireContext())
+					.setMessage("External applications may return a reference to a file on the device's storage.")
+					.setPositiveButton(android.R.string.ok) { _, _ -> startLoadImage(true) }
+					.setNegativeButton(android.R.string.cancel) { _, _ -> }
+					.show()
+			}
+		}
+		if (
+			VERSION.SDK_INT <= VERSION_CODES.P
+			&& !checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE, rationale)
 		) {
 			return
 		}

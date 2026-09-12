@@ -84,8 +84,8 @@ class ResourceFontFragment : ColorFilterFragment() {
 			resultBlack.text = resultText
 			resultWhite.text = resultText
 			resolved.text = getColor(resultText)
-		} catch (@Suppress("TooGenericExceptionCaught") ex: Exception) {
-			// Anything can happen, make sure we don't crash, 
+		} catch (@Suppress("detekt.TooGenericExceptionCaught") ex: Exception) {
+			// Anything can happen, make sure we don't crash,
 			// but rather handle it nicely by showing the error to the user (developer).
 			setError(row, ex)
 		}
@@ -113,8 +113,8 @@ class ResourceFontFragment : ColorFilterFragment() {
 			resultBlack.text = resultText
 			resultWhite.text = resultText
 			resolved.text = getColor(resultText)
-		} catch (@Suppress("TooGenericExceptionCaught") ex: Exception) {
-			// Anything can happen, make sure we don't crash, 
+		} catch (@Suppress("detekt.TooGenericExceptionCaught") ex: Exception) {
+			// Anything can happen, make sure we don't crash,
 			// but rather handle it nicely by showing the error to the user (developer).
 			setError(row, ex)
 		}
@@ -130,7 +130,7 @@ class ResourceFontFragment : ColorFilterFragment() {
 		row.removeViews(resolvedAt, removeCount)
 		params.span += removeCount // two rendered + two divider
 		@SuppressLint("SetTextI18n")
-		resolved.text = "${ex.javaClass.simpleName}\n${ex.message}"
+		resolved.text = "${ex.javaClass.simpleName}\n${ex.message ?: ex}"
 	}
 
 	private fun getColor(text: CharSequence): String? {
