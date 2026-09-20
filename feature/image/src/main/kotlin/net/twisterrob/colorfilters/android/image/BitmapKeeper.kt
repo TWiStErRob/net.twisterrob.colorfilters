@@ -104,7 +104,7 @@ class BitmapKeeper : Fragment() {
 	}
 
 	private class GlideRequestListener(
-		private val listener: Listener
+		listener: Listener
 	) : RequestListener<Drawable> {
 
 		private val ui = Handler(Looper.getMainLooper())

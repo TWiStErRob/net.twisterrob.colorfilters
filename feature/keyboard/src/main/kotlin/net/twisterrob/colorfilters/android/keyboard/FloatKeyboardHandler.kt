@@ -13,7 +13,7 @@ open class FloatKeyboardHandler(
 ) : BaseKeyboardHandler(window, keyboardView) {
 
 	init {
-		@Suppress("DEPRECATION")
+		@Suppress("DEPRECATION", "detekt.UnnecessaryFullyQualifiedName")
 		keyboardView.keyboard = android.inputmethodservice.Keyboard(keyboardView.context, R.xml.keyboard_float)
 		@Suppress("DEPRECATION")
 		keyboardView.setOnKeyboardActionListener(FloatKeyboardActionListener())

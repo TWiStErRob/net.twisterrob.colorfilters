@@ -1,13 +1,9 @@
 package net.twisterrob.colorfilters.build
 
 import net.twisterrob.colorfilters.build.dsl.android
+import net.twisterrob.colorfilters.build.dsl.kotlin
 import net.twisterrob.colorfilters.build.dsl.libs
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
-plugins {
-	id("kotlin-android")
-	id("kotlin-kapt")
-}
 
 dependencies {
 	add("implementation", platform(libs.kotlin))
@@ -28,7 +24,7 @@ tasks.withType<JavaCompile>().configureEach {
 
 plugins.withId("com.android.base") {
 	android {
-		compileOptions {
+		compileOptions.apply {
 			sourceCompatibility = libs.versions.java.map(JavaVersion::toVersion).get()
 			targetCompatibility = libs.versions.java.map(JavaVersion::toVersion).get()
 		}
@@ -40,12 +36,6 @@ plugins.withId("com.android.base") {
 kotlin {
 	compilerOptions {
 		allWarningsAsErrors = true
-
-		// Workaround for https://youtrack.jetbrains.com/issue/KT-68400
-		// > Task :...:kaptGenerateStubsDebugUnitTestKotlin FAILED
-		// > w: Kapt currently doesn't support language version 2.0+. Falling back to 1.9.
-		// > e: warnings found and -Werror specified
-		freeCompilerArgs.add("-Xsuppress-version-warnings")
 
 		// Kotlin 2.2 started warning about this:
 		// > w: ... This annotation is currently applied to the value parameter only,

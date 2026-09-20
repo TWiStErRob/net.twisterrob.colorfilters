@@ -11,16 +11,19 @@ jobs:
     uses: TWiStErRob/github-workflows/.github/workflows/instrumentation.yml@104620e2c495f0c905fde6f15ea2b6453ae4eaed # v3
     with:
       android-api: ${{ matrix.api }}
-      script: >
-        ./gradlew
-        --no-daemon
-        --no-build-cache
-        --no-configuration-cache
-        --continue
-        --stacktrace
-        --scan
-        connectedCheck
-        mergeAndroidReports
+      script: |
+        ./gradlew \
+          --no-daemon \
+          --no-build-cache \
+          --no-configuration-cache \
+          --continue \
+          --stacktrace \
+          --scan \
+          connectedCheck \
+          :app:createAggregatedTestReport
+        # TODEL https://github.com/TWiStErRob/github-workflows/issues/98
+        mkdir -p build/androidTest-results
+        cp -R app/build/reports/tests/aggregated-test-report/. build/androidTest-results/
       junit5: true
 
     permissions:
