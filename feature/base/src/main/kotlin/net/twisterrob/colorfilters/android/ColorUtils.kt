@@ -1,6 +1,5 @@
 package net.twisterrob.colorfilters.android
 
-import android.annotation.SuppressLint
 import android.graphics.Color
 import androidx.annotation.ColorInt
 import androidx.core.graphics.alpha
