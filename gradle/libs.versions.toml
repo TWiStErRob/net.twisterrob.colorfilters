@@ -36,7 +36,7 @@ jupiter-androidtest = "2.0.1"
 agp = "8.13.2"
 
 # https://github.com/TWiStErRob/net.twisterrob.gradle/releases
-twisterrob = "0.19"
+twisterrob = "0.20"
 
 java = "21"
 # https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md
