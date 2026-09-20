@@ -25,9 +25,9 @@ private const val PREF_LIGHTING_MUL = "LightingColorFilter.mul"
 private const val PREF_LIGHTING_MUL_SWATCH = "LightingColorFilter.mulSwatch"
 private const val PREF_LIGHTING_ADD = "LightingColorFilter.add"
 private const val PREF_LIGHTING_ADD_SWATCH = "LightingColorFilter.addSwatch"
-@Suppress("MagicNumber")
+@Suppress("detekt.MagicNumber")
 private val DEFAULT_MUL = Color.argb(0xff, 0xff, 0xff, 0xff)
-@Suppress("MagicNumber")
+@Suppress("detekt.MagicNumber")
 private val DEFAULT_ADD = Color.argb(0xff, 0x00, 0x00, 0x00)
 
 class LightingFragment : ColorFilterFragment() {
@@ -118,6 +118,7 @@ class LightingFragment : ColorFilterFragment() {
 		}
 	}
 
+	@Suppress("detekt.MissingSuperCall") // TODEL https://github.com/detekt/detekt/issues/9528
 	override fun onDestroyView() {
 		keyboard.unregisterEditText(requireView().findViewById(R.id.mulEditor))
 		keyboard.unregisterEditText(requireView().findViewById(R.id.addEditor))
@@ -167,7 +168,7 @@ class LightingFragment : ColorFilterFragment() {
 						val color = "#${s}".toColorInt()
 						updateColor(color, UpdateOrigin.Editor)
 						editor.error = null
-					} catch (@Suppress("TooGenericExceptionCaught") ex: RuntimeException) {
+					} catch (@Suppress("detekt.TooGenericExceptionCaught") ex: RuntimeException) {
 						// Not sure what can happen, but display to user, since they're developers.
 						editor.error = ex.message
 					}

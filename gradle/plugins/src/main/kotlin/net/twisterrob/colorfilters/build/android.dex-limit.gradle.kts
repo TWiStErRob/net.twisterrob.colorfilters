@@ -7,7 +7,7 @@ import com.android.build.gradle.internal.tasks.DexMergingTask
 // > Caused by: java.lang.OutOfMemoryError: Java heap space
 // > Expiring Daemon because JVM heap space is exhausted
 
-@Suppress("MagicNumber")
+@Suppress("detekt.MagicNumber")
 val instances = (Runtime.getRuntime().maxMemory() / 1e9 - 1).toInt().coerceAtLeast(1)
 
 registerLimitTasksService("dexMergingTaskLimiter", instances)
@@ -21,7 +21,7 @@ afterEvaluate { // To get numberOfBuckets populated.
 }
 
 fun Project.registerLimitTasksService(name: String, maxInstances: Int) {
-	@Suppress("UnnecessaryAbstractClass") // Gradle needs to decorate and implement this.
+	@Suppress("detekt.UnnecessaryAbstractClass") // Gradle needs to decorate and implement this.
 	abstract class TaskLimiter : BuildService<BuildServiceParameters.None>
 	gradle.sharedServices.registerIfAbsent(name, TaskLimiter::class.java) {
 		project.logger.info("Registering task limiter '$name' for max $maxInstances instances.")

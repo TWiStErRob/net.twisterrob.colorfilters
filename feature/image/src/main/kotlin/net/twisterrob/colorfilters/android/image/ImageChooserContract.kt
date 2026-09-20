@@ -1,6 +1,5 @@
 package net.twisterrob.colorfilters.android.image
 
-import android.annotation.TargetApi
 import android.app.Activity
 import android.content.ComponentName
 import android.content.Context
@@ -60,10 +59,10 @@ class ImageChooserContract : ActivityResultContract<Unit, ImageChooserContract.I
 		return ImageResult.Invalid
 	}
 
-	sealed class ImageResult {
-		data class ExternalUri(val uri: Uri) : ImageResult()
-		data class InMemory(val bitmap: Bitmap) : ImageResult()
-		data object Invalid : ImageResult()
+	sealed interface ImageResult {
+		data class ExternalUri(val uri: Uri) : ImageResult
+		data class InMemory(val bitmap: Bitmap) : ImageResult
+		data object Invalid : ImageResult
 	}
 }
 

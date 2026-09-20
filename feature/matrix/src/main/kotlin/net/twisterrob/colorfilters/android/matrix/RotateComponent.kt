@@ -67,7 +67,11 @@ internal class RotateComponent(
 		val value = value
 		if (NO_ROT != value && FULL_ROT != value) {
 			val rot = getDisplay(value).trim()
-			sb.append("\ntemp.setRotate(").append(compRGB).append(", ").append(rot).append(");")
+			sb.append("\ntemp.setRotate(")
+				.append(compRGB)
+				.append(", ")
+				.append(rot)
+				.append(");")
 			sb.append("\nmatrix.postConcat(temp);")
 			return true
 		}

@@ -29,8 +29,8 @@ class FastMathTest {
 	fun atan2MatchesBuiltin() {
 		(0..360).forEach { angle ->
 			val r = 1
-			val x = r * (cos(angle.toFloat()))
-			val y = r * (sin(angle.toFloat()))
+			val x = r * cos(angle.toFloat())
+			val y = r * sin(angle.toFloat())
 			val expected = atan2(y, x)
 
 			val result = FastMath.Atan2Faster.atan2(y, x)
@@ -44,14 +44,14 @@ class FastMathTest {
 		val results = runClass(TestBenchmark::class)
 			.toList()
 			.map { it.aggregatedResult.primaryResult }
-		
+
 		fun pickScore(name: String): Double =
 			results.single { it.label == name }.score
 
 		val fastScore = pickScore("fast")
 		val javaScore = pickScore("java")
 		val kotlinScore = pickScore("kotlin")
-		
+
 		assertThat(fastScore, lessThan(javaScore))
 		assertThat(fastScore, lessThan(kotlinScore))
 	}

@@ -42,11 +42,11 @@ class ColorUtilsKtTest {
 				argb(0xFE, 0xDC, 0xBA, 0x00),
 				"FEDCBA00"
 			),
-		).map {
-			dynamicTest(it.useCase) {
-				val result = it.receiver.toARGBHexString()
+		).map { testCase ->
+			dynamicTest(testCase.useCase) {
+				val result = testCase.receiver.toARGBHexString()
 
-				assertThat(result, equalTo(it.expected))
+				assertThat(result, equalTo(testCase.expected))
 			}
 		}
 }

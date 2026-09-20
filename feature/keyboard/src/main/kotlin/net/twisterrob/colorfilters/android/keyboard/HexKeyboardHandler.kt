@@ -17,9 +17,11 @@ class HexKeyboardHandler(
 		keyboardView.setOnKeyboardActionListener(MyOnKeyboardActionListener())
 	}
 
-	private inner class MyOnKeyboardActionListener : BaseKeyboardHandler.BaseOnKeyboardActionListener() {
+	@Suppress("detekt.UnnecessaryInnerClass") // The inner superclass requires this handler as its outer receiver.
+	private inner class MyOnKeyboardActionListener : BaseOnKeyboardActionListener() {
 
 		override fun onKey(editor: EditText, primaryCode: Int, keyCodes: IntArray): Boolean {
+			@Suppress("detekt.UseIfInsteadOfWhen")
 			when (primaryCode) {
 				KEY_NEGATE -> super.onText(editor.editableText?.negate())
 				else -> return false
@@ -48,7 +50,7 @@ private val NEGATE = charArrayOf(
 	/*0x7?*/ '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0'
 )
 
-private fun CharSequence.negate() =
+private fun CharSequence.negate(): String =
 	this.replace("""[0-9A-Fa-f]+""".toRegex()) { match ->
 		match.value.map { NEGATE[it.toInt()] }
 	}

@@ -102,7 +102,7 @@ class AboutFragment : ListFragment() {
 			isSelected = true
 			visibility = if (resources.getBoolean(R.bool.in_test)) View.VISIBLE else View.GONE
 		}
-		@Suppress("UnnecessaryApply") // Keep it consistent.
+		@Suppress("detekt.UnnecessaryApply") // Keep it consistent.
 		binding.aboutIcon.apply {
 			setImageResource(context.applicationInfo.icon)
 		}

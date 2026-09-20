@@ -76,12 +76,16 @@ class PaletteFragment : ColorFilterFragment() {
 			return null
 		}
 		val selectedColor = swatchList.adapter.getItemId(pos).toInt()
-		val color = selectedColor.replaceAlpha(@Suppress("MagicNumber") 0x60)
+		val color = selectedColor.replaceAlpha(@Suppress("detekt.MagicNumber") 0x60)
 		return PorterDuffColorFilter(color, PorterDuff.Mode.SRC_OVER)
 	}
 
 	override fun updateFilter() {
 		generatePalette()
+		super.updateFilter()
+	}
+
+	private fun updateSelectedSwatch() {
 		super.updateFilter()
 	}
 
@@ -144,7 +148,7 @@ class PaletteFragment : ColorFilterFragment() {
 					val numColors = s.toString().fromString()
 					updateNumColors(numColors, UpdateOrigin.Editor)
 					numColorEditor.error = null
-				} catch (@Suppress("TooGenericExceptionCaught") ex: RuntimeException) {
+				} catch (@Suppress("detekt.TooGenericExceptionCaught") ex: RuntimeException) {
 					//Log.w(TAG, "Cannot parse color: " + s, ex);
 					numColorEditor.error = ex.message + " " + s
 				}
@@ -165,7 +169,7 @@ class PaletteFragment : ColorFilterFragment() {
 					val resizeDimen = s.toString().fromString()
 					updateResizeDimen(resizeDimen, UpdateOrigin.Editor)
 					resizeDimenEditor.error = null
-				} catch (@Suppress("TooGenericExceptionCaught") ex: RuntimeException) {
+				} catch (@Suppress("detekt.TooGenericExceptionCaught") ex: RuntimeException) {
 					//Log.w(TAG, "Cannot parse color: ${s}", ex)
 					resizeDimenEditor.error = ex.message + " " + s
 				}
@@ -175,11 +179,12 @@ class PaletteFragment : ColorFilterFragment() {
 		swatchList = view.findViewById(android.R.id.list)
 		swatchList.onItemClickListener = OnItemClickListener { _, _, position, _ ->
 			swatchList.setItemChecked(position, true)
-			super@PaletteFragment.updateFilter()
+			updateSelectedSwatch()
 		}
 		swatchList.onItemLongClickListener = object : OnItemLongClickListener {
 			override fun onItemLongClick(parent: AdapterView<*>, view: View, position: Int, id: Long): Boolean {
 				val context = parent.context
+				@Suppress("detekt.CastToNullableType")
 				val swatch = parent.adapter.getItem(position) as Swatch?
 				if (swatch == null) {
 					Toast.makeText(context, "No swatch", Toast.LENGTH_SHORT).show()
@@ -234,15 +239,16 @@ class PaletteFragment : ColorFilterFragment() {
 			}
 
 			private fun res(name: String, swatch: Swatch?) =
-				if (swatch == null)
+				if (swatch == null) {
 					"<!-- ${name} not available -->\n"
-				else
+				} else {
 					"""
-					<!-- ${name} -->
-					<color name="${name}">${swatch.rgb.toRGBHexString("#")}</color>
-					<color name="${name}_title">${swatch.titleTextColor.toRGBHexString("#")}</color>
-					<color name="${name}_body">${swatch.bodyTextColor.toRGBHexString("#")}</color>
+						<!-- ${name} -->
+						<color name="${name}">${swatch.rgb.toRGBHexString("#")}</color>
+						<color name="${name}_title">${swatch.titleTextColor.toRGBHexString("#")}</color>
+						<color name="${name}_body">${swatch.bodyTextColor.toRGBHexString("#")}</color>
 					""".trimIndent()
+				}
 		}
 		swatchList.adapter = swatchAdapter
 
@@ -353,6 +359,7 @@ class PaletteFragment : ColorFilterFragment() {
 		}
 	}
 
+	@Suppress("detekt.MissingSuperCall") // TODEL https://github.com/detekt/detekt/issues/9528
 	override fun onDestroyView() {
 		keyboard.unregisterEditText(numColorEditor)
 		keyboard.unregisterEditText(resizeDimenEditor)
@@ -370,6 +377,7 @@ class PaletteFragment : ColorFilterFragment() {
 	}
 
 	override fun generateCode(): String =
+		@Suppress("detekt.StringShouldBeRawString")
 		buildString {
 			append("Palette palette = Palette\n")
 			append("\t\t.from(bitmap)\n")
@@ -424,23 +432,24 @@ class PaletteFragment : ColorFilterFragment() {
 
 		override fun getItemId(position: Int): Long {
 			val item = getItem(position)
-			return item?.rgb?.toLong() ?: 0
+			@Suppress("detekt.UnnecessaryLet")
+			return item?.let { it.rgb.toLong() } ?: 0
 		}
 
 		override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-			@Suppress("NAME_SHADOWING") var convertView = convertView
+			var view = convertView
 			val holder: ViewHolder
-			if (convertView == null) {
+			if (view == null) {
 				val inflater = LayoutInflater.from(parent.context)
-				convertView = inflater.inflate(R.layout.inc_palette_swatch, parent, false)
+				view = inflater.inflate(R.layout.inc_palette_swatch, parent, false)
 					?: error("Could not inflate R.layout.inc_palette_swatch")
-				holder = ViewHolder(convertView)
-				convertView.tag = holder
+				holder = ViewHolder(view)
+				view.tag = holder
 			} else {
-				holder = convertView.tag as ViewHolder
+				holder = view.tag as ViewHolder
 			}
 			bindView(position, holder)
-			return convertView
+			return view
 		}
 
 		@SuppressLint("SetTextI18n")
@@ -455,16 +464,16 @@ class PaletteFragment : ColorFilterFragment() {
 				holder.colorText.text = "%s\n%.0f°, %.0f%%, %.0f%%%s".formatRoot(
 					swatch.rgb.toRGBHexString("#"),
 					hsl[0],
-					hsl[1] * @Suppress("MagicNumber") 100,
-					hsl[2] * @Suppress("MagicNumber") 100,
+					hsl[1] * @Suppress("detekt.MagicNumber") 100,
+					hsl[2] * @Suppress("detekt.MagicNumber") 100,
 					if (type != null) "\n" + type else ""
 				)
 				holder.titleText.setBackgroundColor(swatch.rgb)
 				holder.titleText.setTextColor(swatch.titleTextColor)
-				holder.titleText.text = "Title: %s".format(swatch.titleTextColor.toRGBHexString("#"))
+				holder.titleText.text = "Title: ${swatch.titleTextColor.toRGBHexString("#")}"
 				holder.bodyText.setBackgroundColor(swatch.rgb)
 				holder.bodyText.setTextColor(swatch.bodyTextColor)
-				holder.bodyText.text = "Body: %s".format(swatch.bodyTextColor.toRGBHexString("#"))
+				holder.bodyText.text = "Body: ${swatch.bodyTextColor.toRGBHexString("#")}"
 				holder.population.text = swatch.population.asString()
 			} else {
 				holder.colorText.setText(R.string.cf_palette_missing)
@@ -498,7 +507,7 @@ class PaletteFragment : ColorFilterFragment() {
 			this.notifyDataSetChanged()
 		}
 
-		@Suppress("EnumEntryName", "EnumNaming")
+		@Suppress("EnumEntryName", "detekt.EnumNaming")
 		enum class Display(
 			val title: String
 		) {

@@ -36,11 +36,11 @@ class ColorUtilsKtTest {
 				Color.argb(0x00, 0x00, 0x00, 0x00),
 				Color.argb(0x00, 0x34, 0x56, 0x78),
 			),
-		).map {
-			dynamicTest(it.useCase) {
-				val result = it.receiver.replaceAlphaFrom(it.param)
+		).map { testCase ->
+			dynamicTest(testCase.useCase) {
+				val result = testCase.receiver.replaceAlphaFrom(testCase.param)
 
-				assertThat(it.expected, equalTo(result))
+				assertThat(testCase.expected, equalTo(result))
 			}
 		}
 }
