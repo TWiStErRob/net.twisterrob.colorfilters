@@ -5,7 +5,6 @@
 	>
 	<!-- Supported HTML: StringBlock.get -->
 	<!-- lint:TypographyQuotes ignoring because these are code snippets. -->
-	<!-- lint:DuplicateStrings AGP 8.3 false positive: https://issuetracker.google.com/issues/327744439 -->
 
 	<string name="cf_resfont_info_title" tools:ignore="TypographyQuotes"><![CDATA[<font color="…">]]></string>
 	<string name="cf_resfont_info">See my blog post:

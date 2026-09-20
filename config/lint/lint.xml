@@ -17,15 +17,6 @@
 	<issue id="ImplicitSamInstance" severity="ignore">
 		<!-- Don't want to deal with it yet -->
 	</issue>
-	<issue id="MemberExtensionConflict">
-		<!-- TODEL AGP 8.12 https://issuetracker.google.com/issues/427761232 -->
-		<ignore regexp="`.*?` is defined both as a member in class `kotlin\.collections\..*?` and an extension in package `kotlin\.collections`\." />
-	</issue>
-
-	<issue id="PropertyEscape">
-		<!-- TODEL https://issuetracker.google.com/issues/429703136 -->
-		<ignore path="gradle.properties" />
-	</issue>
 
 	<issue id="UnusedResources">
 		<!-- Not used, but can't do anything about it :) -->
