@@ -49,8 +49,8 @@ jobs:
           assemble
           lint
           detekt
-          detektMainSourceSet
-          detektTestSourceSet
+          detektMain
+          detektTest
           test
           check
           violationReportHtml
