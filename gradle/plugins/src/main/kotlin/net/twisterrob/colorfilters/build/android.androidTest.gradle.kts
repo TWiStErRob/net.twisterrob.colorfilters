@@ -12,6 +12,8 @@ android {
 		testInstrumentationRunnerArguments["runnerBuilder"] =
 			"de.mannodermaus.junit5.AndroidJUnitFrameworkBuilder"
 		//testInstrumentationRunnerArguments["useTestStorageService"] = "true"
+		// TODEL https://issuetracker.google.com/issues/563732801
+		testInstrumentationRunnerArguments["notAnnotation"] = "org.junit.jupiter.api.Disabled"
 	}
 	(this@android as? LibraryExtension)?.apply {
 		// Enable multidex for all library modules.
