@@ -3,6 +3,7 @@ package net.twisterrob.colorfilters.android
 import androidx.test.filters.LargeTest
 import de.mannodermaus.junit5.ActivityScenarioExtension
 import org.junit.jupiter.api.Disabled
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
 
@@ -27,6 +28,7 @@ class PreferencesActivityTest {
 	}
 
 	@Disabled("Clear shared preferences before launching this.")
+	@Tag("agp-9.4-disabled")
 	@Test fun togglesExperimentalKeyboards() {
 		val prefs = PreferencesActivityActor()
 		prefs.assertExperimentalKeyboards(true)
