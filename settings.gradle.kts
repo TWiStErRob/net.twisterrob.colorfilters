@@ -47,7 +47,7 @@ pluginManagement {
 
 plugins {
 	id("net.twisterrob.colorfilters.settings")
-	id("com.gradle.develocity") version "4.5.1"
+	id("com.gradle.develocity") version "4.6.0"
 }
 
 @Suppress("UnstableApiUsage")
